@@ -8,6 +8,7 @@ import html
 import json
 import os
 import shlex
+import shutil
 import subprocess
 import sys
 import threading
@@ -17,6 +18,7 @@ from concurrent.futures import ThreadPoolExecutor
 from .. import trust as trustlib
 from .. import workloads as workloadlib
 from ..arms import install, lock as locklib, manifest
+from ..dashboard import build as dashboard_build
 from ..report import theme
 from . import catalog, estimate, listing, machine, selection, tracks as trackslib
 
@@ -223,18 +225,28 @@ def landing_page(summary, report_href):
 
 
 def build_site(opts, paths, run_dirs, faith_dirs, summary, out):
-    """The report and the dashboard, built side by side. `python3 -m buffon dashboard` makes the site; when it fails or is skipped (--no-dashboard), a landing page links the report."""
+    """The report and the dashboard, built side by side. `python3 -m buffon dashboard` makes the site; when it fails or is skipped (--no-dashboard), a landing page links the report.
+    The dashboard owns its output directory (it refuses one it did not write and replaces the whole of one it did), so it runs first on a directory `up` has cleared, the report is
+    built beside it and moved to site/report afterwards, and up.json and build.log are written last."""
     site = paths["site"]
-    os.makedirs(site, exist_ok=True)
-    with open(os.path.join(site, "up.json"), "w") as f:   # what a dashboard needs for its "Run this yourself" panel and its header
-        json.dump(summary, f, indent=1)
-    report_dir = os.path.join(site, "report")
-    report_argv = [opts.python, "-m", "buffon", "report", *run_dirs, "--out", report_dir] + (["--faithfulness", *faith_dirs] if faith_dirs else [])
+    previous = os.path.exists(os.path.join(site, "up.json")) or os.path.exists(os.path.join(site, dashboard_build.MARKER))
+    if previous:   # what an earlier `up` (or the dashboard) wrote here: this directory is rebuilt on every run
+        shutil.rmtree(site)
+    os.makedirs(os.path.dirname(site), exist_ok=True)
+    staged_report = site + ".report"
+    shutil.rmtree(staged_report, ignore_errors=True)
+    report_argv = [opts.python, "-m", "buffon", "report", *run_dirs, "--out", staged_report] + (["--faithfulness", *faith_dirs] if faith_dirs else [])
     dash_argv = [opts.python, "-m", "buffon", "dashboard", *run_dirs, "--out", site] + (["--faithfulness", *faith_dirs] if faith_dirs else [])
     with ThreadPoolExecutor(max_workers=2) as pool:
         rep = pool.submit(subprocess.run, report_argv, capture_output=True, text=True)
         dash = pool.submit(subprocess.run, dash_argv, capture_output=True, text=True) if opts.dashboard else None
         rep, dash = rep.result(), dash.result() if dash else None
+    os.makedirs(site, exist_ok=True)
+    if os.path.isdir(staged_report):
+        shutil.rmtree(os.path.join(site, "report"), ignore_errors=True)
+        os.replace(staged_report, os.path.join(site, "report"))
+    with open(os.path.join(site, "up.json"), "w") as f:   # what a dashboard needs for its "Run this yourself" panel and its header
+        json.dump(summary, f, indent=1)
     with open(os.path.join(site, "build.log"), "w") as f:
         f.write(rep.stdout + rep.stderr + (dash.stdout + dash.stderr if dash else ""))
     dashboard_ok = bool(dash) and dash.returncode == 0 and os.path.exists(os.path.join(site, "index.html"))
