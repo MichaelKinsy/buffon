@@ -123,10 +123,7 @@ class MeasureTest(unittest.TestCase):
 
     @unittest.skipUnless(sys.platform.startswith("linux"), "socket audit reads /proc")
     def test_egress_audit_flags_a_connection_that_leaves_the_loopback(self):
-        meter = cgroup.new_meter()
-        if meter.mode == "rusage":
-            meter.close()
-            self.skipTest("no cgroup meter on this host, so no socket audit")
+        meter = cgroup.new_meter()   # whichever meter this host gives the runner: the socket audit is the meter's tree sampler on both (the rusage meter has its own test below)
         egress.take()
         script = os.path.join(self.tmp, "leak.py")
         with open(script, "w") as f:  # TEST-NET-1 (RFC 5737): never routable; the SYN stays pending long enough to be sampled
@@ -219,7 +216,7 @@ class MeasureTest(unittest.TestCase):
         meter = cgroup.new_meter()
         if meter.mode == "rusage":
             meter.close()
-            self.skipTest("no cgroup meter")
+            self.skipTest("this host gives the runner the rusage meter (no cgroup it can join), which reads no PSS")
         try:
             proc = meter.popen([sys.executable, grab], stdout=__import__("subprocess").PIPE)
             proc.stdout.readline()
