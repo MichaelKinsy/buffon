@@ -111,7 +111,9 @@ class MeasureTest(unittest.TestCase):
     def test_memory_peak_sees_an_allocation(self):
         grab = os.path.join(self.tmp, "grab.py")
         with open(grab, "w") as f:
-            f.write("b = bytearray(150 * 1024 * 1024)\nfor i in range(0, len(b), 4096): b[i] = 1\nprint('ok')\n")
+            # The rusage meter (a host with no cgroup the runner can join) reads the tree's resident set by sampling while it runs, and a runner bigger than the harness makes ru_maxrss
+            # say nothing (RusageMeter.max_proc_rss_mib): the child holds its pages until the sampler has had many intervals to see them, as the PSS test below does.
+            f.write("import time\nb = bytearray(150 * 1024 * 1024)\nfor i in range(0, len(b), 4096): b[i] = 1\nprint('ok', flush=True)\ntime.sleep(1)\n")
         meter = cgroup.new_meter()
         try:
             res = procio.Batch([sys.executable, grab], dict(os.environ), self.tmp, meter, 60).run()

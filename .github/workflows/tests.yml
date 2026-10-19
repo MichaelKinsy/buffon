@@ -25,7 +25,7 @@ jobs:
       - name: "The cgroup meter (Linux): the same suite's meter tests inside the user's systemd session"
         # A GitHub-hosted job runs under system.slice, where a process cannot be moved into a user scope (the first step runs the rusage fallback and says so). Inside `systemd-run --user --scope` the
         # runner and its meters' scopes share user@UID.service, so the tests that need a cgroup run for real and are not skipped.
-        if: runner.os == 'Linux'
+        if: ${{ !cancelled() && runner.os == 'Linux' }}
         run: |
           systemd-run --user --scope --quiet --collect -p MemoryAccounting=yes -p CPUAccounting=yes -- python3 -c "
           from buffon.runner import cgroup
