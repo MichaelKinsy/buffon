@@ -59,9 +59,11 @@ class FakeCgroup:
         files = {"memory.current": f"{v['memory_current']}\n", "memory.peak": f"{v['memory_peak']}\n", "pids.current": "3\n", "pids.peak": f"{v['pids_peak']}\n",
                  "cpu.stat": f"usage_usec {v['usage_usec']}\nuser_usec 1\nsystem_usec 1\nnr_periods 100\nnr_throttled {v['throttled']}\nthrottled_usec 0\n",
                  "memory.events": f"low 0\nhigh 0\nmax {v['mem_max']}\noom 0\noom_kill {v['oom_kill']}\n", "pids.events": f"max {v['pids_max_events']}\n"}
-        for name, text in files.items():
-            with open(os.path.join(self.dir, name), "w") as f:
+        for name, text in files.items():   # replaced whole, as the kernel's files are: a reader polling every few ms must not see one truncated half way
+            tmp = os.path.join(self.dir, name + ".tmp")
+            with open(tmp, "w") as f:
                 f.write(text)
+            os.replace(tmp, os.path.join(self.dir, name))
 
 
 class FakeRuntime:
