@@ -1,0 +1,296 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 220" width="560" height="220" role="img" aria-label="Host load average (1 min) before each sample" font-family="sans-serif" font-size="11">
+<text x="56" y="15" font-size="12" font-weight="bold">Host load average (1 min) before each sample</text>
+<line x1="56" y1="186.0" x2="548" y2="186.0" stroke="#ddd"/><text x="52" y="190.0" text-anchor="end">0</text>
+<line x1="56" y1="146.0" x2="548" y2="146.0" stroke="#ddd"/><text x="52" y="150.0" text-anchor="end">0.5</text>
+<line x1="56" y1="106.0" x2="548" y2="106.0" stroke="#ddd"/><text x="52" y="110.0" text-anchor="end">1</text>
+<line x1="56" y1="66.0" x2="548" y2="66.0" stroke="#ddd"/><text x="52" y="70.0" text-anchor="end">1.5</text>
+<line x1="56" y1="26.0" x2="548" y2="26.0" stroke="#ddd"/><text x="52" y="30.0" text-anchor="end">2</text>
+<text x="56.0" y="200" text-anchor="middle">0</text>
+<text x="61.2" y="200" text-anchor="middle">2</text>
+<text x="66.4" y="200" text-anchor="middle">4</text>
+<text x="71.6" y="200" text-anchor="middle">6</text>
+<text x="76.8" y="200" text-anchor="middle">8</text>
+<text x="82.0" y="200" text-anchor="middle">10</text>
+<text x="87.2" y="200" text-anchor="middle">12</text>
+<text x="92.4" y="200" text-anchor="middle">14</text>
+<text x="97.7" y="200" text-anchor="middle">16</text>
+<text x="102.9" y="200" text-anchor="middle">18</text>
+<text x="108.1" y="200" text-anchor="middle">20</text>
+<text x="113.3" y="200" text-anchor="middle">22</text>
+<text x="118.5" y="200" text-anchor="middle">24</text>
+<text x="123.7" y="200" text-anchor="middle">26</text>
+<text x="128.9" y="200" text-anchor="middle">28</text>
+<text x="134.1" y="200" text-anchor="middle">30</text>
+<text x="139.3" y="200" text-anchor="middle">32</text>
+<text x="144.5" y="200" text-anchor="middle">34</text>
+<text x="149.7" y="200" text-anchor="middle">36</text>
+<text x="154.9" y="200" text-anchor="middle">38</text>
+<text x="160.1" y="200" text-anchor="middle">40</text>
+<text x="165.3" y="200" text-anchor="middle">42</text>
+<text x="170.5" y="200" text-anchor="middle">44</text>
+<text x="175.7" y="200" text-anchor="middle">46</text>
+<text x="181.0" y="200" text-anchor="middle">48</text>
+<text x="186.2" y="200" text-anchor="middle">50</text>
+<text x="191.4" y="200" text-anchor="middle">52</text>
+<text x="196.6" y="200" text-anchor="middle">54</text>
+<text x="201.8" y="200" text-anchor="middle">56</text>
+<text x="207.0" y="200" text-anchor="middle">58</text>
+<text x="212.2" y="200" text-anchor="middle">60</text>
+<text x="217.4" y="200" text-anchor="middle">62</text>
+<text x="222.6" y="200" text-anchor="middle">64</text>
+<text x="227.8" y="200" text-anchor="middle">66</text>
+<text x="233.0" y="200" text-anchor="middle">68</text>
+<text x="238.2" y="200" text-anchor="middle">70</text>
+<text x="243.4" y="200" text-anchor="middle">72</text>
+<text x="248.6" y="200" text-anchor="middle">74</text>
+<text x="253.8" y="200" text-anchor="middle">76</text>
+<text x="259.0" y="200" text-anchor="middle">78</text>
+<text x="264.3" y="200" text-anchor="middle">80</text>
+<text x="269.5" y="200" text-anchor="middle">82</text>
+<text x="274.7" y="200" text-anchor="middle">84</text>
+<text x="279.9" y="200" text-anchor="middle">86</text>
+<text x="285.1" y="200" text-anchor="middle">88</text>
+<text x="290.3" y="200" text-anchor="middle">90</text>
+<text x="295.5" y="200" text-anchor="middle">92</text>
+<text x="300.7" y="200" text-anchor="middle">94</text>
+<text x="305.9" y="200" text-anchor="middle">96</text>
+<text x="311.1" y="200" text-anchor="middle">98</text>
+<text x="316.3" y="200" text-anchor="middle">100</text>
+<text x="321.5" y="200" text-anchor="middle">102</text>
+<text x="326.7" y="200" text-anchor="middle">104</text>
+<text x="331.9" y="200" text-anchor="middle">106</text>
+<text x="337.1" y="200" text-anchor="middle">108</text>
+<text x="342.3" y="200" text-anchor="middle">110</text>
+<text x="347.6" y="200" text-anchor="middle">112</text>
+<text x="352.8" y="200" text-anchor="middle">114</text>
+<text x="358.0" y="200" text-anchor="middle">116</text>
+<text x="363.2" y="200" text-anchor="middle">118</text>
+<text x="368.4" y="200" text-anchor="middle">120</text>
+<text x="373.6" y="200" text-anchor="middle">122</text>
+<text x="378.8" y="200" text-anchor="middle">124</text>
+<text x="384.0" y="200" text-anchor="middle">126</text>
+<text x="389.2" y="200" text-anchor="middle">128</text>
+<text x="394.4" y="200" text-anchor="middle">130</text>
+<text x="399.6" y="200" text-anchor="middle">132</text>
+<text x="404.8" y="200" text-anchor="middle">134</text>
+<text x="410.0" y="200" text-anchor="middle">136</text>
+<text x="415.2" y="200" text-anchor="middle">138</text>
+<text x="420.4" y="200" text-anchor="middle">140</text>
+<text x="425.7" y="200" text-anchor="middle">142</text>
+<text x="430.9" y="200" text-anchor="middle">144</text>
+<text x="436.1" y="200" text-anchor="middle">146</text>
+<text x="441.3" y="200" text-anchor="middle">148</text>
+<text x="446.5" y="200" text-anchor="middle">150</text>
+<text x="451.7" y="200" text-anchor="middle">152</text>
+<text x="456.9" y="200" text-anchor="middle">154</text>
+<text x="462.1" y="200" text-anchor="middle">156</text>
+<text x="467.3" y="200" text-anchor="middle">158</text>
+<text x="472.5" y="200" text-anchor="middle">160</text>
+<text x="477.7" y="200" text-anchor="middle">162</text>
+<text x="482.9" y="200" text-anchor="middle">164</text>
+<text x="488.1" y="200" text-anchor="middle">166</text>
+<text x="493.3" y="200" text-anchor="middle">168</text>
+<text x="498.5" y="200" text-anchor="middle">170</text>
+<text x="503.7" y="200" text-anchor="middle">172</text>
+<text x="509.0" y="200" text-anchor="middle">174</text>
+<text x="514.2" y="200" text-anchor="middle">176</text>
+<text x="519.4" y="200" text-anchor="middle">178</text>
+<text x="524.6" y="200" text-anchor="middle">180</text>
+<text x="529.8" y="200" text-anchor="middle">182</text>
+<text x="535.0" y="200" text-anchor="middle">184</text>
+<text x="540.2" y="200" text-anchor="middle">186</text>
+<text x="545.4" y="200" text-anchor="middle">188</text>
+<text x="302" y="216" text-anchor="middle">sample, in the order they ran</text>
+<text x="10" y="106" transform="rotate(-90 10 106)" text-anchor="middle">load</text>
+<polyline fill="none" stroke="#1f77b4" stroke-width="1.5" points="56.0,28.4 58.6,45.2 61.2,82.8 63.8,73.2 66.4,77.2 69.0,88.4 71.6,89.2 74.2,53.2 76.8,73.2 79.4,93.2 82.0,88.4 84.6,88.4 87.2,89.2 89.8,89.2 92.4,89.2 95.0,89.2 97.7,89.2 100.3,89.2 102.9,89.2 105.5,90.8 108.1,90.8 110.7,90.8 113.3,90.8 115.9,98.8 118.5,98.8 121.1,98.8 123.7,98.8 126.3,98.8 128.9,98.8 131.5,98.8 134.1,105.2 136.7,106.0 139.3,98.0 141.9,106.0 144.5,93.2 147.1,103.6 149.7,104.4 152.3,99.6 154.9,88.4 157.5,86.8 160.1,56.4 162.7,84.4 165.3,100.4 167.9,93.2 170.5,103.6 173.1,93.2 175.7,84.4 178.3,82.0 181.0,85.2 183.6,70.0 186.2,49.2 188.8,49.2 191.4,49.2 194.0,49.2 196.6,49.2 199.2,54.0 201.8,54.0 204.4,54.0 207.0,64.4 209.6,64.4 212.2,64.4 214.8,64.4 217.4,64.4 220.0,64.4 222.6,64.4 225.2,64.4 227.8,61.2 230.4,61.2 233.0,61.2 235.6,61.2 238.2,61.2 240.8,78.0 243.4,89.2 246.0,95.6 248.6,102.0 251.2,58.8 253.8,36.4 256.4,46.0 259.0,44.4 261.7,76.4 264.3,83.6 266.9,86.8 269.5,96.4 272.1,102.0 274.7,103.6 277.3,66.8 279.9,59.6 282.5,87.6 285.1,98.0 287.7,66.0 290.3,90.0 292.9,90.0 295.5,90.0 298.1,66.0 300.7,66.0 303.3,66.0 305.9,66.0 308.5,66.0 311.1,66.0 313.7,75.6 316.3,75.6 318.9,75.6 321.5,75.6 324.1,75.6 326.7,78.0 329.3,78.0 331.9,78.0 334.5,78.0 337.1,78.0 339.7,78.0 342.3,78.0 345.0,58.8 347.6,33.2 350.2,77.2 352.8,83.6 355.4,96.4 358.0,105.2 360.6,98.0 363.2,102.0 365.8,107.6 368.4,102.0 371.0,76.4 373.6,60.4 376.2,86.8 378.8,97.2 381.4,89.2 384.0,89.2 386.6,94.0 389.2,90.0 391.8,96.4 394.4,89.2 397.0,89.2 399.6,89.2 402.2,89.2 404.8,89.2 407.4,89.2 410.0,97.2 412.6,97.2 415.2,97.2 417.8,97.2 420.4,98.0 423.0,98.0 425.7,98.0 428.3,98.0 430.9,98.0 433.5,98.0 436.1,98.0 438.7,98.0 441.3,86.0 443.9,86.0 446.5,86.0 449.1,95.6 451.7,99.6 454.3,91.6 456.9,94.0 459.5,102.0 462.1,107.6 464.7,78.0 467.3,41.2 469.9,78.0 472.5,84.4 475.1,89.2 477.7,85.2 480.3,84.4 482.9,75.6 485.5,72.4 488.1,72.4 490.7,56.4 493.3,50.0 495.9,76.4 498.5,93.2 501.1,93.2 503.7,93.2 506.3,94.0 509.0,94.0 511.6,94.0 514.2,94.0 516.8,88.4 519.4,88.4 522.0,88.4 524.6,88.4 527.2,90.8 529.8,98.0 532.4,106.0 535.0,109.2 537.6,61.2 540.2,50.0 542.8,95.6 545.4,92.4 548.0,98.8"><title>samples</title></polyline>
+<circle cx="56.0" cy="28.4" r="2" fill="#1f77b4"><title>samples at 0: 1.97</title></circle>
+<circle cx="58.6" cy="45.2" r="2" fill="#1f77b4"><title>samples at 1: 1.76</title></circle>
+<circle cx="61.2" cy="82.8" r="2" fill="#1f77b4"><title>samples at 2: 1.29</title></circle>
+<circle cx="63.8" cy="73.2" r="2" fill="#1f77b4"><title>samples at 3: 1.41</title></circle>
+<circle cx="66.4" cy="77.2" r="2" fill="#1f77b4"><title>samples at 4: 1.36</title></circle>
+<circle cx="69.0" cy="88.4" r="2" fill="#1f77b4"><title>samples at 5: 1.22</title></circle>
+<circle cx="71.6" cy="89.2" r="2" fill="#1f77b4"><title>samples at 6: 1.21</title></circle>
+<circle cx="74.2" cy="53.2" r="2" fill="#1f77b4"><title>samples at 7: 1.66</title></circle>
+<circle cx="76.8" cy="73.2" r="2" fill="#1f77b4"><title>samples at 8: 1.41</title></circle>
+<circle cx="79.4" cy="93.2" r="2" fill="#1f77b4"><title>samples at 9: 1.16</title></circle>
+<circle cx="82.0" cy="88.4" r="2" fill="#1f77b4"><title>samples at 10: 1.22</title></circle>
+<circle cx="84.6" cy="88.4" r="2" fill="#1f77b4"><title>samples at 11: 1.22</title></circle>
+<circle cx="87.2" cy="89.2" r="2" fill="#1f77b4"><title>samples at 12: 1.21</title></circle>
+<circle cx="89.8" cy="89.2" r="2" fill="#1f77b4"><title>samples at 13: 1.21</title></circle>
+<circle cx="92.4" cy="89.2" r="2" fill="#1f77b4"><title>samples at 14: 1.21</title></circle>
+<circle cx="95.0" cy="89.2" r="2" fill="#1f77b4"><title>samples at 15: 1.21</title></circle>
+<circle cx="97.7" cy="89.2" r="2" fill="#1f77b4"><title>samples at 16: 1.21</title></circle>
+<circle cx="100.3" cy="89.2" r="2" fill="#1f77b4"><title>samples at 17: 1.21</title></circle>
+<circle cx="102.9" cy="89.2" r="2" fill="#1f77b4"><title>samples at 18: 1.21</title></circle>
+<circle cx="105.5" cy="90.8" r="2" fill="#1f77b4"><title>samples at 19: 1.19</title></circle>
+<circle cx="108.1" cy="90.8" r="2" fill="#1f77b4"><title>samples at 20: 1.19</title></circle>
+<circle cx="110.7" cy="90.8" r="2" fill="#1f77b4"><title>samples at 21: 1.19</title></circle>
+<circle cx="113.3" cy="90.8" r="2" fill="#1f77b4"><title>samples at 22: 1.19</title></circle>
+<circle cx="115.9" cy="98.8" r="2" fill="#1f77b4"><title>samples at 23: 1.09</title></circle>
+<circle cx="118.5" cy="98.8" r="2" fill="#1f77b4"><title>samples at 24: 1.09</title></circle>
+<circle cx="121.1" cy="98.8" r="2" fill="#1f77b4"><title>samples at 25: 1.09</title></circle>
+<circle cx="123.7" cy="98.8" r="2" fill="#1f77b4"><title>samples at 26: 1.09</title></circle>
+<circle cx="126.3" cy="98.8" r="2" fill="#1f77b4"><title>samples at 27: 1.09</title></circle>
+<circle cx="128.9" cy="98.8" r="2" fill="#1f77b4"><title>samples at 28: 1.09</title></circle>
+<circle cx="131.5" cy="98.8" r="2" fill="#1f77b4"><title>samples at 29: 1.09</title></circle>
+<circle cx="134.1" cy="105.2" r="2" fill="#1f77b4"><title>samples at 30: 1.01</title></circle>
+<circle cx="136.7" cy="106.0" r="2" fill="#1f77b4"><title>samples at 31: 1</title></circle>
+<circle cx="139.3" cy="98.0" r="2" fill="#1f77b4"><title>samples at 32: 1.1</title></circle>
+<circle cx="141.9" cy="106.0" r="2" fill="#1f77b4"><title>samples at 33: 1</title></circle>
+<circle cx="144.5" cy="93.2" r="2" fill="#1f77b4"><title>samples at 34: 1.16</title></circle>
+<circle cx="147.1" cy="103.6" r="2" fill="#1f77b4"><title>samples at 35: 1.03</title></circle>
+<circle cx="149.7" cy="104.4" r="2" fill="#1f77b4"><title>samples at 36: 1.02</title></circle>
+<circle cx="152.3" cy="99.6" r="2" fill="#1f77b4"><title>samples at 37: 1.08</title></circle>
+<circle cx="154.9" cy="88.4" r="2" fill="#1f77b4"><title>samples at 38: 1.22</title></circle>
+<circle cx="157.5" cy="86.8" r="2" fill="#1f77b4"><title>samples at 39: 1.24</title></circle>
+<circle cx="160.1" cy="56.4" r="2" fill="#1f77b4"><title>samples at 40: 1.62</title></circle>
+<circle cx="162.7" cy="84.4" r="2" fill="#1f77b4"><title>samples at 41: 1.27</title></circle>
+<circle cx="165.3" cy="100.4" r="2" fill="#1f77b4"><title>samples at 42: 1.07</title></circle>
+<circle cx="167.9" cy="93.2" r="2" fill="#1f77b4"><title>samples at 43: 1.16</title></circle>
+<circle cx="170.5" cy="103.6" r="2" fill="#1f77b4"><title>samples at 44: 1.03</title></circle>
+<circle cx="173.1" cy="93.2" r="2" fill="#1f77b4"><title>samples at 45: 1.16</title></circle>
+<circle cx="175.7" cy="84.4" r="2" fill="#1f77b4"><title>samples at 46: 1.27</title></circle>
+<circle cx="178.3" cy="82.0" r="2" fill="#1f77b4"><title>samples at 47: 1.3</title></circle>
+<circle cx="181.0" cy="85.2" r="2" fill="#1f77b4"><title>samples at 48: 1.26</title></circle>
+<circle cx="183.6" cy="70.0" r="2" fill="#1f77b4"><title>samples at 49: 1.45</title></circle>
+<circle cx="186.2" cy="49.2" r="2" fill="#1f77b4"><title>samples at 50: 1.71</title></circle>
+<circle cx="188.8" cy="49.2" r="2" fill="#1f77b4"><title>samples at 51: 1.71</title></circle>
+<circle cx="191.4" cy="49.2" r="2" fill="#1f77b4"><title>samples at 52: 1.71</title></circle>
+<circle cx="194.0" cy="49.2" r="2" fill="#1f77b4"><title>samples at 53: 1.71</title></circle>
+<circle cx="196.6" cy="49.2" r="2" fill="#1f77b4"><title>samples at 54: 1.71</title></circle>
+<circle cx="199.2" cy="54.0" r="2" fill="#1f77b4"><title>samples at 55: 1.65</title></circle>
+<circle cx="201.8" cy="54.0" r="2" fill="#1f77b4"><title>samples at 56: 1.65</title></circle>
+<circle cx="204.4" cy="54.0" r="2" fill="#1f77b4"><title>samples at 57: 1.65</title></circle>
+<circle cx="207.0" cy="64.4" r="2" fill="#1f77b4"><title>samples at 58: 1.52</title></circle>
+<circle cx="209.6" cy="64.4" r="2" fill="#1f77b4"><title>samples at 59: 1.52</title></circle>
+<circle cx="212.2" cy="64.4" r="2" fill="#1f77b4"><title>samples at 60: 1.52</title></circle>
+<circle cx="214.8" cy="64.4" r="2" fill="#1f77b4"><title>samples at 61: 1.52</title></circle>
+<circle cx="217.4" cy="64.4" r="2" fill="#1f77b4"><title>samples at 62: 1.52</title></circle>
+<circle cx="220.0" cy="64.4" r="2" fill="#1f77b4"><title>samples at 63: 1.52</title></circle>
+<circle cx="222.6" cy="64.4" r="2" fill="#1f77b4"><title>samples at 64: 1.52</title></circle>
+<circle cx="225.2" cy="64.4" r="2" fill="#1f77b4"><title>samples at 65: 1.52</title></circle>
+<circle cx="227.8" cy="61.2" r="2" fill="#1f77b4"><title>samples at 66: 1.56</title></circle>
+<circle cx="230.4" cy="61.2" r="2" fill="#1f77b4"><title>samples at 67: 1.56</title></circle>
+<circle cx="233.0" cy="61.2" r="2" fill="#1f77b4"><title>samples at 68: 1.56</title></circle>
+<circle cx="235.6" cy="61.2" r="2" fill="#1f77b4"><title>samples at 69: 1.56</title></circle>
+<circle cx="238.2" cy="61.2" r="2" fill="#1f77b4"><title>samples at 70: 1.56</title></circle>
+<circle cx="240.8" cy="78.0" r="2" fill="#1f77b4"><title>samples at 71: 1.35</title></circle>
+<circle cx="243.4" cy="89.2" r="2" fill="#1f77b4"><title>samples at 72: 1.21</title></circle>
+<circle cx="246.0" cy="95.6" r="2" fill="#1f77b4"><title>samples at 73: 1.13</title></circle>
+<circle cx="248.6" cy="102.0" r="2" fill="#1f77b4"><title>samples at 74: 1.05</title></circle>
+<circle cx="251.2" cy="58.8" r="2" fill="#1f77b4"><title>samples at 75: 1.59</title></circle>
+<circle cx="253.8" cy="36.4" r="2" fill="#1f77b4"><title>samples at 76: 1.87</title></circle>
+<circle cx="256.4" cy="46.0" r="2" fill="#1f77b4"><title>samples at 77: 1.75</title></circle>
+<circle cx="259.0" cy="44.4" r="2" fill="#1f77b4"><title>samples at 78: 1.77</title></circle>
+<circle cx="261.7" cy="76.4" r="2" fill="#1f77b4"><title>samples at 79: 1.37</title></circle>
+<circle cx="264.3" cy="83.6" r="2" fill="#1f77b4"><title>samples at 80: 1.28</title></circle>
+<circle cx="266.9" cy="86.8" r="2" fill="#1f77b4"><title>samples at 81: 1.24</title></circle>
+<circle cx="269.5" cy="96.4" r="2" fill="#1f77b4"><title>samples at 82: 1.12</title></circle>
+<circle cx="272.1" cy="102.0" r="2" fill="#1f77b4"><title>samples at 83: 1.05</title></circle>
+<circle cx="274.7" cy="103.6" r="2" fill="#1f77b4"><title>samples at 84: 1.03</title></circle>
+<circle cx="277.3" cy="66.8" r="2" fill="#1f77b4"><title>samples at 85: 1.49</title></circle>
+<circle cx="279.9" cy="59.6" r="2" fill="#1f77b4"><title>samples at 86: 1.58</title></circle>
+<circle cx="282.5" cy="87.6" r="2" fill="#1f77b4"><title>samples at 87: 1.23</title></circle>
+<circle cx="285.1" cy="98.0" r="2" fill="#1f77b4"><title>samples at 88: 1.1</title></circle>
+<circle cx="287.7" cy="66.0" r="2" fill="#1f77b4"><title>samples at 89: 1.5</title></circle>
+<circle cx="290.3" cy="90.0" r="2" fill="#1f77b4"><title>samples at 90: 1.2</title></circle>
+<circle cx="292.9" cy="90.0" r="2" fill="#1f77b4"><title>samples at 91: 1.2</title></circle>
+<circle cx="295.5" cy="90.0" r="2" fill="#1f77b4"><title>samples at 92: 1.2</title></circle>
+<circle cx="298.1" cy="66.0" r="2" fill="#1f77b4"><title>samples at 93: 1.5</title></circle>
+<circle cx="300.7" cy="66.0" r="2" fill="#1f77b4"><title>samples at 94: 1.5</title></circle>
+<circle cx="303.3" cy="66.0" r="2" fill="#1f77b4"><title>samples at 95: 1.5</title></circle>
+<circle cx="305.9" cy="66.0" r="2" fill="#1f77b4"><title>samples at 96: 1.5</title></circle>
+<circle cx="308.5" cy="66.0" r="2" fill="#1f77b4"><title>samples at 97: 1.5</title></circle>
+<circle cx="311.1" cy="66.0" r="2" fill="#1f77b4"><title>samples at 98: 1.5</title></circle>
+<circle cx="313.7" cy="75.6" r="2" fill="#1f77b4"><title>samples at 99: 1.38</title></circle>
+<circle cx="316.3" cy="75.6" r="2" fill="#1f77b4"><title>samples at 100: 1.38</title></circle>
+<circle cx="318.9" cy="75.6" r="2" fill="#1f77b4"><title>samples at 101: 1.38</title></circle>
+<circle cx="321.5" cy="75.6" r="2" fill="#1f77b4"><title>samples at 102: 1.38</title></circle>
+<circle cx="324.1" cy="75.6" r="2" fill="#1f77b4"><title>samples at 103: 1.38</title></circle>
+<circle cx="326.7" cy="78.0" r="2" fill="#1f77b4"><title>samples at 104: 1.35</title></circle>
+<circle cx="329.3" cy="78.0" r="2" fill="#1f77b4"><title>samples at 105: 1.35</title></circle>
+<circle cx="331.9" cy="78.0" r="2" fill="#1f77b4"><title>samples at 106: 1.35</title></circle>
+<circle cx="334.5" cy="78.0" r="2" fill="#1f77b4"><title>samples at 107: 1.35</title></circle>
+<circle cx="337.1" cy="78.0" r="2" fill="#1f77b4"><title>samples at 108: 1.35</title></circle>
+<circle cx="339.7" cy="78.0" r="2" fill="#1f77b4"><title>samples at 109: 1.35</title></circle>
+<circle cx="342.3" cy="78.0" r="2" fill="#1f77b4"><title>samples at 110: 1.35</title></circle>
+<circle cx="345.0" cy="58.8" r="2" fill="#1f77b4"><title>samples at 111: 1.59</title></circle>
+<circle cx="347.6" cy="33.2" r="2" fill="#1f77b4"><title>samples at 112: 1.91</title></circle>
+<circle cx="350.2" cy="77.2" r="2" fill="#1f77b4"><title>samples at 113: 1.36</title></circle>
+<circle cx="352.8" cy="83.6" r="2" fill="#1f77b4"><title>samples at 114: 1.28</title></circle>
+<circle cx="355.4" cy="96.4" r="2" fill="#1f77b4"><title>samples at 115: 1.12</title></circle>
+<circle cx="358.0" cy="105.2" r="2" fill="#1f77b4"><title>samples at 116: 1.01</title></circle>
+<circle cx="360.6" cy="98.0" r="2" fill="#1f77b4"><title>samples at 117: 1.1</title></circle>
+<circle cx="363.2" cy="102.0" r="2" fill="#1f77b4"><title>samples at 118: 1.05</title></circle>
+<circle cx="365.8" cy="107.6" r="2" fill="#1f77b4"><title>samples at 119: 0.98</title></circle>
+<circle cx="368.4" cy="102.0" r="2" fill="#1f77b4"><title>samples at 120: 1.05</title></circle>
+<circle cx="371.0" cy="76.4" r="2" fill="#1f77b4"><title>samples at 121: 1.37</title></circle>
+<circle cx="373.6" cy="60.4" r="2" fill="#1f77b4"><title>samples at 122: 1.57</title></circle>
+<circle cx="376.2" cy="86.8" r="2" fill="#1f77b4"><title>samples at 123: 1.24</title></circle>
+<circle cx="378.8" cy="97.2" r="2" fill="#1f77b4"><title>samples at 124: 1.11</title></circle>
+<circle cx="381.4" cy="89.2" r="2" fill="#1f77b4"><title>samples at 125: 1.21</title></circle>
+<circle cx="384.0" cy="89.2" r="2" fill="#1f77b4"><title>samples at 126: 1.21</title></circle>
+<circle cx="386.6" cy="94.0" r="2" fill="#1f77b4"><title>samples at 127: 1.15</title></circle>
+<circle cx="389.2" cy="90.0" r="2" fill="#1f77b4"><title>samples at 128: 1.2</title></circle>
+<circle cx="391.8" cy="96.4" r="2" fill="#1f77b4"><title>samples at 129: 1.12</title></circle>
+<circle cx="394.4" cy="89.2" r="2" fill="#1f77b4"><title>samples at 130: 1.21</title></circle>
+<circle cx="397.0" cy="89.2" r="2" fill="#1f77b4"><title>samples at 131: 1.21</title></circle>
+<circle cx="399.6" cy="89.2" r="2" fill="#1f77b4"><title>samples at 132: 1.21</title></circle>
+<circle cx="402.2" cy="89.2" r="2" fill="#1f77b4"><title>samples at 133: 1.21</title></circle>
+<circle cx="404.8" cy="89.2" r="2" fill="#1f77b4"><title>samples at 134: 1.21</title></circle>
+<circle cx="407.4" cy="89.2" r="2" fill="#1f77b4"><title>samples at 135: 1.21</title></circle>
+<circle cx="410.0" cy="97.2" r="2" fill="#1f77b4"><title>samples at 136: 1.11</title></circle>
+<circle cx="412.6" cy="97.2" r="2" fill="#1f77b4"><title>samples at 137: 1.11</title></circle>
+<circle cx="415.2" cy="97.2" r="2" fill="#1f77b4"><title>samples at 138: 1.11</title></circle>
+<circle cx="417.8" cy="97.2" r="2" fill="#1f77b4"><title>samples at 139: 1.11</title></circle>
+<circle cx="420.4" cy="98.0" r="2" fill="#1f77b4"><title>samples at 140: 1.1</title></circle>
+<circle cx="423.0" cy="98.0" r="2" fill="#1f77b4"><title>samples at 141: 1.1</title></circle>
+<circle cx="425.7" cy="98.0" r="2" fill="#1f77b4"><title>samples at 142: 1.1</title></circle>
+<circle cx="428.3" cy="98.0" r="2" fill="#1f77b4"><title>samples at 143: 1.1</title></circle>
+<circle cx="430.9" cy="98.0" r="2" fill="#1f77b4"><title>samples at 144: 1.1</title></circle>
+<circle cx="433.5" cy="98.0" r="2" fill="#1f77b4"><title>samples at 145: 1.1</title></circle>
+<circle cx="436.1" cy="98.0" r="2" fill="#1f77b4"><title>samples at 146: 1.1</title></circle>
+<circle cx="438.7" cy="98.0" r="2" fill="#1f77b4"><title>samples at 147: 1.1</title></circle>
+<circle cx="441.3" cy="86.0" r="2" fill="#1f77b4"><title>samples at 148: 1.25</title></circle>
+<circle cx="443.9" cy="86.0" r="2" fill="#1f77b4"><title>samples at 149: 1.25</title></circle>
+<circle cx="446.5" cy="86.0" r="2" fill="#1f77b4"><title>samples at 150: 1.25</title></circle>
+<circle cx="449.1" cy="95.6" r="2" fill="#1f77b4"><title>samples at 151: 1.13</title></circle>
+<circle cx="451.7" cy="99.6" r="2" fill="#1f77b4"><title>samples at 152: 1.08</title></circle>
+<circle cx="454.3" cy="91.6" r="2" fill="#1f77b4"><title>samples at 153: 1.18</title></circle>
+<circle cx="456.9" cy="94.0" r="2" fill="#1f77b4"><title>samples at 154: 1.15</title></circle>
+<circle cx="459.5" cy="102.0" r="2" fill="#1f77b4"><title>samples at 155: 1.05</title></circle>
+<circle cx="462.1" cy="107.6" r="2" fill="#1f77b4"><title>samples at 156: 0.98</title></circle>
+<circle cx="464.7" cy="78.0" r="2" fill="#1f77b4"><title>samples at 157: 1.35</title></circle>
+<circle cx="467.3" cy="41.2" r="2" fill="#1f77b4"><title>samples at 158: 1.81</title></circle>
+<circle cx="469.9" cy="78.0" r="2" fill="#1f77b4"><title>samples at 159: 1.35</title></circle>
+<circle cx="472.5" cy="84.4" r="2" fill="#1f77b4"><title>samples at 160: 1.27</title></circle>
+<circle cx="475.1" cy="89.2" r="2" fill="#1f77b4"><title>samples at 161: 1.21</title></circle>
+<circle cx="477.7" cy="85.2" r="2" fill="#1f77b4"><title>samples at 162: 1.26</title></circle>
+<circle cx="480.3" cy="84.4" r="2" fill="#1f77b4"><title>samples at 163: 1.27</title></circle>
+<circle cx="482.9" cy="75.6" r="2" fill="#1f77b4"><title>samples at 164: 1.38</title></circle>
+<circle cx="485.5" cy="72.4" r="2" fill="#1f77b4"><title>samples at 165: 1.42</title></circle>
+<circle cx="488.1" cy="72.4" r="2" fill="#1f77b4"><title>samples at 166: 1.42</title></circle>
+<circle cx="490.7" cy="56.4" r="2" fill="#1f77b4"><title>samples at 167: 1.62</title></circle>
+<circle cx="493.3" cy="50.0" r="2" fill="#1f77b4"><title>samples at 168: 1.7</title></circle>
+<circle cx="495.9" cy="76.4" r="2" fill="#1f77b4"><title>samples at 169: 1.37</title></circle>
+<circle cx="498.5" cy="93.2" r="2" fill="#1f77b4"><title>samples at 170: 1.16</title></circle>
+<circle cx="501.1" cy="93.2" r="2" fill="#1f77b4"><title>samples at 171: 1.16</title></circle>
+<circle cx="503.7" cy="93.2" r="2" fill="#1f77b4"><title>samples at 172: 1.16</title></circle>
+<circle cx="506.3" cy="94.0" r="2" fill="#1f77b4"><title>samples at 173: 1.15</title></circle>
+<circle cx="509.0" cy="94.0" r="2" fill="#1f77b4"><title>samples at 174: 1.15</title></circle>
+<circle cx="511.6" cy="94.0" r="2" fill="#1f77b4"><title>samples at 175: 1.15</title></circle>
+<circle cx="514.2" cy="94.0" r="2" fill="#1f77b4"><title>samples at 176: 1.15</title></circle>
+<circle cx="516.8" cy="88.4" r="2" fill="#1f77b4"><title>samples at 177: 1.22</title></circle>
+<circle cx="519.4" cy="88.4" r="2" fill="#1f77b4"><title>samples at 178: 1.22</title></circle>
+<circle cx="522.0" cy="88.4" r="2" fill="#1f77b4"><title>samples at 179: 1.22</title></circle>
+<circle cx="524.6" cy="88.4" r="2" fill="#1f77b4"><title>samples at 180: 1.22</title></circle>
+<circle cx="527.2" cy="90.8" r="2" fill="#1f77b4"><title>samples at 181: 1.19</title></circle>
+<circle cx="529.8" cy="98.0" r="2" fill="#1f77b4"><title>samples at 182: 1.1</title></circle>
+<circle cx="532.4" cy="106.0" r="2" fill="#1f77b4"><title>samples at 183: 1</title></circle>
+<circle cx="535.0" cy="109.2" r="2" fill="#1f77b4"><title>samples at 184: 0.96</title></circle>
+<circle cx="537.6" cy="61.2" r="2" fill="#1f77b4"><title>samples at 185: 1.56</title></circle>
+<circle cx="540.2" cy="50.0" r="2" fill="#1f77b4"><title>samples at 186: 1.7</title></circle>
+<circle cx="542.8" cy="95.6" r="2" fill="#1f77b4"><title>samples at 187: 1.13</title></circle>
+<circle cx="545.4" cy="92.4" r="2" fill="#1f77b4"><title>samples at 188: 1.17</title></circle>
+<circle cx="548.0" cy="98.8" r="2" fill="#1f77b4"><title>samples at 189: 1.09</title></circle>
+</svg>

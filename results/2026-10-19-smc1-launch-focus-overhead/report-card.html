@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>buffon report card — PROVISIONAL</title><style>
+:root{--bg:#1b1f27;--grid:#232833;--panel:#202530;--panel2:#272d3a;--line:#2f3645;--text:#d4d6db;--muted:#949baa;--coral:#e2928a;--steel:#6599bf;--mustard:#e8c06e;--yours:#7aa3d1;--green:#86b894;
+--serif:"Iowan Old Style","Palatino Linotype",Palatino,"Book Antiqua",Georgia,"Times New Roman",serif;--sans:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;--mono:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono","DejaVu Sans Mono",monospace}
+*{box-sizing:border-box}
+html{color-scheme:dark;-webkit-text-size-adjust:100%}
+body{margin:0;background-color:var(--bg);background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:32px 32px;
+color:var(--text);font:15px/1.55 var(--sans)}
+a{color:var(--yours);text-decoration:none;border-bottom:1px solid rgba(122,163,209,.35)}a:hover{border-bottom-color:var(--yours)}
+code,.mono{font-family:var(--mono);font-size:.86em}
+code{background:rgba(255,255,255,.06);border-radius:4px;padding:.05rem .32rem}
+.wrap{max-width:78rem;margin:0 auto;padding:0 1.4rem}
+.top{display:flex;align-items:center;gap:1.2rem;padding:1rem 0;border-bottom:1px solid var(--line);flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:.65rem;font:600 1.05rem var(--sans);letter-spacing:.02em;color:var(--text);border:0}
+.top nav{margin-left:auto;display:flex;gap:1.1rem;font-size:.9rem;flex-wrap:wrap}.top nav a{color:var(--muted);border:0}.top nav a:hover{color:var(--text)}
+.hero{padding:3rem 0 1.6rem}
+.hero h1{font:italic 400 clamp(2.1rem,5.2vw,3.7rem)/1.1 var(--serif);margin:0 0 1rem;letter-spacing:-.01em;max-width:30ch;text-wrap:balance}
+.hero h1 .yours{color:var(--yours)}
+.lede{font-size:1.08rem;color:#b9bec9;max-width:46rem;margin:0 0 1.3rem}
+.badges{display:flex;flex-wrap:wrap;gap:.5rem;margin:.2rem 0 1rem}
+.badge{display:inline-flex;align-items:center;gap:.4rem;border:1px solid var(--line);background:var(--panel);border-radius:999px;padding:.18rem .75rem;font-size:.8rem;letter-spacing:.04em;color:var(--text)}
+.badge i{width:.55rem;height:.55rem;border-radius:2px;background:var(--muted);display:inline-block}
+.badge.prov{border-color:rgba(232,192,110,.6);color:var(--mustard);background:rgba(232,192,110,.08);font-weight:600}.badge.prov i{background:var(--mustard)}
+.badge.mono{font-family:var(--mono)}
+.notice{border:1px solid rgba(232,192,110,.35);background:rgba(232,192,110,.06);border-radius:10px;padding:.8rem 1rem;margin:.4rem 0 1.2rem;color:#d9ccaa;font-size:.92rem}
+.notice ul{margin:.4rem 0 0 1.1rem;padding:0}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(9.5rem,1fr));gap:.7rem;margin:1.2rem 0 .4rem}
+.stat{border:1px solid var(--line);background:var(--panel);border-radius:10px;padding:.65rem .85rem}
+.stat b{display:block;font:600 1.25rem var(--sans);font-variant-numeric:tabular-nums}.stat span{font-size:.78rem;color:var(--muted);letter-spacing:.04em;text-transform:uppercase}
+h2.sec{font:italic 400 1.75rem var(--serif);margin:2.6rem 0 .3rem}
+p.sub{color:var(--muted);margin:.1rem 0 1rem;max-width:52rem}
+.card{border:1px solid var(--line);background:var(--panel);border-radius:12px;margin:0 0 1.1rem;overflow:hidden}
+.card>header{display:flex;align-items:baseline;gap:.8rem;flex-wrap:wrap;padding:.8rem 1rem;border-bottom:1px solid var(--line);background:var(--panel2)}
+.card>header h3{font:600 1.02rem var(--sans);margin:0}.card>header .meta{color:var(--muted);font-size:.84rem;margin-left:auto}
+.card .scroll{overflow-x:auto}
+.grade{display:grid;grid-template-columns:repeat(auto-fill,minmax(17rem,1fr));gap:.9rem}
+.entry{border:1px solid var(--line);background:var(--panel);border-radius:12px;padding:.9rem 1rem}
+.entry h3{font:600 1rem var(--sans);margin:0 0 .1rem;word-break:break-word}.entry .rel{color:var(--muted);font-size:.82rem;margin-bottom:.5rem}
+.entry .score{display:flex;align-items:baseline;gap:.6rem}.entry .score b{font:italic 400 2.5rem/1 var(--serif);font-variant-numeric:tabular-nums}.entry .score span{font-size:1.1rem;color:var(--mustard)}
+.entry .score small{color:var(--muted);font-size:.8rem}
+.bar{position:relative;height:.5rem;border-radius:999px;background:var(--panel2);margin:.35rem 0 .15rem;overflow:visible}
+.bar>i{position:absolute;inset:0 auto 0 0;border-radius:999px;background:var(--steel)}.bar>u{position:absolute;top:-.25rem;bottom:-.25rem;width:2px;background:var(--mustard);opacity:.9}
+.entry .why{font-size:.82rem;color:var(--muted);margin:.1rem 0 .4rem}.faith{font-size:.82rem;color:var(--muted)}.faith b{color:var(--text);font-variant-numeric:tabular-nums}
+.tag{display:inline-block;border:1px solid var(--line);border-radius:6px;padding:0 .42rem;font-size:.74rem;letter-spacing:.03em;color:var(--muted);margin-right:.25rem;white-space:nowrap}
+.tag.kind-CPU{color:var(--coral);border-color:rgba(226,146,138,.45)}.tag.kind-wall{color:var(--steel);border-color:rgba(101,153,191,.5)}
+.tag.kind-memory{color:var(--mustard);border-color:rgba(232,192,110,.5)}.tag.kind-size{color:var(--yours);border-color:rgba(122,163,209,.45)}
+.tag.mem{background:rgba(232,192,110,.1)}.tag.unnamed{border-style:dashed}
+table.rows{border-collapse:collapse;width:100%;font-size:.86rem}
+table.rows th{font:600 .72rem var(--sans);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);text-align:left;padding:.5rem .7rem;border-bottom:1px solid var(--line);white-space:nowrap}
+table.rows td{padding:.5rem .7rem;border-bottom:1px solid rgba(47,54,69,.6);vertical-align:top}
+table.rows tr:last-child td{border-bottom:0}table.rows tr.armhead td{background:rgba(255,255,255,.025);font-weight:600;color:#e6e8ec;padding:.4rem .7rem}
+table.rows td.num,table.rows th.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+td .wl{display:block;color:var(--text)}td .wl .api{color:var(--muted);font-size:.8rem;margin-left:.3rem}td .mn{display:block;font-family:var(--mono);font-size:.82rem;color:#c3c8d2}td .tags{display:block;margin-top:.2rem}
+.dir{display:inline-block;min-width:1.1rem;text-align:center;font-weight:700}.dir.up{color:var(--coral)}.dir.down{color:var(--steel)}.dir.same{color:var(--muted)}.dir.unsure{color:var(--mustard)}
+.vd{white-space:nowrap}
+.spread{color:var(--muted);font-size:.82rem;display:block}
+details.rerun{margin-top:.35rem}details.rerun summary{cursor:pointer;color:var(--yours);font-size:.78rem;list-style:none}details.rerun summary::-webkit-details-marker{display:none}
+details.rerun summary::before{content:"\25B8  "}details.rerun[open] summary::before{content:"\25BE  "}
+details.rerun code{display:block;margin-top:.3rem;color:var(--yours);background:rgba(122,163,209,.08);border:1px solid rgba(122,163,209,.25);padding:.35rem .5rem;white-space:pre-wrap;overflow-wrap:anywhere}
+details.rerun .hint{display:block;margin-top:.25rem;color:var(--muted);font-size:.76rem}
+table.rows td:first-child{min-width:19rem}
+.legend{display:flex;gap:1.1rem;flex-wrap:wrap;color:var(--muted);font-size:.82rem;margin:.2rem 0 .8rem}
+details.panel{border:1px solid var(--line);background:var(--panel);border-radius:12px;margin:1rem 0}
+details.panel>summary{cursor:pointer;padding:.8rem 1rem;font:600 1rem var(--sans);list-style:none}details.panel>summary::-webkit-details-marker{display:none}
+details.panel>summary::before{content:"\25B8  ";color:var(--muted)}details.panel[open]>summary::before{content:"\25BE  "}
+details.panel>summary small{color:var(--muted);font-weight:400;margin-left:.5rem}
+details.panel>.body{padding:.2rem 1.2rem 1.2rem;border-top:1px solid var(--line)}
+.md h1{font:italic 400 2rem var(--serif);margin:1.4rem 0 .5rem}.md h2{font:italic 400 1.55rem var(--serif);margin:2rem 0 .4rem}.md h3{font:600 1.05rem var(--sans);margin:1.4rem 0 .3rem}.md h4{font:600 .95rem var(--sans);margin:1.1rem 0 .3rem;color:var(--muted)}
+.md table{border-collapse:collapse;margin:.7rem 0;font-size:.83rem;display:block;overflow-x:auto;max-width:100%}
+.md th,.md td{border:1px solid var(--line);padding:.28rem .55rem;vertical-align:top}.md th{background:var(--panel2);text-align:left;font-weight:600}
+.md td.num{text-align:right;font-variant-numeric:tabular-nums}
+.md blockquote{border-left:3px solid var(--mustard);margin:.8rem 0;padding:.2rem .9rem;background:rgba(232,192,110,.06);color:#d9ccaa;border-radius:0 8px 8px 0}
+.md hr{border:0;border-top:1px solid var(--line);margin:1.6rem 0}.md ul{padding-left:1.3rem}.md li{margin:.15rem 0}
+.md details{margin:.5rem 0}.md summary{cursor:pointer;font-weight:600}.md svg{max-width:100%;height:auto;margin:.3rem .5rem .3rem 0;background:#f4f5f7;border-radius:8px}
+.md .doclink{color:var(--text);border-bottom:1px dotted var(--muted)}
+footer.foot{margin:3rem 0 2rem;padding-top:1.2rem;border-top:1px solid var(--line);color:var(--muted);font-size:.84rem}
+footer.foot .brand{font-size:.95rem;margin-bottom:.5rem}
+@media(max-width:640px){.hero{padding-top:2rem}.card>header .meta{margin-left:0}table.rows th,table.rows td{padding:.4rem .5rem}}
+@media print{body{background:#fff;color:#111}.card,.entry,.badge,.stat,details.panel{background:#fff;border-color:#bbb}a{color:#124}}
+</style></head><body><div class="wrap"><div class="top"><a class="brand" href="#"><svg class="mark" role="img" aria-label="Buffon" width="26" height="26" viewBox="0 0 3 3" shape-rendering="crispEdges"><rect x="0.06" y="0.06" width="0.88" height="0.88" fill="#e2928a"/><rect x="0.06" y="1.06" width="0.88" height="0.88" fill="#e2928a"/><rect x="0.06" y="2.06" width="0.88" height="0.88" fill="#e2928a"/><rect x="1.06" y="1.06" width="0.88" height="0.88" fill="#6599bf"/><rect x="1.06" y="2.06" width="0.88" height="0.88" fill="#6599bf"/><rect x="2.06" y="2.06" width="0.88" height="0.88" fill="#e8c06e"/></svg><span>Buffon</span></a></div><main class="md">
+<h1 id="buffon-report-card-provisional">buffon report card — PROVISIONAL</h1>
+<p>Family scores per entry (reference = 70, C-). Losses against the reference are listed first; a cell marked LOSS scores under 70.</p>
+<h2 id="losses-first-provisional">Losses first — PROVISIONAL</h2>
+<ul>
+<li>pi-bun / core: 66 (D), 1.28x the reference's cost</li>
+<li>pi-bun / ext10: 68 (D+), 1.15x the reference's cost</li>
+<li>pig-0.4.1 / ext10: 47 (F), 4.89x the reference's cost</li>
+<li>pig-tip / ext10: 61 (D-), 1.82x the reference's cost</li>
+</ul>
+<h2 id="entry-x-family-provisional">Entry x family — PROVISIONAL</h2>
+<table><thead><tr><th>entry</th><th>core</th><th>ext10</th><th>streaming</th><th>large-write</th><th>long-session</th><th>scale</th><th>search</th><th>reliability</th><th>devloop</th><th>overall</th></tr></thead><tbody>
+<tr><td>pi-node</td><td>70 C-</td><td>70 C-</td><td>not run</td><td>not run</td><td>not run</td><td>not run</td><td>not run</td><td>not run</td><td>not run</td><td><strong>70 (C-)</strong> PROVISIONAL</td></tr>
+<tr><td>pi-bun</td><td>66 D LOSS</td><td>68 D+ LOSS</td><td>not run</td><td>not run</td><td>not run</td><td>not run</td><td>not run</td><td>not run</td><td>not run</td><td><strong>67 (D+)</strong> PROVISIONAL</td></tr>
+<tr><td>pibolt</td><td>91 A-</td><td>86 B</td><td>not run</td><td>not run</td><td>not run</td><td>not run</td><td>not run</td><td>not run</td><td>not run</td><td><strong>89 (B+)</strong> PROVISIONAL</td></tr>
+<tr><td>pig-0.4.1</td><td>85 B</td><td>47 F LOSS</td><td>not run</td><td>not run</td><td>not run</td><td>not run</td><td>not run</td><td>not run</td><td>not run</td><td><strong>66 (D)</strong> PROVISIONAL</td></tr>
+<tr><td>pig-tip</td><td>92 A-</td><td>61 D- LOSS</td><td>not run</td><td>not run</td><td>not run</td><td>not run</td><td>not run</td><td>not run</td><td>not run</td><td><strong>76 (C)</strong> PROVISIONAL</td></tr>
+</tbody></table>
+<h2 id="why-a-cell-is-not-a-score">Why a cell is not a score</h2>
+<table><thead><tr><th>entry</th><th>family</th><th>class</th><th>reason</th></tr></thead><tbody>
+<tr><td>pi-node</td><td>streaming</td><td>not-run</td><td>the reference has no cells in this family in this run</td></tr>
+<tr><td>pi-node</td><td>large-write</td><td>not-run</td><td>the method has no workload for this family yet</td></tr>
+<tr><td>pi-node</td><td>long-session</td><td>not-run</td><td>the reference has no cells in this family in this run</td></tr>
+<tr><td>pi-node</td><td>scale</td><td>not-run</td><td>the method has no workload for this family yet</td></tr>
+<tr><td>pi-node</td><td>search</td><td>not-run</td><td>the method has no workload for this family yet</td></tr>
+<tr><td>pi-node</td><td>reliability</td><td>not-run</td><td>the reference has no fault results in this run</td></tr>
+<tr><td>pi-node</td><td>devloop</td><td>not-run</td><td>the reference has no cells in this family in this run</td></tr>
+<tr><td>pi-bun</td><td>streaming</td><td>not-run</td><td>the reference has no cells in this family in this run</td></tr>
+<tr><td>pi-bun</td><td>large-write</td><td>not-run</td><td>the method has no workload for this family yet</td></tr>
+<tr><td>pi-bun</td><td>long-session</td><td>not-run</td><td>the reference has no cells in this family in this run</td></tr>
+<tr><td>pi-bun</td><td>scale</td><td>not-run</td><td>the method has no workload for this family yet</td></tr>
+<tr><td>pi-bun</td><td>search</td><td>not-run</td><td>the method has no workload for this family yet</td></tr>
+<tr><td>pi-bun</td><td>reliability</td><td>not-run</td><td>the reference has no fault results in this run</td></tr>
+<tr><td>pi-bun</td><td>devloop</td><td>not-run</td><td>the reference has no cells in this family in this run</td></tr>
+<tr><td>pibolt</td><td>streaming</td><td>not-run</td><td>the reference has no cells in this family in this run</td></tr>
+<tr><td>pibolt</td><td>large-write</td><td>not-run</td><td>the method has no workload for this family yet</td></tr>
+<tr><td>pibolt</td><td>long-session</td><td>not-run</td><td>the reference has no cells in this family in this run</td></tr>
+<tr><td>pibolt</td><td>scale</td><td>not-run</td><td>the method has no workload for this family yet</td></tr>
+<tr><td>pibolt</td><td>search</td><td>not-run</td><td>the method has no workload for this family yet</td></tr>
+<tr><td>pibolt</td><td>reliability</td><td>not-run</td><td>the reference has no fault results in this run</td></tr>
+<tr><td>pibolt</td><td>devloop</td><td>not-run</td><td>the reference has no cells in this family in this run</td></tr>
+<tr><td>pig-0.4.1</td><td>streaming</td><td>not-run</td><td>the reference has no cells in this family in this run</td></tr>
+<tr><td>pig-0.4.1</td><td>large-write</td><td>not-run</td><td>the method has no workload for this family yet</td></tr>
+<tr><td>pig-0.4.1</td><td>long-session</td><td>not-run</td><td>the reference has no cells in this family in this run</td></tr>
+<tr><td>pig-0.4.1</td><td>scale</td><td>not-run</td><td>the method has no workload for this family yet</td></tr>
+<tr><td>pig-0.4.1</td><td>search</td><td>not-run</td><td>the method has no workload for this family yet</td></tr>
+<tr><td>pig-0.4.1</td><td>reliability</td><td>not-run</td><td>the reference has no fault results in this run</td></tr>
+<tr><td>pig-0.4.1</td><td>devloop</td><td>not-run</td><td>the reference has no cells in this family in this run</td></tr>
+<tr><td>pig-tip</td><td>streaming</td><td>not-run</td><td>the reference has no cells in this family in this run</td></tr>
+<tr><td>pig-tip</td><td>large-write</td><td>not-run</td><td>the method has no workload for this family yet</td></tr>
+<tr><td>pig-tip</td><td>long-session</td><td>not-run</td><td>the reference has no cells in this family in this run</td></tr>
+<tr><td>pig-tip</td><td>scale</td><td>not-run</td><td>the method has no workload for this family yet</td></tr>
+<tr><td>pig-tip</td><td>search</td><td>not-run</td><td>the method has no workload for this family yet</td></tr>
+<tr><td>pig-tip</td><td>reliability</td><td>not-run</td><td>the reference has no fault results in this run</td></tr>
+<tr><td>pig-tip</td><td>devloop</td><td>not-run</td><td>the reference has no cells in this family in this run</td></tr>
+</tbody></table>
+<p>Classes (from the arm manifests and the run, never by hand): NA-scope is excluded from the mean and counts against coverage; NA-missing scores 0; NA-unmeasurable gives the entry no overall score until Buffon can drive it; NA-held is not listed; not-run is a family with no workload or no reference data in this run.</p>
+
+</main></div></body></html>

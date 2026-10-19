@@ -1,0 +1,4361 @@
+{
+ "trust": {
+  "badge": "Dedicated",
+  "host_class": "A",
+  "reasons": [
+   "adaptive stopping: 2 of 2 cells stopped with fewer than 12 rounds (8-9) because their answer was clear; the 12-round minimum applies to the Verified badge",
+   "8 measured rounds in the thinnest cell (the minimum for a headline is 12)",
+   "uncontained: the arms were not run in the container envelope",
+   "not yet reproduced (buffon reproduce / compare)"
+  ],
+  "headline": "instructions",
+  "headline_why": "hardware instruction counters",
+  "strict_problems": [
+   "8 measured rounds in the thinnest cell (the minimum for a headline is 12)",
+   "uncontained: the arms were not run in the container envelope"
+  ],
+  "rounds": 8
+ },
+ "provisional": false,
+ "reasons": [],
+ "reference": "pi-node",
+ "arms": [
+  "pi-bun",
+  "pi-node",
+  "pibolt",
+  "pig-0.4.1",
+  "pig-tip"
+ ],
+ "health": {
+  "notes": 7,
+  "summary": "7 notes: aa_cv_cpu 3.3%, aa_significant_fraction 8.8%, aa_gap_max 156.7%, aa_floor_median 3.4%, aa_floor_max 167.7%, outlier_fraction 4.4%, foreign_cpu_p95 1.7%",
+  "checks": [
+   {
+    "id": "aa_cv_cpu",
+    "title": "A/A CV of CPU metrics, median over arms and cells",
+    "kind": "threshold",
+    "unit": "fraction",
+    "value": 0.032811704992815716,
+    "usual": 0.02,
+    "status": "note",
+    "meaning": "How much CPU time varies from round to round for one harness. Lower means a quieter host.",
+    "detail": "streaming/tui-prose chat n10_settle_ms pi-bun: 300.0%; streaming/tui-prose chat n10_settle_ms pi-node: 300.0%; streaming/tui-prose chat n10_settle_ms pig-tip: 300.0%"
+   },
+   {
+    "id": "aa_significant_fraction",
+    "title": "A/A pairs with a significant gap (paired p < 0.05, before Holm) that is also larger than 1%",
+    "kind": "threshold",
+    "unit": "fraction",
+    "value": 0.08823529411764706,
+    "usual": 0.05,
+    "status": "note",
+    "meaning": "Share of harness and copy pairs that differ by more than 1% and also pass a significance test. A gap under 1% on a steady counter is not counted. About 5% can happen by chance.",
+    "detail": "streaming/tui-prose chat n_first_paint_ms pi-node: 156.7%; streaming/tui-prose chat n_settle_ms pibolt: 25.7%; streaming/tui-prose chat peak_mem_mib pi-bun: 11.4%"
+   },
+   {
+    "id": "aa_gap_max",
+    "title": "A/A gap between a harness and its own copy, largest cell",
+    "kind": "threshold",
+    "unit": "fraction",
+    "value": 1.5667750853777869,
+    "usual": 0.05,
+    "status": "note",
+    "meaning": "The largest gap between a harness and its identical copy, and the cell where it happened.",
+    "detail": "streaming/tui-prose chat n_first_paint_ms pi-node: 156.7%; streaming/tui-prose chat n_settle_ms pibolt: 25.7%; streaming/tui-prose chat peak_mem_mib pi-bun: 11.4%"
+   },
+   {
+    "id": "aa_floor_median",
+    "title": "A/A noise floor, median over scored cells",
+    "kind": "threshold",
+    "unit": "fraction",
+    "value": 0.034080797539603754,
+    "usual": 0.03,
+    "status": "note",
+    "meaning": "The smallest difference the identical copies cannot tell from noise, in the usual cell. Smaller differences than this are not resolved.",
+    "detail": "streaming/tui-prose chat n10_first_paint_ms: 167.7%; streaming/tui-prose chat n_first_paint_ms: 163.3%; streaming/tui-prose chat n10_first_paint_ms: 155.3%"
+   },
+   {
+    "id": "aa_floor_max",
+    "title": "A/A noise floor, worst scored cell",
+    "kind": "threshold",
+    "unit": "fraction",
+    "value": 1.6765739965881261,
+    "usual": 0.15,
+    "status": "note",
+    "meaning": "The same floor in the noisiest cell. Comparisons in that cell resolve only larger differences.",
+    "detail": "streaming/tui-prose chat n10_first_paint_ms: 167.7%; streaming/tui-prose chat n_first_paint_ms: 163.3%; streaming/tui-prose chat n10_first_paint_ms: 155.3%"
+   },
+   {
+    "id": "outlier_fraction",
+    "title": "Measured values flagged by the MAD rule",
+    "kind": "threshold",
+    "unit": "fraction",
+    "value": 0.043820224719101124,
+    "usual": 0.02,
+    "status": "note",
+    "meaning": "Share of measured values far from the median of their cell. Outliers are counted and never removed.",
+    "detail": "streaming/tui-prose chat n10_first_paint_ms pig-0.4.1: 4; streaming/tui-prose chat n10_first_paint_ms pig-0.4.1-b: 4; streaming/tui-prose chat n10_settle_ms pig-tip-b: 4"
+   },
+   {
+    "id": "foreign_cpu_p95",
+    "title": "Foreign CPU on the pinned CPUs during a sample, p95 over samples, as a share of the sample's CPU time",
+    "kind": "threshold",
+    "unit": "fraction",
+    "value": 0.01663911038498222,
+    "usual": 0.01,
+    "status": "note",
+    "meaning": "CPU time that other processes used on the pinned cores during a sample, as a share of the sample's own CPU time (95th percentile).",
+    "detail": ""
+   },
+   {
+    "id": "calibration_cv",
+    "title": "Calibration: CV of the reference's CPU time between identical runs",
+    "kind": "threshold",
+    "unit": "fraction",
+    "value": 0.0185811065454572,
+    "usual": 0.02,
+    "status": "ok",
+    "meaning": "How much the reference's CPU time varied between identical calibration runs. Lower means a quieter host.",
+    "detail": ""
+   },
+   {
+    "id": "aa_gap_median",
+    "title": "A/A gap between a harness and its own copy, median over cells",
+    "kind": "threshold",
+    "unit": "fraction",
+    "value": 0.004981935724328368,
+    "usual": 0.01,
+    "status": "ok",
+    "meaning": "The usual gap between a harness and its identical copy. A real difference between two harnesses should be larger than this.",
+    "detail": ""
+   },
+   {
+    "id": "flagged_fraction",
+    "title": "Measured samples with at least one host flag",
+    "kind": "threshold",
+    "unit": "fraction",
+    "value": 0.0058823529411764705,
+    "usual": 0.05,
+    "status": "ok",
+    "meaning": "Share of samples where the host showed a disturbance: throttling, foreign CPU, steal, a clock change, swap or a memory event.",
+    "detail": ""
+   },
+   {
+    "id": "throttled_samples",
+    "title": "Measured samples with CFS throttling (arm cgroup, every ancestor, session)",
+    "kind": "threshold",
+    "unit": "count",
+    "value": 0,
+    "usual": 0,
+    "status": "ok",
+    "meaning": "Samples where the kernel held the process back for a CPU quota. Their time then describes the quota, not the harness.",
+    "detail": ""
+   },
+   {
+    "id": "steal_share",
+    "title": "Steal: share of the pinned CPUs' capacity taken by a hypervisor",
+    "kind": "threshold",
+    "unit": "fraction",
+    "value": 0.0,
+    "usual": 0.001,
+    "status": "ok",
+    "meaning": "Share of the pinned CPUs' time that a hypervisor took away. It only matters on virtual machines.",
+    "detail": ""
+   },
+   {
+    "id": "gate_slow_fraction",
+    "title": "Samples that waited more than 1 s for the host to quiet down",
+    "kind": "threshold",
+    "unit": "fraction",
+    "value": 0.0,
+    "usual": 0.01,
+    "status": "ok",
+    "meaning": "Share of samples that had to wait for the quiet-host gate. A busy host makes the gate wait.",
+    "detail": ""
+   },
+   {
+    "id": "gate_gave_up",
+    "title": "Samples for which the host never quieted down",
+    "kind": "threshold",
+    "unit": "count",
+    "value": 0,
+    "usual": 0,
+    "status": "ok",
+    "meaning": "Samples that did not start because the host stayed busy. They are not in the numbers.",
+    "detail": ""
+   },
+   {
+    "id": "clock_deviation",
+    "title": "Effective clock: largest deviation of a sample's mean MHz from the run median",
+    "kind": "threshold",
+    "unit": "fraction",
+    "value": 0.0012857142857142234,
+    "usual": 0.02,
+    "status": "ok",
+    "meaning": "How far a sample's mean CPU clock moved from the run median. A moving clock changes CPU time for the same work.",
+    "detail": ""
+   },
+   {
+    "id": "infra_failed_fraction",
+    "title": "Infrastructure failures (envelope OOM, no process started, runner fault) over measured samples",
+    "kind": "threshold",
+    "unit": "fraction",
+    "value": 0.0,
+    "usual": 0.0,
+    "status": "ok",
+    "meaning": "Share of samples that failed because of the host or the runner. They are never charged to a harness.",
+    "detail": ""
+   },
+   {
+    "id": "arm_failed_fraction",
+    "title": "Arm failures over measured samples (a swarm ladder's designed stops are results and not counted)",
+    "kind": "threshold",
+    "unit": "fraction",
+    "value": 0.0,
+    "usual": 0.02,
+    "status": "ok",
+    "meaning": "Share of samples where the harness itself failed. A scale sample that stopped because the kernel's limit was reached (stop_cause oom, pids or timeout) is a result and is in neither the failures nor the samples counted; a scale error stop is a failure.",
+    "detail": ""
+   },
+   {
+    "id": "drift",
+    "title": "Drift: median absolute change over the run of an arm's value, over cells",
+    "kind": "threshold",
+    "unit": "fraction",
+    "value": 0.008163750507697895,
+    "usual": 0.02,
+    "status": "ok",
+    "meaning": "How much a harness's value moved from the start of the run to the end. Drift means the host changed during the run.",
+    "detail": ""
+   },
+   {
+    "id": "reference_changepoint",
+    "title": "No change point in the reference arm's per-round series",
+    "kind": "pass",
+    "unit": null,
+    "value": true,
+    "usual": null,
+    "status": "ok",
+    "meaning": "The host's speed did not shift during the run. A shift moves every comparison the same way.",
+    "detail": "no change point in 9 rounds"
+   },
+   {
+    "id": "rounds",
+    "title": "At least 12 measured rounds",
+    "kind": "pass",
+    "unit": null,
+    "value": true,
+    "usual": null,
+    "status": "ok",
+    "meaning": "With fewer rounds the intervals are wide.",
+    "detail": "12 measured rounds"
+   },
+   {
+    "id": "aa_copies",
+    "title": "Every arm has an A/A copy",
+    "kind": "pass",
+    "unit": null,
+    "value": true,
+    "usual": null,
+    "status": "ok",
+    "meaning": "Without a copy there is no noise floor for that harness.",
+    "detail": "every arm has its copy"
+   },
+   {
+    "id": "hardware",
+    "title": "Quiet dedicated hardware by the runner's own detection",
+    "kind": "pass",
+    "unit": null,
+    "value": true,
+    "usual": null,
+    "status": "ok",
+    "meaning": "On shared hardware other work can disturb the numbers.",
+    "detail": "quiet dedicated hardware"
+   },
+   {
+    "id": "egress",
+    "title": "No harness connected outside the loopback",
+    "kind": "pass",
+    "unit": null,
+    "value": true,
+    "usual": null,
+    "status": "ok",
+    "meaning": "A harness that talks to the network is not measured alone.",
+    "detail": "no connection outside the loopback"
+   },
+   {
+    "id": "integrity",
+    "title": "Every executable and install tree unchanged during the run",
+    "kind": "pass",
+    "unit": null,
+    "value": true,
+    "usual": null,
+    "status": "ok",
+    "meaning": "A changed executable means the arm is not what the lock names.",
+    "detail": "every executable and install tree unchanged"
+   },
+   {
+    "id": "calibration_ran",
+    "title": "Calibration ran and the reference stayed within its 5% limit",
+    "kind": "pass",
+    "unit": null,
+    "value": true,
+    "usual": null,
+    "status": "ok",
+    "meaning": "Calibration shows the host's noise before the run. Above 5% the run is labelled Noisy.",
+    "detail": "calibration passed in every run"
+   },
+   {
+    "id": "telemetry",
+    "title": "Telemetry recorded for every measured sample",
+    "kind": "pass",
+    "unit": null,
+    "value": true,
+    "usual": null,
+    "status": "ok",
+    "meaning": "Telemetry is how the other checks see the host.",
+    "detail": "every ok sample has telemetry"
+   },
+   {
+    "id": "cpu_quota",
+    "title": "No CPU quota (cpu.max) on the arm cgroup or any ancestor",
+    "kind": "pass",
+    "unit": null,
+    "value": true,
+    "usual": null,
+    "status": "ok",
+    "meaning": "A quota can throttle a sample.",
+    "detail": "no ancestor of the arm cgroup has a CPU quota"
+   },
+   {
+    "id": "clock_policy",
+    "title": "The pinned CPUs have a fixed clock policy",
+    "kind": "pass",
+    "unit": null,
+    "value": true,
+    "usual": null,
+    "status": "ok",
+    "meaning": "A clock that scales with load changes CPU time for the same work.",
+    "detail": "the pinned CPUs have a fixed clock policy (or the machine does not say)"
+   }
+  ],
+  "thresholds_sha256": "bb1caaa044ec28a8b258fb9a98912a3cc5948a3e74bc9d2caec584214f080737"
+ },
+ "noise": {
+  "by_metric": [
+   {
+    "metric": "cpu_ms",
+    "cells": 1,
+    "aa_gap_median": 0.011695040070246021,
+    "aa_gap_max": 0.024490891483747834,
+    "aa_floor_median": 0.06870953598149157,
+    "aa_floor_max": 0.0825577721270847,
+    "cv_median": 0.032811704992815716,
+    "cv_max": 0.07783751402642178,
+    "outliers": 0,
+    "values": 90,
+    "drift_median": 0.00818959193700077,
+    "drift_max": 0.04844790321675201
+   },
+   {
+    "metric": "cycles",
+    "cells": 1,
+    "aa_gap_median": 0.011064334939180354,
+    "aa_gap_max": 0.02564509202275833,
+    "aa_floor_median": 0.06895965913781288,
+    "aa_floor_max": 0.08619924260607559,
+    "cv_median": 0.032823233590131895,
+    "cv_max": 0.08011640004680332,
+    "outliers": 0,
+    "values": 90,
+    "drift_median": 0.015646404981654243,
+    "drift_max": 0.04870698104196473
+   },
+   {
+    "metric": "instructions",
+    "cells": 1,
+    "aa_gap_median": 0.01729536481118077,
+    "aa_gap_max": 0.0393555138475854,
+    "aa_floor_median": 0.0695722192995321,
+    "aa_floor_max": 0.10551435396561937,
+    "cv_median": 0.024184929982771823,
+    "cv_max": 0.09636525813423558,
+    "outliers": 0,
+    "values": 90,
+    "drift_median": 0.02192352674914,
+    "drift_max": 0.04261783432279364
+   },
+   {
+    "metric": "n10_cpu_ms_per_1k_tokens",
+    "cells": 2,
+    "aa_gap_median": 0.006984207866635228,
+    "aa_gap_max": 0.032102181532356444,
+    "aa_floor_median": 0.06184198901346662,
+    "aa_floor_max": 0.09750448300237946,
+    "cv_median": 0.030416561753145055,
+    "cv_max": 0.0881069981902356,
+    "outliers": 2,
+    "values": 170,
+    "drift_median": 0.01826447908371773,
+    "drift_max": 0.09976637499406836
+   },
+   {
+    "metric": "n10_first_paint_ms",
+    "cells": 1,
+    "aa_gap_median": 0.003199897367825777,
+    "aa_gap_max": 0.06608526984443897,
+    "aa_floor_median": 0.3422096031093477,
+    "aa_floor_max": 1.6765739965881261,
+    "cv_median": 0.2822644864034218,
+    "cv_max": 0.40586945956376236,
+    "outliers": 20,
+    "values": 90,
+    "drift_median": 0.016201846453330865,
+    "drift_max": 0.1653435104774529
+   },
+   {
+    "metric": "n10_instructions_per_1k_tokens",
+    "cells": 2,
+    "aa_gap_median": 0.00458276664769286,
+    "aa_gap_max": 0.04821286278225456,
+    "aa_floor_median": 0.030705219738370287,
+    "aa_floor_max": 0.12190678569056823,
+    "cv_median": 0.018484345638209262,
+    "cv_max": 0.10663639908749216,
+    "outliers": 4,
+    "values": 170,
+    "drift_median": 0.009924130275562451,
+    "drift_max": 0.05310207466665133
+   },
+   {
+    "metric": "n10_peak_rss_mib",
+    "cells": 1,
+    "aa_gap_median": 0.005376746506986052,
+    "aa_gap_max": 0.00686469584991467,
+    "aa_floor_median": 0.00844322933419095,
+    "aa_floor_max": 0.12917135872998434,
+    "cv_median": 0.006812664700971121,
+    "cv_max": 0.06029259211319456,
+    "outliers": 0,
+    "values": 80,
+    "drift_median": 0.0053774215096860385,
+    "drift_max": 0.01721977449308319
+   },
+   {
+    "metric": "n10_settle_ms",
+    "cells": 1,
+    "aa_gap_median": NaN,
+    "aa_gap_max": NaN,
+    "aa_floor_median": NaN,
+    "aa_floor_max": NaN,
+    "cv_median": 3.0,
+    "cv_max": 3.0000000000000004,
+    "outliers": 15,
+    "values": 90,
+    "drift_median": NaN,
+    "drift_max": NaN
+   },
+   {
+    "metric": "n10_wall_ms",
+    "cells": 2,
+    "aa_gap_median": 0.007944703954594234,
+    "aa_gap_max": 0.029124381860694437,
+    "aa_floor_median": 0.03352549478747177,
+    "aa_floor_max": 0.17676117279955064,
+    "cv_median": 0.020635519362899438,
+    "cv_max": 0.08969431845800732,
+    "outliers": 2,
+    "values": 170,
+    "drift_median": 0.010776749542777027,
+    "drift_max": 0.16826314961548547
+   },
+   {
+    "metric": "n_cpu_ms_per_1k_tokens",
+    "cells": 2,
+    "aa_gap_median": 0.02046468735916107,
+    "aa_gap_max": 0.03859796587374986,
+    "aa_floor_median": 0.06044740692696282,
+    "aa_floor_max": 0.13097624328395407,
+    "cv_median": 0.0347134786006993,
+    "cv_max": 0.08961796171424338,
+    "outliers": 1,
+    "values": 170,
+    "drift_median": 0.02452912889779401,
+    "drift_max": 0.12556501320809976
+   },
+   {
+    "metric": "n_first_paint_ms",
+    "cells": 1,
+    "aa_gap_median": 0.006456579613496327,
+    "aa_gap_max": 1.5667750853777869,
+    "aa_floor_median": 0.06827424508178281,
+    "aa_floor_max": 1.632532254396736,
+    "cv_median": 0.03705097580259452,
+    "cv_max": 0.5155517132723115,
+    "outliers": 20,
+    "values": 90,
+    "drift_median": 0.006361836356404134,
+    "drift_max": 0.1689037490944963
+   },
+   {
+    "metric": "n_instructions_per_1k_tokens",
+    "cells": 2,
+    "aa_gap_median": 0.003403488557688794,
+    "aa_gap_max": 0.025876431926845078,
+    "aa_floor_median": 0.06050096701070767,
+    "aa_floor_max": 0.1415799388659133,
+    "cv_median": 0.025288085032698804,
+    "cv_max": 0.07336333151797056,
+    "outliers": 12,
+    "values": 170,
+    "drift_median": 0.012999624489333728,
+    "drift_max": 0.05619111709510927
+   },
+   {
+    "metric": "n_peak_rss_mib",
+    "cells": 1,
+    "aa_gap_median": 0.008737558631735531,
+    "aa_gap_max": 0.01400168020162429,
+    "aa_floor_median": 0.012084845101870023,
+    "aa_floor_max": 0.05480225988700571,
+    "cv_median": 0.007989685942537312,
+    "cv_max": 0.022074431199735713,
+    "outliers": 1,
+    "values": 80,
+    "drift_median": 0.00588104907905274,
+    "drift_max": 0.010749561524969998
+   },
+   {
+    "metric": "n_settle_ms",
+    "cells": 1,
+    "aa_gap_median": 0.2571393222235838,
+    "aa_gap_max": 0.2571393222235838,
+    "aa_floor_median": 0.5564729644825535,
+    "aa_floor_max": 0.5564729644825535,
+    "cv_median": 1.9984856344522717,
+    "cv_max": 2.6444816695017654,
+    "outliers": 17,
+    "values": 90,
+    "drift_median": 0.005885351613749503,
+    "drift_max": 0.005885351613749503
+   },
+   {
+    "metric": "n_wall_ms",
+    "cells": 2,
+    "aa_gap_median": 0.0178883706796083,
+    "aa_gap_max": 0.059300513173419,
+    "aa_floor_median": 0.06643147744170998,
+    "aa_floor_max": 0.12437021638383004,
+    "cv_median": 0.02579886496951764,
+    "cv_max": 0.07056885251552385,
+    "outliers": 4,
+    "values": 170,
+    "drift_median": 0.01831127802914892,
+    "drift_max": 0.04712397914118881
+   },
+   {
+    "metric": "peak_mem_mib",
+    "cells": 1,
+    "aa_gap_median": 0.023535564853556457,
+    "aa_gap_max": 0.11423374794649144,
+    "aa_floor_median": 0.04921968787515008,
+    "aa_floor_max": 0.1829768691673626,
+    "cv_median": 0.034104834852836996,
+    "cv_max": 0.11250355944231273,
+    "outliers": 9,
+    "values": 90,
+    "drift_median": 0.015212193664076511,
+    "drift_max": 0.05122037080497536
+   },
+   {
+    "metric": "peak_rss_mib",
+    "cells": 1,
+    "aa_gap_median": 0.009939228715851622,
+    "aa_gap_max": 0.0811022039613245,
+    "aa_floor_median": 0.03164703164703162,
+    "aa_floor_max": 0.12057238975159063,
+    "cv_median": 0.01324840568126639,
+    "cv_max": 0.07542652685185121,
+    "outliers": 10,
+    "values": 90,
+    "drift_median": 0.014539848197343453,
+    "drift_max": 0.04711609316035103
+   },
+   {
+    "metric": "request_bytes",
+    "cells": 2,
+    "aa_gap_median": 0.0,
+    "aa_gap_max": 0.0,
+    "aa_floor_median": 0.0,
+    "aa_floor_max": 0.0,
+    "cv_median": 0.0,
+    "cv_max": 0.0,
+    "outliers": 0,
+    "values": 170,
+    "drift_median": 0.0,
+    "drift_max": 0.0
+   },
+   {
+    "metric": "request_bytes_per_turn",
+    "cells": 2,
+    "aa_gap_median": 0.0,
+    "aa_gap_max": 0.0,
+    "aa_floor_median": 0.0,
+    "aa_floor_max": 0.0,
+    "cv_median": 0.0,
+    "cv_max": 0.0,
+    "outliers": 0,
+    "values": 170,
+    "drift_median": 0.0,
+    "drift_max": 0.0
+   },
+   {
+    "metric": "requests",
+    "cells": 2,
+    "aa_gap_median": 0.0,
+    "aa_gap_max": 0.0,
+    "aa_floor_median": 0.0,
+    "aa_floor_max": 0.0,
+    "cv_median": 0.0,
+    "cv_max": 0.0,
+    "outliers": 0,
+    "values": 170,
+    "drift_median": 0.0,
+    "drift_max": 0.0
+   },
+   {
+    "metric": "side_requests",
+    "cells": 2,
+    "aa_gap_median": NaN,
+    "aa_gap_max": NaN,
+    "aa_floor_median": NaN,
+    "aa_floor_max": NaN,
+    "cv_median": NaN,
+    "cv_max": NaN,
+    "outliers": 0,
+    "values": 170,
+    "drift_median": NaN,
+    "drift_max": NaN
+   }
+  ],
+  "runs": [
+   {
+    "index": 1,
+    "rounds": 12,
+    "warmup_rounds": 1,
+    "hardware": "quiet-dedicated",
+    "samples": {
+     "measured": 170,
+     "ok": 170,
+     "failed": 0,
+     "warmup": 20,
+     "with_telemetry": 170,
+     "infra_failed": 0,
+     "arm_failed": 0,
+     "stopped": 0
+    },
+    "failed": [],
+    "flag_counts": {
+     "throttled": 0,
+     "foreign_busy": 0,
+     "steal": 0,
+     "clock_moved": 1,
+     "gate_waited": 0,
+     "swap": 0,
+     "thermal": 0,
+     "memory_events": 0
+    },
+    "flagged_samples": 1,
+    "flagged_rounds": [
+     [
+      "streaming/tui-prose",
+      "openai-completions",
+      8
+     ]
+    ],
+    "flagged": [
+     {
+      "arm": "pi-node-b",
+      "scenario": "streaming/tui-prose",
+      "api": "openai-completions",
+      "round": 8,
+      "flags": [
+       "clock_moved"
+      ]
+     }
+    ],
+    "throttled_samples": 0,
+    "throttled_us_total": 0,
+    "throttle_events": [],
+    "facts_throttled_us": 0,
+    "gate": {
+     "passed": 170,
+     "waited": 0,
+     "gave_up": 0,
+     "disabled": 0,
+     "waited_ms_total": 0,
+     "waited_ms_max": 0,
+     "slow": 0
+    },
+    "sources": [
+     "cgroup_throttle",
+     "cpufreq",
+     "loadavg",
+     "meminfo",
+     "pressure",
+     "proc_stat",
+     "schedstat",
+     "thermal_throttle",
+     "vmstat"
+    ],
+    "steal_share": 0.0,
+    "foreign_p95": 0.01663911038498222,
+    "clock_deviation": 0.0012857142857142234,
+    "clock_median_mhz": 2800.0,
+    "cpu_quota_limited": [],
+    "fixed_clock": true,
+    "collector_cpu_ms_median": 220.178,
+    "collector_cpu_ms_max": 289.53799999999995,
+    "calibration": {
+     "metric": "cpu_ms",
+     "max_cv": 0.0185811065454572,
+     "gate": 0.05,
+     "passed": true,
+     "runs": 12,
+     "arm": "pi-node"
+    },
+    "host": {
+     "load_before": [
+      1.43310546875,
+      1.74267578125,
+      1.7763671875
+     ],
+     "load_after": [
+      1.08984375,
+      1.19384765625,
+      1.23583984375
+     ],
+     "idle_before": {
+      "48": 0.0,
+      "49": 0.0,
+      "50": 0.0,
+      "51": 0.0,
+      "112": 0.0,
+      "113": 0.0,
+      "114": 0.0,
+      "115": 0.0
+     },
+     "idle_after": {
+      "48": 0.0,
+      "49": 0.0,
+      "50": 0.0,
+      "51": 0.0,
+      "112": 0.0,
+      "113": 0.0,
+      "114": 0.0,
+      "115": 0.0
+     },
+     "cpumon": {
+      "samples": 4992,
+      "pinned_busy_mean": 0.022014418578323126,
+      "pinned_busy_max": 0.1664141414141414,
+      "host_busy_mean": 0.009147627403471434
+     }
+    }
+   }
+  ],
+  "discarded": [
+   [
+    "warm-up round (kept in the raw data, excluded from the statistics by rule)",
+    20,
+    1
+   ]
+  ],
+  "dropped": [],
+  "sensitivity": {
+   "rounds_dropped": 1,
+   "comparisons": 111,
+   "verdict_changes": 2,
+   "changes": [
+    {
+     "scenario": "streaming/tui-prose",
+     "api": "openai-completions",
+     "metric": "instructions",
+     "arm": "pig-0.4.1",
+     "with_flagged": "no measurable difference",
+     "without_flagged": "win"
+    },
+    {
+     "scenario": "streaming/tui-prose",
+     "api": "openai-completions",
+     "metric": "n10_first_paint_ms",
+     "arm": "pi-bun",
+     "with_flagged": "loss",
+     "without_flagged": "inconclusive (paired test p 0.07 >= 0.05)"
+    }
+   ]
+  }
+ },
+ "cells": [
+  {
+   "id": "2026-10-19-smc1-launch-focus-streaming::streaming/print-prose@openai-completions#n10_cpu_ms_per_1k_tokens",
+   "rerun": "python3 -m buffon rerun 2026-10-19-smc1-launch-focus-streaming::streaming/print-prose@openai-completions#n10_cpu_ms_per_1k_tokens",
+   "scenario": "streaming/print-prose",
+   "api": "openai-completions",
+   "metric": "n10_cpu_ms_per_1k_tokens",
+   "kind": "CPU",
+   "unit": "ms of CPU time per 1k tokens",
+   "mde": 0.05659561998493921,
+   "aa": {
+    "pi-bun": 0.08196931627652296,
+    "pi-node": 0.06611668977795644,
+    "pibolt": 0.009272791455322154,
+    "pig-0.4.1": 0.022665536215541602,
+    "pig-tip": 0.05377761389019748
+   },
+   "comparisons": {
+    "pi-bun": {
+     "ratio": 1.109286180148386,
+     "ci": [
+      1.0241532322426183,
+      1.2018754740398532
+     ],
+     "floor": 0.08196931627652296,
+     "p": 0.0078125,
+     "p_holm": 0.03125,
+     "verdict": "loss",
+     "n": 8,
+     "arm_median": 11.168700000000005,
+     "not_compared": null,
+     "equivalence": {
+      "margin": 0.05,
+      "low": 1.0413097867017276,
+      "high": 1.192879959069098,
+      "p": 0.89425,
+      "equivalent": false
+     }
+    },
+    "pibolt": {
+     "ratio": 0.4009653998828012,
+     "ci": [
+      0.385343974461293,
+      0.418758365932367
+     ],
+     "floor": 0.06611668977795644,
+     "p": 0.0078125,
+     "p_holm": 0.03125,
+     "verdict": "win",
+     "n": 8,
+     "arm_median": 4.037066666666666,
+     "not_compared": null,
+     "equivalence": {
+      "margin": 0.05,
+      "low": 0.38641946165281127,
+      "high": 0.418692649047624,
+      "p": 1.0,
+      "equivalent": false
+     }
+    },
+    "pig-0.4.1": {
+     "ratio": 1.9487007161042342,
+     "ci": [
+      1.86216140315045,
+      2.055643420021178
+     ],
+     "floor": 0.06611668977795644,
+     "p": 0.0078125,
+     "p_holm": 0.03125,
+     "verdict": "loss",
+     "n": 8,
+     "arm_median": 19.620233333333335,
+     "not_compared": null,
+     "equivalence": {
+      "margin": 0.05,
+      "low": 1.8657867190890751,
+      "high": 2.05137450392024,
+      "p": 1.0,
+      "equivalent": false
+     }
+    },
+    "pig-tip": {
+     "ratio": 0.2586351311533483,
+     "ci": [
+      0.24809577015163614,
+      0.2699861097740431
+     ],
+     "floor": 0.06611668977795644,
+     "p": 0.0078125,
+     "p_holm": 0.03125,
+     "verdict": "win",
+     "n": 8,
+     "arm_median": 2.604033333333333,
+     "not_compared": null,
+     "equivalence": {
+      "margin": 0.05,
+      "low": 0.24809577015163614,
+      "high": 0.2699861097740431,
+      "p": 1.0,
+      "equivalent": false
+     }
+    }
+   }
+  },
+  {
+   "id": "2026-10-19-smc1-launch-focus-streaming::streaming/print-prose@openai-completions#n10_instructions_per_1k_tokens",
+   "rerun": "python3 -m buffon rerun 2026-10-19-smc1-launch-focus-streaming::streaming/print-prose@openai-completions#n10_instructions_per_1k_tokens",
+   "scenario": "streaming/print-prose",
+   "api": "openai-completions",
+   "metric": "n10_instructions_per_1k_tokens",
+   "kind": "CPU",
+   "unit": "instructions per 1k tokens",
+   "mde": 0.0038548080715226983,
+   "aa": {
+    "pi-bun": 0.027468861158789173,
+    "pi-node": 0.0034553540875545724,
+    "pibolt": 0.011798085244684639,
+    "pig-0.4.1": 0.017263448254918667,
+    "pig-tip": 0.07799136577863448
+   },
+   "comparisons": {
+    "pi-bun": {
+     "ratio": 0.8247801624504714,
+     "ci": [
+      0.8139742612870865,
+      0.8300683678904647
+     ],
+     "floor": 0.027468861158789173,
+     "p": 0.0078125,
+     "p_holm": 0.03125,
+     "verdict": "win",
+     "n": 8,
+     "arm_median": 44772785.766666666,
+     "not_compared": null,
+     "equivalence": {
+      "margin": 0.05,
+      "low": 0.817356982767453,
+      "high": 0.8290367279589309,
+      "p": 1.0,
+      "equivalent": false
+     }
+    },
+    "pibolt": {
+     "ratio": 0.36367545057311307,
+     "ci": [
+      0.3595488701180709,
+      0.3654111101997597
+     ],
+     "floor": 0.011798085244684639,
+     "p": 0.0078125,
+     "p_holm": 0.03125,
+     "verdict": "win",
+     "n": 8,
+     "arm_median": 19741943.1,
+     "not_compared": null,
+     "equivalence": {
+      "margin": 0.05,
+      "low": 0.35984168878309963,
+      "high": 0.36502781245283644,
+      "p": 1.0,
+      "equivalent": false
+     }
+    },
+    "pig-0.4.1": {
+     "ratio": 1.8253054885045734,
+     "ci": [
+      1.8036754326499616,
+      1.838464077263307
+     ],
+     "floor": 0.017263448254918667,
+     "p": 0.0078125,
+     "p_holm": 0.03125,
+     "verdict": "loss",
+     "n": 8,
+     "arm_median": 99085811.36666667,
+     "not_compared": null,
+     "equivalence": {
+      "margin": 0.05,
+      "low": 1.805567229190784,
+      "high": 1.8369252713310618,
+      "p": 1.0,
+      "equivalent": false
+     }
+    },
+    "pig-tip": {
+     "ratio": 0.2928162158252962,
+     "ci": [
+      0.26637845368055046,
+      0.29334725020731184
+     ],
+     "floor": 0.07799136577863448,
+     "p": 0.0078125,
+     "p_holm": 0.03125,
+     "verdict": "win",
+     "n": 8,
+     "arm_median": 15895384.366666667,
+     "not_compared": null,
+     "equivalence": {
+      "margin": 0.05,
+      "low": 0.2707437900099107,
+      "high": 0.29325983803668176,
+      "p": 1.0,
+      "equivalent": false
+     }
+    }
+   }
+  },
+  {
+   "id": "2026-10-19-smc1-launch-focus-streaming::streaming/print-prose@openai-completions#n10_peak_rss_mib",
+   "rerun": "python3 -m buffon rerun 2026-10-19-smc1-launch-focus-streaming::streaming/print-prose@openai-completions#n10_peak_rss_mib",
+   "scenario": "streaming/print-prose",
+   "api": "openai-completions",
+   "metric": "n10_peak_rss_mib",
+   "kind": "memory",
+   "unit": "MiB",
+   "mde": 0.014079511866761837,
+   "aa": {
+    "pi-bun": 0.12148405286190368,
+    "pi-node": 0.019011925457895592,
+    "pibolt": 0.007634244825752803,
+    "pig-0.4.1": 0.008407784645405215,
+    "pig-tip": 0.006987518569192156
+   },
+   "comparisons": {
+    "pi-bun": {
+     "ratio": 1.1392836839113132,
+     "ci": [
+      1.049644776850691,
+      1.1786289394985048
+     ],
+     "floor": 0.12148405286190368,
+     "p": 0.0078125,
+     "p_holm": 0.03125,
+     "verdict": "loss",
+     "n": 8,
+     "arm_median": 156.5625,
+     "not_compared": null,
+     "equivalence": {
+      "margin": 0.05,
+      "low": 1.0768466755583304,
+      "high": 1.1750632620197838,
+      "p": 0.973,
+      "equivalent": false
+     }
+    },
+    "pibolt": {
+     "ratio": 0.6980955088118249,
+     "ci": [
+      0.6917750380003378,
+      0.709478002137678
+     ],
+     "floor": 0.019011925457895592,
+     "p": 0.0078125,
+     "p_holm": 0.03125,
+     "verdict": "win",
+     "n": 8,
+     "arm_median": 95.93359375,
+     "not_compared": null,
+     "equivalence": {
+      "margin": 0.05,
+      "low": 0.6936308431012569,
+      "high": 0.7078523770409119,
+      "p": 1.0,
+      "equivalent": false
+     }
+    },
+    "pig-0.4.1": {
+     "ratio": 0.3546048891415577,
+     "ci": [
+      0.3523796074000847,
+      0.3595175305866586
+     ],
+     "floor": 0.019011925457895592,
+     "p": 0.0078125,
+     "p_holm": 0.03125,
+     "verdict": "win",
+     "n": 8,
+     "arm_median": 48.73046875,
+     "not_compared": null,
+     "equivalence": {
+      "margin": 0.05,
+      "low": 0.3526036882639723,
+      "high": 0.35908521032380786,
+      "p": 1.0,
+      "equivalent": false
+     }
+    },
+    "pig-tip": {
+     "ratio": 0.31482376350198976,
+     "ci": [
+      0.3125598153465068,
+      0.320102839645261
+     ],
+     "floor": 0.019011925457895592,
+     "p": 0.0078125,
+     "p_holm": 0.03125,
+     "verdict": "win",
+     "n": 8,
+     "arm_median": 43.263671875,
+     "not_compared": null,
+     "equivalence": {
+      "margin": 0.05,
+      "low": 0.312823047592148,
+      "high": 0.3193693888432551,
+      "p": 1.0,
+      "equivalent": false
+     }
+    }
+   }
+  },
+  {
+   "id": "2026-10-19-smc1-launch-focus-streaming::streaming/print-prose@openai-completions#n10_wall_ms",
+   "rerun": "python3 -m buffon rerun 2026-10-19-smc1-launch-focus-streaming::streaming/print-prose@openai-completions#n10_wall_ms",
+   "scenario": "streaming/print-prose",
+   "api": "openai-completions",
+   "metric": "n10_wall_ms",
+   "kind": "wall",
+   "unit": "ms",
+   "mde": 0.05311552862033346,
+   "aa": {
+    "pi-bun": 0.16276589587868565,
+    "pi-node": 0.04576448543635963,
+    "pibolt": 0.022474641845012407,
+    "pig-0.4.1": 0.02447936407981452,
+    "pig-tip": 0.01157616753759725
+   },
+   "comparisons": {
+    "pi-bun": {
+     "ratio": 0.825697592042703,
+     "ci": [
+      0.761834859435649,
+      0.8828971092928806
+     ],
+     "floor": 0.16276589587868565,
+     "p": 0.0078125,
+     "p_holm": 0.03125,
+     "verdict": "win",
+     "n": 8,
+     "arm_median": 56.6020765,
+     "not_compared": null,
+     "equivalence": {
+      "margin": 0.05,
+      "low": 0.788394759289945,
+      "high": 0.8783209251677404,
+      "p": 1.0,
+      "equivalent": false
+     }
+    },
+    "pibolt": {
+     "ratio": 0.5419326115877868,
+     "ci": [
+      0.5363846627746238,
+      0.5478701075642857
+     ],
+     "floor": 0.04576448543635963,
+     "p": 0.0078125,
+     "p_holm": 0.03125,
+     "verdict": "win",
+     "n": 8,
+     "arm_median": 37.149812999999995,
+     "not_compared": null,
+     "equivalence": {
+      "margin": 0.05,
+      "low": 0.5369361521135891,
+      "high": 0.5473791510675088,
+      "p": 1.0,
+      "equivalent": false
+     }
+    },
+    "pig-0.4.1": {
+     "ratio": 2.084154170261365,
+     "ci": [
+      2.0572694696233387,
+      2.1222920468194344
+     ],
+     "floor": 0.04576448543635963,
+     "p": 0.0078125,
+     "p_holm": 0.03125,
+     "verdict": "loss",
+     "n": 8,
+     "arm_median": 142.870047,
+     "not_compared": null,
+     "equivalence": {
+      "margin": 0.05,
+      "low": 2.0637797132533757,
+      "high": 2.113878296070079,
+      "p": 1.0,
+      "equivalent": false
+     }
+    },
+    "pig-tip": {
+     "ratio": 0.4698565243329296,
+     "ci": [
+      0.46543993868558337,
+      0.4739684157999703
+     ],
+     "floor": 0.04576448543635963,
+     "p": 0.0078125,
+     "p_holm": 0.03125,
+     "verdict": "win",
+     "n": 8,
+     "arm_median": 32.208953,
+     "not_compared": null,
+     "equivalence": {
+      "margin": 0.05,
+      "low": 0.4665264204366737,
+      "high": 0.4734766089815711,
+      "p": 1.0,
+      "equivalent": false
+     }
+    }
+   }
+  },
+  {
+   "id": "2026-10-19-smc1-launch-focus-streaming::streaming/print-prose@openai-completions#n_cpu_ms_per_1k_tokens",
+   "rerun": "python3 -m buffon rerun 2026-10-19-smc1-launch-focus-streaming::streaming/print-prose@openai-completions#n_cpu_ms_per_1k_tokens",
+   "scenario": "streaming/print-prose",
+   "api": "openai-completions",
+   "metric": "n_cpu_ms_per_1k_tokens",
+   "kind": "CPU",
+   "unit": "ms of CPU time per 1k tokens",
+   "mde": 0.014627579182864708,
+   "aa": {
+    "pi-bun": 0.12308119185939899,
+    "pi-node": 0.020355119062423665,
+    "pibolt": 0.06113218381505399,
+    "pig-0.4.1": 0.10753505786540349,
+    "pig-tip": 0.06599487005206477
+   },
+   "comparisons": {
+    "pi-bun": {
+     "ratio": 0.529366065879429,
+     "ci": [
+      0.4920472098860788,
+      0.5731438839503528
+     ],
+     "floor": 0.12308119185939899,
+     "p": 0.0078125,
+     "p_holm": 0.03125,
+     "verdict": "win",
+     "n": 8,
+     "arm_median": 29.52733333333337,
+     "not_compared": null,
+     "equivalence": {
+      "margin": 0.05,
+      "low": 0.5056160908649321,
+      "high": 0.5609299329627602,
+      "p": 1.0,
+      "equivalent": false
+     }
+    },
+    "pibolt": {
+     "ratio": 0.10778911889850362,
+     "ci": [
+      0.10657384172473187,
+      0.10945237924352261
+     ],
+     "floor": 0.06113218381505399,
+     "p": 0.0078125,
+     "p_holm": 0.03125,
+     "verdict": "win",
+     "n": 8,
+     "arm_median": 6.012333333333332,
+     "not_compared": null,
+     "equivalence": {
+      "margin": 0.05,
+      "low": 0.10668991377869069,
+      "high": 0.10902772793607507,
+      "p": 1.0,
+      "equivalent": false
+     }
+    },
+    "pig-0.4.1": {
+     "ratio": 0.3554823827508726,
+     "ci": [
+      0.34195347393059317,
+      0.36266794338549946
+     ],
+     "floor": 0.10753505786540349,
+     "p": 0.0078125,
+     "p_holm": 0.03125,
+     "verdict": "win",
+     "n": 8,
+     "arm_median": 19.828333333333337,
+     "not_compared": null,
+     "equivalence": {
+      "margin": 0.05,
+      "low": 0.3427331757383527,
+      "high": 0.3625385774779304,
+      "p": 1.0,
+      "equivalent": false
+     }
+    },
+    "pig-tip": {
+     "ratio": 0.06478582014629251,
+     "ci": [
+      0.0631694392952298,
+      0.06660180647641013
+     ],
+     "floor": 0.06599487005206477,
+     "p": 0.0078125,
+     "p_holm": 0.03125,
+     "verdict": "win",
+     "n": 8,
+     "arm_median": 3.613666666666667,
+     "not_compared": null,
+     "equivalence": {
+      "margin": 0.05,
+      "low": 0.06324896171742052,
+      "high": 0.06652334814424474,
+      "p": 1.0,
+      "equivalent": false
+     }
+    }
+   }
+  },
+  {
+   "id": "2026-10-19-smc1-launch-focus-streaming::streaming/print-prose@openai-completions#n_instructions_per_1k_tokens",
+   "rerun": "python3 -m buffon rerun 2026-10-19-smc1-launch-focus-streaming::streaming/print-prose@openai-completions#n_instructions_per_1k_tokens",
+   "scenario": "streaming/print-prose",
+   "api": "openai-completions",
+   "metric": "n_instructions_per_1k_tokens",
+   "kind": "CPU",
+   "unit": "instructions per 1k tokens",
+   "mde": 0.004942686240025931,
+   "aa": {
+    "pi-bun": 0.09256216941382502,
+    "pi-node": 0.0037514885945809195,
+    "pibolt": 0.014555402409552203,
+    "pig-0.4.1": 0.13241321420365523,
+    "pig-tip": 0.0675936839802943
+   },
+   "comparisons": {
+    "pi-bun": {
+     "ratio": 0.3200831452483036,
+     "ci": [
+      0.29171012881902114,
+      0.3229241910718098
+     ],
+     "floor": 0.09256216941382502,
+     "p": 0.0078125,
+     "p_holm": 0.03125,
+     "verdict": "win",
+     "n": 8,
+     "arm_median": 91179005.0,
+     "not_compared": null,
+     "equivalence": {
+      "margin": 0.05,
+      "low": 0.3050645744114221,
+      "high": 0.3226984089481302,
+      "p": 1.0,
+      "equivalent": false
+     }
+    },
+    "pibolt": {
+     "ratio": 0.06893005372911774,
+     "ci": [
+      0.068488861755388,
+      0.06958906764714544
+     ],
+     "floor": 0.014555402409552203,
+     "p": 0.0078125,
+     "p_holm": 0.03125,
+     "verdict": "win",
+     "n": 8,
+     "arm_median": 19635441.0,
+     "not_compared": null,
+     "equivalence": {
+      "margin": 0.05,
+      "low": 0.06858141332144249,
+      "high": 0.06939068758535782,
+      "p": 1.0,
+      "equivalent": false
+     }
+    },
+    "pig-0.4.1": {
+     "ratio": 0.307929221329504,
+     "ci": [
+      0.3005081546322767,
+      0.31087870958797803
+     ],
+     "floor": 0.13241321420365523,
+     "p": 0.0078125,
+     "p_holm": 0.03125,
+     "verdict": "win",
+     "n": 8,
+     "arm_median": 87716833.66666666,
+     "not_compared": null,
+     "equivalence": {
+      "margin": 0.05,
+      "low": 0.30070218407619786,
+      "high": 0.3105434168451536,
+      "p": 1.0,
+      "equivalent": false
+     }
+    },
+    "pig-tip": {
+     "ratio": 0.049544872525601656,
+     "ci": [
+      0.04606230205221932,
+      0.049833182961546714
+     ],
+     "floor": 0.0675936839802943,
+     "p": 0.0078125,
+     "p_holm": 0.03125,
+     "verdict": "win",
+     "n": 8,
+     "arm_median": 14113371.0,
+     "not_compared": null,
+     "equivalence": {
+      "margin": 0.05,
+      "low": 0.04667455734135358,
+      "high": 0.04981558212496793,
+      "p": 1.0,
+      "equivalent": false
+     }
+    }
+   }
+  },
+  {
+   "id": "2026-10-19-smc1-launch-focus-streaming::streaming/print-prose@openai-completions#n_peak_rss_mib",
+   "rerun": "python3 -m buffon rerun 2026-10-19-smc1-launch-focus-streaming::streaming/print-prose@openai-completions#n_peak_rss_mib",
+   "scenario": "streaming/print-prose",
+   "api": "openai-completions",
+   "metric": "n_peak_rss_mib",
+   "kind": "memory",
+   "unit": "MiB",
+   "mde": 0.017173564351938907,
+   "aa": {
+    "pi-bun": 0.01201240638444686,
+    "pi-node": 0.01861879229582086,
+    "pibolt": 0.011985087994261968,
+    "pig-0.4.1": 0.008229711520051562,
+    "pig-tip": 0.05335331797384785
+   },
+   "comparisons": {
+    "pi-bun": {
+     "ratio": 1.0327765701864775,
+     "ci": [
+      1.0244817064476572,
+      1.0504059835278368
+     ],
+     "floor": 0.01861879229582086,
+     "p": 0.0078125,
+     "p_holm": 0.03125,
+     "verdict": "loss",
+     "n": 8,
+     "arm_median": 141.0546875,
+     "not_compared": null,
+     "equivalence": {
+      "margin": 0.05,
+      "low": 1.0255083126586249,
+      "high": 1.0438614233291919,
+      "p": 0.02525,
+      "equivalent": true
+     }
+    },
+    "pibolt": {
+     "ratio": 0.5745767074705411,
+     "ci": [
+      0.5698241633579126,
+      0.582564535374407
+     ],
+     "floor": 0.01861879229582086,
+     "p": 0.0078125,
+     "p_holm": 0.03125,
+     "verdict": "win",
+     "n": 8,
+     "arm_median": 78.474609375,
+     "not_compared": null,
+     "equivalence": {
+      "margin": 0.05,
+      "low": 0.5709898047691498,
+      "high": 0.5807257808211262,
+      "p": 1.0,
+      "equivalent": false
+     }
+    },
+    "pig-0.4.1": {
+     "ratio": 0.29963676924836974,
+     "ci": [
+      0.29652979009117253,
+      0.30366068590910406
+     ],
+     "floor": 0.01861879229582086,
+     "p": 0.0078125,
+     "p_holm": 0.03125,
+     "verdict": "win",
+     "n": 8,
+     "arm_median": 40.923828125,
+     "not_compared": null,
+     "equivalence": {
+      "margin": 0.05,
+      "low": 0.29664444824246566,
+      "high": 0.3029558785287064,
+      "p": 1.0,
+      "equivalent": false
+     }
+    },
+    "pig-tip": {
+     "ratio": 0.051066811577622696,
+     "ci": [
+      0.05033628620586688,
+      0.052583264006425885
+     ],
+     "floor": 0.05335331797384785,
+     "p": 0.0078125,
+     "p_holm": 0.03125,
+     "verdict": "win",
+     "n": 8,
+     "arm_median": 6.974609375,
+     "not_compared": null,
+     "equivalence": {
+      "margin": 0.05,
+      "low": 0.050446753024667605,
+      "high": 0.05242862547655772,
+      "p": 1.0,
+      "equivalent": false
+     }
+    }
+   }
+  },
+  {
+   "id": "2026-10-19-smc1-launch-focus-streaming::streaming/print-prose@openai-completions#n_wall_ms",
+   "rerun": "python3 -m buffon rerun 2026-10-19-smc1-launch-focus-streaming::streaming/print-prose@openai-completions#n_wall_ms",
+   "scenario": "streaming/print-prose",
+   "api": "openai-completions",
+   "metric": "n_wall_ms",
+   "kind": "wall",
+   "unit": "ms",
+   "mde": 0.020560408651498226,
+   "aa": {
+    "pi-bun": 0.07392694341217161,
+    "pi-node": 0.018561403190850468,
+    "pibolt": 0.0841037505782347,
+    "pig-0.4.1": 0.05496252711353141,
+    "pig-tip": 0.0683648767211116
+   },
+   "comparisons": {
+    "pi-bun": {
+     "ratio": 0.44638510398821224,
+     "ci": [
+      0.4344209808108021,
+      0.4598870475942159
+     ],
+     "floor": 0.07392694341217161,
+     "p": 0.0078125,
+     "p_holm": 0.03125,
+     "verdict": "win",
+     "n": 8,
+     "arm_median": 23.9470795,
+     "not_compared": null,
+     "equivalence": {
+      "margin": 0.05,
+      "low": 0.439102505650062,
+      "high": 0.4557712794612734,
+      "p": 1.0,
+      "equivalent": false
+     }
+    },
+    "pibolt": {
+     "ratio": 0.11587882654027726,
+     "ci": [
+      0.11438412200820428,
+      0.11903906966126808
+     ],
+     "floor": 0.0841037505782347,
+     "p": 0.0078125,
+     "p_holm": 0.03125,
+     "verdict": "win",
+     "n": 8,
+     "arm_median": 6.216514500000001,
+     "not_compared": null,
+     "equivalence": {
+      "margin": 0.05,
+      "low": 0.11455646584172119,
+      "high": 0.11857102675877577,
+      "p": 1.0,
+      "equivalent": false
+     }
+    },
+    "pig-0.4.1": {
+     "ratio": 0.2967478612819695,
+     "ci": [
+      0.29042483612719017,
+      0.30306681886919873
+     ],
+     "floor": 0.05496252711353141,
+     "p": 0.0078125,
+     "p_holm": 0.03125,
+     "verdict": "win",
+     "n": 8,
+     "arm_median": 15.919538,
+     "not_compared": null,
+     "equivalence": {
+      "margin": 0.05,
+      "low": 0.29178302526133804,
+      "high": 0.30225131067097133,
+      "p": 1.0,
+      "equivalent": false
+     }
+    },
+    "pig-tip": {
+     "ratio": 0.08226412849040814,
+     "ci": [
+      0.08022396509612222,
+      0.08574754652896852
+     ],
+     "floor": 0.0683648767211116,
+     "p": 0.0078125,
+     "p_holm": 0.03125,
+     "verdict": "win",
+     "n": 8,
+     "arm_median": 4.413197500000001,
+     "not_compared": null,
+     "equivalence": {
+      "margin": 0.05,
+      "low": 0.08054125093799441,
+      "high": 0.0847971229742827,
+      "p": 1.0,
+      "equivalent": false
+     }
+    }
+   }
+  },
+  {
+   "id": "2026-10-19-smc1-launch-focus-streaming::streaming/print-prose@openai-completions#request_bytes",
+   "rerun": "python3 -m buffon rerun 2026-10-19-smc1-launch-focus-streaming::streaming/print-prose@openai-completions#request_bytes",
+   "scenario": "streaming/print-prose",
+   "api": "openai-completions",
+   "metric": "request_bytes",
+   "kind": "wire",
+   "unit": "bytes",
+   "mde": 0.0,
+   "aa": {
+    "pi-bun": 0.0,
+    "pi-node": 0.0,
+    "pibolt": 0.0,
+    "pig-0.4.1": 0.0,
+    "pig-tip": 0.0
+   },
+   "comparisons": {
+    "pi-bun": {
+     "ratio": 0.9784625579854208,
+     "ci": [
+      0.9784625579854208,
+      0.9784625579854208
+     ],
+     "floor": 0.0,
+     "p": 0.0078125,
+     "p_holm": 0.03125,
+     "verdict": "win",
+     "n": 8,
+     "arm_median": 11812.0,
+     "not_compared": null,
+     "equivalence": null
+    },
+    "pibolt": {
+     "ratio": 1.3175944333996024,
+     "ci": [
+      1.3175944333996024,
+      1.3175944333996024
+     ],
+     "floor": 0.0,
+     "p": 0.0078125,
+     "p_holm": 0.03125,
+     "verdict": "loss",
+     "n": 8,
+     "arm_median": 15906.0,
+     "not_compared": null,
+     "equivalence": null
+    },
+    "pig-0.4.1": {
+     "ratio": 1.0041418157720345,
+     "ci": [
+      1.0041418157720345,
+      1.0041418157720345
+     ],
+     "floor": 0.0,
+     "p": 0.0078125,
+     "p_holm": 0.03125,
+     "verdict": "loss",
+     "n": 8,
+     "arm_median": 12122.0,
+     "not_compared": null,
+     "equivalence": null
+    },
+    "pig-tip": {
+     "ratio": 0.997846255798542,
+     "ci": [
+      0.997846255798542,
+      0.997846255798542
+     ],
+     "floor": 0.0,
+     "p": 0.0078125,
+     "p_holm": 0.03125,
+     "verdict": "win",
+     "n": 8,
+     "arm_median": 12046.0,
+     "not_compared": null,
+     "equivalence": null
+    }
+   }
+  },
+  {
+   "id": "2026-10-19-smc1-launch-focus-streaming::streaming/print-prose@openai-completions#request_bytes_per_turn",
+   "rerun": "python3 -m buffon rerun 2026-10-19-smc1-launch-focus-streaming::streaming/print-prose@openai-completions#request_bytes_per_turn",
+   "scenario": "streaming/print-prose",
+   "api": "openai-completions",
+   "metric": "request_bytes_per_turn",
+   "kind": "wire",
+   "unit": "bytes per turn",
+   "mde": 0.0,
+   "aa": {
+    "pi-bun": 0.0,
+    "pi-node": 0.0,
+    "pibolt": 0.0,
+    "pig-0.4.1": 0.0,
+    "pig-tip": 0.0
+   },
+   "comparisons": {
+    "pi-bun": {
+     "ratio": 0.9784625579854208,
+     "ci": [
+      0.9784625579854208,
+      0.9784625579854208
+     ],
+     "floor": 0.0,
+     "p": 0.0078125,
+     "p_holm": 0.03125,
+     "verdict": "win",
+     "n": 8,
+     "arm_median": 5906.0,
+     "not_compared": null,
+     "equivalence": {
+      "margin": 0.0,
+      "low": 0.9784625579854208,
+      "high": 0.9784625579854208,
+      "p": 1.0,
+      "equivalent": false
+     }
+    },
+    "pibolt": {
+     "ratio": 1.3175944333996024,
+     "ci": [
+      1.3175944333996024,
+      1.3175944333996024
+     ],
+     "floor": 0.0,
+     "p": 0.0078125,
+     "p_holm": 0.03125,
+     "verdict": "loss",
+     "n": 8,
+     "arm_median": 7953.0,
+     "not_compared": null,
+     "equivalence": {
+      "margin": 0.0,
+      "low": 1.3175944333996024,
+      "high": 1.3175944333996024,
+      "p": 1.0,
+      "equivalent": false
+     }
+    },
+    "pig-0.4.1": {
+     "ratio": 1.0041418157720345,
+     "ci": [
+      1.0041418157720345,
+      1.0041418157720345
+     ],
+     "floor": 0.0,
+     "p": 0.0078125,
+     "p_holm": 0.03125,
+     "verdict": "loss",
+     "n": 8,
+     "arm_median": 6061.0,
+     "not_compared": null,
+     "equivalence": {
+      "margin": 0.0,
+      "low": 1.0041418157720345,
+      "high": 1.0041418157720345,
+      "p": 1.0,
+      "equivalent": false
+     }
+    },
+    "pig-tip": {
+     "ratio": 0.997846255798542,
+     "ci": [
+      0.997846255798542,
+      0.997846255798542
+     ],
+     "floor": 0.0,
+     "p": 0.0078125,
+     "p_holm": 0.03125,
+     "verdict": "win",
+     "n": 8,
+     "arm_median": 6023.0,
+     "not_compared": null,
+     "equivalence": {
+      "margin": 0.0,
+      "low": 0.997846255798542,
+      "high": 0.997846255798542,
+      "p": 1.0,
+      "equivalent": false
+     }
+    }
+   }
+  },
+  {
+   "id": "2026-10-19-smc1-launch-focus-streaming::streaming/print-prose@openai-completions#requests",
+   "rerun": "python3 -m buffon rerun 2026-10-19-smc1-launch-focus-streaming::streaming/print-prose@openai-completions#requests",
+   "scenario": "streaming/print-prose",
+   "api": "openai-completions",
+   "metric": "requests",
+   "kind": "wire",
+   "unit": "count",
+   "mde": 0.0,
+   "aa": {
+    "pi-bun": 0.0,
+    "pi-node": 0.0,
+    "pibolt": 0.0,
+    "pig-0.4.1": 0.0,
+    "pig-tip": 0.0
+   },
+   "comparisons": {
+    "pi-bun": {
+     "ratio": 1.0,
+     "ci": [
+      1.0,
+      1.0
+     ],
+     "floor": 0.0,
+     "p": 1.0,
+     "p_holm": 1.0,
+     "verdict": "no measurable difference",
+     "n": 8,
+     "arm_median": 2.0,
+     "not_compared": null,
+     "equivalence": null
+    },
+    "pibolt": {
+     "ratio": 1.0,
+     "ci": [
+      1.0,
+      1.0
+     ],
+     "floor": 0.0,
+     "p": 1.0,
+     "p_holm": 1.0,
+     "verdict": "no measurable difference",
+     "n": 8,
+     "arm_median": 2.0,
+     "not_compared": null,
+     "equivalence": null
+    },
+    "pig-0.4.1": {
+     "ratio": 1.0,
+     "ci": [
+      1.0,
+      1.0
+     ],
+     "floor": 0.0,
+     "p": 1.0,
+     "p_holm": 1.0,
+     "verdict": "no measurable difference",
+     "n": 8,
+     "arm_median": 2.0,
+     "not_compared": null,
+     "equivalence": null
+    },
+    "pig-tip": {
+     "ratio": 1.0,
+     "ci": [
+      1.0,
+      1.0
+     ],
+     "floor": 0.0,
+     "p": 1.0,
+     "p_holm": 1.0,
+     "verdict": "no measurable difference",
+     "n": 8,
+     "arm_median": 2.0,
+     "not_compared": null,
+     "equivalence": null
+    }
+   }
+  },
+  {
+   "id": "2026-10-19-smc1-launch-focus-streaming::streaming/print-prose@openai-completions#side_requests",
+   "rerun": "python3 -m buffon rerun 2026-10-19-smc1-launch-focus-streaming::streaming/print-prose@openai-completions#side_requests",
+   "scenario": "streaming/print-prose",
+   "api": "openai-completions",
+   "metric": "side_requests",
+   "kind": "wire",
+   "unit": "count",
+   "mde": null,
+   "aa": {
+    "pi-bun": null,
+    "pi-node": null,
+    "pibolt": null,
+    "pig-0.4.1": null,
+    "pig-tip": null
+   },
+   "comparisons": {}
+  },
+  {
+   "id": "2026-10-19-smc1-launch-focus-streaming::streaming/tui-prose@openai-completions#cpu_ms",
+   "rerun": "python3 -m buffon rerun 2026-10-19-smc1-launch-focus-streaming::streaming/tui-prose@openai-completions#cpu_ms",
+   "scenario": "streaming/tui-prose",
+   "api": "openai-completions",
+   "metric": "cpu_ms",
+   "kind": "CPU",
+   "unit": "ms of CPU time",
+   "mde": 0.04582293597186376,
+   "aa": {
+    "pi-bun": 0.06645187948213511,
+    "pi-node": 0.07905732480774127,
+    "pibolt": 0.03283152861287255,
+    "pig-0.4.1": 0.0793265486409414,
+    "pig-tip": 0.03510899265693045
+   },
+   "comparisons": {
+    "pi-bun": {
+     "ratio": 12.108750280693876,
+     "ci": [
+      11.766326762320478,
+      13.264432882679792
+     ],
+     "floor": 0.07905732480774127,
+     "p": 0.00390625,
+     "p_holm": 0.01171875,
+     "verdict": "loss",
+     "n": 9,
+     "arm_median": 34510.907,
+     "not_compared": null,
+     "equivalence": {
+      "margin": 0.05,
+      "low": 11.80200611732069,
+      "high": 13.246026576708648,
+      "p": 1.0,
+      "equivalent": false
+     }
+    },
+    "pibolt": {
+     "ratio": null,
+     "ci": null,
+     "floor": null,
+     "p": null,
+     "p_holm": null,
+     "verdict": "not compared",
+     "n": 9,
+     "arm_median": 924.751,
+     "not_compared": "Pi-Bolt's fullscreen TUI scrolls the rows that only moved (a scroll region) and draws only the rows that changed",
+     "equivalence": null
+    },
+    "pig-0.4.1": {
+     "ratio": 0.8599748077246954,
+     "ci": [
+      0.8228749258918672,
+      0.9557721409526554
+     ],
+     "floor": 0.0793265486409414,
+     "p": 0.0078125,
+     "p_holm": 0.01171875,
+     "verdict": "win",
+     "n": 9,
+     "arm_median": 2450.997,
+     "not_compared": null,
+     "equivalence": {
+      "margin": 0.05,
+      "low": 0.8268478152328398,
+      "high": 0.936079100189544,
+      "p": 0.972,
+      "equivalent": false
+     }
+    },
+    "pig-tip": {
+     "ratio": 0.14137252287655083,
+     "ci": [
+      0.13638225867566572,
+      0.15323572297035198
+     ],
+     "floor": 0.07905732480774127,
+     "p": 0.00390625,
+     "p_holm": 0.01171875,
+     "verdict": "win",
+     "n": 9,
+     "arm_median": 402.923,
+     "not_compared": null,
+     "equivalence": {
+      "margin": 0.05,
+      "low": 0.13638225867566572,
+      "high": 0.15126094270469462,
+      "p": 1.0,
+      "equivalent": false
+     }
+    }
+   }
+  },
+  {
+   "id": "2026-10-19-smc1-launch-focus-streaming::streaming/tui-prose@openai-completions#cycles",
+   "rerun": "python3 -m buffon rerun 2026-10-19-smc1-launch-focus-streaming::streaming/tui-prose@openai-completions#cycles",
+   "scenario": "streaming/tui-prose",
+   "api": "openai-completions",
+   "metric": "cycles",
+   "kind": "CPU",
+   "unit": "cycles",
+   "mde": 0.04583869294140168,
+   "aa": {
+    "pi-bun": 0.06668589432225522,
+    "pi-node": 0.07950762547626593,
+    "pibolt": 0.0319232422835026,
+    "pig-0.4.1": 0.08268466933064203,
+    "pig-tip": 0.03643539358904446
+   },
+   "comparisons": {
+    "pi-bun": {
+     "ratio": 12.140687342371542,
+     "ci": [
+      11.805593644832683,
+      13.311649925182468
+     ],
+     "floor": 0.07950762547626593,
+     "p": 0.00390625,
+     "p_holm": 0.01171875,
+     "verdict": "loss",
+     "n": 9,
+     "arm_median": 96250856282.0,
+     "not_compared": null,
+     "equivalence": {
+      "margin": 0.05,
+      "low": 11.840063015696677,
+      "high": 13.303217002888287,
+      "p": 1.0,
+      "equivalent": false
+     }
+    },
+    "pibolt": {
+     "ratio": null,
+     "ci": null,
+     "floor": null,
+     "p": null,
+     "p_holm": null,
+     "verdict": "not compared",
+     "n": 9,
+     "arm_median": 2511498807.0,
+     "not_compared": "Pi-Bolt's fullscreen TUI scrolls the rows that only moved (a scroll region) and draws only the rows that changed",
+     "equivalence": null
+    },
+    "pig-0.4.1": {
+     "ratio": 0.832521292468422,
+     "ci": [
+      0.7957148159696498,
+      0.9242298139508447
+     ],
+     "floor": 0.08268466933064203,
+     "p": 0.0078125,
+     "p_holm": 0.01171875,
+     "verdict": "win",
+     "n": 9,
+     "arm_median": 6600193631.0,
+     "not_compared": null,
+     "equivalence": {
+      "margin": 0.05,
+      "low": 0.7995914209095056,
+      "high": 0.9044686744182148,
+      "p": 0.991,
+      "equivalent": false
+     }
+    },
+    "pig-tip": {
+     "ratio": 0.12488343359924778,
+     "ci": [
+      0.11990997174678812,
+      0.13513650691745016
+     ],
+     "floor": 0.07950762547626593,
+     "p": 0.00390625,
+     "p_holm": 0.01171875,
+     "verdict": "win",
+     "n": 9,
+     "arm_median": 990070585.0,
+     "not_compared": null,
+     "equivalence": {
+      "margin": 0.05,
+      "low": 0.11990997174678812,
+      "high": 0.13383168028348813,
+      "p": 1.0,
+      "equivalent": false
+     }
+    }
+   }
+  },
+  {
+   "id": "2026-10-19-smc1-launch-focus-streaming::streaming/tui-prose@openai-completions#instructions",
+   "rerun": "python3 -m buffon rerun 2026-10-19-smc1-launch-focus-streaming::streaming/tui-prose@openai-completions#instructions",
+   "scenario": "streaming/tui-prose",
+   "api": "openai-completions",
+   "metric": "instructions",
+   "kind": "CPU",
+   "unit": "instructions",
+   "mde": 0.05045697961276855,
+   "aa": {
+    "pi-bun": 0.06725877348730172,
+    "pi-node": 0.07622774244436661,
+    "pibolt": 0.029053781246672787,
+    "pig-0.4.1": 0.10031070537002991,
+    "pig-tip": 0.01638435608533204
+   },
+   "comparisons": {
+    "pi-bun": {
+     "ratio": 13.218997300259186,
+     "ci": [
+      12.96991451086645,
+      14.606097798225175
+     ],
+     "floor": 0.07622774244436661,
+     "p": 0.00390625,
+     "p_holm": 0.01171875,
+     "verdict": "loss",
+     "n": 9,
+     "arm_median": 274661282191.0,
+     "not_compared": null,
+     "equivalence": {
+      "margin": 0.05,
+      "low": 13.035524793498068,
+      "high": 14.557436592990575,
+      "p": 1.0,
+      "equivalent": false
+     }
+    },
+    "pibolt": {
+     "ratio": null,
+     "ci": null,
+     "floor": null,
+     "p": null,
+     "p_holm": null,
+     "verdict": "not compared",
+     "n": 9,
+     "arm_median": 4798643345.0,
+     "not_compared": "Pi-Bolt's fullscreen TUI scrolls the rows that only moved (a scroll region) and draws only the rows that changed",
+     "equivalence": null
+    },
+    "pig-0.4.1": {
+     "ratio": 0.9088873495061549,
+     "ci": [
+      0.8903243443925737,
+      1.0382732512106125
+     ],
+     "floor": 0.10031070537002991,
+     "p": 0.16796875,
+     "p_holm": 0.16796875,
+     "verdict": "no measurable difference",
+     "n": 9,
+     "arm_median": 18884652074.0,
+     "not_compared": null,
+     "equivalence": {
+      "margin": 0.05,
+      "low": 0.8920823225051733,
+      "high": 1.0005132069993883,
+      "p": 0.5645,
+      "equivalent": false
+     }
+    },
+    "pig-tip": {
+     "ratio": 0.09831044947906073,
+     "ci": [
+      0.09750188849274863,
+      0.10760912444895857
+     ],
+     "floor": 0.07622774244436661,
+     "p": 0.00390625,
+     "p_holm": 0.01171875,
+     "verdict": "win",
+     "n": 9,
+     "arm_median": 2042671883.0,
+     "not_compared": null,
+     "equivalence": {
+      "margin": 0.05,
+      "low": 0.09752509592869993,
+      "high": 0.10723386881100151,
+      "p": 1.0,
+      "equivalent": false
+     }
+    }
+   }
+  },
+  {
+   "id": "2026-10-19-smc1-launch-focus-streaming::streaming/tui-prose@openai-completions#n10_cpu_ms_per_1k_tokens",
+   "rerun": "python3 -m buffon rerun 2026-10-19-smc1-launch-focus-streaming::streaming/tui-prose@openai-completions#n10_cpu_ms_per_1k_tokens",
+   "scenario": "streaming/tui-prose",
+   "api": "openai-completions",
+   "metric": "n10_cpu_ms_per_1k_tokens",
+   "kind": "CPU",
+   "unit": "ms of CPU time per 1k tokens",
+   "mde": 0.059033938323064625,
+   "aa": {
+    "pi-bun": 0.07404410231993198,
+    "pi-node": 0.08954559476751023,
+    "pibolt": 0.039439159942245956,
+    "pig-0.4.1": 0.0930389506990559,
+    "pig-tip": 0.05385598022837387
+   },
+   "comparisons": {
+    "pi-bun": {
+     "ratio": 16.09142442400874,
+     "ci": [
+      15.843081951863745,
+      18.293040141920045
+     ],
+     "floor": 0.08954559476751023,
+     "p": 0.00390625,
+     "p_holm": 0.01171875,
+     "verdict": "loss",
+     "n": 9,
+     "arm_median": 2048.568133333333,
+     "not_compared": null,
+     "equivalence": {
+      "margin": 0.05,
+      "low": 15.872975314823663,
+      "high": 18.259181891132265,
+      "p": 1.0,
+      "equivalent": false
+     }
+    },
+    "pibolt": {
+     "ratio": null,
+     "ci": null,
+     "floor": null,
+     "p": null,
+     "p_holm": null,
+     "verdict": "not compared",
+     "n": 9,
+     "arm_median": 54.072466666666664,
+     "not_compared": "Pi-Bolt's fullscreen TUI scrolls the rows that only moved (a scroll region) and draws only the rows that changed",
+     "equivalence": null
+    },
+    "pig-0.4.1": {
+     "ratio": 1.100401598013428,
+     "ci": [
+      1.054042845308097,
+      1.2925250294983575
+     ],
+     "floor": 0.0930389506990559,
+     "p": 0.0078125,
+     "p_holm": 0.01171875,
+     "verdict": "loss",
+     "n": 9,
+     "arm_median": 140.09000000000003,
+     "not_compared": null,
+     "equivalence": {
+      "margin": 0.05,
+      "low": 1.079254437543018,
+      "high": 1.2558424933859937,
+      "p": 0.98075,
+      "equivalent": false
+     }
+    },
+    "pig-tip": {
+     "ratio": 0.1558749092097332,
+     "ci": [
+      0.15305051101170086,
+      0.1763621898129213
+     ],
+     "floor": 0.08954559476751023,
+     "p": 0.00390625,
+     "p_holm": 0.01171875,
+     "verdict": "win",
+     "n": 9,
+     "arm_median": 19.844133333333332,
+     "not_compared": null,
+     "equivalence": {
+      "margin": 0.05,
+      "low": 0.15305051101170086,
+      "high": 0.1754836955226968,
+      "p": 1.0,
+      "equivalent": false
+     }
+    }
+   }
+  },
+  {
+   "id": "2026-10-19-smc1-launch-focus-streaming::streaming/tui-prose@openai-completions#n10_first_paint_ms",
+   "rerun": "python3 -m buffon rerun 2026-10-19-smc1-launch-focus-streaming::streaming/tui-prose@openai-completions#n10_first_paint_ms",
+   "scenario": "streaming/tui-prose",
+   "api": "openai-completions",
+   "metric": "n10_first_paint_ms",
+   "kind": "wall",
+   "unit": "ms",
+   "mde": 0.5697199773329932,
+   "aa": {
+    "pi-bun": 0.2943172134693107,
+    "pi-node": 0.2790855568740671,
+    "pibolt": 0.08817007312440002,
+    "pig-0.4.1": 0.9845376172422056,
+    "pig-tip": 0.9373609588832925
+   },
+   "comparisons": {
+    "pi-bun": {
+     "ratio": 1.4811592702167815,
+     "ci": [
+      1.2516721311618366,
+      1.7071905699310086
+     ],
+     "floor": 0.2943172134693107,
+     "p": 0.01171875,
+     "p_holm": 0.03515625,
+     "verdict": "loss",
+     "n": 9,
+     "arm_median": 12.100972,
+     "not_compared": null,
+     "equivalence": {
+      "margin": 0.05,
+      "low": 1.2628652095585071,
+      "high": 1.6885017522728758,
+      "p": 0.99825,
+      "equivalent": false
+     }
+    },
+    "pibolt": {
+     "ratio": null,
+     "ci": null,
+     "floor": null,
+     "p": null,
+     "p_holm": null,
+     "verdict": "not compared",
+     "n": 9,
+     "arm_median": 11.659073,
+     "not_compared": "Pi-Bolt's fullscreen TUI scrolls the rows that only moved (a scroll region) and draws only the rows that changed",
+     "equivalence": null
+    },
+    "pig-0.4.1": {
+     "ratio": 1.2868678360030614,
+     "ci": [
+      1.04067420014517,
+      1.5347122808634577
+     ],
+     "floor": 0.9845376172422056,
+     "p": 0.9765625,
+     "p_holm": 0.9765625,
+     "verdict": "no measurable difference",
+     "n": 9,
+     "arm_median": 10.513624,
+     "not_compared": null,
+     "equivalence": {
+      "margin": 0.05,
+      "low": 1.0453273143406019,
+      "high": 1.4730040024044566,
+      "p": 0.85225,
+      "equivalent": false
+     }
+    },
+    "pig-tip": {
+     "ratio": 1.413956883122542,
+     "ci": [
+      1.2529947662294096,
+      1.6671216572259397
+     ],
+     "floor": 0.9373609588832925,
+     "p": 0.4609375,
+     "p_holm": 0.921875,
+     "verdict": "no measurable difference",
+     "n": 9,
+     "arm_median": 11.551933,
+     "not_compared": null,
+     "equivalence": {
+      "margin": 0.05,
+      "low": 1.2565703857083124,
+      "high": 1.611917883453063,
+      "p": 0.99675,
+      "equivalent": false
+     }
+    }
+   }
+  },
+  {
+   "id": "2026-10-19-smc1-launch-focus-streaming::streaming/tui-prose@openai-completions#n10_instructions_per_1k_tokens",
+   "rerun": "python3 -m buffon rerun 2026-10-19-smc1-launch-focus-streaming::streaming/tui-prose@openai-completions#n10_instructions_per_1k_tokens",
+   "scenario": "streaming/tui-prose",
+   "api": "openai-completions",
+   "metric": "n10_instructions_per_1k_tokens",
+   "kind": "CPU",
+   "unit": "instructions per 1k tokens",
+   "mde": 0.06659017547142856,
+   "aa": {
+    "pi-bun": 0.07407139749969105,
+    "pi-node": 0.09833269372157288,
+    "pibolt": 0.03300995754017084,
+    "pig-0.4.1": 0.11502972494211919,
+    "pig-tip": 0.027004926398625714
+   },
+   "comparisons": {
+    "pi-bun": {
+     "ratio": 16.01632850031148,
+     "ci": [
+      15.734324933648763,
+      18.041624273170832
+     ],
+     "floor": 0.09833269372157288,
+     "p": 0.00390625,
+     "p_holm": 0.01171875,
+     "verdict": "loss",
+     "n": 9,
+     "arm_median": 16746356916.533333,
+     "not_compared": null,
+     "equivalence": {
+      "margin": 0.05,
+      "low": 15.740948072205121,
+      "high": 17.973595012593808,
+      "p": 1.0,
+      "equivalent": false
+     }
+    },
+    "pibolt": {
+     "ratio": null,
+     "ci": null,
+     "floor": null,
+     "p": null,
+     "p_holm": null,
+     "verdict": "not compared",
+     "n": 9,
+     "arm_median": 281216190.6666667,
+     "not_compared": "Pi-Bolt's fullscreen TUI scrolls the rows that only moved (a scroll region) and draws only the rows that changed",
+     "equivalence": null
+    },
+    "pig-0.4.1": {
+     "ratio": 1.0667248886958856,
+     "ci": [
+      1.043338052140202,
+      1.2571969094853415
+     ],
+     "floor": 0.11502972494211919,
+     "p": 0.01171875,
+     "p_holm": 0.01171875,
+     "verdict": "no measurable difference",
+     "n": 9,
+     "arm_median": 1115346486.4,
+     "not_compared": null,
+     "equivalence": {
+      "margin": 0.05,
+      "low": 1.0489439330183006,
+      "high": 1.214153225593747,
+      "p": 0.926,
+      "equivalent": false
+     }
+    },
+    "pig-tip": {
+     "ratio": 0.09616929666060384,
+     "ci": [
+      0.094536368554458,
+      0.10833009056551095
+     ],
+     "floor": 0.09833269372157288,
+     "p": 0.00390625,
+     "p_holm": 0.01171875,
+     "verdict": "win",
+     "n": 9,
+     "arm_median": 100552718.2,
+     "not_compared": null,
+     "equivalence": {
+      "margin": 0.05,
+      "low": 0.09503378039553992,
+      "high": 0.10775726272859039,
+      "p": 1.0,
+      "equivalent": false
+     }
+    }
+   }
+  },
+  {
+   "id": "2026-10-19-smc1-launch-focus-streaming::streaming/tui-prose@openai-completions#n10_settle_ms",
+   "rerun": "python3 -m buffon rerun 2026-10-19-smc1-launch-focus-streaming::streaming/tui-prose@openai-completions#n10_settle_ms",
+   "scenario": "streaming/tui-prose",
+   "api": "openai-completions",
+   "metric": "n10_settle_ms",
+   "kind": "wall",
+   "unit": "ms",
+   "mde": null,
+   "aa": {
+    "pi-bun": null,
+    "pi-node": null,
+    "pibolt": null,
+    "pig-0.4.1": null,
+    "pig-tip": null
+   },
+   "comparisons": {
+    "pibolt": {
+     "ratio": null,
+     "ci": null,
+     "floor": null,
+     "p": null,
+     "p_holm": null,
+     "verdict": "not compared",
+     "n": 9,
+     "arm_median": 0.0,
+     "not_compared": "Pi-Bolt's fullscreen TUI scrolls the rows that only moved (a scroll region) and draws only the rows that changed",
+     "equivalence": null
+    }
+   }
+  },
+  {
+   "id": "2026-10-19-smc1-launch-focus-streaming::streaming/tui-prose@openai-completions#n10_wall_ms",
+   "rerun": "python3 -m buffon rerun 2026-10-19-smc1-launch-focus-streaming::streaming/tui-prose@openai-completions#n10_wall_ms",
+   "scenario": "streaming/tui-prose",
+   "api": "openai-completions",
+   "metric": "n10_wall_ms",
+   "kind": "wall",
+   "unit": "ms",
+   "mde": 0.0186390409957187,
+   "aa": {
+    "pi-bun": 0.035749121827470094,
+    "pi-node": 0.031430100817195473,
+    "pibolt": 0.028848591948110906,
+    "pig-0.4.1": 0.03451905024486145,
+    "pig-tip": 0.05837356913730299
+   },
+   "comparisons": {
+    "pi-bun": {
+     "ratio": 0.982940452340389,
+     "ci": [
+      0.9497332415372615,
+      1.018654468982959
+     ],
+     "floor": 0.035749121827470094,
+     "p": 0.0625,
+     "p_holm": 0.1171875,
+     "verdict": "no measurable difference",
+     "n": 9,
+     "arm_median": 45316.417607,
+     "not_compared": null,
+     "equivalence": {
+      "margin": 0.05,
+      "low": 0.9497332415372615,
+      "high": 1.01535252976373,
+      "p": 0.0705,
+      "equivalent": false
+     }
+    },
+    "pibolt": {
+     "ratio": null,
+     "ci": null,
+     "floor": null,
+     "p": null,
+     "p_holm": null,
+     "verdict": "not compared",
+     "n": 9,
+     "arm_median": 37847.594169,
+     "not_compared": "Pi-Bolt's fullscreen TUI scrolls the rows that only moved (a scroll region) and draws only the rows that changed",
+     "equivalence": null
+    },
+    "pig-0.4.1": {
+     "ratio": 1.014902764633559,
+     "ci": [
+      0.9917252168121617,
+      1.0714047541681002
+     ],
+     "floor": 0.03451905024486145,
+     "p": 0.05078125,
+     "p_holm": 0.1171875,
+     "verdict": "no measurable difference",
+     "n": 9,
+     "arm_median": 46789.973292,
+     "not_compared": null,
+     "equivalence": {
+      "margin": 0.05,
+      "low": 0.9943173530447421,
+      "high": 1.057788698306298,
+      "p": 0.092,
+      "equivalent": false
+     }
+    },
+    "pig-tip": {
+     "ratio": 1.0227863873109961,
+     "ci": [
+      1.007701882219134,
+      1.0649059120880575
+     ],
+     "floor": 0.05837356913730299,
+     "p": 0.0390625,
+     "p_holm": 0.1171875,
+     "verdict": "no measurable difference",
+     "n": 9,
+     "arm_median": 47153.431258,
+     "not_compared": null,
+     "equivalence": {
+      "margin": 0.05,
+      "low": 1.009610666277306,
+      "high": 1.058711471135095,
+      "p": 0.19775,
+      "equivalent": false
+     }
+    }
+   }
+  },
+  {
+   "id": "2026-10-19-smc1-launch-focus-streaming::streaming/tui-prose@openai-completions#n_cpu_ms_per_1k_tokens",
+   "rerun": "python3 -m buffon rerun 2026-10-19-smc1-launch-focus-streaming::streaming/tui-prose@openai-completions#n_cpu_ms_per_1k_tokens",
+   "scenario": "streaming/tui-prose",
+   "api": "openai-completions",
+   "metric": "n_cpu_ms_per_1k_tokens",
+   "kind": "CPU",
+   "unit": "ms of CPU time per 1k tokens",
+   "mde": 0.020161866909497426,
+   "aa": {
+    "pi-bun": 0.05624364389323622,
+    "pi-node": 0.029616386586363886,
+    "pibolt": 0.051625929811316015,
+    "pig-0.4.1": 0.08729792379973478,
+    "pig-tip": 0.04388593649847201
+   },
+   "comparisons": {
+    "pi-bun": {
+     "ratio": 6.082087503051013,
+     "ci": [
+      5.932170964281161,
+      6.4117957161258134
+     ],
+     "floor": 0.05624364389323622,
+     "p": 0.00390625,
+     "p_holm": 0.01171875,
+     "verdict": "loss",
+     "n": 9,
+     "arm_median": 1594.7720000000002,
+     "not_compared": null,
+     "equivalence": {
+      "margin": 0.05,
+      "low": 5.962400562178493,
+      "high": 6.4117957161258134,
+      "p": 1.0,
+      "equivalent": false
+     }
+    },
+    "pibolt": {
+     "ratio": null,
+     "ci": null,
+     "floor": null,
+     "p": null,
+     "p_holm": null,
+     "verdict": "not compared",
+     "n": 9,
+     "arm_median": 31.879333333333335,
+     "not_compared": "Pi-Bolt's fullscreen TUI scrolls the rows that only moved (a scroll region) and draws only the rows that changed",
+     "equivalence": null
+    },
+    "pig-0.4.1": {
+     "ratio": 0.4856627817101944,
+     "ci": [
+      0.47826174383619824,
+      0.509772198446005
+     ],
+     "floor": 0.08729792379973478,
+     "p": 0.00390625,
+     "p_holm": 0.01171875,
+     "verdict": "win",
+     "n": 9,
+     "arm_median": 127.34466666666667,
+     "not_compared": null,
+     "equivalence": {
+      "margin": 0.05,
+      "low": 0.47826174383619824,
+      "high": 0.507902443950717,
+      "p": 1.0,
+      "equivalent": false
+     }
+    },
+    "pig-tip": {
+     "ratio": 0.11334513058335366,
+     "ci": [
+      0.11072763078166027,
+      0.11735567291932253
+     ],
+     "floor": 0.04388593649847201,
+     "p": 0.00390625,
+     "p_holm": 0.01171875,
+     "verdict": "win",
+     "n": 9,
+     "arm_median": 29.72,
+     "not_compared": null,
+     "equivalence": {
+      "margin": 0.05,
+      "low": 0.11148539661342478,
+      "high": 0.11714172933892882,
+      "p": 1.0,
+      "equivalent": false
+     }
+    }
+   }
+  },
+  {
+   "id": "2026-10-19-smc1-launch-focus-streaming::streaming/tui-prose@openai-completions#n_first_paint_ms",
+   "rerun": "python3 -m buffon rerun 2026-10-19-smc1-launch-focus-streaming::streaming/tui-prose@openai-completions#n_first_paint_ms",
+   "scenario": "streaming/tui-prose",
+   "api": "openai-completions",
+   "metric": "n_first_paint_ms",
+   "kind": "wall",
+   "unit": "ms",
+   "mde": 0.7208215475600432,
+   "aa": {
+    "pi-bun": 0.0660444913591308,
+    "pi-node": 0.9679462173333595,
+    "pibolt": 0.004699764170083629,
+    "pig-0.4.1": 0.08353449385609066,
+    "pig-tip": 0.008127456805114237
+   },
+   "comparisons": {
+    "pi-bun": {
+     "ratio": 1.3861641293779303,
+     "ci": [
+      0.5069647024038533,
+      1.457534611859042
+     ],
+     "floor": 0.9679462173333595,
+     "p": 0.6640625,
+     "p_holm": 1.0,
+     "verdict": "no measurable difference",
+     "n": 9,
+     "arm_median": 11.563438,
+     "not_compared": null,
+     "equivalence": {
+      "margin": 0.05,
+      "low": 0.519394731290667,
+      "high": 1.420078471626301,
+      "p": 0.6305,
+      "equivalent": false
+     }
+    },
+    "pibolt": {
+     "ratio": null,
+     "ci": null,
+     "floor": null,
+     "p": null,
+     "p_holm": null,
+     "verdict": "not compared",
+     "n": 9,
+     "arm_median": 14.137428,
+     "not_compared": "Pi-Bolt's fullscreen TUI scrolls the rows that only moved (a scroll region) and draws only the rows that changed",
+     "equivalence": null
+    },
+    "pig-0.4.1": {
+     "ratio": 1.5094123848108634,
+     "ci": [
+      0.552724067540996,
+      1.6458244947538305
+     ],
+     "floor": 0.9679462173333595,
+     "p": 0.9765625,
+     "p_holm": 1.0,
+     "verdict": "no measurable difference",
+     "n": 9,
+     "arm_median": 12.59158,
+     "not_compared": null,
+     "equivalence": {
+      "margin": 0.05,
+      "low": 0.5699340547676772,
+      "high": 1.630884695963494,
+      "p": 0.6305,
+      "equivalent": false
+     }
+    },
+    "pig-tip": {
+     "ratio": 1.7486661837312956,
+     "ci": [
+      0.6422193608852,
+      1.788485887212772
+     ],
+     "floor": 0.9679462173333595,
+     "p": 0.4921875,
+     "p_holm": 1.0,
+     "verdict": "no measurable difference",
+     "n": 9,
+     "arm_median": 14.587445,
+     "not_compared": null,
+     "equivalence": {
+      "margin": 0.05,
+      "low": 0.6622098959294922,
+      "high": 1.7862033232232992,
+      "p": 0.6305,
+      "equivalent": false
+     }
+    }
+   }
+  },
+  {
+   "id": "2026-10-19-smc1-launch-focus-streaming::streaming/tui-prose@openai-completions#n_instructions_per_1k_tokens",
+   "rerun": "python3 -m buffon rerun 2026-10-19-smc1-launch-focus-streaming::streaming/tui-prose@openai-completions#n_instructions_per_1k_tokens",
+   "scenario": "streaming/tui-prose",
+   "api": "openai-completions",
+   "metric": "n_instructions_per_1k_tokens",
+   "kind": "CPU",
+   "unit": "instructions per 1k tokens",
+   "mde": 0.016415811113919907,
+   "aa": {
+    "pi-bun": 0.05962555190062821,
+    "pi-node": 0.03401561719675664,
+    "pibolt": 0.014627766956799676,
+    "pig-0.4.1": 0.05785647942776368,
+    "pig-tip": 0.07825352818066181
+   },
+   "comparisons": {
+    "pi-bun": {
+     "ratio": 6.763816497109739,
+     "ci": [
+      6.566618158647205,
+      7.264292701102565
+     ],
+     "floor": 0.05962555190062821,
+     "p": 0.00390625,
+     "p_holm": 0.01171875,
+     "verdict": "loss",
+     "n": 9,
+     "arm_median": 9470146790.666666,
+     "not_compared": null,
+     "equivalence": {
+      "margin": 0.05,
+      "low": 6.566618158647205,
+      "high": 7.129562536979205,
+      "p": 1.0,
+      "equivalent": false
+     }
+    },
+    "pibolt": {
+     "ratio": null,
+     "ci": null,
+     "floor": null,
+     "p": null,
+     "p_holm": null,
+     "verdict": "not compared",
+     "n": 9,
+     "arm_median": 181560718.66666666,
+     "not_compared": "Pi-Bolt's fullscreen TUI scrolls the rows that only moved (a scroll region) and draws only the rows that changed",
+     "equivalence": null
+    },
+    "pig-0.4.1": {
+     "ratio": 0.6458934413468451,
+     "ci": [
+      0.6260831931199095,
+      0.6619624938850021
+     ],
+     "floor": 0.05785647942776368,
+     "p": 0.00390625,
+     "p_holm": 0.01171875,
+     "verdict": "win",
+     "n": 9,
+     "arm_median": 904327564.6666666,
+     "not_compared": null,
+     "equivalence": {
+      "margin": 0.05,
+      "low": 0.6267763035032992,
+      "high": 0.6619624938850021,
+      "p": 1.0,
+      "equivalent": false
+     }
+    },
+    "pig-tip": {
+     "ratio": 0.10870217217954464,
+     "ci": [
+      0.10031481928023828,
+      0.11154710200499278
+     ],
+     "floor": 0.07825352818066181,
+     "p": 0.00390625,
+     "p_holm": 0.01171875,
+     "verdict": "win",
+     "n": 9,
+     "arm_median": 152195957.33333334,
+     "not_compared": null,
+     "equivalence": {
+      "margin": 0.05,
+      "low": 0.10658352521623123,
+      "high": 0.11149440275890317,
+      "p": 1.0,
+      "equivalent": false
+     }
+    }
+   }
+  },
+  {
+   "id": "2026-10-19-smc1-launch-focus-streaming::streaming/tui-prose@openai-completions#n_settle_ms",
+   "rerun": "python3 -m buffon rerun 2026-10-19-smc1-launch-focus-streaming::streaming/tui-prose@openai-completions#n_settle_ms",
+   "scenario": "streaming/tui-prose",
+   "api": "openai-completions",
+   "metric": "n_settle_ms",
+   "kind": "wall",
+   "unit": "ms",
+   "mde": null,
+   "aa": {
+    "pi-bun": null,
+    "pi-node": null,
+    "pibolt": 0.4424223413188994,
+    "pig-0.4.1": null,
+    "pig-tip": null
+   },
+   "comparisons": {
+    "pibolt": {
+     "ratio": null,
+     "ci": null,
+     "floor": null,
+     "p": null,
+     "p_holm": null,
+     "verdict": "not compared",
+     "n": 9,
+     "arm_median": 21.257305,
+     "not_compared": "Pi-Bolt's fullscreen TUI scrolls the rows that only moved (a scroll region) and draws only the rows that changed",
+     "equivalence": null
+    }
+   }
+  },
+  {
+   "id": "2026-10-19-smc1-launch-focus-streaming::streaming/tui-prose@openai-completions#n_wall_ms",
+   "rerun": "python3 -m buffon rerun 2026-10-19-smc1-launch-focus-streaming::streaming/tui-prose@openai-completions#n_wall_ms",
+   "scenario": "streaming/tui-prose",
+   "api": "openai-completions",
+   "metric": "n_wall_ms",
+   "kind": "wall",
+   "unit": "ms",
+   "mde": 0.05000055587446779,
+   "aa": {
+    "pi-bun": 0.060254693411029535,
+    "pi-node": 0.08349745810843465,
+    "pibolt": 0.03426778608127401,
+    "pig-0.4.1": 0.11722307124675535,
+    "pig-tip": 0.05256761861521238
+   },
+   "comparisons": {
+    "pi-bun": {
+     "ratio": 1.0140228255347818,
+     "ci": [
+      0.9617310785756249,
+      1.0787183535319735
+     ],
+     "floor": 0.08349745810843465,
+     "p": 0.45703125,
+     "p_holm": 0.6875,
+     "verdict": "no measurable difference",
+     "n": 9,
+     "arm_median": 2580.340776,
+     "not_compared": null,
+     "equivalence": {
+      "margin": 0.05,
+      "low": 0.9617310785756249,
+      "high": 1.075529057505814,
+      "p": 0.14975,
+      "equivalent": false
+     }
+    },
+    "pibolt": {
+     "ratio": null,
+     "ci": null,
+     "floor": null,
+     "p": null,
+     "p_holm": null,
+     "verdict": "not compared",
+     "n": 9,
+     "arm_median": 1907.003411,
+     "not_compared": "Pi-Bolt's fullscreen TUI scrolls the rows that only moved (a scroll region) and draws only the rows that changed",
+     "equivalence": null
+    },
+    "pig-0.4.1": {
+     "ratio": 1.0549452473110206,
+     "ci": [
+      0.9789916196745814,
+      1.1438291592192467
+     ],
+     "floor": 0.11722307124675535,
+     "p": 0.0859375,
+     "p_holm": 0.2578125,
+     "verdict": "no measurable difference",
+     "n": 9,
+     "arm_median": 2684.474323,
+     "not_compared": null,
+     "equivalence": {
+      "margin": 0.05,
+      "low": 0.996916637551087,
+      "high": 1.1224795763161663,
+      "p": 0.42775,
+      "equivalent": false
+     }
+    },
+    "pig-tip": {
+     "ratio": 1.0280622945668514,
+     "ci": [
+      0.9839311631599595,
+      1.0420503441758142
+     ],
+     "floor": 0.08349745810843465,
+     "p": 0.34375,
+     "p_holm": 0.6875,
+     "verdict": "no measurable difference",
+     "n": 9,
+     "arm_median": 2616.066416,
+     "not_compared": null,
+     "equivalence": {
+      "margin": 0.05,
+      "low": 0.9845665468096335,
+      "high": 1.0379469655994347,
+      "p": 0.00175,
+      "equivalent": true
+     }
+    }
+   }
+  },
+  {
+   "id": "2026-10-19-smc1-launch-focus-streaming::streaming/tui-prose@openai-completions#peak_mem_mib",
+   "rerun": "python3 -m buffon rerun 2026-10-19-smc1-launch-focus-streaming::streaming/tui-prose@openai-completions#peak_mem_mib",
+   "scenario": "streaming/tui-prose",
+   "api": "openai-completions",
+   "metric": "peak_mem_mib",
+   "kind": "memory",
+   "unit": "MiB",
+   "mde": 0.13080080520727286,
+   "aa": {
+    "pi-bun": 0.13594951922993648,
+    "pi-node": 0.16803403211478282,
+    "pibolt": 0.00925524455883726,
+    "pig-0.4.1": 0.04804673348869279,
+    "pig-tip": 0.028873396823287264
+   },
+   "comparisons": {
+    "pi-bun": {
+     "ratio": 1.1791483621017675,
+     "ci": [
+      0.9840824506155168,
+      1.2161956484139886
+     ],
+     "floor": 0.16803403211478282,
+     "p": 0.01171875,
+     "p_holm": 0.01171875,
+     "verdict": "no measurable difference",
+     "n": 9,
+     "arm_median": 133.15625,
+     "not_compared": null,
+     "equivalence": {
+      "margin": 0.05,
+      "low": 1.0423291792006877,
+      "high": 1.208505673984516,
+      "p": 0.865,
+      "equivalent": false
+     }
+    },
+    "pibolt": {
+     "ratio": null,
+     "ci": null,
+     "floor": null,
+     "p": null,
+     "p_holm": null,
+     "verdict": "not compared",
+     "n": 9,
+     "arm_median": 35.80078125,
+     "not_compared": "Pi-Bolt's fullscreen TUI scrolls the rows that only moved (a scroll region) and draws only the rows that changed",
+     "equivalence": null
+    },
+    "pig-0.4.1": {
+     "ratio": 0.3306928638140372,
+     "ci": [
+      0.2752361866590324,
+      0.3401662243330074
+     ],
+     "floor": 0.16803403211478282,
+     "p": 0.00390625,
+     "p_holm": 0.01171875,
+     "verdict": "win",
+     "n": 9,
+     "arm_median": 37.34375,
+     "not_compared": null,
+     "equivalence": {
+      "margin": 0.05,
+      "low": 0.2897660998219657,
+      "high": 0.339201753455651,
+      "p": 1.0,
+      "equivalent": false
+     }
+    },
+    "pig-tip": {
+     "ratio": 0.15953509287765055,
+     "ci": [
+      0.1307185800171772,
+      0.16396224414041785
+     ],
+     "floor": 0.16803403211478282,
+     "p": 0.00390625,
+     "p_holm": 0.01171875,
+     "verdict": "win",
+     "n": 9,
+     "arm_median": 18.015625,
+     "not_compared": null,
+     "equivalence": {
+      "margin": 0.05,
+      "low": 0.14015593345202285,
+      "high": 0.16329055749991161,
+      "p": 1.0,
+      "equivalent": false
+     }
+    }
+   }
+  },
+  {
+   "id": "2026-10-19-smc1-launch-focus-streaming::streaming/tui-prose@openai-completions#peak_rss_mib",
+   "rerun": "python3 -m buffon rerun 2026-10-19-smc1-launch-focus-streaming::streaming/tui-prose@openai-completions#peak_rss_mib",
+   "scenario": "streaming/tui-prose",
+   "api": "openai-completions",
+   "metric": "peak_rss_mib",
+   "kind": "memory",
+   "unit": "MiB",
+   "mde": 0.08752400773429923,
+   "aa": {
+    "pi-bun": 0.10776250269929995,
+    "pi-node": 0.11383961703735981,
+    "pibolt": 0.0026494760707679345,
+    "pig-0.4.1": 0.0311565849581226,
+    "pig-tip": 0.010909450185890516
+   },
+   "comparisons": {
+    "pi-bun": {
+     "ratio": 1.0622153700189754,
+     "ci": [
+      0.9343550765269039,
+      1.0828084082383749
+     ],
+     "floor": 0.11383961703735981,
+     "p": 0.26171875,
+     "p_holm": 0.26171875,
+     "verdict": "no measurable difference",
+     "n": 9,
+     "arm_median": 174.93359375,
+     "not_compared": null,
+     "equivalence": {
+      "margin": 0.05,
+      "low": 0.9675854417299367,
+      "high": 1.0709728295935192,
+      "p": 0.67275,
+      "equivalent": false
+     }
+    },
+    "pibolt": {
+     "ratio": null,
+     "ci": null,
+     "floor": null,
+     "p": null,
+     "p_holm": null,
+     "verdict": "not compared",
+     "n": 9,
+     "arm_median": 110.4765625,
+     "not_compared": "Pi-Bolt's fullscreen TUI scrolls the rows that only moved (a scroll region) and draws only the rows that changed",
+     "equivalence": null
+    },
+    "pig-0.4.1": {
+     "ratio": 0.417623339658444,
+     "ci": [
+      0.37098415467364443,
+      0.4252788986470449
+     ],
+     "floor": 0.11383961703735981,
+     "p": 0.00390625,
+     "p_holm": 0.01171875,
+     "verdict": "win",
+     "n": 9,
+     "arm_median": 68.77734375,
+     "not_compared": null,
+     "equivalence": {
+      "margin": 0.05,
+      "low": 0.38151282441751694,
+      "high": 0.42402088772845953,
+      "p": 1.0,
+      "equivalent": false
+     }
+    },
+    "pig-tip": {
+     "ratio": 0.34468690702087285,
+     "ci": [
+      0.3010404336178431,
+      0.34989508212537085
+     ],
+     "floor": 0.11383961703735981,
+     "p": 0.00390625,
+     "p_holm": 0.01171875,
+     "verdict": "win",
+     "n": 9,
+     "arm_median": 56.765625,
+     "not_compared": null,
+     "equivalence": {
+      "margin": 0.05,
+      "low": 0.3153566689146562,
+      "high": 0.3482686930962793,
+      "p": 1.0,
+      "equivalent": false
+     }
+    }
+   }
+  },
+  {
+   "id": "2026-10-19-smc1-launch-focus-streaming::streaming/tui-prose@openai-completions#request_bytes",
+   "rerun": "python3 -m buffon rerun 2026-10-19-smc1-launch-focus-streaming::streaming/tui-prose@openai-completions#request_bytes",
+   "scenario": "streaming/tui-prose",
+   "api": "openai-completions",
+   "metric": "request_bytes",
+   "kind": "wire",
+   "unit": "bytes",
+   "mde": 0.0,
+   "aa": {
+    "pi-bun": 0.0,
+    "pi-node": 0.0,
+    "pibolt": 0.0,
+    "pig-0.4.1": 0.0,
+    "pig-tip": 0.0
+   },
+   "comparisons": {
+    "pi-bun": {
+     "ratio": 0.9857393593681439,
+     "ci": [
+      0.9857393593681439,
+      0.9857393593681439
+     ],
+     "floor": 0.0,
+     "p": 0.00390625,
+     "p_holm": 0.01171875,
+     "verdict": "win",
+     "n": 9,
+     "arm_median": 17972.0,
+     "not_compared": null,
+     "equivalence": null
+    },
+    "pibolt": {
+     "ratio": null,
+     "ci": null,
+     "floor": null,
+     "p": null,
+     "p_holm": null,
+     "verdict": "not compared",
+     "n": 9,
+     "arm_median": 22066.0,
+     "not_compared": "Pi-Bolt's fullscreen TUI scrolls the rows that only moved (a scroll region) and draws only the rows that changed",
+     "equivalence": null
+    },
+    "pig-0.4.1": {
+     "ratio": 1.001645458534445,
+     "ci": [
+      1.001645458534445,
+      1.001645458534445
+     ],
+     "floor": 0.0,
+     "p": 0.00390625,
+     "p_holm": 0.01171875,
+     "verdict": "loss",
+     "n": 9,
+     "arm_median": 18262.0,
+     "not_compared": null,
+     "equivalence": null
+    },
+    "pig-tip": {
+     "ratio": 0.9974769635805177,
+     "ci": [
+      0.9974769635805177,
+      0.9974769635805177
+     ],
+     "floor": 0.0,
+     "p": 0.00390625,
+     "p_holm": 0.01171875,
+     "verdict": "win",
+     "n": 9,
+     "arm_median": 18186.0,
+     "not_compared": null,
+     "equivalence": null
+    }
+   }
+  },
+  {
+   "id": "2026-10-19-smc1-launch-focus-streaming::streaming/tui-prose@openai-completions#request_bytes_per_turn",
+   "rerun": "python3 -m buffon rerun 2026-10-19-smc1-launch-focus-streaming::streaming/tui-prose@openai-completions#request_bytes_per_turn",
+   "scenario": "streaming/tui-prose",
+   "api": "openai-completions",
+   "metric": "request_bytes_per_turn",
+   "kind": "wire",
+   "unit": "bytes per turn",
+   "mde": 0.0,
+   "aa": {
+    "pi-bun": 0.0,
+    "pi-node": 0.0,
+    "pibolt": 0.0,
+    "pig-0.4.1": 0.0,
+    "pig-tip": 0.0
+   },
+   "comparisons": {
+    "pi-bun": {
+     "ratio": 0.9857393593681439,
+     "ci": [
+      0.9857393593681439,
+      0.9857393593681439
+     ],
+     "floor": 0.0,
+     "p": 0.00390625,
+     "p_holm": 0.01171875,
+     "verdict": "win",
+     "n": 9,
+     "arm_median": 8986.0,
+     "not_compared": null,
+     "equivalence": {
+      "margin": 0.0,
+      "low": 0.9857393593681439,
+      "high": 0.9857393593681439,
+      "p": 1.0,
+      "equivalent": false
+     }
+    },
+    "pibolt": {
+     "ratio": null,
+     "ci": null,
+     "floor": null,
+     "p": null,
+     "p_holm": null,
+     "verdict": "not compared",
+     "n": 9,
+     "arm_median": 11033.0,
+     "not_compared": "Pi-Bolt's fullscreen TUI scrolls the rows that only moved (a scroll region) and draws only the rows that changed",
+     "equivalence": null
+    },
+    "pig-0.4.1": {
+     "ratio": 1.001645458534445,
+     "ci": [
+      1.001645458534445,
+      1.001645458534445
+     ],
+     "floor": 0.0,
+     "p": 0.00390625,
+     "p_holm": 0.01171875,
+     "verdict": "loss",
+     "n": 9,
+     "arm_median": 9131.0,
+     "not_compared": null,
+     "equivalence": {
+      "margin": 0.0,
+      "low": 1.001645458534445,
+      "high": 1.001645458534445,
+      "p": 1.0,
+      "equivalent": false
+     }
+    },
+    "pig-tip": {
+     "ratio": 0.9974769635805177,
+     "ci": [
+      0.9974769635805177,
+      0.9974769635805177
+     ],
+     "floor": 0.0,
+     "p": 0.00390625,
+     "p_holm": 0.01171875,
+     "verdict": "win",
+     "n": 9,
+     "arm_median": 9093.0,
+     "not_compared": null,
+     "equivalence": {
+      "margin": 0.0,
+      "low": 0.9974769635805177,
+      "high": 0.9974769635805177,
+      "p": 1.0,
+      "equivalent": false
+     }
+    }
+   }
+  },
+  {
+   "id": "2026-10-19-smc1-launch-focus-streaming::streaming/tui-prose@openai-completions#requests",
+   "rerun": "python3 -m buffon rerun 2026-10-19-smc1-launch-focus-streaming::streaming/tui-prose@openai-completions#requests",
+   "scenario": "streaming/tui-prose",
+   "api": "openai-completions",
+   "metric": "requests",
+   "kind": "wire",
+   "unit": "count",
+   "mde": 0.0,
+   "aa": {
+    "pi-bun": 0.0,
+    "pi-node": 0.0,
+    "pibolt": 0.0,
+    "pig-0.4.1": 0.0,
+    "pig-tip": 0.0
+   },
+   "comparisons": {
+    "pi-bun": {
+     "ratio": 1.0,
+     "ci": [
+      1.0,
+      1.0
+     ],
+     "floor": 0.0,
+     "p": 1.0,
+     "p_holm": 1.0,
+     "verdict": "no measurable difference",
+     "n": 9,
+     "arm_median": 2.0,
+     "not_compared": null,
+     "equivalence": null
+    },
+    "pibolt": {
+     "ratio": null,
+     "ci": null,
+     "floor": null,
+     "p": null,
+     "p_holm": null,
+     "verdict": "not compared",
+     "n": 9,
+     "arm_median": 2.0,
+     "not_compared": "Pi-Bolt's fullscreen TUI scrolls the rows that only moved (a scroll region) and draws only the rows that changed",
+     "equivalence": null
+    },
+    "pig-0.4.1": {
+     "ratio": 1.0,
+     "ci": [
+      1.0,
+      1.0
+     ],
+     "floor": 0.0,
+     "p": 1.0,
+     "p_holm": 1.0,
+     "verdict": "no measurable difference",
+     "n": 9,
+     "arm_median": 2.0,
+     "not_compared": null,
+     "equivalence": null
+    },
+    "pig-tip": {
+     "ratio": 1.0,
+     "ci": [
+      1.0,
+      1.0
+     ],
+     "floor": 0.0,
+     "p": 1.0,
+     "p_holm": 1.0,
+     "verdict": "no measurable difference",
+     "n": 9,
+     "arm_median": 2.0,
+     "not_compared": null,
+     "equivalence": null
+    }
+   }
+  },
+  {
+   "id": "2026-10-19-smc1-launch-focus-streaming::streaming/tui-prose@openai-completions#side_requests",
+   "rerun": "python3 -m buffon rerun 2026-10-19-smc1-launch-focus-streaming::streaming/tui-prose@openai-completions#side_requests",
+   "scenario": "streaming/tui-prose",
+   "api": "openai-completions",
+   "metric": "side_requests",
+   "kind": "wire",
+   "unit": "count",
+   "mde": null,
+   "aa": {
+    "pi-bun": null,
+    "pi-node": null,
+    "pibolt": null,
+    "pig-0.4.1": null,
+    "pig-tip": null
+   },
+   "comparisons": {
+    "pibolt": {
+     "ratio": null,
+     "ci": null,
+     "floor": null,
+     "p": null,
+     "p_holm": null,
+     "verdict": "not compared",
+     "n": 9,
+     "arm_median": 0.0,
+     "not_compared": "Pi-Bolt's fullscreen TUI scrolls the rows that only moved (a scroll region) and draws only the rows that changed",
+     "equivalence": null
+    }
+   }
+  }
+ ],
+ "grade_inputs": {
+  "method_version": 1,
+  "method_sha256": "c585418aa13158fcbc72dbf434744400c46ef512a9eb699898aead4cb3a53701",
+  "reference": "pi-node",
+  "provisional": false,
+  "reasons": [],
+  "notes": 7,
+  "arms": {
+   "pi-node": {
+    "label": "Pi on Node",
+    "cost": "npm ci --ignore-scripts; 110.6 MB + node 199 MB; linux-x64",
+    "relation": "pi-reference",
+    "claims": [
+     "pi-extensions",
+     "pi-sessions",
+     "pi-rpc"
+    ]
+   },
+   "pi-bun": {
+    "label": "Pi on Bun",
+    "cost": "release archive; 114.5 MB; linux-x64",
+    "relation": "pi-reference",
+    "claims": [
+     "pi-extensions",
+     "pi-sessions",
+     "pi-rpc"
+    ]
+   },
+   "pig-tip": {
+    "label": "PiG 0.5.0",
+    "cost": "source build; 70.2 MB; linux-x64",
+    "relation": "pi-port",
+    "claims": [
+     "pi-extensions",
+     "pi-sessions",
+     "pi-rpc"
+    ]
+   },
+   "pig-0.4.1": {
+    "label": "PiG 0.4.1",
+    "cost": "release archive; 63.8 MB; linux-x64",
+    "relation": "pi-port",
+    "claims": [
+     "pi-extensions",
+     "pi-sessions",
+     "pi-rpc"
+    ]
+   },
+   "pibolt": {
+    "label": "Pi-Bolt",
+    "cost": "release archive; 267.5 MB; linux-x64",
+    "relation": "pi-fork",
+    "claims": [
+     "pi-extensions",
+     "pi-sessions",
+     "pi-rpc"
+    ]
+   }
+  },
+  "cells": [
+   {
+    "family": "streaming",
+    "kind": "cpu",
+    "direction": "lower",
+    "scenario": "streaming/print-prose",
+    "api": "openai-completions",
+    "metric": "n10_instructions_per_1k_tokens",
+    "arms": {
+     "pi-bun": {
+      "ratio": 0.8247801624504714,
+      "ci": [
+       0.8139742612870865,
+       0.8300683678904647
+      ],
+      "floor": 0.027468861158789173,
+      "n": 8
+     },
+     "pibolt": {
+      "ratio": 0.36367545057311307,
+      "ci": [
+       0.3595488701180709,
+       0.3654111101997597
+      ],
+      "floor": 0.011798085244684639,
+      "n": 8
+     },
+     "pig-0.4.1": {
+      "ratio": 1.8253054885045734,
+      "ci": [
+       1.8036754326499616,
+       1.838464077263307
+      ],
+      "floor": 0.017263448254918667,
+      "n": 8
+     },
+     "pig-tip": {
+      "ratio": 0.2928162158252962,
+      "ci": [
+       0.26637845368055046,
+       0.29334725020731184
+      ],
+      "floor": 0.07799136577863448,
+      "n": 8
+     }
+    },
+    "values": {
+     "pi-bun": {
+      "0:1": 45059853.4,
+      "0:2": 44115227.93333333,
+      "0:3": 43552391.93333333,
+      "0:4": 44680964.8,
+      "0:5": 44854486.93333333,
+      "0:6": 45981491.2,
+      "0:7": 44947849.266666666,
+      "0:8": 44691084.6
+     },
+     "pi-node": {
+      "0:1": 54243725.666666664,
+      "0:2": 54325291.4,
+      "0:3": 54064554.4,
+      "0:4": 54183242.86666667,
+      "0:5": 54211408.0,
+      "0:6": 54479915.6,
+      "0:7": 54367229.46666667,
+      "0:8": 54400870.53333333
+     },
+     "pibolt": {
+      "0:1": 19787249.2,
+      "0:2": 19556356.866666667,
+      "0:3": 19460186.6,
+      "0:4": 19235904.533333335,
+      "0:5": 19843461.6,
+      "0:6": 19895911.2,
+      "0:7": 19781837.6,
+      "0:8": 19702048.6
+     },
+     "pig-0.4.1": {
+      "0:1": 99045660.66666667,
+      "0:2": 99840643.86666666,
+      "0:3": 99819225.53333333,
+      "0:4": 96793482.53333333,
+      "0:5": 97979482.46666667,
+      "0:6": 99125962.06666666,
+      "0:7": 98023014.8,
+      "0:8": 99613945.6
+     },
+     "pig-tip": {
+      "0:1": 14954296.0,
+      "0:2": 15904032.4,
+      "0:3": 14401632.4,
+      "0:4": 14136862.8,
+      "0:5": 15902767.466666667,
+      "0:6": 16274458.2,
+      "0:7": 15906308.6,
+      "0:8": 15888001.266666668
+     }
+    }
+   },
+   {
+    "family": "streaming",
+    "kind": "time",
+    "direction": "lower",
+    "scenario": "streaming/print-prose",
+    "api": "openai-completions",
+    "metric": "n10_wall_ms",
+    "arms": {
+     "pi-bun": {
+      "ratio": 0.825697592042703,
+      "ci": [
+       0.761834859435649,
+       0.8828971092928806
+      ],
+      "floor": 0.16276589587868565,
+      "n": 8
+     },
+     "pibolt": {
+      "ratio": 0.5419326115877868,
+      "ci": [
+       0.5363846627746238,
+       0.5478701075642857
+      ],
+      "floor": 0.04576448543635963,
+      "n": 8
+     },
+     "pig-0.4.1": {
+      "ratio": 2.084154170261365,
+      "ci": [
+       2.0572694696233387,
+       2.1222920468194344
+      ],
+      "floor": 0.04576448543635963,
+      "n": 8
+     },
+     "pig-tip": {
+      "ratio": 0.4698565243329296,
+      "ci": [
+       0.46543993868558337,
+       0.4739684157999703
+      ],
+      "floor": 0.04576448543635963,
+      "n": 8
+     }
+    },
+    "values": {
+     "pi-bun": {
+      "0:1": 47.966347,
+      "0:2": 56.690772,
+      "0:3": 56.085794,
+      "0:4": 59.985143,
+      "0:5": 60.284159,
+      "0:6": 52.224247,
+      "0:7": 56.513381,
+      "0:8": 64.528674
+     },
+     "pi-node": {
+      "0:1": 68.410993,
+      "0:2": 68.140374,
+      "0:3": 75.611624,
+      "0:4": 68.790557,
+      "0:5": 67.86964,
+      "0:6": 68.690234,
+      "0:7": 67.799216,
+      "0:8": 68.820028
+     },
+     "pibolt": {
+      "0:1": 37.246948,
+      "0:2": 36.652126,
+      "0:3": 36.844388,
+      "0:4": 37.298927,
+      "0:5": 37.268873,
+      "0:6": 37.075103,
+      "0:7": 37.224523,
+      "0:8": 36.944049
+     },
+     "pig-0.4.1": {
+      "0:1": 141.13028,
+      "0:2": 146.889586,
+      "0:3": 145.719709,
+      "0:4": 140.349478,
+      "0:5": 142.933262,
+      "0:6": 142.806832,
+      "0:7": 142.662147,
+      "0:8": 143.921528
+     },
+     "pig-tip": {
+      "0:1": 31.89646,
+      "0:2": 32.310564,
+      "0:3": 32.283219,
+      "0:4": 32.37658,
+      "0:5": 32.085498,
+      "0:6": 32.50386,
+      "0:7": 32.134687,
+      "0:8": 31.936399
+     }
+    }
+   },
+   {
+    "family": "streaming",
+    "kind": "cpu",
+    "direction": "lower",
+    "scenario": "streaming/print-prose",
+    "api": "openai-completions",
+    "metric": "n_instructions_per_1k_tokens",
+    "arms": {
+     "pi-bun": {
+      "ratio": 0.3200831452483036,
+      "ci": [
+       0.29171012881902114,
+       0.3229241910718098
+      ],
+      "floor": 0.09256216941382502,
+      "n": 8
+     },
+     "pibolt": {
+      "ratio": 0.06893005372911774,
+      "ci": [
+       0.068488861755388,
+       0.06958906764714544
+      ],
+      "floor": 0.014555402409552203,
+      "n": 8
+     },
+     "pig-0.4.1": {
+      "ratio": 0.307929221329504,
+      "ci": [
+       0.3005081546322767,
+       0.31087870958797803
+      ],
+      "floor": 0.13241321420365523,
+      "n": 8
+     },
+     "pig-tip": {
+      "ratio": 0.049544872525601656,
+      "ci": [
+       0.04606230205221932,
+       0.049833182961546714
+      ],
+      "floor": 0.0675936839802943,
+      "n": 8
+     }
+    },
+    "values": {
+     "pi-bun": {
+      "0:1": 82908154.0,
+      "0:2": 92941818.0,
+      "0:3": 90891852.66666667,
+      "0:4": 91240331.33333333,
+      "0:5": 92051920.66666667,
+      "0:6": 83079836.0,
+      "0:7": 91796059.33333333,
+      "0:8": 91117678.66666667
+     },
+     "pi-node": {
+      "0:1": 286329054.0,
+      "0:2": 285332663.3333333,
+      "0:3": 283966622.0,
+      "0:4": 284404375.3333333,
+      "0:5": 284918038.6666667,
+      "0:6": 284802712.6666667,
+      "0:7": 284281312.6666667,
+      "0:8": 285685833.3333333
+     },
+     "pibolt": {
+      "0:1": 19621894.666666668,
+      "0:2": 19531262.0,
+      "0:3": 19219593.333333332,
+      "0:4": 19542109.333333332,
+      "0:5": 19827180.666666668,
+      "0:6": 19706134.0,
+      "0:7": 19897370.666666668,
+      "0:8": 19648987.333333332
+     },
+     "pig-0.4.1": {
+      "0:1": 88272752.66666667,
+      "0:2": 85749150.0,
+      "0:3": 88757078.66666667,
+      "0:4": 74594324.0,
+      "0:5": 88557026.0,
+      "0:6": 88206488.0,
+      "0:7": 85447343.33333333,
+      "0:8": 87227179.33333333
+     },
+     "pig-tip": {
+      "0:1": 14158659.333333334,
+      "0:2": 14276896.666666666,
+      "0:3": 13475522.0,
+      "0:4": 14068082.666666666,
+      "0:5": 14194070.0,
+      "0:6": 12646502.0,
+      "0:7": 14174626.0,
+      "0:8": 13121324.666666666
+     }
+    }
+   },
+   {
+    "family": "streaming",
+    "kind": "time",
+    "direction": "lower",
+    "scenario": "streaming/print-prose",
+    "api": "openai-completions",
+    "metric": "n_wall_ms",
+    "arms": {
+     "pi-bun": {
+      "ratio": 0.44638510398821224,
+      "ci": [
+       0.4344209808108021,
+       0.4598870475942159
+      ],
+      "floor": 0.07392694341217161,
+      "n": 8
+     },
+     "pibolt": {
+      "ratio": 0.11587882654027726,
+      "ci": [
+       0.11438412200820428,
+       0.11903906966126808
+      ],
+      "floor": 0.0841037505782347,
+      "n": 8
+     },
+     "pig-0.4.1": {
+      "ratio": 0.2967478612819695,
+      "ci": [
+       0.29042483612719017,
+       0.30306681886919873
+      ],
+      "floor": 0.05496252711353141,
+      "n": 8
+     },
+     "pig-tip": {
+      "ratio": 0.08226412849040814,
+      "ci": [
+       0.08022396509612222,
+       0.08574754652896852
+      ],
+      "floor": 0.0683648767211116,
+      "n": 8
+     }
+    },
+    "values": {
+     "pi-bun": {
+      "0:1": 24.687511,
+      "0:2": 24.050439,
+      "0:3": 23.898165,
+      "0:4": 23.995994,
+      "0:5": 25.690057,
+      "0:6": 22.018542,
+      "0:7": 23.792208,
+      "0:8": 23.110419
+     },
+     "pi-node": {
+      "0:1": 55.579375,
+      "0:2": 54.390351,
+      "0:3": 53.963805,
+      "0:4": 53.885985,
+      "0:5": 52.222965,
+      "0:6": 53.407378,
+      "0:7": 52.548273,
+      "0:8": 52.989044
+     },
+     "pibolt": {
+      "0:1": 6.366742,
+      "0:2": 6.194899,
+      "0:3": 6.199096,
+      "0:4": 6.172988,
+      "0:5": 6.180231,
+      "0:6": 6.233933,
+      "0:7": 6.248791,
+      "0:8": 6.500782
+     },
+     "pig-0.4.1": {
+      "0:1": 15.964614,
+      "0:2": 15.652038,
+      "0:3": 15.8167,
+      "0:4": 15.975992,
+      "0:5": 16.14245,
+      "0:6": 16.145059,
+      "0:7": 15.874462,
+      "0:8": 15.129514
+     },
+     "pig-tip": {
+      "0:1": 4.316821,
+      "0:2": 4.444231,
+      "0:3": 4.728602,
+      "0:4": 4.369536,
+      "0:5": 4.613353,
+      "0:6": 4.273533,
+      "0:7": 4.436213,
+      "0:8": 4.390182
+     }
+    }
+   },
+   {
+    "family": "streaming",
+    "kind": "cpu",
+    "direction": "lower",
+    "scenario": "streaming/tui-prose",
+    "api": "openai-completions",
+    "metric": "n10_instructions_per_1k_tokens",
+    "arms": {
+     "pi-bun": {
+      "ratio": 16.01632850031148,
+      "ci": [
+       15.734324933648763,
+       18.041624273170832
+      ],
+      "floor": 0.09833269372157288,
+      "n": 9
+     },
+     "pig-0.4.1": {
+      "ratio": 1.0667248886958856,
+      "ci": [
+       1.043338052140202,
+       1.2571969094853415
+      ],
+      "floor": 0.11502972494211919,
+      "n": 9
+     },
+     "pig-tip": {
+      "ratio": 0.09616929666060384,
+      "ci": [
+       0.094536368554458,
+       0.10833009056551095
+      ],
+      "floor": 0.09833269372157288,
+      "n": 9
+     }
+    },
+    "not_compared": {
+     "pibolt": "Pi-Bolt's fullscreen TUI scrolls the rows that only moved (a scroll region) and draws only the rows that changed"
+    },
+    "values": {
+     "pi-bun": {
+      "0:1": 16451499554.0,
+      "0:2": 17223402892.866665,
+      "0:3": 17170660191.6,
+      "0:4": 16746356916.533333,
+      "0:5": 16405781907.6,
+      "0:6": 16458424576.933332,
+      "0:7": 17002383786.6,
+      "0:8": 17399948773.533333,
+      "0:9": 16584606206.933332
+     },
+     "pi-node": {
+      "0:1": 1045580259.9333333,
+      "0:2": 1049902093.6,
+      "0:3": 955326977.1333333,
+      "0:4": 1050681190.2666667,
+      "0:5": 949433445.0,
+      "0:6": 928206721.4666667,
+      "0:7": 1067602970.2666667,
+      "0:8": 888348289.1333333,
+      "0:9": 1069017356.4666667
+     },
+     "pibolt": {
+      "0:1": 281216190.6666667,
+      "0:2": 288429818.8,
+      "0:3": 282608663.06666666,
+      "0:4": 288764467.0,
+      "0:5": 277367164.26666665,
+      "0:6": 275243068.4,
+      "0:7": 279694181.73333335,
+      "0:8": 283646665.0,
+      "0:9": 278368744.06666666
+     },
+     "pig-0.4.1": {
+      "0:1": 1152757679.7333333,
+      "0:2": 1201034123.2,
+      "0:3": 1114020339.7333333,
+      "0:4": 1209362739.2,
+      "0:5": 1042129985.4666667,
+      "0:6": 1102105660.0666666,
+      "0:7": 1003945063.0666667,
+      "0:8": 1271699512.9333334,
+      "0:9": 1115346486.4
+     },
+     "pig-tip": {
+      "0:1": 99776165.0,
+      "0:2": 99253931.26666667,
+      "0:3": 101860780.53333333,
+      "0:4": 102943420.06666666,
+      "0:5": 103211978.66666667,
+      "0:6": 100552718.2,
+      "0:7": 104527358.66666667,
+      "0:8": 98470688.53333333,
+      "0:9": 99937919.93333334
+     }
+    }
+   },
+   {
+    "family": "streaming",
+    "kind": "time",
+    "direction": "lower",
+    "scenario": "streaming/tui-prose",
+    "api": "openai-completions",
+    "metric": "n10_wall_ms",
+    "arms": {
+     "pi-bun": {
+      "ratio": 0.982940452340389,
+      "ci": [
+       0.9497332415372615,
+       1.018654468982959
+      ],
+      "floor": 0.035749121827470094,
+      "n": 9
+     },
+     "pig-0.4.1": {
+      "ratio": 1.014902764633559,
+      "ci": [
+       0.9917252168121617,
+       1.0714047541681002
+      ],
+      "floor": 0.03451905024486145,
+      "n": 9
+     },
+     "pig-tip": {
+      "ratio": 1.0227863873109961,
+      "ci": [
+       1.007701882219134,
+       1.0649059120880575
+      ],
+      "floor": 0.05837356913730299,
+      "n": 9
+     }
+    },
+    "not_compared": {
+     "pibolt": "Pi-Bolt's fullscreen TUI scrolls the rows that only moved (a scroll region) and draws only the rows that changed"
+    },
+    "values": {
+     "pi-bun": {
+      "0:1": 43785.468475,
+      "0:2": 44137.229826,
+      "0:3": 45316.417607,
+      "0:4": 42926.193032,
+      "0:5": 45463.787168,
+      "0:6": 46202.235605,
+      "0:7": 43747.031413,
+      "0:8": 45905.714128,
+      "0:9": 45627.437763
+     },
+     "pi-node": {
+      "0:1": 46102.912439,
+      "0:2": 46563.343382,
+      "0:3": 46223.414598,
+      "0:4": 44631.215542,
+      "0:5": 46266.379316,
+      "0:6": 45573.981997,
+      "0:7": 44487.248407,
+      "0:8": 44561.464709,
+      "0:9": 46992.746253
+     },
+     "pibolt": {
+      "0:1": 37419.54949,
+      "0:2": 38913.680031,
+      "0:3": 38895.154334,
+      "0:4": 37213.699122,
+      "0:5": 39424.529218,
+      "0:6": 37983.173229,
+      "0:7": 36971.993358,
+      "0:8": 37194.327596,
+      "0:9": 37847.594169
+     },
+     "pig-0.4.1": {
+      "0:1": 47094.729854,
+      "0:2": 45801.32066,
+      "0:3": 46789.973292,
+      "0:4": 48404.295165,
+      "0:5": 46244.480799,
+      "0:6": 45793.005714,
+      "0:7": 47818.096516,
+      "0:8": 45840.925864,
+      "0:9": 47210.395392
+     },
+     "pig-tip": {
+      "0:1": 46579.421893,
+      "0:2": 47010.848136,
+      "0:3": 46104.891292,
+      "0:4": 47153.431258,
+      "0:5": 49890.030423,
+      "0:6": 48882.411574,
+      "0:7": 47177.733858,
+      "0:8": 43514.929935,
+      "0:9": 48532.002866
+     }
+    }
+   },
+   {
+    "family": "streaming",
+    "kind": "cpu",
+    "direction": "lower",
+    "scenario": "streaming/tui-prose",
+    "api": "openai-completions",
+    "metric": "n_instructions_per_1k_tokens",
+    "arms": {
+     "pi-bun": {
+      "ratio": 6.763816497109739,
+      "ci": [
+       6.566618158647205,
+       7.264292701102565
+      ],
+      "floor": 0.05962555190062821,
+      "n": 9
+     },
+     "pig-0.4.1": {
+      "ratio": 0.6458934413468451,
+      "ci": [
+       0.6260831931199095,
+       0.6619624938850021
+      ],
+      "floor": 0.05785647942776368,
+      "n": 9
+     },
+     "pig-tip": {
+      "ratio": 0.10870217217954464,
+      "ci": [
+       0.10031481928023828,
+       0.11154710200499278
+      ],
+      "floor": 0.07825352818066181,
+      "n": 9
+     }
+    },
+    "not_compared": {
+     "pibolt": "Pi-Bolt's fullscreen TUI scrolls the rows that only moved (a scroll region) and draws only the rows that changed"
+    },
+    "values": {
+     "pi-bun": {
+      "0:1": 9996681656.666666,
+      "0:2": 9954624796.0,
+      "0:3": 9641957223.333334,
+      "0:4": 9149226900.0,
+      "0:5": 8730842889.333334,
+      "0:6": 9440304202.666666,
+      "0:7": 9249931379.333334,
+      "0:8": 9708132418.666666,
+      "0:9": 9470146790.666666
+     },
+     "pi-node": {
+      "0:1": 1370350178.0,
+      "0:2": 1361672945.3333333,
+      "0:3": 1400118822.6666667,
+      "0:4": 1431317552.0,
+      "0:5": 1378572285.3333333,
+      "0:6": 1431218396.0,
+      "0:7": 1408629397.3333333,
+      "0:8": 1359793479.3333333,
+      "0:9": 1408121634.6666667
+     },
+     "pibolt": {
+      "0:1": 182277101.33333334,
+      "0:2": 183374636.66666666,
+      "0:3": 179687506.0,
+      "0:4": 182233422.0,
+      "0:5": 181560718.66666666,
+      "0:6": 185398046.66666666,
+      "0:7": 178494330.66666666,
+      "0:8": 173831220.0,
+      "0:9": 180697754.0
+     },
+     "pig-0.4.1": {
+      "0:1": 826991788.6666666,
+      "0:2": 875970028.6666666,
+      "0:3": 942542566.6666666,
+      "0:4": 924947998.0,
+      "0:5": 912563148.0,
+      "0:6": 881601289.3333334,
+      "0:7": 907389900.0,
+      "0:8": 904327564.6666666,
+      "0:9": 882895526.6666666
+     },
+     "pig-tip": {
+      "0:1": 152786374.66666666,
+      "0:2": 153775743.33333334,
+      "0:3": 140209767.33333334,
+      "0:4": 140452666.66666666,
+      "0:5": 151635114.0,
+      "0:6": 152544302.0,
+      "0:7": 152195957.33333334,
+      "0:8": 151506882.0,
+      "0:9": 175262160.66666666
+     }
+    }
+   },
+   {
+    "family": "streaming",
+    "kind": "time",
+    "direction": "lower",
+    "scenario": "streaming/tui-prose",
+    "api": "openai-completions",
+    "metric": "n_wall_ms",
+    "arms": {
+     "pi-bun": {
+      "ratio": 1.0140228255347818,
+      "ci": [
+       0.9617310785756249,
+       1.0787183535319735
+      ],
+      "floor": 0.08349745810843465,
+      "n": 9
+     },
+     "pig-0.4.1": {
+      "ratio": 1.0549452473110206,
+      "ci": [
+       0.9789916196745814,
+       1.1438291592192467
+      ],
+      "floor": 0.11722307124675535,
+      "n": 9
+     },
+     "pig-tip": {
+      "ratio": 1.0280622945668514,
+      "ci": [
+       0.9839311631599595,
+       1.0420503441758142
+      ],
+      "floor": 0.08349745810843465,
+      "n": 9
+     }
+    },
+    "not_compared": {
+     "pibolt": "Pi-Bolt's fullscreen TUI scrolls the rows that only moved (a scroll region) and draws only the rows that changed"
+    },
+    "values": {
+     "pi-bun": {
+      "0:1": 2836.070534,
+      "0:2": 2617.493143,
+      "0:3": 2736.251767,
+      "0:4": 2480.14714,
+      "0:5": 2545.795859,
+      "0:6": 2550.383894,
+      "0:7": 2566.568058,
+      "0:8": 2712.085009,
+      "0:9": 2580.340776
+     },
+     "pi-node": {
+      "0:1": 2505.580039,
+      "0:2": 2500.778543,
+      "0:3": 2536.576631,
+      "0:4": 2651.868023,
+      "0:5": 2544.657488,
+      "0:6": 2653.580494,
+      "0:7": 2728.615235,
+      "0:8": 2521.628765,
+      "0:9": 2594.839281
+     },
+     "pibolt": {
+      "0:1": 1917.375804,
+      "0:2": 1939.122582,
+      "0:3": 1874.773344,
+      "0:4": 1907.003411,
+      "0:5": 1951.326809,
+      "0:6": 1958.778867,
+      "0:7": 1852.750291,
+      "0:8": 1808.896827,
+      "0:9": 1889.34919
+     },
+     "pig-0.4.1": {
+      "0:1": 2377.299115,
+      "0:2": 2579.520061,
+      "0:3": 2971.408773,
+      "0:4": 2856.326059,
+      "0:5": 2910.653435,
+      "0:6": 2586.838451,
+      "0:7": 2782.317472,
+      "0:8": 2596.156571,
+      "0:9": 2684.474323
+     },
+     "pig-tip": {
+      "0:1": 2630.157558,
+      "0:2": 2585.374947,
+      "0:3": 2723.033646,
+      "0:4": 2619.735054,
+      "0:5": 2616.066416,
+      "0:6": 2548.979018,
+      "0:7": 2610.940542,
+      "0:8": 2617.316925,
+      "0:9": 2589.819703
+     }
+    }
+   }
+  ],
+  "failures": {
+   "pi-bun": {
+    "streaming": [
+     0,
+     17
+    ]
+   },
+   "pig-tip": {
+    "streaming": [
+     0,
+     17
+    ]
+   },
+   "pig-0.4.1": {
+    "streaming": [
+     0,
+     17
+    ]
+   },
+   "pibolt": {
+    "streaming": [
+     0,
+     17
+    ]
+   },
+   "pi-node": {
+    "streaming": [
+     0,
+     17
+    ]
+   }
+  },
+  "skips": {},
+  "reliability": {},
+  "faithfulness": {},
+  "correctness": {},
+  "trust": {
+   "badge": "Dedicated",
+   "host_class": "A",
+   "reasons": [
+    "adaptive stopping: 2 of 2 cells stopped with fewer than 12 rounds (8-9) because their answer was clear; the 12-round minimum applies to the Verified badge",
+    "8 measured rounds in the thinnest cell (the minimum for a headline is 12)",
+    "uncontained: the arms were not run in the container envelope",
+    "not yet reproduced (buffon reproduce / compare)"
+   ],
+   "headline": "instructions",
+   "headline_why": "hardware instruction counters",
+   "strict_problems": [
+    "8 measured rounds in the thinnest cell (the minimum for a headline is 12)",
+    "uncontained: the arms were not run in the container envelope"
+   ],
+   "rounds": 8
+  }
+ },
+ "races": []
+}

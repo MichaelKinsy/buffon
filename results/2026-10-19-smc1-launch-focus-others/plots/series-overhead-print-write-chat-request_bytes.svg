@@ -1,0 +1,108 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 220" width="560" height="220" role="img" aria-label="overhead/print-write chat request_bytes" font-family="sans-serif" font-size="11">
+<text x="56" y="15" font-size="12" font-weight="bold">overhead/print-write chat request_bytes</text>
+<line x1="56" y1="186.0" x2="548" y2="186.0" stroke="#ddd"/><text x="52" y="190.0" text-anchor="end">0</text>
+<line x1="56" y1="146.0" x2="548" y2="146.0" stroke="#ddd"/><text x="52" y="150.0" text-anchor="end">125,000</text>
+<line x1="56" y1="106.0" x2="548" y2="106.0" stroke="#ddd"/><text x="52" y="110.0" text-anchor="end">250,000</text>
+<line x1="56" y1="66.0" x2="548" y2="66.0" stroke="#ddd"/><text x="52" y="70.0" text-anchor="end">375,000</text>
+<line x1="56" y1="26.0" x2="548" y2="26.0" stroke="#ddd"/><text x="52" y="30.0" text-anchor="end">500,000</text>
+<text x="56.0" y="200" text-anchor="middle">1</text>
+<text x="126.3" y="200" text-anchor="middle">2</text>
+<text x="196.6" y="200" text-anchor="middle">3</text>
+<text x="266.9" y="200" text-anchor="middle">4</text>
+<text x="337.1" y="200" text-anchor="middle">5</text>
+<text x="407.4" y="200" text-anchor="middle">6</text>
+<text x="477.7" y="200" text-anchor="middle">7</text>
+<text x="548.0" y="200" text-anchor="middle">8</text>
+<text x="302" y="216" text-anchor="middle">round</text>
+<text x="10" y="106" transform="rotate(-90 10 106)" text-anchor="middle">request_bytes</text>
+<polyline fill="none" stroke="#1f77b4" stroke-width="1.5" points="56.0,40.3 126.3,40.3 196.6,40.3 266.9,40.3 337.1,40.3 407.4,40.3 477.7,40.3 548.0,40.3"><title>copilot</title></polyline>
+<circle cx="56.0" cy="40.3" r="2" fill="#1f77b4"><title>copilot at 1: 455,177</title></circle>
+<circle cx="126.3" cy="40.3" r="2" fill="#1f77b4"><title>copilot at 2: 455,177</title></circle>
+<circle cx="196.6" cy="40.3" r="2" fill="#1f77b4"><title>copilot at 3: 455,177</title></circle>
+<circle cx="266.9" cy="40.3" r="2" fill="#1f77b4"><title>copilot at 4: 455,177</title></circle>
+<circle cx="337.1" cy="40.3" r="2" fill="#1f77b4"><title>copilot at 5: 455,177</title></circle>
+<circle cx="407.4" cy="40.3" r="2" fill="#1f77b4"><title>copilot at 6: 455,177</title></circle>
+<circle cx="477.7" cy="40.3" r="2" fill="#1f77b4"><title>copilot at 7: 455,177</title></circle>
+<circle cx="548.0" cy="40.3" r="2" fill="#1f77b4"><title>copilot at 8: 455,177</title></circle>
+<polyline fill="none" stroke="#1f77b4" stroke-width="1.5" stroke-dasharray="4 3" points="56.0,40.3 126.3,40.3 196.6,40.3 266.9,40.3 337.1,40.3 407.4,40.3 477.7,40.3 548.0,40.3"><title>copilot-b</title></polyline>
+<circle cx="56.0" cy="40.3" r="2" fill="#1f77b4"><title>copilot-b at 1: 455,177</title></circle>
+<circle cx="126.3" cy="40.3" r="2" fill="#1f77b4"><title>copilot-b at 2: 455,177</title></circle>
+<circle cx="196.6" cy="40.3" r="2" fill="#1f77b4"><title>copilot-b at 3: 455,177</title></circle>
+<circle cx="266.9" cy="40.3" r="2" fill="#1f77b4"><title>copilot-b at 4: 455,177</title></circle>
+<circle cx="337.1" cy="40.3" r="2" fill="#1f77b4"><title>copilot-b at 5: 455,177</title></circle>
+<circle cx="407.4" cy="40.3" r="2" fill="#1f77b4"><title>copilot-b at 6: 455,177</title></circle>
+<circle cx="477.7" cy="40.3" r="2" fill="#1f77b4"><title>copilot-b at 7: 455,177</title></circle>
+<circle cx="548.0" cy="40.3" r="2" fill="#1f77b4"><title>copilot-b at 8: 455,177</title></circle>
+<polyline fill="none" stroke="#d62728" stroke-width="1.5" points="56.0,92.1 126.3,92.1 196.6,92.1 266.9,92.1 337.1,92.1 407.4,92.1 477.7,92.1 548.0,92.1"><title>octet</title></polyline>
+<circle cx="56.0" cy="92.1" r="2" fill="#d62728"><title>octet at 1: 293,503</title></circle>
+<circle cx="126.3" cy="92.1" r="2" fill="#d62728"><title>octet at 2: 293,503</title></circle>
+<circle cx="196.6" cy="92.1" r="2" fill="#d62728"><title>octet at 3: 293,503</title></circle>
+<circle cx="266.9" cy="92.1" r="2" fill="#d62728"><title>octet at 4: 293,503</title></circle>
+<circle cx="337.1" cy="92.1" r="2" fill="#d62728"><title>octet at 5: 293,503</title></circle>
+<circle cx="407.4" cy="92.1" r="2" fill="#d62728"><title>octet at 6: 293,503</title></circle>
+<circle cx="477.7" cy="92.1" r="2" fill="#d62728"><title>octet at 7: 293,503</title></circle>
+<circle cx="548.0" cy="92.1" r="2" fill="#d62728"><title>octet at 8: 293,503</title></circle>
+<polyline fill="none" stroke="#d62728" stroke-width="1.5" stroke-dasharray="4 3" points="56.0,92.1 126.3,92.1 196.6,92.1 266.9,92.1 337.1,92.1 407.4,92.1 477.7,92.1 548.0,92.1"><title>octet-b</title></polyline>
+<circle cx="56.0" cy="92.1" r="2" fill="#d62728"><title>octet-b at 1: 293,503</title></circle>
+<circle cx="126.3" cy="92.1" r="2" fill="#d62728"><title>octet-b at 2: 293,503</title></circle>
+<circle cx="196.6" cy="92.1" r="2" fill="#d62728"><title>octet-b at 3: 293,503</title></circle>
+<circle cx="266.9" cy="92.1" r="2" fill="#d62728"><title>octet-b at 4: 293,503</title></circle>
+<circle cx="337.1" cy="92.1" r="2" fill="#d62728"><title>octet-b at 5: 293,503</title></circle>
+<circle cx="407.4" cy="92.1" r="2" fill="#d62728"><title>octet-b at 6: 293,503</title></circle>
+<circle cx="477.7" cy="92.1" r="2" fill="#d62728"><title>octet-b at 7: 293,503</title></circle>
+<circle cx="548.0" cy="92.1" r="2" fill="#d62728"><title>octet-b at 8: 293,503</title></circle>
+<polyline fill="none" stroke="#2ca02c" stroke-width="1.5" points="56.0,72.0 126.3,72.0 196.6,72.0 266.9,72.0 337.1,72.0 407.4,72.0 477.7,72.0 548.0,72.0"><title>opencode-v2</title></polyline>
+<circle cx="56.0" cy="72.0" r="2" fill="#2ca02c"><title>opencode-v2 at 1: 356,349</title></circle>
+<circle cx="126.3" cy="72.0" r="2" fill="#2ca02c"><title>opencode-v2 at 2: 356,349</title></circle>
+<circle cx="196.6" cy="72.0" r="2" fill="#2ca02c"><title>opencode-v2 at 3: 356,349</title></circle>
+<circle cx="266.9" cy="72.0" r="2" fill="#2ca02c"><title>opencode-v2 at 4: 356,349</title></circle>
+<circle cx="337.1" cy="72.0" r="2" fill="#2ca02c"><title>opencode-v2 at 5: 356,349</title></circle>
+<circle cx="407.4" cy="72.0" r="2" fill="#2ca02c"><title>opencode-v2 at 6: 356,349</title></circle>
+<circle cx="477.7" cy="72.0" r="2" fill="#2ca02c"><title>opencode-v2 at 7: 356,349</title></circle>
+<circle cx="548.0" cy="72.0" r="2" fill="#2ca02c"><title>opencode-v2 at 8: 356,349</title></circle>
+<polyline fill="none" stroke="#2ca02c" stroke-width="1.5" stroke-dasharray="4 3" points="56.0,72.0 126.3,72.0 196.6,72.0 266.9,72.0 337.1,72.0 407.4,72.0 477.7,72.0 548.0,72.0"><title>opencode-v2-b</title></polyline>
+<circle cx="56.0" cy="72.0" r="2" fill="#2ca02c"><title>opencode-v2-b at 1: 356,349</title></circle>
+<circle cx="126.3" cy="72.0" r="2" fill="#2ca02c"><title>opencode-v2-b at 2: 356,349</title></circle>
+<circle cx="196.6" cy="72.0" r="2" fill="#2ca02c"><title>opencode-v2-b at 3: 356,349</title></circle>
+<circle cx="266.9" cy="72.0" r="2" fill="#2ca02c"><title>opencode-v2-b at 4: 356,349</title></circle>
+<circle cx="337.1" cy="72.0" r="2" fill="#2ca02c"><title>opencode-v2-b at 5: 356,349</title></circle>
+<circle cx="407.4" cy="72.0" r="2" fill="#2ca02c"><title>opencode-v2-b at 6: 356,349</title></circle>
+<circle cx="477.7" cy="72.0" r="2" fill="#2ca02c"><title>opencode-v2-b at 7: 356,349</title></circle>
+<circle cx="548.0" cy="72.0" r="2" fill="#2ca02c"><title>opencode-v2-b at 8: 356,349</title></circle>
+<polyline fill="none" stroke="#9467bd" stroke-width="1.5" points="56.0,94.4 126.3,94.4 196.6,94.4 266.9,94.4 337.1,94.4 407.4,94.4 477.7,94.4 548.0,94.4"><title>pi-node</title></polyline>
+<circle cx="56.0" cy="94.4" r="2" fill="#9467bd"><title>pi-node at 1: 286,114</title></circle>
+<circle cx="126.3" cy="94.4" r="2" fill="#9467bd"><title>pi-node at 2: 286,114</title></circle>
+<circle cx="196.6" cy="94.4" r="2" fill="#9467bd"><title>pi-node at 3: 286,114</title></circle>
+<circle cx="266.9" cy="94.4" r="2" fill="#9467bd"><title>pi-node at 4: 286,114</title></circle>
+<circle cx="337.1" cy="94.4" r="2" fill="#9467bd"><title>pi-node at 5: 286,114</title></circle>
+<circle cx="407.4" cy="94.4" r="2" fill="#9467bd"><title>pi-node at 6: 286,114</title></circle>
+<circle cx="477.7" cy="94.4" r="2" fill="#9467bd"><title>pi-node at 7: 286,114</title></circle>
+<circle cx="548.0" cy="94.4" r="2" fill="#9467bd"><title>pi-node at 8: 286,114</title></circle>
+<polyline fill="none" stroke="#9467bd" stroke-width="1.5" stroke-dasharray="4 3" points="56.0,94.4 126.3,94.4 196.6,94.4 266.9,94.4 337.1,94.4 407.4,94.4 477.7,94.4 548.0,94.4"><title>pi-node-b</title></polyline>
+<circle cx="56.0" cy="94.4" r="2" fill="#9467bd"><title>pi-node-b at 1: 286,114</title></circle>
+<circle cx="126.3" cy="94.4" r="2" fill="#9467bd"><title>pi-node-b at 2: 286,114</title></circle>
+<circle cx="196.6" cy="94.4" r="2" fill="#9467bd"><title>pi-node-b at 3: 286,114</title></circle>
+<circle cx="266.9" cy="94.4" r="2" fill="#9467bd"><title>pi-node-b at 4: 286,114</title></circle>
+<circle cx="337.1" cy="94.4" r="2" fill="#9467bd"><title>pi-node-b at 5: 286,114</title></circle>
+<circle cx="407.4" cy="94.4" r="2" fill="#9467bd"><title>pi-node-b at 6: 286,114</title></circle>
+<circle cx="477.7" cy="94.4" r="2" fill="#9467bd"><title>pi-node-b at 7: 286,114</title></circle>
+<circle cx="548.0" cy="94.4" r="2" fill="#9467bd"><title>pi-node-b at 8: 286,114</title></circle>
+<polyline fill="none" stroke="#ff7f0e" stroke-width="1.5" points="56.0,92.3 126.3,92.3 196.6,92.3 266.9,92.3 337.1,92.3 407.4,92.3 477.7,92.3 548.0,92.3"><title>rpi</title></polyline>
+<circle cx="56.0" cy="92.3" r="2" fill="#ff7f0e"><title>rpi at 1: 292,670</title></circle>
+<circle cx="126.3" cy="92.3" r="2" fill="#ff7f0e"><title>rpi at 2: 292,670</title></circle>
+<circle cx="196.6" cy="92.3" r="2" fill="#ff7f0e"><title>rpi at 3: 292,670</title></circle>
+<circle cx="266.9" cy="92.3" r="2" fill="#ff7f0e"><title>rpi at 4: 292,670</title></circle>
+<circle cx="337.1" cy="92.3" r="2" fill="#ff7f0e"><title>rpi at 5: 292,670</title></circle>
+<circle cx="407.4" cy="92.3" r="2" fill="#ff7f0e"><title>rpi at 6: 292,670</title></circle>
+<circle cx="477.7" cy="92.3" r="2" fill="#ff7f0e"><title>rpi at 7: 292,670</title></circle>
+<circle cx="548.0" cy="92.3" r="2" fill="#ff7f0e"><title>rpi at 8: 292,670</title></circle>
+<polyline fill="none" stroke="#ff7f0e" stroke-width="1.5" stroke-dasharray="4 3" points="56.0,92.3 126.3,92.3 196.6,92.3 266.9,92.3 337.1,92.3 407.4,92.3 477.7,92.3 548.0,92.3"><title>rpi-b</title></polyline>
+<circle cx="56.0" cy="92.3" r="2" fill="#ff7f0e"><title>rpi-b at 1: 292,670</title></circle>
+<circle cx="126.3" cy="92.3" r="2" fill="#ff7f0e"><title>rpi-b at 2: 292,670</title></circle>
+<circle cx="196.6" cy="92.3" r="2" fill="#ff7f0e"><title>rpi-b at 3: 292,670</title></circle>
+<circle cx="266.9" cy="92.3" r="2" fill="#ff7f0e"><title>rpi-b at 4: 292,670</title></circle>
+<circle cx="337.1" cy="92.3" r="2" fill="#ff7f0e"><title>rpi-b at 5: 292,670</title></circle>
+<circle cx="407.4" cy="92.3" r="2" fill="#ff7f0e"><title>rpi-b at 6: 292,670</title></circle>
+<circle cx="477.7" cy="92.3" r="2" fill="#ff7f0e"><title>rpi-b at 7: 292,670</title></circle>
+<circle cx="548.0" cy="92.3" r="2" fill="#ff7f0e"><title>rpi-b at 8: 292,670</title></circle>
+</svg>

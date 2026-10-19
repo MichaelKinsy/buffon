@@ -1,0 +1,108 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 220" width="560" height="220" role="img" aria-label="longsession/resume-n chat ready_cpu_ms" font-family="sans-serif" font-size="11">
+<text x="56" y="15" font-size="12" font-weight="bold">longsession/resume-n chat ready_cpu_ms</text>
+<line x1="56" y1="186.0" x2="548" y2="186.0" stroke="#ddd"/><text x="52" y="190.0" text-anchor="end">0</text>
+<line x1="56" y1="146.0" x2="548" y2="146.0" stroke="#ddd"/><text x="52" y="150.0" text-anchor="end">250</text>
+<line x1="56" y1="106.0" x2="548" y2="106.0" stroke="#ddd"/><text x="52" y="110.0" text-anchor="end">500</text>
+<line x1="56" y1="66.0" x2="548" y2="66.0" stroke="#ddd"/><text x="52" y="70.0" text-anchor="end">750</text>
+<line x1="56" y1="26.0" x2="548" y2="26.0" stroke="#ddd"/><text x="52" y="30.0" text-anchor="end">1,000</text>
+<text x="56.0" y="200" text-anchor="middle">1</text>
+<text x="126.3" y="200" text-anchor="middle">2</text>
+<text x="196.6" y="200" text-anchor="middle">3</text>
+<text x="266.9" y="200" text-anchor="middle">4</text>
+<text x="337.1" y="200" text-anchor="middle">5</text>
+<text x="407.4" y="200" text-anchor="middle">6</text>
+<text x="477.7" y="200" text-anchor="middle">7</text>
+<text x="548.0" y="200" text-anchor="middle">8</text>
+<text x="302" y="216" text-anchor="middle">round</text>
+<text x="10" y="106" transform="rotate(-90 10 106)" text-anchor="middle">ready_cpu_ms</text>
+<polyline fill="none" stroke="#1f77b4" stroke-width="1.5" points="56.0,93.6 126.3,92.7 196.6,92.4 266.9,91.4 337.1,93.7 407.4,91.1 477.7,93.6 548.0,91.0"><title>pi-bun</title></polyline>
+<circle cx="56.0" cy="93.6" r="2" fill="#1f77b4"><title>pi-bun at 1: 577</title></circle>
+<circle cx="126.3" cy="92.7" r="2" fill="#1f77b4"><title>pi-bun at 2: 583</title></circle>
+<circle cx="196.6" cy="92.4" r="2" fill="#1f77b4"><title>pi-bun at 3: 585</title></circle>
+<circle cx="266.9" cy="91.4" r="2" fill="#1f77b4"><title>pi-bun at 4: 591</title></circle>
+<circle cx="337.1" cy="93.7" r="2" fill="#1f77b4"><title>pi-bun at 5: 577</title></circle>
+<circle cx="407.4" cy="91.1" r="2" fill="#1f77b4"><title>pi-bun at 6: 593</title></circle>
+<circle cx="477.7" cy="93.6" r="2" fill="#1f77b4"><title>pi-bun at 7: 577</title></circle>
+<circle cx="548.0" cy="91.0" r="2" fill="#1f77b4"><title>pi-bun at 8: 593</title></circle>
+<polyline fill="none" stroke="#1f77b4" stroke-width="1.5" stroke-dasharray="4 3" points="56.0,91.1 126.3,92.9 196.6,92.0 266.9,91.8 337.1,90.9 407.4,91.7 477.7,91.9 548.0,93.4"><title>pi-bun-b</title></polyline>
+<circle cx="56.0" cy="91.1" r="2" fill="#1f77b4"><title>pi-bun-b at 1: 593</title></circle>
+<circle cx="126.3" cy="92.9" r="2" fill="#1f77b4"><title>pi-bun-b at 2: 582</title></circle>
+<circle cx="196.6" cy="92.0" r="2" fill="#1f77b4"><title>pi-bun-b at 3: 588</title></circle>
+<circle cx="266.9" cy="91.8" r="2" fill="#1f77b4"><title>pi-bun-b at 4: 589</title></circle>
+<circle cx="337.1" cy="90.9" r="2" fill="#1f77b4"><title>pi-bun-b at 5: 595</title></circle>
+<circle cx="407.4" cy="91.7" r="2" fill="#1f77b4"><title>pi-bun-b at 6: 590</title></circle>
+<circle cx="477.7" cy="91.9" r="2" fill="#1f77b4"><title>pi-bun-b at 7: 588</title></circle>
+<circle cx="548.0" cy="93.4" r="2" fill="#1f77b4"><title>pi-bun-b at 8: 579</title></circle>
+<polyline fill="none" stroke="#d62728" stroke-width="1.5" points="56.0,126.0 126.3,126.0 196.6,124.3 266.9,125.5 337.1,126.9 407.4,124.5 477.7,125.2 548.0,126.2"><title>pi-node</title></polyline>
+<circle cx="56.0" cy="126.0" r="2" fill="#d62728"><title>pi-node at 1: 375</title></circle>
+<circle cx="126.3" cy="126.0" r="2" fill="#d62728"><title>pi-node at 2: 375</title></circle>
+<circle cx="196.6" cy="124.3" r="2" fill="#d62728"><title>pi-node at 3: 385</title></circle>
+<circle cx="266.9" cy="125.5" r="2" fill="#d62728"><title>pi-node at 4: 378</title></circle>
+<circle cx="337.1" cy="126.9" r="2" fill="#d62728"><title>pi-node at 5: 369</title></circle>
+<circle cx="407.4" cy="124.5" r="2" fill="#d62728"><title>pi-node at 6: 384</title></circle>
+<circle cx="477.7" cy="125.2" r="2" fill="#d62728"><title>pi-node at 7: 380</title></circle>
+<circle cx="548.0" cy="126.2" r="2" fill="#d62728"><title>pi-node at 8: 374</title></circle>
+<polyline fill="none" stroke="#d62728" stroke-width="1.5" stroke-dasharray="4 3" points="56.0,125.5 126.3,126.2 196.6,126.4 266.9,125.8 337.1,126.8 407.4,126.4 477.7,125.4 548.0,126.1"><title>pi-node-b</title></polyline>
+<circle cx="56.0" cy="125.5" r="2" fill="#d62728"><title>pi-node-b at 1: 378</title></circle>
+<circle cx="126.3" cy="126.2" r="2" fill="#d62728"><title>pi-node-b at 2: 374</title></circle>
+<circle cx="196.6" cy="126.4" r="2" fill="#d62728"><title>pi-node-b at 3: 372</title></circle>
+<circle cx="266.9" cy="125.8" r="2" fill="#d62728"><title>pi-node-b at 4: 376</title></circle>
+<circle cx="337.1" cy="126.8" r="2" fill="#d62728"><title>pi-node-b at 5: 370</title></circle>
+<circle cx="407.4" cy="126.4" r="2" fill="#d62728"><title>pi-node-b at 6: 372</title></circle>
+<circle cx="477.7" cy="125.4" r="2" fill="#d62728"><title>pi-node-b at 7: 379</title></circle>
+<circle cx="548.0" cy="126.1" r="2" fill="#d62728"><title>pi-node-b at 8: 374</title></circle>
+<polyline fill="none" stroke="#2ca02c" stroke-width="1.5" points="56.0,179.8 126.3,179.4 196.6,179.7 266.9,179.6 337.1,179.6 407.4,179.5 477.7,179.7 548.0,179.7"><title>pibolt</title></polyline>
+<circle cx="56.0" cy="179.8" r="2" fill="#2ca02c"><title>pibolt at 1: 39</title></circle>
+<circle cx="126.3" cy="179.4" r="2" fill="#2ca02c"><title>pibolt at 2: 41.2</title></circle>
+<circle cx="196.6" cy="179.7" r="2" fill="#2ca02c"><title>pibolt at 3: 39.5</title></circle>
+<circle cx="266.9" cy="179.6" r="2" fill="#2ca02c"><title>pibolt at 4: 39.7</title></circle>
+<circle cx="337.1" cy="179.6" r="2" fill="#2ca02c"><title>pibolt at 5: 39.7</title></circle>
+<circle cx="407.4" cy="179.5" r="2" fill="#2ca02c"><title>pibolt at 6: 40.4</title></circle>
+<circle cx="477.7" cy="179.7" r="2" fill="#2ca02c"><title>pibolt at 7: 39.6</title></circle>
+<circle cx="548.0" cy="179.7" r="2" fill="#2ca02c"><title>pibolt at 8: 39.3</title></circle>
+<polyline fill="none" stroke="#2ca02c" stroke-width="1.5" stroke-dasharray="4 3" points="56.0,179.8 126.3,179.8 196.6,179.8 266.9,179.9 337.1,179.6 407.4,179.8 477.7,179.8 548.0,179.8"><title>pibolt-b</title></polyline>
+<circle cx="56.0" cy="179.8" r="2" fill="#2ca02c"><title>pibolt-b at 1: 38.8</title></circle>
+<circle cx="126.3" cy="179.8" r="2" fill="#2ca02c"><title>pibolt-b at 2: 38.7</title></circle>
+<circle cx="196.6" cy="179.8" r="2" fill="#2ca02c"><title>pibolt-b at 3: 38.9</title></circle>
+<circle cx="266.9" cy="179.9" r="2" fill="#2ca02c"><title>pibolt-b at 4: 38.4</title></circle>
+<circle cx="337.1" cy="179.6" r="2" fill="#2ca02c"><title>pibolt-b at 5: 39.7</title></circle>
+<circle cx="407.4" cy="179.8" r="2" fill="#2ca02c"><title>pibolt-b at 6: 38.7</title></circle>
+<circle cx="477.7" cy="179.8" r="2" fill="#2ca02c"><title>pibolt-b at 7: 38.7</title></circle>
+<circle cx="548.0" cy="179.8" r="2" fill="#2ca02c"><title>pibolt-b at 8: 38.7</title></circle>
+<polyline fill="none" stroke="#9467bd" stroke-width="1.5" points="56.0,169.9 126.3,169.8 196.6,169.9 266.9,170.1 337.1,170.8 407.4,169.6 477.7,170.4 548.0,169.9"><title>pig-0.4.1</title></polyline>
+<circle cx="56.0" cy="169.9" r="2" fill="#9467bd"><title>pig-0.4.1 at 1: 101</title></circle>
+<circle cx="126.3" cy="169.8" r="2" fill="#9467bd"><title>pig-0.4.1 at 2: 101</title></circle>
+<circle cx="196.6" cy="169.9" r="2" fill="#9467bd"><title>pig-0.4.1 at 3: 101</title></circle>
+<circle cx="266.9" cy="170.1" r="2" fill="#9467bd"><title>pig-0.4.1 at 4: 99.6</title></circle>
+<circle cx="337.1" cy="170.8" r="2" fill="#9467bd"><title>pig-0.4.1 at 5: 94.8</title></circle>
+<circle cx="407.4" cy="169.6" r="2" fill="#9467bd"><title>pig-0.4.1 at 6: 103</title></circle>
+<circle cx="477.7" cy="170.4" r="2" fill="#9467bd"><title>pig-0.4.1 at 7: 97.8</title></circle>
+<circle cx="548.0" cy="169.9" r="2" fill="#9467bd"><title>pig-0.4.1 at 8: 101</title></circle>
+<polyline fill="none" stroke="#9467bd" stroke-width="1.5" stroke-dasharray="4 3" points="56.0,169.8 126.3,170.0 196.6,169.8 266.9,170.0 337.1,169.9 407.4,170.0 477.7,170.0 548.0,169.9"><title>pig-0.4.1-b</title></polyline>
+<circle cx="56.0" cy="169.8" r="2" fill="#9467bd"><title>pig-0.4.1-b at 1: 101</title></circle>
+<circle cx="126.3" cy="170.0" r="2" fill="#9467bd"><title>pig-0.4.1-b at 2: 100</title></circle>
+<circle cx="196.6" cy="169.8" r="2" fill="#9467bd"><title>pig-0.4.1-b at 3: 101</title></circle>
+<circle cx="266.9" cy="170.0" r="2" fill="#9467bd"><title>pig-0.4.1-b at 4: 99.7</title></circle>
+<circle cx="337.1" cy="169.9" r="2" fill="#9467bd"><title>pig-0.4.1-b at 5: 101</title></circle>
+<circle cx="407.4" cy="170.0" r="2" fill="#9467bd"><title>pig-0.4.1-b at 6: 99.8</title></circle>
+<circle cx="477.7" cy="170.0" r="2" fill="#9467bd"><title>pig-0.4.1-b at 7: 100</title></circle>
+<circle cx="548.0" cy="169.9" r="2" fill="#9467bd"><title>pig-0.4.1-b at 8: 101</title></circle>
+<polyline fill="none" stroke="#ff7f0e" stroke-width="1.5" points="56.0,177.4 126.3,177.3 196.6,177.5 266.9,177.4 337.1,177.5 407.4,177.3 477.7,177.3 548.0,177.4"><title>pig-tip</title></polyline>
+<circle cx="56.0" cy="177.4" r="2" fill="#ff7f0e"><title>pig-tip at 1: 54</title></circle>
+<circle cx="126.3" cy="177.3" r="2" fill="#ff7f0e"><title>pig-tip at 2: 54.1</title></circle>
+<circle cx="196.6" cy="177.5" r="2" fill="#ff7f0e"><title>pig-tip at 3: 53.3</title></circle>
+<circle cx="266.9" cy="177.4" r="2" fill="#ff7f0e"><title>pig-tip at 4: 53.8</title></circle>
+<circle cx="337.1" cy="177.5" r="2" fill="#ff7f0e"><title>pig-tip at 5: 53.2</title></circle>
+<circle cx="407.4" cy="177.3" r="2" fill="#ff7f0e"><title>pig-tip at 6: 54.3</title></circle>
+<circle cx="477.7" cy="177.3" r="2" fill="#ff7f0e"><title>pig-tip at 7: 54.3</title></circle>
+<circle cx="548.0" cy="177.4" r="2" fill="#ff7f0e"><title>pig-tip at 8: 53.7</title></circle>
+<polyline fill="none" stroke="#ff7f0e" stroke-width="1.5" stroke-dasharray="4 3" points="56.0,177.5 126.3,177.5 196.6,177.5 266.9,177.5 337.1,177.4 407.4,177.5 477.7,177.5 548.0,177.5"><title>pig-tip-b</title></polyline>
+<circle cx="56.0" cy="177.5" r="2" fill="#ff7f0e"><title>pig-tip-b at 1: 53.2</title></circle>
+<circle cx="126.3" cy="177.5" r="2" fill="#ff7f0e"><title>pig-tip-b at 2: 53.2</title></circle>
+<circle cx="196.6" cy="177.5" r="2" fill="#ff7f0e"><title>pig-tip-b at 3: 53.3</title></circle>
+<circle cx="266.9" cy="177.5" r="2" fill="#ff7f0e"><title>pig-tip-b at 4: 53</title></circle>
+<circle cx="337.1" cy="177.4" r="2" fill="#ff7f0e"><title>pig-tip-b at 5: 53.5</title></circle>
+<circle cx="407.4" cy="177.5" r="2" fill="#ff7f0e"><title>pig-tip-b at 6: 53.4</title></circle>
+<circle cx="477.7" cy="177.5" r="2" fill="#ff7f0e"><title>pig-tip-b at 7: 53</title></circle>
+<circle cx="548.0" cy="177.5" r="2" fill="#ff7f0e"><title>pig-tip-b at 8: 53</title></circle>
+</svg>
