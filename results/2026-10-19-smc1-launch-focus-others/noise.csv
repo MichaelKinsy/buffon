@@ -32,7 +32,7 @@ overhead/print-write,anthropic-messages,kb200_cycles,copilot-b,7,0.0172390812984
 overhead/print-write,anthropic-messages,kb200_cycles,pi-node-b,7,0.01559699083658011,1,0.004898964231557485,nan,nan
 overhead/print-write,anthropic-messages,kb200_cycles,rpi-b,7,0.006033933074727999,0,-0.006471941212625342,nan,nan
 overhead/print-write,anthropic-messages,kb200_instructions,claude-code,7,0.006313765295319239,0,0.005671585254215816,0.006105468639359013,0.015218936353739533
-overhead/print-write,anthropic-messages,kb200_instructions,copilot,7,0.004170648907914023,0,0.002310915918987175,0.000965194046310569,0.005481048107088605
+overhead/print-write,anthropic-messages,kb200_instructions,copilot,7,0.004170648907914023,0,0.002310915918987175,0.000965194046310569,0.005481048107088604
 overhead/print-write,anthropic-messages,kb200_instructions,pi-node,7,0.0006818810423068912,0,0.00023539866649373753,0.0006538558117452631,0.001388739294976132
 overhead/print-write,anthropic-messages,kb200_instructions,rpi,7,0.0004813657926503961,1,-0.0004196719330526207,0.000299966239321936,0.0005712342944657056
 overhead/print-write,anthropic-messages,kb200_instructions,claude-code-b,7,0.010397743991773234,0,-0.01947109171117954,nan,nan
@@ -65,7 +65,7 @@ overhead/print-write,anthropic-messages,kb200_wall_ms,pi-node-b,7,0.015900443105
 overhead/print-write,anthropic-messages,kb200_wall_ms,rpi-b,7,0.005274331006163608,0,-0.0062209325254796,nan,nan
 overhead/print-write,anthropic-messages,kb50_after_stream_ms,claude-code,7,0.04221183754406794,0,0.05784327064087467,0.01747538417391059,0.06269969047306323
 overhead/print-write,anthropic-messages,kb50_after_stream_ms,copilot,7,0.023623786047851945,0,0.011556536239272015,0.006543606104873589,0.06459060195493982
-overhead/print-write,anthropic-messages,kb50_after_stream_ms,pi-node,7,0.003320060071777123,0,-0.005767929222475099,0.0045615752701384515,0.00722463570676853
+overhead/print-write,anthropic-messages,kb50_after_stream_ms,pi-node,7,0.003320060071777123,0,-0.005767929222475099,0.0045615752701384515,0.007224635706768529
 overhead/print-write,anthropic-messages,kb50_after_stream_ms,rpi,7,0.00740928156076513,2,-0.002057177284800224,0.00020601709258860623,0.0031313914846554888
 overhead/print-write,anthropic-messages,kb50_after_stream_ms,claude-code-b,7,0.019882011404546956,0,-0.019632714722771838,nan,nan
 overhead/print-write,anthropic-messages,kb50_after_stream_ms,copilot-b,7,0.05401873599662003,1,0.08048931220041781,nan,nan
@@ -88,7 +88,7 @@ overhead/print-write,anthropic-messages,kb50_cpu_ms,copilot-b,7,0.01407328302902
 overhead/print-write,anthropic-messages,kb50_cpu_ms,pi-node-b,7,0.004086187090175517,0,-0.003905762868008457,nan,nan
 overhead/print-write,anthropic-messages,kb50_cpu_ms,rpi-b,7,0.02222902440296228,2,-0.01590420137400778,nan,nan
 overhead/print-write,anthropic-messages,kb50_cycles,claude-code,7,0.02283049147285062,1,0.012174484895595328,0.011798298877720548,0.049322978420786034
-overhead/print-write,anthropic-messages,kb50_cycles,copilot,7,0.015632850858997172,0,0.003427496273937889,0.002662772413549286,0.032834343423057126
+overhead/print-write,anthropic-messages,kb50_cycles,copilot,7,0.015632850858997172,0,0.003427496273937889,0.002662772413549286,0.03283434342305713
 overhead/print-write,anthropic-messages,kb50_cycles,pi-node,7,0.005927964245019359,0,-0.009300223535212034,0.0012095494930179918,0.005987572982724374
 overhead/print-write,anthropic-messages,kb50_cycles,rpi,7,0.012522406235806872,0,-0.009293923259323841,0.003606744322812605,0.02100682573072394
 overhead/print-write,anthropic-messages,kb50_cycles,claude-code-b,7,0.015393644671959297,0,-0.0015600296559833467,nan,nan
@@ -241,7 +241,7 @@ overhead/print-write,openai-completions,kb200_wall_ms,pi-node-b,8,0.002721723605
 overhead/print-write,openai-completions,kb200_wall_ms,rpi-b,8,0.0020975994223353805,0,0.0025790601301139806,nan,nan
 overhead/print-write,openai-completions,kb50_after_stream_ms,copilot,8,0.019145899244412318,0,-0.006630004824311885,0.016141698369875446,0.04855072018905404
 overhead/print-write,openai-completions,kb50_after_stream_ms,octet,8,0.023124670605184854,0,-0.03155032745935989,0.0022023509236279715,0.0387079692720596
-overhead/print-write,openai-completions,kb50_after_stream_ms,opencode-v2,8,0.14307849961387245,0,0.08070197563968286,0.161744897149518,0.3780885503219857
+overhead/print-write,openai-completions,kb50_after_stream_ms,opencode-v2,8,0.14307849961387245,0,0.08070197563968286,0.161744897149518,0.37808855032198563
 overhead/print-write,openai-completions,kb50_after_stream_ms,pi-node,8,0.02560656005147301,0,-0.05697596266630409,0.0025692281499625214,0.049356586253494594
 overhead/print-write,openai-completions,kb50_after_stream_ms,rpi,8,0.005612798642974462,0,0.002393635377395794,0.00294227780996148,0.011737004654300165
 overhead/print-write,openai-completions,kb50_after_stream_ms,copilot-b,8,0.034600750106644595,0,-0.0323163418039994,nan,nan
@@ -251,7 +251,7 @@ overhead/print-write,openai-completions,kb50_after_stream_ms,pi-node-b,8,0.02295
 overhead/print-write,openai-completions,kb50_after_stream_ms,rpi-b,8,0.007546123187974808,0,0.006551351441614421,nan,nan
 overhead/print-write,openai-completions,kb50_call_to_result_ms,copilot,8,0.017715538052551855,0,-0.01107063005107624,0.017828401518434456,0.048461659766721385
 overhead/print-write,openai-completions,kb50_call_to_result_ms,octet,8,0.0073732618752699606,0,-0.014032795796737184,0.001614342464639762,0.011699300471550295
-overhead/print-write,openai-completions,kb50_call_to_result_ms,opencode-v2,8,0.11603753131718514,0,0.04220244341296204,0.12434041210299007,0.30344079219377224
+overhead/print-write,openai-completions,kb50_call_to_result_ms,opencode-v2,8,0.11603753131718514,0,0.04220244341296204,0.12434041210299007,0.3034407921937722
 overhead/print-write,openai-completions,kb50_call_to_result_ms,pi-node,8,0.025270449212641467,0,-0.05378587040985575,0.004496752749378219,0.04849946980645936
 overhead/print-write,openai-completions,kb50_call_to_result_ms,rpi,8,0.008053690237172043,0,0.0035541631098680118,0.003133782018382103,0.015418237317158745
 overhead/print-write,openai-completions,kb50_call_to_result_ms,copilot-b,8,0.03572862664080336,0,-0.023056892560838822,nan,nan
@@ -283,7 +283,7 @@ overhead/print-write,openai-completions,kb50_instructions,copilot,8,0.0044830203
 overhead/print-write,openai-completions,kb50_instructions,octet,8,0.005607401547974633,0,-0.007719685028118694,0.004288465204834391,0.01271453150832644
 overhead/print-write,openai-completions,kb50_instructions,opencode-v2,8,0.01343219585298214,0,-0.018728463661424572,0.00227088645413398,0.016996954192498588
 overhead/print-write,openai-completions,kb50_instructions,pi-node,8,0.0009056826581765402,0,-0.00023795681365559748,4.0353656555192075e-05,0.00127696172684538
-overhead/print-write,openai-completions,kb50_instructions,rpi,8,0.0013489941667858437,0,0.00010232735062280722,7.984716666198377e-05,0.001860936073368998
+overhead/print-write,openai-completions,kb50_instructions,rpi,8,0.0013489941667858437,0,0.00010232735062280722,7.984716666198377e-05,0.0018609360733689978
 overhead/print-write,openai-completions,kb50_instructions,copilot-b,8,0.003142679470798418,0,-0.006082229472601217,nan,nan
 overhead/print-write,openai-completions,kb50_instructions,octet-b,8,0.007414642214372114,0,0.00026459540482842215,nan,nan
 overhead/print-write,openai-completions,kb50_instructions,opencode-v2-b,8,0.006149280944410206,0,-0.0011591454219886577,nan,nan
@@ -360,7 +360,7 @@ overhead/print-write,openai-completions,side_requests,opencode-v2-b,8,0.0,0,0.0,
 overhead/print-write,openai-completions,side_requests,pi-node-b,8,nan,0,nan,nan,nan
 overhead/print-write,openai-completions,side_requests,rpi-b,8,nan,0,nan,nan,nan
 overhead/print-write,openai-responses,kb200_after_stream_ms,codex,7,0.015444264289984438,0,0.019324378367580615,0.005579600792920081,0.027798937188165507
-overhead/print-write,openai-responses,kb200_after_stream_ms,copilot,7,0.013026903112150967,1,0.00048488194562895735,0.03453307839943376,0.06653422415485831
+overhead/print-write,openai-responses,kb200_after_stream_ms,copilot,7,0.013026903112150967,1,0.00048488194562895735,0.03453307839943376,0.06653422415485832
 overhead/print-write,openai-responses,kb200_after_stream_ms,pi-node,7,0.025481193537975018,0,-0.0008719307789543604,0.0017132166311734087,0.05305435178479139
 overhead/print-write,openai-responses,kb200_after_stream_ms,rpi,7,0.005570926170760385,0,0.0035619094088163252,0.0012317510408534904,0.0060895008611268064
 overhead/print-write,openai-responses,kb200_after_stream_ms,codex-b,7,0.014522677805253322,0,-0.005407311791097721,nan,nan
@@ -370,7 +370,7 @@ overhead/print-write,openai-responses,kb200_after_stream_ms,rpi-b,7,0.0071842871
 overhead/print-write,openai-responses,kb200_call_to_result_ms,codex,7,0.005218450250872493,0,0.004478591205740927,0.001006238504017043,0.005929943021905536
 overhead/print-write,openai-responses,kb200_call_to_result_ms,copilot,7,0.012821388989398575,2,0.001666625478270077,0.03340256550760867,0.06322599223064862
 overhead/print-write,openai-responses,kb200_call_to_result_ms,pi-node,7,0.025416654910021545,0,-0.0009364209829078524,0.0016606048186140754,0.052680666731623735
-overhead/print-write,openai-responses,kb200_call_to_result_ms,rpi,7,0.005548963169798719,0,0.0025486955680453093,0.0008267396536014715,0.0067287879468849185
+overhead/print-write,openai-responses,kb200_call_to_result_ms,rpi,7,0.005548963169798719,0,0.0025486955680453093,0.0008267396536014715,0.006728787946884918
 overhead/print-write,openai-responses,kb200_call_to_result_ms,codex-b,7,0.003006167863162743,0,0.0036061874256899155,nan,nan
 overhead/print-write,openai-responses,kb200_call_to_result_ms,copilot-b,7,0.02050070078329551,0,-0.04451546385306223,nan,nan
 overhead/print-write,openai-responses,kb200_call_to_result_ms,pi-node-b,7,0.0054360106937688625,0,-0.0006462343290086323,nan,nan
@@ -407,7 +407,7 @@ overhead/print-write,openai-responses,kb200_peak_mem_mib,codex-b,7,0.01112752986
 overhead/print-write,openai-responses,kb200_peak_mem_mib,copilot-b,7,0.013604236973892845,0,-0.010756141954718784,nan,nan
 overhead/print-write,openai-responses,kb200_peak_mem_mib,pi-node-b,7,0.16943972188787454,1,0.013796968978377563,nan,nan
 overhead/print-write,openai-responses,kb200_peak_mem_mib,rpi-b,7,0.08683248877077865,0,0.11219278099612656,nan,nan
-overhead/print-write,openai-responses,kb200_peak_rss_mib,codex,7,0.003780001904741969,0,0.008657267865824016,0.0024112785610110876,0.008851282851126909
+overhead/print-write,openai-responses,kb200_peak_rss_mib,codex,7,0.003780001904741969,0,0.008657267865824016,0.0024112785610110876,0.008851282851126907
 overhead/print-write,openai-responses,kb200_peak_rss_mib,copilot,7,0.015295581429223763,1,0.006549170532496495,0.010698860481966221,0.03412730766990859
 overhead/print-write,openai-responses,kb200_peak_rss_mib,pi-node,7,0.0066046538999789866,0,-0.005158730158730159,0.005441216034436369,0.018544770524651425
 overhead/print-write,openai-responses,kb200_peak_rss_mib,rpi,7,0.09461139525060788,0,0.0071675033690227615,0.08572867149436525,0.22419608356801357
@@ -423,7 +423,7 @@ overhead/print-write,openai-responses,kb200_wall_ms,codex-b,7,0.0082678449676927
 overhead/print-write,openai-responses,kb200_wall_ms,copilot-b,7,0.017432814686168786,0,-0.03842806607558657,nan,nan
 overhead/print-write,openai-responses,kb200_wall_ms,pi-node-b,7,0.005305122328379781,0,-0.0003982665880723994,nan,nan
 overhead/print-write,openai-responses,kb200_wall_ms,rpi-b,7,0.007103585424894455,0,-0.00831976945878498,nan,nan
-overhead/print-write,openai-responses,kb50_after_stream_ms,codex,7,0.010248971102289521,0,0.004696157459161309,0.0014823406479103074,0.021520581297428173
+overhead/print-write,openai-responses,kb50_after_stream_ms,codex,7,0.010248971102289521,0,0.004696157459161309,0.0014823406479103074,0.021520581297428176
 overhead/print-write,openai-responses,kb50_after_stream_ms,copilot,7,0.014957543734570342,0,-0.015517318879072999,0.02771035189086013,0.059512770474568155
 overhead/print-write,openai-responses,kb50_after_stream_ms,pi-node,7,0.014674649479975512,0,0.003558347831960425,0.004751422213013723,0.028197628589676223
 overhead/print-write,openai-responses,kb50_after_stream_ms,rpi,7,0.015541957242190367,0,-0.016047728187450976,0.006495461655775192,0.024565287932326926
@@ -481,7 +481,7 @@ overhead/print-write,openai-responses,kb50_peak_rss_mib,pi-node-b,7,0.0037026652
 overhead/print-write,openai-responses,kb50_peak_rss_mib,rpi-b,7,0.03968024216494357,1,-0.023666029692782597,nan,nan
 overhead/print-write,openai-responses,kb50_wall_ms,codex,7,0.011231537769755245,0,-0.008163611671310411,0.038322659742777154,0.051524117359341315
 overhead/print-write,openai-responses,kb50_wall_ms,copilot,7,0.006367357521057746,0,-0.004822724217352449,0.004146176558558645,0.016903023683372546
-overhead/print-write,openai-responses,kb50_wall_ms,pi-node,7,0.013219738135917595,1,0.005853470072449664,0.0019888516709732906,0.026840129614558585
+overhead/print-write,openai-responses,kb50_wall_ms,pi-node,7,0.013219738135917595,1,0.005853470072449664,0.0019888516709732906,0.026840129614558582
 overhead/print-write,openai-responses,kb50_wall_ms,rpi,7,0.009323111276466123,0,-0.013613888684671765,0.006305970144417916,0.013387528122829503
 overhead/print-write,openai-responses,kb50_wall_ms,codex-b,7,0.009340144920468557,0,-0.0017072758442942535,nan,nan
 overhead/print-write,openai-responses,kb50_wall_ms,copilot-b,7,0.011950064289736342,0,0.020164479731487363,nan,nan
@@ -567,7 +567,7 @@ streaming/print-prose,anthropic-messages,n_instructions_per_1k_tokens,claude-cod
 streaming/print-prose,anthropic-messages,n_instructions_per_1k_tokens,copilot-b,7,0.03572933446990994,1,0.03343347590261652,nan,nan
 streaming/print-prose,anthropic-messages,n_instructions_per_1k_tokens,pi-node-b,7,0.008590087566078305,2,-0.0017629997819923772,nan,nan
 streaming/print-prose,anthropic-messages,n_instructions_per_1k_tokens,rpi-b,7,0.008784204120919141,0,-0.016487057842629705,nan,nan
-streaming/print-prose,anthropic-messages,n_peak_rss_mib,claude-code,7,0.007296505971805204,0,0.004020038886650668,0.013137381982518459,0.020779494752386492
+streaming/print-prose,anthropic-messages,n_peak_rss_mib,claude-code,7,0.007296505971805204,0,0.004020038886650668,0.013137381982518459,0.020779494752386496
 streaming/print-prose,anthropic-messages,n_peak_rss_mib,copilot,7,0.004699647329081711,0,-0.0015346053506573227,0.0011381656350708536,0.008976243906213766
 streaming/print-prose,anthropic-messages,n_peak_rss_mib,pi-node,7,0.018304442746369175,1,0.019150386861530252,0.024397474283342713,0.03755279427067395
 streaming/print-prose,anthropic-messages,n_peak_rss_mib,rpi,7,0.015790417797815873,0,-0.0070028011204481795,0.011204481792717047,0.04947668886774492
@@ -636,9 +636,9 @@ streaming/print-prose,openai-completions,n10_instructions_per_1k_tokens,opencode
 streaming/print-prose,openai-completions,n10_instructions_per_1k_tokens,pi-node-b,8,0.0007417600606441278,0,0.0013209015377650863,nan,nan
 streaming/print-prose,openai-completions,n10_instructions_per_1k_tokens,rpi-b,8,0.010614695109454978,0,-0.024012611200235904,nan,nan
 streaming/print-prose,openai-completions,n10_peak_rss_mib,copilot,8,0.008976904696225628,0,-0.0035708349222179857,0.00431198850136405,0.01225366198011657
-streaming/print-prose,openai-completions,n10_peak_rss_mib,octet,8,0.008026859552397509,0,-0.0171370282216933,0.0023121387283238093,0.010140193276167164
+streaming/print-prose,openai-completions,n10_peak_rss_mib,octet,8,0.008026859552397509,0,-0.0171370282216933,0.0023121387283238093,0.010140193276167163
 streaming/print-prose,openai-completions,n10_peak_rss_mib,opencode-v2,8,0.009401642252654925,1,0.020778590372589015,0.007088256371621249,0.016417938325332938
-streaming/print-prose,openai-completions,n10_peak_rss_mib,pi-node,8,0.011134962331302558,0,-0.0027200898061396314,0.0036555704272986933,0.015319247333583917
+streaming/print-prose,openai-completions,n10_peak_rss_mib,pi-node,8,0.011134962331302558,0,-0.0027200898061396314,0.0036555704272986933,0.015319247333583919
 streaming/print-prose,openai-completions,n10_peak_rss_mib,rpi,8,0.0917732686779337,2,-0.06232676224611709,0.013440860215053752,0.1035154937151308
 streaming/print-prose,openai-completions,n10_peak_rss_mib,copilot-b,8,0.006178530112944258,0,0.0027600911268181555,nan,nan
 streaming/print-prose,openai-completions,n10_peak_rss_mib,octet-b,8,0.007313390048188653,0,-0.003855982992966506,nan,nan
@@ -770,7 +770,7 @@ streaming/print-prose,openai-responses,n10_wall_ms,rpi-b,7,0.03977295904786058,3
 streaming/print-prose,openai-responses,n_cpu_ms_per_1k_tokens,codex,7,0.024475616456445328,0,-0.01976011927279339,0.0882084603573734,0.13958137927629952
 streaming/print-prose,openai-responses,n_cpu_ms_per_1k_tokens,copilot,7,0.04542061181620975,0,0.09382467271650376,0.026822609962488086,0.09439682939809144
 streaming/print-prose,openai-responses,n_cpu_ms_per_1k_tokens,pi-node,7,0.018375126945458453,0,0.0029320736276275054,0.0026411933074254046,0.038762446657183876
-streaming/print-prose,openai-responses,n_cpu_ms_per_1k_tokens,rpi,7,0.05041620313736984,0,0.08719488317452044,0.008354000783187487,0.10777683854606922
+streaming/print-prose,openai-responses,n_cpu_ms_per_1k_tokens,rpi,7,0.05041620313736984,0,0.08719488317452044,0.008354000783187487,0.1077768385460692
 streaming/print-prose,openai-responses,n_cpu_ms_per_1k_tokens,codex-b,7,0.01951403410089305,0,-0.019280048810249268,nan,nan
 streaming/print-prose,openai-responses,n_cpu_ms_per_1k_tokens,copilot-b,7,0.03971045791085639,2,-0.0007135312099972472,nan,nan
 streaming/print-prose,openai-responses,n_cpu_ms_per_1k_tokens,pi-node-b,7,0.017048036923739206,0,-0.008236213674914044,nan,nan
