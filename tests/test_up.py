@@ -450,6 +450,12 @@ class EndToEnd(unittest.TestCase):
         self.assertIn(summary["trust"]["badge"], ("Shared", "Noisy"))   # unpinned: never Dedicated
         self.assertTrue(os.path.exists(summary["site"]))
         self.assertTrue(os.path.exists(os.path.join(self.home, "site", "report", "report.md")))
+        site = os.path.join(self.home, "site")   # the dashboard built (its marker, its data), then the report, up.json and build.log were added beside it: not the summary page
+        self.assertNotIn("the dashboard did not build", text)
+        for name in (".buffon-dashboard", "index.html", os.path.join("data", "site.js"), "up.json", "build.log"):
+            self.assertTrue(os.path.exists(os.path.join(site, name)), name)
+        with open(summary["site"]) as f:
+            self.assertNotIn("Run this yourself</h2><pre>", f.read())
         self.assertTrue(os.path.exists(os.path.join(self.home, "sites", "this-machine.toml")))
         self.assertIn("buffon up: summary", text)
         self.assertIn("up --harness stub-fast,stub-slow --bench quick", summary["command"])
@@ -470,6 +476,8 @@ class EndToEnd(unittest.TestCase):
         again, lines2 = self.up()
         self.assertIn("a finished run with these settings exists, reused", "\n".join(lines2))
         self.assertEqual(again["run_dirs"], summary["run_dirs"])
+        self.assertNotIn("the dashboard did not build", "\n".join(lines2))   # the second build replaces the first site, up.json and all
+        self.assertTrue(os.path.exists(os.path.join(site, ".buffon-dashboard")) and os.path.exists(os.path.join(site, "report", "report.md")))
         rerun, lines3 = self.up(rerun=True)
         self.assertNotIn("reused", "\n".join(lines3).split("measuring")[1].split("building")[0])
     def test_an_arm_with_operator_terms_runs_only_when_accepted_and_raw_json_records_it(self):
