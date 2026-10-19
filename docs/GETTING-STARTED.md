@@ -348,7 +348,7 @@ python3 -m http.server -d site 8000     # then browse http://127.0.0.1:8000/
 
 ## 4. The demo dashboard (no run)
 
-`tools/pages_site.py` builds the site from the newest published run in `results/`, and from a synthetic demo run when `results/` holds none. That is the shortest real command:
+`tools/pages_site.py` builds the site from every published run in `results/` that is not withdrawn, and from a synthetic demo run when `results/` holds none. That is the shortest real command:
 
 ```sh
 python3 tools/pages_site.py /tmp/demo-site
@@ -367,7 +367,7 @@ build.build([run], "/tmp/demo-site", faithfulness=[demo_faithfulness_dir("/tmp/d
 
 ## 5. Publish with GitHub Pages
 
-`.github/workflows/pages.yml` runs on every push to `main` that touches `results/**`, `buffon/**`, `tools/pages_site.py` or the methodology docs it lists, and on manual dispatch. It sets up Python 3.12 and Node 22, runs `python3 tools/pages_site.py site`, uploads `site/` and deploys it. `tools/pages_site.py:published` picks the newest run in `results/index.json` that is not withdrawn, a headline run first. With none, it builds the DEMO site. The owner enables Pages for the repository with "GitHub Actions" as the source.
+The live site is served from the `gh-pages` branch: a static build of `buffon dashboard` over the published runs, committed there. `.github/workflows/pages.yml` is the other way to publish, by manual dispatch only: it sets up Python 3.12 and Node 22, runs `python3 tools/pages_site.py site` (every run in `results/index.json` that is not withdrawn, or the DEMO site when there is none), uploads `site/` and deploys it, which replaces whatever Pages served before. It needs Pages' source set to "GitHub Actions".
 
 To publish a real run, follow [SUBMITTING.md](SUBMITTING.md): `buffon verify --submission`, copy the run directory to `results/<id>/`, `buffon index results`, commit, and open a pull request. CI promotes it after the merge.
 
