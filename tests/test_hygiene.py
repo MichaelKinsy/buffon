@@ -16,6 +16,7 @@ SKIP_DIRS = {".git", "__pycache__", "runs", ".cache"}
 SKIP_FILES = {"package-lock.json", "install-package-lock.json", "arms.lock"}  # vendor lockfiles carry registry URLs and integrity hashes, not our hosts
 HOME_PATH = re.compile(r"(?<![\w.$~])/(?:home|Users|root)/[\w.-]+")
 IPV4 = re.compile(r"(?<![\w.])(\d{1,3}(?:\.\d{1,3}){3})(?![\w.])")
+SVG_PATH_DATA = re.compile(r'\bd="[MmLlHhVvCcSsQqTtAaZz\d\s.,-]+"')   # minified path data packs numbers as `1.23.82.72` (1.23, .82, .72): coordinates, not an address
 # Words that name a machine, an account or an internal system of the people who built this; a public repository has no use for them.
 # The generic words are in tests/banned_words.py. A private list can add to them: it is read from BUFFON_FORBIDDEN_WORDS (a regular expression)
 # or a file named by BUFFON_FORBIDDEN_WORDS_FILE; without either, only the generic words apply.
@@ -63,7 +64,7 @@ class Hygiene(unittest.TestCase):
         self.assertEqual(hits, [], "a home directory is machine-specific: use a site profile, a flag or an environment variable")
 
     def test_no_non_loopback_addresses(self):
-        hits = [f"{rel}:{n}: {m.group(1)}" for rel, n, line in self.scan() for m in IPV4.finditer(line) if not allowed_ip(m.group(1)) and rel != "tests/test_hygiene.py"]
+        hits = [f"{rel}:{n}: {m.group(1)}" for rel, n, line in self.scan() for m in IPV4.finditer(SVG_PATH_DATA.sub('d=""', line)) if not allowed_ip(m.group(1)) and rel != "tests/test_hygiene.py"]
         self.assertEqual(hits, [])
 
     def test_no_machine_account_or_internal_names(self):

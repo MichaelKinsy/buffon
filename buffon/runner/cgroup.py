@@ -808,7 +808,31 @@ def _try_direct(root):
     return meter
 
 
+SYSTEMD_BLOCKED = {}   # the runner's own cgroup -> why a systemd scope cannot hold the harness from there (see _join_blocked); the probe is not repeated for every meter
+
+
+def _join_blocked(meter):
+    """Why a process of this runner cannot be moved into the meter's cgroup, or None when it can.
+
+    cgroup v2 lets a process be moved only by a writer who can write the cgroup.procs of the destination and of the closest common ancestor of the source and the destination.
+    A systemd user scope is owned by the user, but it sits under user@UID.service: a runner that lives elsewhere (a job started by a system service, as on a GitHub-hosted runner)
+    has the root cgroup as the common ancestor, and every join fails with EACCES even though cgroup.procs of the scope is writable. A probe child of the runner is moved in to find out."""
+    probe = subprocess.Popen(["sleep", "infinity"], stdin=subprocess.DEVNULL, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    try:
+        with open(os.path.join(meter.path, "cgroup.procs"), "w") as f:
+            f.write(str(probe.pid))
+    except OSError as error:
+        return f"a process of this runner (cgroup {_own_cgroup()}) cannot be moved into the scope {meter.path}: {error.strerror or error}"
+    finally:
+        probe.kill()
+        probe.wait()
+    return None
+
+
 def _try_systemd():
+    own = _own_cgroup()
+    if own in SYSTEMD_BLOCKED:
+        return None
     if not os.path.exists("/usr/bin/systemd-run") and not any(os.access(os.path.join(p, "systemd-run"), os.X_OK) for p in os.environ.get("PATH", "").split(os.pathsep)):
         return None
     unit = f"buffon-{uuid.uuid4().hex[:12]}"
@@ -830,8 +854,12 @@ def _try_systemd():
         holder.kill()
         return None
     meter = CgroupMeter(path, holder, "cgroup-systemd")
-    if not meter.has_memory_peak or not os.access(os.path.join(path, "cgroup.procs"), os.W_OK):
-        meter.close()
+    blocked = None if meter.has_memory_peak and os.access(os.path.join(path, "cgroup.procs"), os.W_OK) else "no memory.peak or no writable cgroup.procs"
+    blocked = blocked or _join_blocked(meter)
+    if blocked:
+        SYSTEMD_BLOCKED[own] = blocked   # a meter that never held a harness is not closed with close(): it would add an empty reading to what the next sample reports
+        holder.terminate()
+        holder.wait(10)
         return None
     return meter
 
@@ -863,5 +891,6 @@ def new_meter(force=None):
             if meter:
                 return meter
         if force:
-            raise RuntimeError(f"meter {force} is not available on this host")
+            why = SYSTEMD_BLOCKED.get(_own_cgroup()) if force == "cgroup-systemd" else None
+            raise RuntimeError(f"meter {force} is not available on this host" + (f": {why}" if why else ""))
     return RusageMeter()

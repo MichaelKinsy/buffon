@@ -1,5 +1,6 @@
 """Preflight: host class A (dedicated, publishable) or B (shared, provisional), whole physical cores, quota refusal."""
 import unittest
+from unittest import mock
 
 from buffon.runner import preflight
 
@@ -20,7 +21,11 @@ class ClockClaim(unittest.TestCase):
     """A virtual machine shows no cpufreq or turbo interface: only the site's claim can make it class A, and only when nothing is readable."""
 
     def vm(self, **kw):
-        return host(governors={4: None, 5: None}, turbo_off=None, **kw)
+        # turbo_off=None makes preflight read this host's own turbo files, and a host that has them (a cloud VM on a boosting CPU) shows "turbo is on": a VM that shows neither is described by hiding them.
+        real = preflight.factlib._read
+        hidden = (f"{preflight.SYS}/cpu/intel_pstate/no_turbo", f"{preflight.SYS}/cpu/cpufreq/boost")
+        with mock.patch.object(preflight.factlib, "_read", lambda path, default=None: default if path in hidden else real(path, default)):
+            return host(governors={4: None, 5: None}, turbo_off=None, **kw)
 
     def test_without_the_claim_an_unreadable_clock_and_turbo_state_is_class_b(self):
         self.assertEqual((self.vm()["class"], "turbo_off" in failed(self.vm())), ("B", True))

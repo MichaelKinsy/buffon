@@ -111,7 +111,9 @@ class MeasureTest(unittest.TestCase):
     def test_memory_peak_sees_an_allocation(self):
         grab = os.path.join(self.tmp, "grab.py")
         with open(grab, "w") as f:
-            f.write("b = bytearray(150 * 1024 * 1024)\nfor i in range(0, len(b), 4096): b[i] = 1\nprint('ok')\n")
+            # The rusage meter (a host with no cgroup the runner can join) reads the tree's resident set by sampling while it runs, and a runner bigger than the harness makes ru_maxrss
+            # say nothing (RusageMeter.max_proc_rss_mib): the child holds its pages until the sampler has had many intervals to see them, as the PSS test below does.
+            f.write("import time\nb = bytearray(150 * 1024 * 1024)\nfor i in range(0, len(b), 4096): b[i] = 1\nprint('ok', flush=True)\ntime.sleep(1)\n")
         meter = cgroup.new_meter()
         try:
             res = procio.Batch([sys.executable, grab], dict(os.environ), self.tmp, meter, 60).run()
@@ -123,10 +125,7 @@ class MeasureTest(unittest.TestCase):
 
     @unittest.skipUnless(sys.platform.startswith("linux"), "socket audit reads /proc")
     def test_egress_audit_flags_a_connection_that_leaves_the_loopback(self):
-        meter = cgroup.new_meter()
-        if meter.mode == "rusage":
-            meter.close()
-            self.skipTest("no cgroup meter on this host, so no socket audit")
+        meter = cgroup.new_meter()   # whichever meter this host gives the runner: the socket audit is the meter's tree sampler on both (the rusage meter has its own test below)
         egress.take()
         script = os.path.join(self.tmp, "leak.py")
         with open(script, "w") as f:  # TEST-NET-1 (RFC 5737): never routable; the SYN stays pending long enough to be sampled
@@ -219,7 +218,7 @@ class MeasureTest(unittest.TestCase):
         meter = cgroup.new_meter()
         if meter.mode == "rusage":
             meter.close()
-            self.skipTest("no cgroup meter")
+            self.skipTest("this host gives the runner the rusage meter (no cgroup it can join), which reads no PSS")
         try:
             proc = meter.popen([sys.executable, grab], stdout=__import__("subprocess").PIPE)
             proc.stdout.readline()

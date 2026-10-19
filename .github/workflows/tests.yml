@@ -22,6 +22,18 @@ jobs:
           python-version: ${{ matrix.python }}
       - name: "Unit tests (one way only: the package root is the top-level directory)"
         run: python3 -m unittest discover -s tests -t .
+      - name: "The cgroup meter (Linux): the same suite's meter tests inside the user's systemd session"
+        # A GitHub-hosted job runs under system.slice, where a process cannot be moved into a user scope (the first step runs the rusage fallback and says so). Inside `systemd-run --user --scope` the
+        # runner and its meters' scopes share user@UID.service, so the tests that need a cgroup run for real and are not skipped.
+        if: ${{ !cancelled() && runner.os == 'Linux' }}
+        run: |
+          systemd-run --user --scope --quiet --collect -p MemoryAccounting=yes -p CPUAccounting=yes -- python3 -c "
+          from buffon.runner import cgroup
+          meter = cgroup.new_meter()
+          print('meter:', meter.mode)
+          meter.close()
+          assert meter.mode == 'cgroup-systemd', meter.mode"
+          systemd-run --user --scope --quiet --collect -p MemoryAccounting=yes -p CPUAccounting=yes -- python3 -m unittest -v tests.test_spawn_clock tests.test_schedstat tests.test_egress tests.test_measure
   signoff:
     # CONTRIBUTING.md: every commit, merge commits included, carries a Signed-off-by line (`git commit -s`, `git merge --signoff`).
     if: github.event_name == 'pull_request'
