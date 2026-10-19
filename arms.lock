@@ -90,7 +90,7 @@
       },
       "held": null,
       "licence": "Apache-2.0",
-      "manifest_sha256": "8f6e750426be308d9e377ae0e01e0fbfc7835643f9b2b74878e759042f7b1b12",
+      "manifest_sha256": "72b2eabc3828da3ed2055c7fab4d1d3c9dfb76258d7fdedd5f2a98776fb91d1d",
       "spec": {
         "cannot_run": {
           "pty": "tried at 0.162.1: no egress, but its TUI does not echo the PTY workload's first-input probe within 20 s (it shows its own startup screens), so first-input latency is not comparable; not measured in v0",
@@ -124,12 +124,23 @@
             "danger-full-access",
             "{prompt}"
           ],
+          "print_write": [
+            "exec",
+            "-m",
+            "{model}",
+            "-c",
+            "model_catalog_json=\"{home}/.codex/write-catalog.json\"",
+            "--skip-git-repo-check",
+            "--sandbox",
+            "danger-full-access",
+            "{prompt}"
+          ],
           "version": [
             "--version"
           ]
         },
         "name": "codex",
-        "notes": "Unrelated to Pi; a reference point. Needs the OpenAI Responses endpoint. Its TUI contacts a GitHub content address even with remote catalogs off, so no PTY workload runs on it.",
+        "notes": "Unrelated to Pi; a reference point. Needs the OpenAI Responses endpoint. The large-write workload runs it through its `apply_patch` tool (the `print_write` mode loads a model catalog that enables it for the mock model). Its TUI contacts a GitHub content address even with remote catalogs off, so no PTY workload runs on it.",
         "npm": {
           "bin": "node_modules/.bin/codex",
           "integrity": "sha512-NWZdi/kxyjv/8EUGFupziGU38YyleugZRM4JXgY5XFH7FUmaFA33NZS2Bmq0HPazf7S3jJQQWsZ/jAK9jsrV3Q==",
@@ -2295,7 +2306,7 @@
       },
       "held": null,
       "licence": "MIT",
-      "manifest_sha256": "09024d418927cdb86538f03f810348cac4ff4a24fd0ede18570094e862d75205",
+      "manifest_sha256": "d0032cdda0e713436aa3f6930bb5cac18491bdd91011ffa362100c5bd6b4526f",
       "spec": {
         "capabilities": {
           "exact_requests": true,
@@ -2406,12 +2417,12 @@
             "-buildvcs=false",
             "-trimpath",
             "-ldflags",
-            "-s -w -X github.com/MichaelKinsy/PiG/coding/cli.Build=a136850c38f4097e1cd965ab989efb58960709f9 -X github.com/MichaelKinsy/PiG/internal/codingagent.DefaultUpdateURL=https://github.com/MichaelKinsy/PiG/releases/latest/download/update.json -X github.com/MichaelKinsy/PiG/internal/codingagent.DefaultUpdateTrustRoot=LS0tLS1CRUdJTiBQVUJMSUMgS0VZLS0tLS0KTUNvd0JRWURLMlZ3QXlFQVFBdUtJTHRmc0FpbWdabnRpZ2UydzRGRy9QeDFQeU5HampHYXlEalREM0k9Ci0tLS0tRU5EIFBVQkxJQyBLRVktLS0tLQo= -X github.com/MichaelKinsy/PiG/coding/pigletbuild.releaseSourceVersion=v0.5.0",
+            "-s -w -X github.com/MichaelKinsy/PiG/coding/cli.Build=26eaad58e3ec09e25adf74000f79bcd83123aa8c -X github.com/MichaelKinsy/PiG/internal/codingagent.DefaultUpdateURL=https://github.com/MichaelKinsy/PiG/releases/latest/download/update.json -X github.com/MichaelKinsy/PiG/internal/codingagent.DefaultUpdateTrustRoot=LS0tLS1CRUdJTiBQVUJMSUMgS0VZLS0tLS0KTUNvd0JRWURLMlZ3QXlFQVFBdUtJTHRmc0FpbWdabnRpZ2UydzRGRy9QeDFQeU5HampHYXlEalREM0k9Ci0tLS0tRU5EIFBVQkxJQyBLRVktLS0tLQo= -X github.com/MichaelKinsy/PiG/coding/pigletbuild.releaseSourceVersion=v0.5.0",
             "-o",
             "{out}",
             "{package}"
           ],
-          "commit": "a136850c38f4097e1cd965ab989efb58960709f9",
+          "commit": "26eaad58e3ec09e25adf74000f79bcd83123aa8c",
           "env": {
             "CGO_ENABLED": "0",
             "GOFLAGS": "",
@@ -2420,7 +2431,7 @@
           "package": "./cmd/pig",
           "repo_env": "BUFFON_SOURCE_REPO_PIG_TIP",
           "toolchain": "go",
-          "tree": "593786aecf8c8606fdfb1cddd63aab544a032048"
+          "tree": "8b867e1919867ebfc99e50c7a630f27f0ce9be30"
         },
         "state": {
           "dirs": [

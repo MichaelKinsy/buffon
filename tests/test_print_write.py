@@ -18,6 +18,24 @@ FAKE = textwrap.dedent('''\
     if mode == "no-write-tool":
         tools = [{"type": "function", "function": {"name": "apply_patch", "parameters": {"type": "object", "properties": {"input": {"type": "string"}}}}}]
 
+    def patch_file(patch):
+        """What Codex's apply_patch does with an Add File patch: the path (relative to the working directory) and the file, every line ended by a newline."""
+        lines = patch.split("\\n")
+        assert lines[0] == "*** Begin Patch" and lines[1].startswith("*** Add File: ") and lines[-1] == "*** End Patch", lines[:2]
+        return lines[1][len("*** Add File: "):], "".join(line[1:] + "\\n" for line in lines[2:-1])
+
+    def ask_responses(items):
+        tools = [{"type": "function", "name": "exec_command", "parameters": {"type": "object", "properties": {"cmd": {"type": "string"}}}}, {"type": "web_search", "external_web_access": True}]
+        if mode == "patch":
+            tools.append({"type": "custom", "name": "apply_patch", "format": {"type": "grammar"}})
+        c = http.client.HTTPConnection(u.hostname, u.port)
+        c.request("POST", "/v1/responses", json.dumps({"model": "bench-1", "stream": True, "input": items, "tools": tools}), {"Content-Type": "application/json"})
+        data = c.getresponse().read().decode()
+        events = [json.loads(b.split("data: ", 1)[1]) for b in data.split("\\n\\n") if "data: {" in b]
+        text = "".join(e["delta"] for e in events if e["type"] == "response.output_text.delta")
+        patch = "".join(e["delta"] for e in events if e["type"] == "response.custom_tool_call_input.delta")
+        return text, patch
+
     def ask(messages):
         c = http.client.HTTPConnection(u.hostname, u.port)
         c.request("POST", "/v1/chat/completions", json.dumps({"model": "bench-1", "stream": True, "messages": messages, "tools": tools}), {"Content-Type": "application/json"})
@@ -31,6 +49,18 @@ FAKE = textwrap.dedent('''\
                     args += call.get("function", {}).get("arguments", "")
         return text, args
 
+    if mode in ("patch", "patch-missing"):
+        items = [{"role": "user", "content": [{"type": "input_text", "text": sys.argv[-1]}]}]
+        text, patch = ask_responses(items)
+        if patch:
+            path, body = patch_file(patch)
+            os.makedirs(os.path.dirname(path), exist_ok=True)
+            with open(path, "wb") as f:
+                f.write(body.encode())
+            items += [{"type": "custom_tool_call", "call_id": "c", "name": "apply_patch", "input": patch}, {"type": "custom_tool_call_output", "call_id": "c", "output": "ok"}]
+            text, _ = ask_responses(items)
+        print(text)
+        sys.exit(0)
     messages = [{"role": "user", "content": sys.argv[-1]}]
     text, args = ask(messages)
     if args:
@@ -40,7 +70,9 @@ FAKE = textwrap.dedent('''\
             body = body[:-1]
         elif mode == "flip":
             body = body[:100] + ("Z" if body[100] != "Z" else "Y") + body[101:]
-        if mode != "missing":
+        if mode == "create-strict" and not os.path.isdir(os.path.dirname(call["path"])):
+            pass   # Copilot's create: "Parent directories must exist before creating the file"
+        elif mode != "missing":
             os.makedirs(os.path.dirname(call["path"]), exist_ok=True)
             with open(call["path"], "wb") as f:
                 f.write(body.encode())
@@ -58,7 +90,7 @@ class FakeHarness:
         with open(self.script, "w") as f:
             f.write(FAKE)
 
-    def print_argv(self, prompt):
+    def print_write_argv(self, prompt):
         return [sys.executable, self.script, prompt]
 
 
@@ -80,7 +112,7 @@ class FakeArm:
 class FakeCtx:
     def __init__(self, work, server, mode, **params):
         self.work, self.server, self.mode = work, server, mode
-        self.opts = type("O", (), {"timeout": 60, "api": "openai-completions", "params": params})()
+        self.opts = type("O", (), {"timeout": 60, "api": "openai-responses" if mode.startswith("patch") else "openai-completions", "params": params})()
 
     def harness(self, arm, scenario, **kwargs):
         return FakeHarness(self.work, self.server, self.mode)
@@ -131,6 +163,21 @@ class PrintWrite(unittest.TestCase):
         with self.assertRaises(overhead.Skip) as why:
             self.run_one("no-write-tool", write_kb=1)
         self.assertIn("declared no write tool (it declared apply_patch)", str(why.exception))
+
+    def test_a_tool_that_needs_the_parent_directory_to_exist_finds_it(self):
+        sample = self.run_one("create-strict", write_kb=1)
+        self.assertNotIn("failure", sample)
+        self.assertIn("kb1_wall_ms", sample)
+
+    def test_a_patch_tool_is_driven_through_its_own_freeform_call_and_its_trailing_newline_is_expected(self):
+        sample = self.run_one("patch", write_kb=1)
+        self.assertNotIn("failure", sample)
+        self.assertIn("kb1_call_to_result_ms", sample)
+
+    def test_a_harness_whose_tools_have_no_name_and_no_write_tool_is_skipped_naming_them_by_type(self):
+        with self.assertRaises(overhead.Skip) as why:
+            self.run_one("patch-missing", write_kb=1)
+        self.assertIn("(it declared exec_command, web_search)", str(why.exception))
 
     def test_a_manifest_reason_skips_before_anything_runs(self):
         arm = FakeArm("good")

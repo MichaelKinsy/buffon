@@ -205,18 +205,22 @@ class Harness:
     # -- argv ---------------------------------------------------------------------------------------------------------------------------------
 
     def argv(self, mode, prompt="", session=None):
-        """The command for a mode: the manifest's template with {model}, {prompt}, {session}, {session_dir} and {extensions} filled."""
+        """The command for a mode: the manifest's template with {model}, {prompt}, {session}, {session_dir}, {home} and {extensions} filled."""
         out = [self.arm.binary]
         for part in self.arm.modes[mode]:
             if part == "{extensions}":
                 for path in self.extensions:
                     out += ["-e", path]
                 continue
-            out.append(part.replace("{model}", MODEL).replace("{prompt}", prompt).replace("{session_dir}", self.sessions).replace("{session}", session or os.path.join(self.sessions, "s.jsonl")))
+            out.append(part.replace("{model}", MODEL).replace("{prompt}", prompt).replace("{session_dir}", self.sessions).replace("{home}", self.home).replace("{session}", session or os.path.join(self.sessions, "s.jsonl")))
         return out
 
     def print_argv(self, prompt, session=False):
         return self.argv("print_session" if session and self.arm.supports_mode("print_session") else "print", prompt)
+
+    def print_write_argv(self, prompt):
+        """The print command of the large-write workload: the manifest's `print_write` mode when it has one (Codex needs its patch tool turned on), else `print`."""
+        return self.argv("print_write" if self.arm.supports_mode("print_write") else "print", prompt)
 
     def rpc_resume_argv(self, session):
         return self.argv("rpc_resume", session=session)

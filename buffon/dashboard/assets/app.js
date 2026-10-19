@@ -1216,7 +1216,7 @@
     var trust = [where ? "Measured on " + where : "Measured", when ? "on " + when : ""].filter(Boolean).join(" ") + (run.rounds ? ", " + plural(run.rounds, "round") : "") + ".";
     return '<section class="hero"><div class="htext"><h1>Buffon</h1><p class="lead">Benchmarks for coding agents built on Pi\'s use cases.</p>' +
       '<p class="lede">Pi is the foundation many coding agents build on. Buffon runs Pi and those agents through the same scripted tasks, and measures what each one costs your machine.</p>' +
-      '<p class="name">Named for Buffon\'s needle: drop a needle on a floor of parallel boards, and the chance it crosses a line depends on π, so counting many drops estimates π. We drop the same task on every Pi harness, many times, and count.</p>' +
+      '<p class="name">Named for Buffon\'s needle: drop a needle on a floor of parallel boards, and the chance it crosses a line depends on π, so counting many drops estimates π. We drop the same Pi use case on every harness, many times, and count.</p>' +
       '<p class="name">A lens on Pi, not a ranking of agents. · <a href="' + esc(link("method")) + '">How it works</a> · <a href="' + esc(link("about", [], { at: "why-buffon" })) + '">Why "Buffon"</a></p>' +
       '<p class="trust">' + esc(trust) + "</p></div>" + heroArt() + "</section>";
   }

@@ -82,6 +82,7 @@ class Request:
     def __init__(self, index, protocol, body, raw_bytes, t_recv):
         self.index, self.protocol, self.body, self.bytes, self.t_recv = index, protocol, body, raw_bytes, t_recv
         self.stream = bool(body.get("stream"))
+        self.freeform = set()  # names of freeform tools (Responses `custom` type): a call to one carries raw text as its input, not JSON arguments
         if protocol == "openai-completions":
             messages = body.get("messages") or []
             self.tools = [t.get("function", {}).get("name") for t in body.get("tools") or []]
@@ -89,9 +90,13 @@ class Request:
             self.roles = ["tool" if m.get("role") == "tool" else m.get("role") for m in messages]
         elif protocol == "openai-responses":
             items = body.get("input") if isinstance(body.get("input"), list) else []
-            self.tools = [t.get("name") for t in body.get("tools") or []]
-            self.schemas = {t.get("name"): t.get("parameters") or {} for t in body.get("tools") or []}
-            self.roles = ["tool" if i.get("type") == "function_call_output" else ("assistant" if i.get("type") in ("function_call", "reasoning") else i.get("role")) for i in items]
+            declared = body.get("tools") or []
+            # A built-in such as `web_search` has a type and no name; a tool is known by its name, else by its type.
+            self.tools = [t.get("name") or t.get("type") for t in declared]
+            self.schemas = {t.get("name") or t.get("type"): t.get("parameters") or {} for t in declared}
+            self.freeform = {t["name"] for t in declared if t.get("type") == "custom" and t.get("name")}
+            self.roles = ["tool" if i.get("type") in ("function_call_output", "custom_tool_call_output") else ("assistant" if i.get("type") in ("function_call", "custom_tool_call", "reasoning") else i.get("role"))
+                          for i in items]
         else:
             messages = body.get("messages") or []
             self.tools = [t.get("name") for t in body.get("tools") or []]
@@ -170,11 +175,21 @@ def agentic_policy(cwd, tool_turns=1, reply=REPLY, file="README.md"):
 
 WRITE_TOOLS = ("write", "Write", "write_file", "create_file", "create")
 CONTENT_KEYS = ("content", "contents", "text", "file_text")
+PATCH_TOOL = "apply_patch"   # Codex's own file-writing tool: a freeform tool whose input is a patch in its own text format
 
 
-def write_call(request, path, content):
+def patch_add_file(path, content):
+    """The `apply_patch` input that adds `path` holding `content`, and the bytes the file then holds. The format has no way to end a file without a newline,
+    so a body that lacks one comes out with one."""
+    lines = content[:-1].split("\n") if content.endswith("\n") else content.split("\n")
+    body = "".join(f"+{line}\n" for line in lines)
+    return f"*** Begin Patch\n*** Add File: {path}\n{body}*** End Patch", content if content.endswith("\n") else content + "\n"
+
+
+def write_call(request, path, content, patch_path=None):
     """A tool call that writes `content` to `path`, built from whatever write tool this request declares, or None. The argument names come from the tool's own schema
-    (Pi `path`+`content`, Claude Code `file_path`+`content`, OpenCode `filePath`+`content`)."""
+    (Pi `path`+`content`, Claude Code `file_path`+`content`, OpenCode `filePath`+`content`, Copilot `path`+`file_text`). A freeform `apply_patch` tool (Codex) gets a patch that adds the
+    file at `patch_path` (default `path`; Codex documents relative paths)."""
     for name in WRITE_TOOLS:
         if name not in request.schemas:
             continue
@@ -182,27 +197,32 @@ def write_call(request, path, content):
         text_key = next((k for k in CONTENT_KEYS if k in props), None)
         if text_key:
             return name, {next((k for k in PATH_KEYS if k in props), "path"): path, text_key: content}
+    if PATCH_TOOL in getattr(request, "freeform", ()):
+        return PATCH_TOOL, patch_add_file(patch_path or path, content)[0]
     return None
 
 
 def write_policy(cwd, file, content, chunk=16, reply=REPLY):
     """Answer a user turn with one write tool call that carries `content` for `file` (under `cwd`), then text. The call's arguments stream in fixed chunks
     (`chunk` characters per piece). A request with no tools gets text; so does a harness with no write tool, and `missing` collects
-    the tool names such a request declared so the workload can tell why no file appeared."""
+    the tool names such a request declared so the workload can tell why no file appeared. `expected` is the bytes the file should hold: `content`, or what a patch tool makes of it."""
     path = posixpath.join(cwd, file) if cwd.startswith("/") else os.path.join(cwd, file)
     missing = []
 
     def policy(request):
         if not request.tools:
             return Step(text="Summary: the earlier turns wrote a file.")
-        call = write_call(request, path, content) if request.rounds() < 1 else None
+        call = write_call(request, path, content, patch_path=file) if request.rounds() < 1 else None
         if call:
+            if isinstance(call[1], str):
+                policy.expected = patch_add_file(file, content)[1]
             return Step(tool_calls=[call], arg_chunk_chars=chunk)
         if request.rounds() < 1:
             missing.append(list(request.tools))
         return Step(text=reply)
 
     policy.missing = missing
+    policy.expected = content
     return policy
 
 
@@ -525,7 +545,10 @@ def encode_responses(request, step, tokens_in):
     if step.text:
         items.append({"id": f"msg_{request.index}", "type": "message", "status": "completed", "role": "assistant", "content": [{"type": "output_text", "text": step.text, "annotations": []}]})
     for i, (name, arguments) in enumerate(step.tool_calls):
-        items.append({"id": f"fc_{request.index}_{i}", "type": "function_call", "status": "completed", "call_id": f"call_{request.index}_{i}", "name": name, "arguments": json.dumps(arguments)})
+        if isinstance(arguments, str):   # a freeform tool's input is raw text
+            items.append({"id": f"ctc_{request.index}_{i}", "type": "custom_tool_call", "status": "completed", "call_id": f"call_{request.index}_{i}", "name": name, "input": arguments})
+        else:
+            items.append({"id": f"fc_{request.index}_{i}", "type": "function_call", "status": "completed", "call_id": f"call_{request.index}_{i}", "name": name, "arguments": json.dumps(arguments)})
     final = {"id": f"resp_{request.index}", "object": "response", "created_at": 0, "status": "completed", "model": model, "output": items, "usage": usage}
     seq = iter(range(1_000_000))
     events = []
@@ -544,6 +567,11 @@ def encode_responses(request, step, tokens_in):
                 emit("response.output_text.delta", {"item_id": item["id"], "output_index": index, "content_index": 0, "delta": part, "logprobs": []})
             emit("response.output_text.done", {"item_id": item["id"], "output_index": index, "content_index": 0, "text": step.text, "logprobs": []})
             emit("response.content_part.done", {"item_id": item["id"], "output_index": index, "content_index": 0, "part": item["content"][0]})
+        elif item["type"] == "custom_tool_call":
+            emit("response.output_item.added", {"output_index": index, "item": dict(item, status="in_progress", input="")})
+            for piece in arg_pieces(item["input"], step):
+                emit("response.custom_tool_call_input.delta", {"item_id": item["id"], "call_id": item["call_id"], "output_index": index, "delta": piece})
+            emit("response.custom_tool_call_input.done", {"item_id": item["id"], "output_index": index, "input": item["input"]})
         else:
             emit("response.output_item.added", {"output_index": index, "item": dict(item, status="in_progress", arguments="")})
             for piece in arg_pieces(item["arguments"], step):

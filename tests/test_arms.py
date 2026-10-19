@@ -154,6 +154,22 @@ class OctetWriter(unittest.TestCase):
             self.assertIn('theme = "', open(os.path.join(home, ".octet", "config.toml")).read())   # without it the first TUI start waits on a picker
 
 
+class CodexWriteCatalog(unittest.TestCase):
+    def test_the_large_write_mode_loads_a_catalog_that_gives_the_mock_model_apply_patch_and_no_other_mode_does(self):
+        import json
+        from buffon.arms.writers import WriteSpec
+        from buffon.arms.writers.codex import write
+        arm = manifest.load_all()["codex"]
+        self.assertFalse(any("model_catalog_json" in part for part in arm.modes["print"]))
+        self.assertIn('model_catalog_json="{home}/.codex/write-catalog.json"', arm.modes["print_write"])
+        with tempfile.TemporaryDirectory() as home:
+            write(WriteSpec(arm=arm, home=home, agent_dir=home, cwd=home, base_url="http://127.0.0.1:4242/v1", origin="http://127.0.0.1:4242"))
+            self.assertNotIn("model_catalog_json", open(os.path.join(home, ".codex", "config.toml")).read())
+            (entry,) = json.load(open(os.path.join(home, ".codex", "write-catalog.json")))["models"]
+            self.assertEqual((entry["slug"], entry["apply_patch_tool_type"]), ("bench-1", "freeform"))
+            self.assertTrue(entry["base_instructions"])
+
+
 if __name__ == "__main__":
     unittest.main()
 
