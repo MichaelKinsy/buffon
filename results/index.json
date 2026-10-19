@@ -35,7 +35,7 @@
     "backend": "local",
     "name": "smc1-socket1"
    },
-   "tier": "self-reported",
+   "tier": "ci-revalidated",
    "withdrawn": null,
    "workloads": [
     "overhead/pty",
@@ -59,7 +59,7 @@
    "cpu_model": "Intel(R) Xeon(R) Platinum 8462Y+",
    "finished_utc": "2026-10-19T14:25:57Z",
    "hardware": "quiet-dedicated",
-   "headline": false,
+   "headline": true,
    "id": "2026-10-19-smc1-launch-focus-streaming",
    "independent": false,
    "kernel": "6.8.0-137-generic",
@@ -84,7 +84,7 @@
     "backend": "local",
     "name": "smc1-socket1"
    },
-   "tier": "self-reported",
+   "tier": "ci-revalidated",
    "withdrawn": null,
    "workloads": [
     "streaming/tui-prose",
@@ -126,7 +126,7 @@
     "backend": "local",
     "name": "smc1-socket1"
    },
-   "tier": "self-reported",
+   "tier": "ci-revalidated",
    "withdrawn": null,
    "workloads": [
     "longsession/resume-n",
@@ -152,7 +152,7 @@
    "cpu_model": "Intel(R) Xeon(R) Platinum 8462Y+",
    "finished_utc": "2026-10-19T14:55:35Z",
    "hardware": "quiet-dedicated",
-   "headline": false,
+   "headline": true,
    "id": "2026-10-19-smc1-launch-core",
    "independent": false,
    "kernel": "6.8.0-137-generic",
@@ -173,7 +173,7 @@
     "backend": "local",
     "name": "smc1-socket1"
    },
-   "tier": "self-reported",
+   "tier": "ci-revalidated",
    "withdrawn": null,
    "workloads": [
     "overhead/version",
@@ -197,7 +197,7 @@
    "cpu_model": "Intel(R) Xeon(R) Platinum 8462Y+",
    "finished_utc": "2026-10-19T17:33:22Z",
    "hardware": "quiet-dedicated",
-   "headline": false,
+   "headline": true,
    "id": "2026-10-19-smc1-launch-focus-others",
    "independent": false,
    "kernel": "6.8.0-137-generic",
@@ -219,7 +219,7 @@
     "backend": "local",
     "name": "smc1-socket1"
    },
-   "tier": "self-reported",
+   "tier": "ci-revalidated",
    "withdrawn": null,
    "workloads": [
     "overhead/print-write",
