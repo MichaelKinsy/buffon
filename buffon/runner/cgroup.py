@@ -528,7 +528,11 @@ class RusageMeter(Meter):
     def perf(self):
         if self.perf_session is not None:
             return self.perf_session.read()
-        return self.mac.read() if self.mac is not None and PERF is not None else {}
+        return self.mac.read() if self._counting_on_mac() else {}
+
+    def _counting_on_mac(self):
+        """Counters are sampled only where the probe found them (`available`): on a host that refused them the sample carries none, not zeros."""
+        return self.mac is not None and PERF is not None and bool(PERF.get("available"))
 
     def popen(self, argv, **kwargs):
         kwargs.setdefault("start_new_session", True)
@@ -563,7 +567,7 @@ class RusageMeter(Meter):
     def _sample(self):
         rows = _tree_rows(self.child.pid)
         members = set(rows)
-        if self.mac is not None and PERF is not None:
+        if self._counting_on_mac():
             self.mac.observe(members)
         now = time.monotonic()
         if now - self._text_at >= TEXT_INTERVAL_S:
