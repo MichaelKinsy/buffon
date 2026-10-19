@@ -26,7 +26,7 @@ python3 -m buffon verify runs/2026-10-12-mine --submission                 # wha
 | `raw`, `facts` | a raw.json that does not validate, a missing facts.json |
 | `run`, `egress` | a refused run, an executable that changed during the run, a run with no egress audit |
 | `flags` | a run made without telemetry (`--no-telemetry`) or without every A/A copy (`--aa` other than `all`): these switch off what makes numbers comparable at all |
-| `lock`, `arms`, `runner` | pins that are not the lock at the runner's commit: arm version, manifest, artifact sha256, source commit and tree; a runner checkout with uncommitted changes |
+| `lock`, `arms`, `runner` | pins that are not the lock at the runner's commit, in the lock archive (section 6) or the current one: arm version, manifest, artifact sha256, source commit and tree; a runner checkout with uncommitted changes |
 | `telemetry` | a measured sample without telemetry |
 | `health.json`, `report.json` | a report that differs from the recomputation: edited, or made with other usual ranges |
 | `submission` | a missing or invalid `submission.toml` |
@@ -109,3 +109,23 @@ python3 -m buffon reproduce results/<id> --site mine --out runs/repro
 - A comparison is **consistent** when the two 95% intervals of the ratio overlap or the ratios differ by less than the larger of the two A/A floors; it **reproduces** when it is consistent and both runs reach the same verdict.
 - The telemetry section says whether your host was **noisier**, **quieter** or **similar** (by the median A/A floor: more than 1.5 times the other's and at least 0.5 percentage points apart), with the calibration CV, flagged samples, throttling, steal, foreign CPU, clock and the number of run notes of both runs side by side. A difference that is smaller than the noisier host's floor is not a failure to reproduce.
 - Pin and plan differences are listed first; with them the two runs are not the same experiment.
+
+## 6. The lock archive
+
+`arms.lock` pins every harness (version, artifact, manifest, source commit). A run records the sha256 of the lock it used and the commit of the runner. `buffon verify` accepts that lock when it is, in this order:
+
+1. the repository's current `arms.lock`;
+2. an entry of the lock archive, `locks/<sha256>.json`: the exact bytes of an earlier `arms.lock`, named by their sha256;
+3. the `arms.lock` committed at the run's runner commit, when this repository's history has that commit.
+
+The archive exists for a run made at a runner commit that is not in this repository's history (a run from a private or rebased tree, or from a fork): its pins are checked all the same, against the archived bytes, and the `lock` line of `buffon verify` says "is in the lock archive". Every arm is still compared with the lock (`arms`); the archive only stands in for the git history. The runner tree is checked as well when the commit is present.
+
+An entry cannot stand for a lock it is not. `buffon verify` hashes the file and rejects the run when the bytes do not match the name, and a lock hash that is not a bare lowercase sha256 never names a file. Entries are not run data: a submission pull request changes `results/` only (`buffon index --immutable-against` refuses anything else), so a submitter cannot supply the lock that judges their own run. A maintainer adds an entry in a reviewed code pull request, copying the bytes from the runner commit:
+
+```sh
+git show <runner commit>:arms.lock > /tmp/arms.lock
+cp /tmp/arms.lock locks/$(sha256sum /tmp/arms.lock | cut -d' ' -f1).json     # shasum -a 256 on macOS
+python3 -m buffon verify results/<id> --submission                           # the `lock` check now passes
+```
+
+Only add a lock that a published run needs, and keep an entry for as long as the run is listed.

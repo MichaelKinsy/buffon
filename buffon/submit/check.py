@@ -6,8 +6,10 @@ recomputation. A check is an error (the run is not accepted) or a warning (a run
 provenance, submission.toml, and a run that switched off what makes numbers comparable at all (telemetry, the A/A copies). Noise never decides it: the health notes, the quiet-host
 gate, the hardware class, the number of rounds and the gates a run was allowed to bypass are listed as warnings.
 """
+import hashlib
 import json
 import os
+import re
 import subprocess
 import tempfile
 
@@ -69,28 +71,56 @@ def lock_at(repo, commit):
     blob = git(repo, "show", f"{commit}:arms.lock")
     if blob is None:
         return None, None
-    import hashlib
     return json.loads(blob), hashlib.sha256(blob).hexdigest()
 
 
+LOCK_ARCHIVE = "locks"      # locks/<sha256>.json: the exact bytes of an earlier arms.lock that a published run used (docs/SUBMITTING.md, "The lock archive")
+
+
+def archived_lock(repo, want):
+    """(dict, None) for the archived lock whose sha256 is `want`, (None, None) when the archive holds none, (None, problem) when the file under that name is not that lock.
+    The name is checked against the file's bytes, so an entry cannot stand for a lock it is not; `want` must be a bare sha256 (it becomes a file name)."""
+    if not isinstance(want, str) or not re.fullmatch(r"[0-9a-f]{64}", want):
+        return None, None
+    path = os.path.join(repo, LOCK_ARCHIVE, want + ".json")
+    if not os.path.isfile(path):
+        return None, None
+    with open(path, "rb") as f:
+        blob = f.read()
+    got = hashlib.sha256(blob).hexdigest()
+    if got != want:
+        return None, f"{LOCK_ARCHIVE}/{want}.json has sha256 {got[:12]}: an archived lock is named by the sha256 of its bytes"
+    try:
+        return json.loads(blob), None
+    except ValueError as error:
+        return None, f"{LOCK_ARCHIVE}/{want}.json is not JSON: {error}"
+
+
 def pins(raw, repo, result):
-    """The run's lock hash is the one at its runner commit (or the current one), and each arm's recorded artifact, manifest, version and source commit are the lock's."""
+    """The run's lock hash is the current one, one in the lock archive (locks/<sha256>.json), or the one at its runner commit, and each arm's recorded artifact, manifest, version and source commit are the lock's."""
     want, commit = raw.get("lock_sha256"), (raw.get("runner") or {}).get("commit")
     lock = None
-    if os.path.exists(os.path.join(repo, "arms.lock")) and manifest.sha256_file(os.path.join(repo, "arms.lock")) == want:
-        with open(os.path.join(repo, "arms.lock")) as f:
+    current = os.path.join(repo, "arms.lock")
+    archived, bad_entry = archived_lock(repo, want)
+    if os.path.exists(current) and manifest.sha256_file(current) == want:
+        with open(current) as f:
             lock = json.load(f)
         result.ok("lock", f"arms.lock sha256 {want[:12]} is the repository's lock")
+    elif archived is not None:
+        lock = archived
+        result.ok("lock", f"arms.lock sha256 {want[:12]} is in the lock archive ({LOCK_ARCHIVE}/{want}.json); its runner commit {str(commit)[:12]} need not be in this repository")
+    elif bad_entry:
+        result.error("lock", bad_entry)
     elif commit:
         lock, got = lock_at(repo, commit)
         if lock is None:
-            result.error("lock", f"runner commit {commit[:12]} is not in this repository, and the run's arms.lock ({str(want)[:12]}) is not the current one: the pins cannot be checked")
+            result.error("lock", f"runner commit {commit[:12]} is not in this repository, and the run's arms.lock ({str(want)[:12]}) is neither the current one nor in the {LOCK_ARCHIVE}/ archive: the pins cannot be checked")
         elif got != want:
             result.error("lock", f"arms.lock at the runner commit has sha256 {got[:12]}, the run says {str(want)[:12]}")
         else:
             result.ok("lock", f"arms.lock sha256 {want[:12]} is the lock at runner commit {commit[:12]}")
     else:
-        result.error("lock", "the run records no runner commit and its arms.lock is not the current one")
+        result.error("lock", "the run records no runner commit and its arms.lock is neither the current one nor in the lock archive")
     if lock is None:
         return
     runner = raw.get("runner") or {}

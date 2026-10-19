@@ -260,6 +260,55 @@ class Verify(unittest.TestCase):
             f.write("\n")
         self.assertIn("lock", self.errors(self.verify(raw)[0]))
 
+    def archive(self, name, blob):
+        os.makedirs(os.path.join(self.repo, check.LOCK_ARCHIVE), exist_ok=True)
+        with open(os.path.join(self.repo, check.LOCK_ARCHIVE, name + ".json"), "wb") as f:
+            f.write(blob)
+
+    def run_from_elsewhere(self):
+        """A run whose lock is archived-or-not and whose runner commit this repository does not have, against a checkout whose current lock is another one."""
+        raw = submit_raw(self.repo)
+        with open(os.path.join(self.repo, "arms.lock"), "rb") as f:
+            old = f.read()
+        raw["runner"]["commit"], raw["runner"]["tree"] = "1" * 40, "2" * 40
+        with open(os.path.join(self.repo, "arms.lock"), "a") as f:
+            f.write("\n")
+        return raw, old, raw["lock_sha256"]
+
+    def test_an_archived_lock_checks_a_run_whose_runner_commit_is_not_in_the_repository(self):
+        raw, old, digest = self.run_from_elsewhere()
+        self.assertIn("lock", self.errors(self.verify(raw)[0]), "no archive: rejected")
+        self.archive(digest, old)
+        r, d = self.verify(raw)
+        self.assertTrue(r.accepted, check.text(r, d))
+        self.assertIn("lock archive", [c["message"] for c in r.checks if c["id"] == "lock"][0])
+        self.assertEqual(status(r, "arms"), ["ok"], "the arms are still checked against the archived lock")
+
+    def test_an_archived_lock_still_pins_every_arm(self):
+        raw, old, digest = self.run_from_elsewhere()
+        self.archive(digest, old)
+        raw["arms"]["other"]["version"] = "9.9.9"
+        self.assertIn("arms", self.errors(self.verify(raw)[0]))
+
+    def test_an_archive_that_lacks_the_runs_lock_or_holds_another_under_its_name_rejects_the_run(self):
+        raw, old, digest = self.run_from_elsewhere()
+        self.archive("ab" * 32, old)                                   # some other lock is archived: this run's is not
+        self.assertIn("lock", self.errors(self.verify(raw)[0]))
+        self.archive(digest, old.replace(b"1.1.0", b"1.1.1"))           # tampered: the bytes do not hash to the name
+        r, _ = self.verify(raw)
+        self.assertIn("lock", self.errors(r))
+        self.assertIn("named by the sha256 of its bytes", [c["message"] for c in r.checks if c["id"] == "lock"][0])
+        self.archive(digest, b"not json")
+        self.assertIn("lock", self.errors(self.verify(raw)[0]))
+
+    def test_a_lock_hash_that_is_not_a_bare_sha256_never_names_an_archive_file(self):
+        raw, old, _ = self.run_from_elsewhere()
+        self.archive("x", old)
+        for bad in ("../arms", "x", "AB" * 32, "ab" * 33, "", None):
+            self.assertEqual(check.archived_lock(self.repo, bad), (None, None))
+        raw["lock_sha256"] = "../arms.lock"
+        self.assertIn("lock", self.errors(self.verify(raw)[0]))
+
     def test_a_forged_health_file_or_report_is_rejected(self):
         d = sealed_dir(self.repo)
         with open(os.path.join(d, "health.json"), "w") as f:
