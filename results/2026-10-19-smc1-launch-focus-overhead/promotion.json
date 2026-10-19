@@ -1,0 +1,38 @@
+{
+ "checks": [
+  "seal",
+  "raw",
+  "facts",
+  "rules-home",
+  "rules-isolation",
+  "rules-raw",
+  "rules-host-disclosure",
+  "rules-host-class",
+  "rules-provenance",
+  "run",
+  "egress",
+  "rounds",
+  "flags",
+  "quiet_gate",
+  "lock",
+  "arms",
+  "telemetry",
+  "health",
+  "health.json",
+  "report.json",
+  "generated",
+  "submission"
+ ],
+ "ci": {
+  "ref": "refs/heads/main",
+  "repository": "MichaelKinsy/buffon",
+  "run_attempt": "1",
+  "run_id": "39324378685",
+  "sha": "c81babb419fa14e0b1c8f4028b94e629b4155757",
+  "workflow": "results-merge"
+ },
+ "id": "2026-10-19-smc1-launch-focus-overhead",
+ "manifest_sha256": "b90c5324d27c1f034a0d31c6a5bc78f57f4920cb2d9674ceedbd44d142037fb0",
+ "notes": 4,
+ "thresholds_sha256": "bb1caaa044ec28a8b258fb9a98912a3cc5948a3e74bc9d2caec584214f080737"
+}
