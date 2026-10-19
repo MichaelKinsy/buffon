@@ -1,0 +1,20 @@
+# Track 3, scenario 2. Eight agents at once on a server. Eight agents is one of the probes of every scale/agents-limit search (probes[n=8] when the limit is at least 8). It waits for the real extensions, so it shows as coming until they are pinned.
+id = "team-box"
+title = "A team box"
+sentence = "Eight agents at once, each with real extensions and a session of medium length, on a shared server. How much memory per agent and how slow is the slowest turn?"
+machine = "vps"
+conditions = "lab"
+uses = ["scale/agents-limit"]
+coming = ["real-extensions"]
+apis = ["openai-completions"]
+isolation = "container"
+
+[[reports]]
+label = "Memory per agent"
+from = "scale/agents-limit"
+metric = "pss_mib_per_agent"
+
+[[reports]]
+label = "Slowest turn"
+from = "scale/agents-limit"
+metric = "latency_ms_max"

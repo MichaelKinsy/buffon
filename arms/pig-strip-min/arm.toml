@@ -1,0 +1,12 @@
+name = "pig-strip-min"
+label = "PiG strip Piglet pig-min (opt-in strip: base Piglet + slots, one binary)"
+notes = "An opt-in strip Piglet in keep mode (fixtures/piglets/pig-min.yaml, from PiG's bench/evals footprint comparison): every built-in extension, extra provider API and feature not listed is compiled out; the built-in tools and slash commands stay so the scripted requests match the other arms. It has no extension runtime, so extension workloads are N/A. Built by `pig piglet build --format binary` from the pig-tip checkout."
+
+[derive]
+base = "pig-tip"
+
+[capabilities]
+pi_extensions = "none"
+
+[prepare]
+script = "prepare.py"

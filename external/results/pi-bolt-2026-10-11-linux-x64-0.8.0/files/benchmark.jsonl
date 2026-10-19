@@ -1,0 +1,420 @@
+{"ok": true, "wall_ms": 11.576678021810949, "cpu_ms": 12.45, "peak_mb": 63.11328125, "build": "pi-bolt", "scenario": "startup", "run": 0}
+{"ok": true, "wall_ms": 15.561877051368356, "cpu_ms": 19.145000000000003, "peak_mb": 35.40625, "build": "pig", "scenario": "startup", "run": 0}
+{"ok": true, "wall_ms": 123.34650906268507, "cpu_ms": 136.58599999999998, "peak_mb": 146.22265625, "build": "omp", "scenario": "startup", "run": 0}
+{"ok": true, "wall_ms": 96.886632964015, "cpu_ms": 167.62699999999998, "peak_mb": 107.78125, "build": "bun", "scenario": "startup", "run": 0}
+{"ok": true, "wall_ms": 275.2650739857927, "cpu_ms": 350.653, "peak_mb": 103.91015625, "build": "node", "scenario": "startup", "run": 0}
+{"ok": true, "wall_ms": 16.285737045109272, "cpu_ms": 16.982, "peak_mb": 63.1171875, "build": "pi-bolt", "scenario": "startup", "run": 1}
+{"ok": true, "wall_ms": 14.570808038115501, "cpu_ms": 16.917, "peak_mb": 34.84765625, "build": "pig", "scenario": "startup", "run": 1}
+{"ok": true, "wall_ms": 113.58256102539599, "cpu_ms": 126.88499999999999, "peak_mb": 146.9140625, "build": "omp", "scenario": "startup", "run": 1}
+{"ok": true, "wall_ms": 80.36804699804634, "cpu_ms": 141.104, "peak_mb": 108.21875, "build": "bun", "scenario": "startup", "run": 1}
+{"ok": true, "wall_ms": 245.1677880017087, "cpu_ms": 317.03, "peak_mb": 101.05859375, "build": "node", "scenario": "startup", "run": 1}
+{"ok": true, "wall_ms": 14.265207923017442, "cpu_ms": 15.230999999999998, "peak_mb": 63.1328125, "build": "pi-bolt", "scenario": "startup", "run": 2}
+{"ok": true, "wall_ms": 16.015677014365792, "cpu_ms": 22.396, "peak_mb": 34.65625, "build": "pig", "scenario": "startup", "run": 2}
+{"ok": true, "wall_ms": 112.99961095210165, "cpu_ms": 126.886, "peak_mb": 146.9765625, "build": "omp", "scenario": "startup", "run": 2}
+{"ok": true, "wall_ms": 88.87791505549103, "cpu_ms": 160.631, "peak_mb": 108.3203125, "build": "bun", "scenario": "startup", "run": 2}
+{"ok": true, "wall_ms": 236.77578999195248, "cpu_ms": 311.604, "peak_mb": 101.7109375, "build": "node", "scenario": "startup", "run": 2}
+{"ok": true, "wall_ms": 15.602957108058035, "cpu_ms": 16.312, "peak_mb": 63.1171875, "build": "pi-bolt", "scenario": "startup", "run": 3}
+{"ok": true, "wall_ms": 15.185737982392311, "cpu_ms": 17.994, "peak_mb": 35.3984375, "build": "pig", "scenario": "startup", "run": 3}
+{"ok": true, "wall_ms": 112.27648099884391, "cpu_ms": 126.06399999999998, "peak_mb": 147.2265625, "build": "omp", "scenario": "startup", "run": 3}
+{"ok": true, "wall_ms": 90.55792400613427, "cpu_ms": 158.87599999999998, "peak_mb": 108.3671875, "build": "bun", "scenario": "startup", "run": 3}
+{"ok": true, "wall_ms": 230.90727091766894, "cpu_ms": 303.247, "peak_mb": 102.20703125, "build": "node", "scenario": "startup", "run": 3}
+{"ok": true, "wall_ms": 14.478018041700125, "cpu_ms": 15.312, "peak_mb": 63.0625, "build": "pi-bolt", "scenario": "startup", "run": 4}
+{"ok": true, "wall_ms": 18.06744688656181, "cpu_ms": 24.457, "peak_mb": 35.64453125, "build": "pig", "scenario": "startup", "run": 4}
+{"ok": true, "wall_ms": 114.49029005598277, "cpu_ms": 124.80499999999999, "peak_mb": 147.4609375, "build": "omp", "scenario": "startup", "run": 4}
+{"ok": true, "wall_ms": 81.92161691840738, "cpu_ms": 153.088, "peak_mb": 108.42578125, "build": "bun", "scenario": "startup", "run": 4}
+{"ok": true, "wall_ms": 234.62833103258163, "cpu_ms": 306.241, "peak_mb": 101.1015625, "build": "node", "scenario": "startup", "run": 4}
+{"ok": true, "wall_ms": 12.245677993632853, "cpu_ms": 12.969999999999999, "peak_mb": 62.69921875, "build": "pi-bolt", "scenario": "startup", "run": 5}
+{"ok": true, "wall_ms": 15.621577040292323, "cpu_ms": 22.095, "peak_mb": 34.58203125, "build": "pig", "scenario": "startup", "run": 5}
+{"ok": true, "wall_ms": 120.57059002108872, "cpu_ms": 132.75, "peak_mb": 146.0, "build": "omp", "scenario": "startup", "run": 5}
+{"ok": true, "wall_ms": 91.40383405610919, "cpu_ms": 161.363, "peak_mb": 108.28125, "build": "bun", "scenario": "startup", "run": 5}
+{"ok": true, "wall_ms": 287.7286219736561, "cpu_ms": 357.163, "peak_mb": 101.8515625, "build": "node", "scenario": "startup", "run": 5}
+{"ok": true, "wall_ms": 13.29997694119811, "cpu_ms": 13.906, "peak_mb": 63.1171875, "build": "pi-bolt", "scenario": "startup", "run": 6}
+{"ok": true, "wall_ms": 14.67082800809294, "cpu_ms": 20.538999999999998, "peak_mb": 35.65234375, "build": "pig", "scenario": "startup", "run": 6}
+{"ok": true, "wall_ms": 114.6186999976635, "cpu_ms": 125.64900000000002, "peak_mb": 147.4453125, "build": "omp", "scenario": "startup", "run": 6}
+{"ok": true, "wall_ms": 83.34057603497058, "cpu_ms": 152.87099999999998, "peak_mb": 107.5234375, "build": "bun", "scenario": "startup", "run": 6}
+{"ok": true, "wall_ms": 233.18966093938798, "cpu_ms": 304.334, "peak_mb": 102.62109375, "build": "node", "scenario": "startup", "run": 6}
+{"ok": true, "wall_ms": 11.858507990837097, "cpu_ms": 12.61, "peak_mb": 63.1171875, "build": "pi-bolt", "scenario": "startup", "run": 7}
+{"ok": true, "wall_ms": 15.779817011207342, "cpu_ms": 21.696, "peak_mb": 34.66015625, "build": "pig", "scenario": "startup", "run": 7}
+{"ok": true, "wall_ms": 130.64563798252493, "cpu_ms": 144.16099999999997, "peak_mb": 145.9765625, "build": "omp", "scenario": "startup", "run": 7}
+{"ok": true, "wall_ms": 89.23494501505047, "cpu_ms": 158.11999999999998, "peak_mb": 107.65625, "build": "bun", "scenario": "startup", "run": 7}
+{"ok": true, "wall_ms": 255.07579697296023, "cpu_ms": 325.3449999999999, "peak_mb": 101.1328125, "build": "node", "scenario": "startup", "run": 7}
+{"ok": true, "wall_ms": 14.937157044187188, "cpu_ms": 15.688, "peak_mb": 63.1171875, "build": "pi-bolt", "scenario": "startup", "run": 8}
+{"ok": true, "wall_ms": 17.82122696749866, "cpu_ms": 18.324, "peak_mb": 34.83203125, "build": "pig", "scenario": "startup", "run": 8}
+{"ok": true, "wall_ms": 127.07440892700106, "cpu_ms": 139.289, "peak_mb": 147.0, "build": "omp", "scenario": "startup", "run": 8}
+{"ok": true, "wall_ms": 75.27549704536796, "cpu_ms": 148.611, "peak_mb": 107.83984375, "build": "bun", "scenario": "startup", "run": 8}
+{"ok": true, "wall_ms": 267.38164492417127, "cpu_ms": 332.592, "peak_mb": 101.2578125, "build": "node", "scenario": "startup", "run": 8}
+{"ok": true, "wall_ms": 12.275648070499301, "cpu_ms": 12.874, "peak_mb": 63.13671875, "build": "pi-bolt", "scenario": "startup", "run": 9}
+{"ok": true, "wall_ms": 14.91501706186682, "cpu_ms": 19.557, "peak_mb": 35.33203125, "build": "pig", "scenario": "startup", "run": 9}
+{"ok": true, "wall_ms": 112.31422098353505, "cpu_ms": 123.40599999999999, "peak_mb": 147.45703125, "build": "omp", "scenario": "startup", "run": 9}
+{"ok": true, "wall_ms": 90.9421551041305, "cpu_ms": 155.73399999999998, "peak_mb": 107.99609375, "build": "bun", "scenario": "startup", "run": 9}
+{"ok": true, "wall_ms": 250.55746699217707, "cpu_ms": 318.49899999999997, "peak_mb": 102.92578125, "build": "node", "scenario": "startup", "run": 9}
+{"ok": true, "wall_ms": 15.411708038300276, "cpu_ms": 16.171, "peak_mb": 63.14453125, "build": "pi-bolt", "scenario": "startup", "run": 10}
+{"ok": true, "wall_ms": 16.799686942249537, "cpu_ms": 21.099, "peak_mb": 34.21875, "build": "pig", "scenario": "startup", "run": 10}
+{"ok": true, "wall_ms": 110.28286092914641, "cpu_ms": 122.107, "peak_mb": 146.4765625, "build": "omp", "scenario": "startup", "run": 10}
+{"ok": true, "wall_ms": 86.21096599381417, "cpu_ms": 151.70099999999996, "peak_mb": 108.8671875, "build": "bun", "scenario": "startup", "run": 10}
+{"ok": true, "wall_ms": 232.1719710016623, "cpu_ms": 302.745, "peak_mb": 104.94140625, "build": "node", "scenario": "startup", "run": 10}
+{"ok": true, "wall_ms": 15.325147891417146, "cpu_ms": 16.001, "peak_mb": 63.11328125, "build": "pi-bolt", "scenario": "startup", "run": 11}
+{"ok": true, "wall_ms": 14.253966975957155, "cpu_ms": 16.654, "peak_mb": 35.14453125, "build": "pig", "scenario": "startup", "run": 11}
+{"ok": true, "wall_ms": 112.1971809770912, "cpu_ms": 124.04599999999999, "peak_mb": 146.74609375, "build": "omp", "scenario": "startup", "run": 11}
+{"ok": true, "wall_ms": 75.84438705816865, "cpu_ms": 141.176, "peak_mb": 107.97265625, "build": "bun", "scenario": "startup", "run": 11}
+{"ok": true, "wall_ms": 240.29837001580745, "cpu_ms": 312.65999999999997, "peak_mb": 101.79296875, "build": "node", "scenario": "startup", "run": 11}
+{"ok": true, "wall_ms": 13.099417905323207, "cpu_ms": 13.366, "peak_mb": 63.1171875, "build": "pi-bolt", "scenario": "startup", "run": 12}
+{"ok": true, "wall_ms": 16.158048063516617, "cpu_ms": 22.723, "peak_mb": 34.45703125, "build": "pig", "scenario": "startup", "run": 12}
+{"ok": true, "wall_ms": 112.40511096548289, "cpu_ms": 125.36900000000001, "peak_mb": 145.9765625, "build": "omp", "scenario": "startup", "run": 12}
+{"ok": true, "wall_ms": 78.76790594309568, "cpu_ms": 136.164, "peak_mb": 106.87109375, "build": "bun", "scenario": "startup", "run": 12}
+{"ok": true, "wall_ms": 233.06000092998147, "cpu_ms": 299.66700000000003, "peak_mb": 102.87109375, "build": "node", "scenario": "startup", "run": 12}
+{"ok": true, "wall_ms": 12.535927933640778, "cpu_ms": 13.474, "peak_mb": 63.1171875, "build": "pi-bolt", "scenario": "startup", "run": 13}
+{"ok": true, "wall_ms": 13.89460708014667, "cpu_ms": 19.901000000000003, "peak_mb": 33.96875, "build": "pig", "scenario": "startup", "run": 13}
+{"ok": true, "wall_ms": 111.2318419618532, "cpu_ms": 121.715, "peak_mb": 146.9609375, "build": "omp", "scenario": "startup", "run": 13}
+{"ok": true, "wall_ms": 77.18589599244297, "cpu_ms": 144.72099999999998, "peak_mb": 108.1953125, "build": "bun", "scenario": "startup", "run": 13}
+{"ok": true, "wall_ms": 242.20950005110353, "cpu_ms": 312.413, "peak_mb": 101.03125, "build": "node", "scenario": "startup", "run": 13}
+{"ok": true, "wall_ms": 14.641367015428841, "cpu_ms": 15.318999999999999, "peak_mb": 63.1171875, "build": "pi-bolt", "scenario": "startup", "run": 14}
+{"ok": true, "wall_ms": 13.63887800835073, "cpu_ms": 16.31, "peak_mb": 34.89453125, "build": "pig", "scenario": "startup", "run": 14}
+{"ok": true, "wall_ms": 113.1919709732756, "cpu_ms": 123.719, "peak_mb": 147.0078125, "build": "omp", "scenario": "startup", "run": 14}
+{"ok": true, "wall_ms": 73.97017697803676, "cpu_ms": 129.31199999999998, "peak_mb": 106.51953125, "build": "bun", "scenario": "startup", "run": 14}
+{"ok": true, "wall_ms": 236.4615600090474, "cpu_ms": 292.38599999999997, "peak_mb": 102.39453125, "build": "node", "scenario": "startup", "run": 14}
+{"ok": true, "wall_ms": 11.99968799483031, "cpu_ms": 12.632, "peak_mb": 63.1171875, "build": "pi-bolt", "scenario": "startup", "run": 15}
+{"ok": true, "wall_ms": 13.845028006471694, "cpu_ms": 18.963, "peak_mb": 33.96875, "build": "pig", "scenario": "startup", "run": 15}
+{"ok": true, "wall_ms": 108.38086099829525, "cpu_ms": 119.23799999999999, "peak_mb": 147.4453125, "build": "omp", "scenario": "startup", "run": 15}
+{"ok": true, "wall_ms": 74.27937805186957, "cpu_ms": 132.64, "peak_mb": 108.33203125, "build": "bun", "scenario": "startup", "run": 15}
+{"ok": true, "wall_ms": 231.4351910026744, "cpu_ms": 291.328, "peak_mb": 101.1328125, "build": "node", "scenario": "startup", "run": 15}
+{"ok": true, "wall_ms": 12.601347058080137, "cpu_ms": 13.526, "peak_mb": 63.140625, "build": "pi-bolt", "scenario": "startup", "run": 16}
+{"ok": true, "wall_ms": 16.392178018577397, "cpu_ms": 21.666999999999998, "peak_mb": 34.15625, "build": "pig", "scenario": "startup", "run": 16}
+{"ok": true, "wall_ms": 109.55459100659937, "cpu_ms": 122.85499999999999, "peak_mb": 146.99609375, "build": "omp", "scenario": "startup", "run": 16}
+{"ok": true, "wall_ms": 95.54814407601953, "cpu_ms": 141.732, "peak_mb": 107.1015625, "build": "bun", "scenario": "startup", "run": 16}
+{"ok": true, "wall_ms": 258.83251591585577, "cpu_ms": 319.7219999999999, "peak_mb": 100.98046875, "build": "node", "scenario": "startup", "run": 16}
+{"ok": true, "wall_ms": 13.442618073895574, "cpu_ms": 14.275, "peak_mb": 63.1171875, "build": "pi-bolt", "scenario": "startup", "run": 17}
+{"ok": true, "wall_ms": 17.481256974861026, "cpu_ms": 18.764, "peak_mb": 33.91015625, "build": "pig", "scenario": "startup", "run": 17}
+{"ok": true, "wall_ms": 107.97208198346198, "cpu_ms": 118.139, "peak_mb": 147.03125, "build": "omp", "scenario": "startup", "run": 17}
+{"ok": true, "wall_ms": 78.58303701505065, "cpu_ms": 143.25099999999998, "peak_mb": 109.0390625, "build": "bun", "scenario": "startup", "run": 17}
+{"ok": true, "wall_ms": 221.79551201406866, "cpu_ms": 285.41, "peak_mb": 103.50390625, "build": "node", "scenario": "startup", "run": 17}
+{"ok": true, "wall_ms": 11.373498011380434, "cpu_ms": 12.091999999999999, "peak_mb": 63.1171875, "build": "pi-bolt", "scenario": "startup", "run": 18}
+{"ok": true, "wall_ms": 13.403218006715178, "cpu_ms": 15.858999999999998, "peak_mb": 34.20703125, "build": "pig", "scenario": "startup", "run": 18}
+{"ok": true, "wall_ms": 107.58967197034508, "cpu_ms": 118.396, "peak_mb": 147.01953125, "build": "omp", "scenario": "startup", "run": 18}
+{"ok": true, "wall_ms": 72.53634801600128, "cpu_ms": 132.066, "peak_mb": 108.3203125, "build": "bun", "scenario": "startup", "run": 18}
+{"ok": true, "wall_ms": 255.14284695964307, "cpu_ms": 321.849, "peak_mb": 101.1953125, "build": "node", "scenario": "startup", "run": 18}
+{"ok": true, "wall_ms": 13.736748020164669, "cpu_ms": 14.745000000000001, "peak_mb": 62.6796875, "build": "pi-bolt", "scenario": "startup", "run": 19}
+{"ok": true, "wall_ms": 20.30167600605637, "cpu_ms": 26.776, "peak_mb": 34.21875, "build": "pig", "scenario": "startup", "run": 19}
+{"ok": true, "wall_ms": 120.73212000541389, "cpu_ms": 132.904, "peak_mb": 146.0, "build": "omp", "scenario": "startup", "run": 19}
+{"ok": true, "wall_ms": 77.18162704259157, "cpu_ms": 140.42499999999998, "peak_mb": 108.20703125, "build": "bun", "scenario": "startup", "run": 19}
+{"ok": true, "wall_ms": 229.06388097908348, "cpu_ms": 292.829, "peak_mb": 102.91015625, "build": "node", "scenario": "startup", "run": 19}
+{"ok": true, "wall_ms": 11.569138034246862, "cpu_ms": 12.208, "peak_mb": 63.0703125, "build": "pi-bolt", "scenario": "startup", "run": 20}
+{"ok": true, "wall_ms": 13.402627897448838, "cpu_ms": 17.003999999999998, "peak_mb": 34.8359375, "build": "pig", "scenario": "startup", "run": 20}
+{"ok": true, "wall_ms": 106.85022198595107, "cpu_ms": 117.48, "peak_mb": 147.0234375, "build": "omp", "scenario": "startup", "run": 20}
+{"ok": true, "wall_ms": 73.46360792871565, "cpu_ms": 131.11599999999999, "peak_mb": 108.6328125, "build": "bun", "scenario": "startup", "run": 20}
+{"ok": true, "wall_ms": 239.42726000677794, "cpu_ms": 312.666, "peak_mb": 102.26953125, "build": "node", "scenario": "startup", "run": 20}
+{"ok": true, "wall_ms": 77.29939697310328, "cpu_ms": 77.829, "peak_mb": 124.859375, "build": "pi-bolt", "scenario": "headless", "run": 0}
+{"ok": true, "wall_ms": 201.8042759737, "cpu_ms": 258.04699999999997, "peak_mb": 55.46875, "build": "pig", "scenario": "headless", "run": 0}
+{"ok": true, "wall_ms": 1146.2167960125953, "cpu_ms": 1664.676, "peak_mb": 474.66796875, "build": "omp", "scenario": "headless", "run": 0}
+{"ok": true, "wall_ms": 156.96833294350654, "cpu_ms": 288.703, "peak_mb": 146.296875, "build": "bun", "scenario": "headless", "run": 0}
+{"ok": true, "wall_ms": 434.6547060413286, "cpu_ms": 624.712, "peak_mb": 132.94921875, "build": "node", "scenario": "headless", "run": 0}
+{"ok": true, "wall_ms": 80.58309589978307, "cpu_ms": 83.204, "peak_mb": 123.81640625, "build": "pi-bolt", "scenario": "headless", "run": 1}
+{"ok": true, "wall_ms": 218.84102292824537, "cpu_ms": 278.68299999999994, "peak_mb": 57.03125, "build": "pig", "scenario": "headless", "run": 1}
+{"ok": true, "wall_ms": 1204.5552269555628, "cpu_ms": 1769.7959999999998, "peak_mb": 461.0078125, "build": "omp", "scenario": "headless", "run": 1}
+{"ok": true, "wall_ms": 167.01420093886554, "cpu_ms": 306.3, "peak_mb": 132.59765625, "build": "bun", "scenario": "headless", "run": 1}
+{"ok": true, "wall_ms": 412.72694093640894, "cpu_ms": 587.38, "peak_mb": 136.0390625, "build": "node", "scenario": "headless", "run": 1}
+{"ok": true, "wall_ms": 75.90463699307293, "cpu_ms": 78.30499999999999, "peak_mb": 124.60546875, "build": "pi-bolt", "scenario": "headless", "run": 2}
+{"ok": true, "wall_ms": 203.6596949910745, "cpu_ms": 258.911, "peak_mb": 54.828125, "build": "pig", "scenario": "headless", "run": 2}
+{"ok": true, "wall_ms": 1135.2550779702142, "cpu_ms": 1671.051, "peak_mb": 455.58984375, "build": "omp", "scenario": "headless", "run": 2}
+{"ok": true, "wall_ms": 182.6925789937377, "cpu_ms": 338.77000000000004, "peak_mb": 133.54296875, "build": "bun", "scenario": "headless", "run": 2}
+{"ok": true, "wall_ms": 448.5444650053978, "cpu_ms": 618.439, "peak_mb": 133.84375, "build": "node", "scenario": "headless", "run": 2}
+{"ok": true, "wall_ms": 74.19907697476447, "cpu_ms": 75.832, "peak_mb": 124.55859375, "build": "pi-bolt", "scenario": "headless", "run": 3}
+{"ok": true, "wall_ms": 189.14096802473068, "cpu_ms": 242.27599999999998, "peak_mb": 59.18359375, "build": "pig", "scenario": "headless", "run": 3}
+{"ok": true, "wall_ms": 1105.6736529571936, "cpu_ms": 1621.202, "peak_mb": 467.69921875, "build": "omp", "scenario": "headless", "run": 3}
+{"ok": true, "wall_ms": 211.15515509154648, "cpu_ms": 370.976, "peak_mb": 134.5390625, "build": "bun", "scenario": "headless", "run": 3}
+{"ok": true, "wall_ms": 466.3777609821409, "cpu_ms": 642.9229999999999, "peak_mb": 135.48046875, "build": "node", "scenario": "headless", "run": 3}
+{"ok": true, "wall_ms": 82.36269606277347, "cpu_ms": 82.408, "peak_mb": 124.55078125, "build": "pi-bolt", "scenario": "headless", "run": 4}
+{"ok": true, "wall_ms": 196.0096969269216, "cpu_ms": 255.20299999999995, "peak_mb": 56.46875, "build": "pig", "scenario": "headless", "run": 4}
+{"ok": true, "wall_ms": 1157.4467440368608, "cpu_ms": 1759.824, "peak_mb": 469.1171875, "build": "omp", "scenario": "headless", "run": 4}
+{"ok": true, "wall_ms": 173.69094106834382, "cpu_ms": 319.102, "peak_mb": 131.59765625, "build": "bun", "scenario": "headless", "run": 4}
+{"ok": true, "wall_ms": 426.88803700730205, "cpu_ms": 599.371, "peak_mb": 134.4375, "build": "node", "scenario": "headless", "run": 4}
+{"ok": true, "wall_ms": 84.5270249992609, "cpu_ms": 87.517, "peak_mb": 124.19921875, "build": "pi-bolt", "scenario": "headless", "run": 5}
+{"ok": true, "wall_ms": 183.09322907589376, "cpu_ms": 238.826, "peak_mb": 55.421875, "build": "pig", "scenario": "headless", "run": 5}
+{"ok": true, "wall_ms": 1128.9963989984244, "cpu_ms": 1665.8919999999998, "peak_mb": 479.87109375, "build": "omp", "scenario": "headless", "run": 5}
+{"ok": true, "wall_ms": 180.3847789997235, "cpu_ms": 319.85999999999996, "peak_mb": 133.046875, "build": "bun", "scenario": "headless", "run": 5}
+{"ok": true, "wall_ms": 439.46478597354144, "cpu_ms": 615.5379999999999, "peak_mb": 134.84375, "build": "node", "scenario": "headless", "run": 5}
+{"ok": true, "wall_ms": 82.14182604569942, "cpu_ms": 82.266, "peak_mb": 124.19140625, "build": "pi-bolt", "scenario": "headless", "run": 6}
+{"ok": true, "wall_ms": 195.02708700019866, "cpu_ms": 256.548, "peak_mb": 54.5625, "build": "pig", "scenario": "headless", "run": 6}
+{"ok": true, "wall_ms": 1207.8843859490007, "cpu_ms": 1823.42, "peak_mb": 466.2578125, "build": "omp", "scenario": "headless", "run": 6}
+{"ok": true, "wall_ms": 173.78073104191571, "cpu_ms": 328.388, "peak_mb": 132.57421875, "build": "bun", "scenario": "headless", "run": 6}
+{"ok": true, "wall_ms": 432.7124170958996, "cpu_ms": 620.981, "peak_mb": 134.4609375, "build": "node", "scenario": "headless", "run": 6}
+{"ok": true, "wall_ms": 73.04591790307313, "cpu_ms": 74.88, "peak_mb": 124.18359375, "build": "pi-bolt", "scenario": "headless", "run": 7}
+{"ok": true, "wall_ms": 204.61414498277009, "cpu_ms": 265.041, "peak_mb": 55.76953125, "build": "pig", "scenario": "headless", "run": 7}
+{"ok": true, "wall_ms": 1137.5108580105007, "cpu_ms": 1699.325, "peak_mb": 459.2578125, "build": "omp", "scenario": "headless", "run": 7}
+{"ok": true, "wall_ms": 178.4670000197366, "cpu_ms": 323.01099999999997, "peak_mb": 133.05078125, "build": "bun", "scenario": "headless", "run": 7}
+{"ok": true, "wall_ms": 419.64488895609975, "cpu_ms": 595.698, "peak_mb": 135.515625, "build": "node", "scenario": "headless", "run": 7}
+{"ok": true, "wall_ms": 78.8102459628135, "cpu_ms": 78.661, "peak_mb": 124.11328125, "build": "pi-bolt", "scenario": "headless", "run": 8}
+{"ok": true, "wall_ms": 211.44838398322463, "cpu_ms": 274.426, "peak_mb": 57.20703125, "build": "pig", "scenario": "headless", "run": 8}
+{"ok": true, "wall_ms": 1194.594449014403, "cpu_ms": 1806.6349999999998, "peak_mb": 465.66015625, "build": "omp", "scenario": "headless", "run": 8}
+{"ok": true, "wall_ms": 188.86965804267675, "cpu_ms": 328.23199999999997, "peak_mb": 132.7890625, "build": "bun", "scenario": "headless", "run": 8}
+{"ok": true, "wall_ms": 461.0134019749239, "cpu_ms": 641.274, "peak_mb": 135.41015625, "build": "node", "scenario": "headless", "run": 8}
+{"ok": true, "wall_ms": 70.80871798098087, "cpu_ms": 72.17999999999999, "peak_mb": 123.8828125, "build": "pi-bolt", "scenario": "headless", "run": 9}
+{"ok": true, "wall_ms": 196.18945592083037, "cpu_ms": 243.51399999999998, "peak_mb": 55.24609375, "build": "pig", "scenario": "headless", "run": 9}
+{"ok": true, "wall_ms": 1173.0187711073086, "cpu_ms": 1791.368, "peak_mb": 465.59765625, "build": "omp", "scenario": "headless", "run": 9}
+{"ok": true, "wall_ms": 175.688580959104, "cpu_ms": 322.823, "peak_mb": 133.9296875, "build": "bun", "scenario": "headless", "run": 9}
+{"ok": true, "wall_ms": 409.4305499456823, "cpu_ms": 597.7640000000001, "peak_mb": 135.21484375, "build": "node", "scenario": "headless", "run": 9}
+{"ok": true, "wall_ms": 72.37518799956888, "cpu_ms": 77.024, "peak_mb": 124.11328125, "build": "pi-bolt", "scenario": "headless", "run": 10}
+{"ok": true, "wall_ms": 203.81927606649697, "cpu_ms": 265.049, "peak_mb": 54.3359375, "build": "pig", "scenario": "headless", "run": 10}
+{"ok": true, "wall_ms": 1168.091322062537, "cpu_ms": 1752.0379999999998, "peak_mb": 472.82421875, "build": "omp", "scenario": "headless", "run": 10}
+{"ok": true, "wall_ms": 176.29397998098284, "cpu_ms": 329.006, "peak_mb": 132.74609375, "build": "bun", "scenario": "headless", "run": 10}
+{"ok": true, "wall_ms": 398.31773308105767, "cpu_ms": 582.759, "peak_mb": 135.984375, "build": "node", "scenario": "headless", "run": 10}
+{"ok": true, "wall_ms": 76.15854695905, "cpu_ms": 77.322, "peak_mb": 123.75, "build": "pi-bolt", "scenario": "headless", "run": 11}
+{"ok": true, "wall_ms": 219.8379230685532, "cpu_ms": 289.685, "peak_mb": 55.4921875, "build": "pig", "scenario": "headless", "run": 11}
+{"ok": true, "wall_ms": 1158.4435539552942, "cpu_ms": 1735.025, "peak_mb": 463.8671875, "build": "omp", "scenario": "headless", "run": 11}
+{"ok": true, "wall_ms": 164.92295206990093, "cpu_ms": 304.762, "peak_mb": 134.046875, "build": "bun", "scenario": "headless", "run": 11}
+{"ok": true, "wall_ms": 416.68255999684334, "cpu_ms": 608.906, "peak_mb": 137.03515625, "build": "node", "scenario": "headless", "run": 11}
+{"ok": true, "wall_ms": 79.5598259428516, "cpu_ms": 79.567, "peak_mb": 124.171875, "build": "pi-bolt", "scenario": "headless", "run": 12}
+{"ok": true, "wall_ms": 200.33294602762908, "cpu_ms": 265.69300000000004, "peak_mb": 55.58203125, "build": "pig", "scenario": "headless", "run": 12}
+{"ok": true, "wall_ms": 1184.9728800589219, "cpu_ms": 1803.8860000000002, "peak_mb": 472.34765625, "build": "omp", "scenario": "headless", "run": 12}
+{"ok": true, "wall_ms": 187.29991791769862, "cpu_ms": 348.57899999999995, "peak_mb": 133.97265625, "build": "bun", "scenario": "headless", "run": 12}
+{"ok": true, "wall_ms": 438.59188503120095, "cpu_ms": 635.2699999999999, "peak_mb": 135.3203125, "build": "node", "scenario": "headless", "run": 12}
+{"ok": true, "wall_ms": 81.03922696318477, "cpu_ms": 80.942, "peak_mb": 123.921875, "build": "pi-bolt", "scenario": "headless", "run": 13}
+{"ok": true, "wall_ms": 230.44559103436768, "cpu_ms": 296.11699999999996, "peak_mb": 55.109375, "build": "pig", "scenario": "headless", "run": 13}
+{"ok": true, "wall_ms": 1211.9402149692178, "cpu_ms": 1852.326, "peak_mb": 460.44921875, "build": "omp", "scenario": "headless", "run": 13}
+{"ok": true, "wall_ms": 181.01213895715773, "cpu_ms": 330.541, "peak_mb": 133.44921875, "build": "bun", "scenario": "headless", "run": 13}
+{"ok": true, "wall_ms": 450.6901840213686, "cpu_ms": 625.518, "peak_mb": 134.78125, "build": "node", "scenario": "headless", "run": 13}
+{"ok": true, "wall_ms": 77.21731706988066, "cpu_ms": 78.96199999999999, "peak_mb": 124.11328125, "build": "pi-bolt", "scenario": "headless", "run": 14}
+{"ok": true, "wall_ms": 213.8648140244186, "cpu_ms": 261.414, "peak_mb": 58.5, "build": "pig", "scenario": "headless", "run": 14}
+{"ok": true, "wall_ms": 1183.7779399938881, "cpu_ms": 1748.6739999999998, "peak_mb": 463.6953125, "build": "omp", "scenario": "headless", "run": 14}
+{"ok": true, "wall_ms": 172.75817005429417, "cpu_ms": 316.64099999999996, "peak_mb": 133.2421875, "build": "bun", "scenario": "headless", "run": 14}
+{"ok": true, "wall_ms": 432.29162599891424, "cpu_ms": 598.5799999999999, "peak_mb": 135.703125, "build": "node", "scenario": "headless", "run": 14}
+{"ok": true, "wall_ms": 79.06644709873945, "cpu_ms": 81.511, "peak_mb": 124.36328125, "build": "pi-bolt", "scenario": "headless", "run": 15}
+{"ok": true, "wall_ms": 200.56661602575332, "cpu_ms": 259.347, "peak_mb": 55.08203125, "build": "pig", "scenario": "headless", "run": 15}
+{"ok": true, "wall_ms": 1143.6371569288895, "cpu_ms": 1702.022, "peak_mb": 473.15625, "build": "omp", "scenario": "headless", "run": 15}
+{"ok": true, "wall_ms": 165.4901320580393, "cpu_ms": 304.122, "peak_mb": 134.36328125, "build": "bun", "scenario": "headless", "run": 15}
+{"ok": true, "wall_ms": 425.5353279877454, "cpu_ms": 591.1560000000001, "peak_mb": 134.8984375, "build": "node", "scenario": "headless", "run": 15}
+{"ok": true, "wall_ms": 70.02558803651482, "cpu_ms": 71.745, "peak_mb": 124.25, "build": "pi-bolt", "scenario": "headless", "run": 16}
+{"ok": true, "wall_ms": 179.29827992338687, "cpu_ms": 235.27100000000002, "peak_mb": 55.23828125, "build": "pig", "scenario": "headless", "run": 16}
+{"ok": true, "wall_ms": 1151.4631449244916, "cpu_ms": 1766.119, "peak_mb": 476.0625, "build": "omp", "scenario": "headless", "run": 16}
+{"ok": true, "wall_ms": 164.87943194806576, "cpu_ms": 314.295, "peak_mb": 133.50390625, "build": "bun", "scenario": "headless", "run": 16}
+{"ok": true, "wall_ms": 468.98988098837435, "cpu_ms": 675.4089999999999, "peak_mb": 136.6015625, "build": "node", "scenario": "headless", "run": 16}
+{"ok": true, "wall_ms": 79.54780606087297, "cpu_ms": 81.228, "peak_mb": 123.33984375, "build": "pi-bolt", "scenario": "headless", "run": 17}
+{"ok": true, "wall_ms": 222.59900299832225, "cpu_ms": 293.26099999999997, "peak_mb": 48.59765625, "build": "pig", "scenario": "headless", "run": 17}
+{"ok": true, "wall_ms": 1223.5516030341387, "cpu_ms": 1919.9360000000001, "peak_mb": 459.83984375, "build": "omp", "scenario": "headless", "run": 17}
+{"ok": true, "wall_ms": 189.75384801160544, "cpu_ms": 330.17, "peak_mb": 131.82421875, "build": "bun", "scenario": "headless", "run": 17}
+{"ok": true, "wall_ms": 441.05431507341564, "cpu_ms": 623.847, "peak_mb": 138.4140625, "build": "node", "scenario": "headless", "run": 17}
+{"ok": true, "wall_ms": 87.30193600058556, "cpu_ms": 88.397, "peak_mb": 123.296875, "build": "pi-bolt", "scenario": "headless", "run": 18}
+{"ok": true, "wall_ms": 210.92289395164698, "cpu_ms": 263.662, "peak_mb": 49.8671875, "build": "pig", "scenario": "headless", "run": 18}
+{"ok": true, "wall_ms": 1165.8382629975677, "cpu_ms": 1746.2009999999998, "peak_mb": 472.0859375, "build": "omp", "scenario": "headless", "run": 18}
+{"ok": true, "wall_ms": 199.96633601840585, "cpu_ms": 339.99399999999997, "peak_mb": 133.41015625, "build": "bun", "scenario": "headless", "run": 18}
+{"ok": true, "wall_ms": 457.31522201094776, "cpu_ms": 623.987, "peak_mb": 133.37109375, "build": "node", "scenario": "headless", "run": 18}
+{"ok": true, "wall_ms": 91.62456390913576, "cpu_ms": 90.631, "peak_mb": 122.4375, "build": "pi-bolt", "scenario": "headless", "run": 19}
+{"ok": true, "wall_ms": 182.69138899631798, "cpu_ms": 238.808, "peak_mb": 49.75390625, "build": "pig", "scenario": "headless", "run": 19}
+{"ok": true, "wall_ms": 1125.3801400307566, "cpu_ms": 1675.8139999999999, "peak_mb": 476.4296875, "build": "omp", "scenario": "headless", "run": 19}
+{"ok": true, "wall_ms": 176.7790400190279, "cpu_ms": 310.792, "peak_mb": 132.34765625, "build": "bun", "scenario": "headless", "run": 19}
+{"ok": true, "wall_ms": 402.7320919558406, "cpu_ms": 576.001, "peak_mb": 134.06640625, "build": "node", "scenario": "headless", "run": 19}
+{"ok": true, "wall_ms": 80.01352602150291, "cpu_ms": 81.553, "peak_mb": 122.85546875, "build": "pi-bolt", "scenario": "headless", "run": 20}
+{"ok": true, "wall_ms": 202.7799260104075, "cpu_ms": 263.19399999999996, "peak_mb": 48.7109375, "build": "pig", "scenario": "headless", "run": 20}
+{"ok": true, "wall_ms": 1162.6439539249986, "cpu_ms": 1769.059, "peak_mb": 469.71875, "build": "omp", "scenario": "headless", "run": 20}
+{"ok": true, "wall_ms": 161.5850229281932, "cpu_ms": 310.469, "peak_mb": 134.04296875, "build": "bun", "scenario": "headless", "run": 20}
+{"ok": true, "wall_ms": 442.5546050770208, "cpu_ms": 619.824, "peak_mb": 135.60546875, "build": "node", "scenario": "headless", "run": 20}
+{"ok": true, "tti_ms": 51.71766097191721, "turns_ms": 346.1999511346221, "wall_ms": 663.1901280488819, "cpu_ms": 335.024, "peak_mb": 146.6640625, "build": "pi-bolt", "scenario": "interactive", "run": 0}
+{"ok": true, "tti_ms": 39.90237298421562, "turns_ms": 2136.7714180378243, "wall_ms": 2479.0513010229915, "cpu_ms": 2818.699, "peak_mb": 78.8984375, "build": "pig", "scenario": "interactive", "run": 0}
+{"ok": true, "tti_ms": 1034.4679550034925, "turns_ms": 1010.135788936168, "wall_ms": 5082.120681065135, "cpu_ms": 3241.2189999999996, "peak_mb": 508.671875, "build": "omp", "scenario": "interactive", "run": 0}
+{"ok": true, "tti_ms": 134.2673379695043, "turns_ms": 395.8492730744183, "wall_ms": 829.233429976739, "cpu_ms": 873.068, "peak_mb": 206.734375, "build": "bun", "scenario": "interactive", "run": 0}
+{"ok": true, "tti_ms": 299.2033889750019, "turns_ms": 559.9849649006501, "wall_ms": 1249.553108937107, "cpu_ms": 1200.57, "peak_mb": 213.75390625, "build": "node", "scenario": "interactive", "run": 0}
+{"ok": true, "tti_ms": 44.231591979041696, "turns_ms": 324.5934449369088, "wall_ms": 633.5004729917273, "cpu_ms": 297.575, "peak_mb": 146.578125, "build": "pi-bolt", "scenario": "interactive", "run": 1}
+{"ok": true, "tti_ms": 45.49731209408492, "turns_ms": 2154.257603920996, "wall_ms": 2464.1999130835757, "cpu_ms": 2832.494, "peak_mb": 83.06640625, "build": "pig", "scenario": "interactive", "run": 1}
+{"ok": true, "tti_ms": 957.0045389700681, "turns_ms": 1020.1658690348268, "wall_ms": 5068.130113999359, "cpu_ms": 3135.27, "peak_mb": 535.49609375, "build": "omp", "scenario": "interactive", "run": 1}
+{"ok": true, "tti_ms": 122.52208904828876, "turns_ms": 389.8598829982802, "wall_ms": 804.0733439847827, "cpu_ms": 866.027, "peak_mb": 206.2734375, "build": "bun", "scenario": "interactive", "run": 1}
+{"ok": true, "tti_ms": 314.33260696940124, "turns_ms": 600.5855877883732, "wall_ms": 1305.628178990446, "cpu_ms": 1279.994, "peak_mb": 212.45703125, "build": "node", "scenario": "interactive", "run": 1}
+{"ok": true, "tti_ms": 40.40705296210945, "turns_ms": 294.71103101968765, "wall_ms": 596.9067990081385, "cpu_ms": 283.968, "peak_mb": 147.078125, "build": "pi-bolt", "scenario": "interactive", "run": 2}
+{"ok": true, "tti_ms": 32.08165499381721, "turns_ms": 2046.455385047011, "wall_ms": 2375.0614889431745, "cpu_ms": 2676.394, "peak_mb": 79.4765625, "build": "pig", "scenario": "interactive", "run": 2}
+{"ok": true, "tti_ms": 916.4245950523764, "turns_ms": 992.8799020126462, "wall_ms": 5014.795482042246, "cpu_ms": 3012.4399999999996, "peak_mb": 510.69140625, "build": "omp", "scenario": "interactive", "run": 2}
+{"ok": true, "tti_ms": 128.33909899927676, "turns_ms": 382.2519051609561, "wall_ms": 798.6415460472926, "cpu_ms": 808.7869999999999, "peak_mb": 205.46484375, "build": "bun", "scenario": "interactive", "run": 2}
+{"ok": true, "tti_ms": 320.8540660561994, "turns_ms": 635.2720819413662, "wall_ms": 1303.9843599544838, "cpu_ms": 1291.7880000000002, "peak_mb": 212.12890625, "build": "node", "scenario": "interactive", "run": 2}
+{"ok": true, "tti_ms": 46.2872120551765, "turns_ms": 320.3247948549688, "wall_ms": 629.7428229590878, "cpu_ms": 304.31399999999996, "peak_mb": 145.44140625, "build": "pi-bolt", "scenario": "interactive", "run": 3}
+{"ok": true, "tti_ms": 36.96885297540575, "turns_ms": 2287.3526139883325, "wall_ms": 2634.097103960812, "cpu_ms": 3009.361, "peak_mb": 83.15234375, "build": "pig", "scenario": "interactive", "run": 3}
+{"ok": true, "tti_ms": 1051.9525930285454, "turns_ms": 999.3489909684286, "wall_ms": 5130.3596530342475, "cpu_ms": 3349.278, "peak_mb": 500.4609375, "build": "omp", "scenario": "interactive", "run": 3}
+{"ok": true, "tti_ms": 144.0799260744825, "turns_ms": 403.9765909546986, "wall_ms": 840.2219880372286, "cpu_ms": 896.9359999999999, "peak_mb": 203.609375, "build": "bun", "scenario": "interactive", "run": 3}
+{"ok": true, "tti_ms": 364.85853896010667, "turns_ms": 575.3362820250914, "wall_ms": 1283.9740329654887, "cpu_ms": 1253.6879999999999, "peak_mb": 213.38671875, "build": "node", "scenario": "interactive", "run": 3}
+{"ok": true, "tti_ms": 43.77891297917813, "turns_ms": 296.9688900047913, "wall_ms": 603.5797980148345, "cpu_ms": 284.505, "peak_mb": 148.7421875, "build": "pi-bolt", "scenario": "interactive", "run": 4}
+{"ok": true, "tti_ms": 35.4140039999038, "turns_ms": 2175.3516019089147, "wall_ms": 2519.1267039626837, "cpu_ms": 2882.6720000000005, "peak_mb": 83.15234375, "build": "pig", "scenario": "interactive", "run": 4}
+{"ok": true, "tti_ms": 1082.2253680089489, "turns_ms": 1018.2717068819329, "wall_ms": 5156.689389026724, "cpu_ms": 3255.8129999999996, "peak_mb": 498.0546875, "build": "omp", "scenario": "interactive", "run": 4}
+{"ok": true, "tti_ms": 121.18132901377976, "turns_ms": 419.66640891041607, "wall_ms": 831.4135199179873, "cpu_ms": 906.6679999999999, "peak_mb": 209.9765625, "build": "bun", "scenario": "interactive", "run": 4}
+{"ok": true, "tti_ms": 298.4190699644387, "turns_ms": 544.1390477353707, "wall_ms": 1227.851582923904, "cpu_ms": 1148.758, "peak_mb": 209.88671875, "build": "node", "scenario": "interactive", "run": 4}
+{"ok": true, "tti_ms": 40.526153054088354, "turns_ms": 321.2163560092449, "wall_ms": 629.1063440730795, "cpu_ms": 302.486, "peak_mb": 149.31640625, "build": "pi-bolt", "scenario": "interactive", "run": 5}
+{"ok": true, "tti_ms": 45.14531197492033, "turns_ms": 2194.98934969306, "wall_ms": 2537.1737009845674, "cpu_ms": 2879.73, "peak_mb": 82.078125, "build": "pig", "scenario": "interactive", "run": 5}
+{"ok": true, "tti_ms": 1047.3633529618382, "turns_ms": 1027.6143058435991, "wall_ms": 5149.61562003009, "cpu_ms": 3338.354, "peak_mb": 536.05078125, "build": "omp", "scenario": "interactive", "run": 5}
+{"ok": true, "tti_ms": 145.6803559558466, "turns_ms": 464.58299993537366, "wall_ms": 902.93543797452, "cpu_ms": 935.0469999999999, "peak_mb": 210.203125, "build": "bun", "scenario": "interactive", "run": 5}
+{"ok": true, "tti_ms": 316.27816695254296, "turns_ms": 574.3094231002033, "wall_ms": 1242.284209933132, "cpu_ms": 1250.757, "peak_mb": 211.015625, "build": "node", "scenario": "interactive", "run": 5}
+{"ok": true, "tti_ms": 45.27452203910798, "turns_ms": 293.2964210631326, "wall_ms": 601.92098794505, "cpu_ms": 288.36899999999997, "peak_mb": 147.25, "build": "pi-bolt", "scenario": "interactive", "run": 6}
+{"ok": true, "tti_ms": 37.55102399736643, "turns_ms": 2386.8252659449354, "wall_ms": 2726.1644590180367, "cpu_ms": 3138.353, "peak_mb": 82.48828125, "build": "pig", "scenario": "interactive", "run": 6}
+{"ok": true, "tti_ms": 1047.5732429185882, "turns_ms": 1042.9791249334812, "wall_ms": 5169.0601469017565, "cpu_ms": 3402.526, "peak_mb": 503.1015625, "build": "omp", "scenario": "interactive", "run": 6}
+{"ok": true, "tti_ms": 126.3048880500719, "turns_ms": 403.3014919841662, "wall_ms": 822.7763010654598, "cpu_ms": 886.351, "peak_mb": 207.203125, "build": "bun", "scenario": "interactive", "run": 6}
+{"ok": true, "tti_ms": 321.05813501402736, "turns_ms": 583.7659519165754, "wall_ms": 1304.1674389969558, "cpu_ms": 1242.973, "peak_mb": 212.4453125, "build": "node", "scenario": "interactive", "run": 6}
+{"ok": true, "tti_ms": 47.4485419690609, "turns_ms": 306.0494380770251, "wall_ms": 617.7808060310781, "cpu_ms": 291.09999999999997, "peak_mb": 147.30078125, "build": "pi-bolt", "scenario": "interactive", "run": 7}
+{"ok": true, "tti_ms": 32.953504007309675, "turns_ms": 2238.4990118443966, "wall_ms": 2585.2147330297157, "cpu_ms": 2953.473, "peak_mb": 79.859375, "build": "pig", "scenario": "interactive", "run": 7}
+{"ok": true, "tti_ms": 988.2746329531074, "turns_ms": 1029.4133350253105, "wall_ms": 5126.956513966434, "cpu_ms": 3279.453, "peak_mb": 509.59375, "build": "omp", "scenario": "interactive", "run": 7}
+{"ok": true, "tti_ms": 129.36923804227263, "turns_ms": 388.081873068586, "wall_ms": 808.2651640288532, "cpu_ms": 851.9119999999999, "peak_mb": 205.5390625, "build": "bun", "scenario": "interactive", "run": 7}
+{"ok": true, "tti_ms": 331.01605507545173, "turns_ms": 549.2132571525872, "wall_ms": 1221.8826240859926, "cpu_ms": 1213.246, "peak_mb": 213.2265625, "build": "node", "scenario": "interactive", "run": 7}
+{"ok": true, "tti_ms": 41.582152945920825, "turns_ms": 276.46468312013894, "wall_ms": 581.2669720035046, "cpu_ms": 268.345, "peak_mb": 146.58984375, "build": "pi-bolt", "scenario": "interactive", "run": 8}
+{"ok": true, "tti_ms": 38.95896300673485, "turns_ms": 2219.360816059634, "wall_ms": 2557.2837570216507, "cpu_ms": 2931.344, "peak_mb": 81.16796875, "build": "pig", "scenario": "interactive", "run": 8}
+{"ok": true, "tti_ms": 988.3519840659574, "turns_ms": 1072.2953681834042, "wall_ms": 5147.3396009532735, "cpu_ms": 3358.1569999999997, "peak_mb": 513.9140625, "build": "omp", "scenario": "interactive", "run": 8}
+{"ok": true, "tti_ms": 148.23244593571872, "turns_ms": 448.68507608771324, "wall_ms": 894.1247689072043, "cpu_ms": 1001.2919999999998, "peak_mb": 208.7265625, "build": "bun", "scenario": "interactive", "run": 8}
+{"ok": true, "tti_ms": 321.7120059998706, "turns_ms": 620.342694921419, "wall_ms": 1291.5743120247498, "cpu_ms": 1306.996, "peak_mb": 212.8359375, "build": "node", "scenario": "interactive", "run": 8}
+{"ok": true, "tti_ms": 49.584632040932775, "turns_ms": 329.7524641966447, "wall_ms": 646.1556409485638, "cpu_ms": 334.07599999999996, "peak_mb": 145.70703125, "build": "pi-bolt", "scenario": "interactive", "run": 9}
+{"ok": true, "tti_ms": 38.64084300585091, "turns_ms": 2416.3064010208473, "wall_ms": 2720.883070025593, "cpu_ms": 3207.698, "peak_mb": 81.6640625, "build": "pig", "scenario": "interactive", "run": 9}
+{"ok": true, "tti_ms": 970.5675559816882, "turns_ms": 980.6708539836109, "wall_ms": 5059.8316750256345, "cpu_ms": 3122.634, "peak_mb": 534.0078125, "build": "omp", "scenario": "interactive", "run": 9}
+{"ok": true, "tti_ms": 125.31482893973589, "turns_ms": 370.14348001684994, "wall_ms": 792.7574359346181, "cpu_ms": 851.698, "peak_mb": 204.6328125, "build": "bun", "scenario": "interactive", "run": 9}
+{"ok": true, "tti_ms": 315.7699160510674, "turns_ms": 570.144402096048, "wall_ms": 1229.8891020473093, "cpu_ms": 1163.978, "peak_mb": 212.29296875, "build": "node", "scenario": "interactive", "run": 9}
+{"ok": true, "tti_ms": 43.38732291944325, "turns_ms": 287.22156200092286, "wall_ms": 595.2436599181965, "cpu_ms": 266.719, "peak_mb": 147.4609375, "build": "pi-bolt", "scenario": "interactive", "run": 10}
+{"ok": true, "tti_ms": 37.28416399098933, "turns_ms": 2195.4688378609717, "wall_ms": 2528.3022230723873, "cpu_ms": 2838.6870000000004, "peak_mb": 81.18359375, "build": "pig", "scenario": "interactive", "run": 10}
+{"ok": true, "tti_ms": 969.0602669725195, "turns_ms": 1028.8363960571587, "wall_ms": 5110.211235936731, "cpu_ms": 3140.552, "peak_mb": 514.83203125, "build": "omp", "scenario": "interactive", "run": 10}
+{"ok": true, "tti_ms": 124.73201903048903, "turns_ms": 381.00921583827585, "wall_ms": 795.2828160487115, "cpu_ms": 811.024, "peak_mb": 202.76953125, "build": "bun", "scenario": "interactive", "run": 10}
+{"ok": true, "tti_ms": 306.1320580309257, "turns_ms": 574.8138142516837, "wall_ms": 1232.1021320531145, "cpu_ms": 1211.757, "peak_mb": 210.9921875, "build": "node", "scenario": "interactive", "run": 10}
+{"ok": true, "tti_ms": 58.70502989273518, "turns_ms": 296.42067884560674, "wall_ms": 618.2516049593687, "cpu_ms": 293.89500000000004, "peak_mb": 147.5234375, "build": "pi-bolt", "scenario": "interactive", "run": 11}
+{"ok": true, "tti_ms": 33.078675041906536, "turns_ms": 2332.395634963177, "wall_ms": 2668.900819029659, "cpu_ms": 3063.42, "peak_mb": 82.8125, "build": "pig", "scenario": "interactive", "run": 11}
+{"ok": true, "tti_ms": 999.7089910320938, "turns_ms": 993.0334520759061, "wall_ms": 5105.977216968313, "cpu_ms": 3297.062, "peak_mb": 538.26953125, "build": "omp", "scenario": "interactive", "run": 11}
+{"ok": true, "tti_ms": 130.45599800534546, "turns_ms": 390.40520298294723, "wall_ms": 807.4171440675855, "cpu_ms": 900.121, "peak_mb": 211.34375, "build": "bun", "scenario": "interactive", "run": 11}
+{"ok": true, "tti_ms": 312.1814869809896, "turns_ms": 586.8158509256318, "wall_ms": 1244.6812299313024, "cpu_ms": 1228.8750000000002, "peak_mb": 213.91015625, "build": "node", "scenario": "interactive", "run": 11}
+{"ok": true, "tti_ms": 40.65067402552813, "turns_ms": 315.1810670970008, "wall_ms": 621.8939550453797, "cpu_ms": 300.938, "peak_mb": 146.32421875, "build": "pi-bolt", "scenario": "interactive", "run": 12}
+{"ok": true, "tti_ms": 37.62550395913422, "turns_ms": 2186.5991700906307, "wall_ms": 2528.973922948353, "cpu_ms": 2883.813, "peak_mb": 81.8984375, "build": "pig", "scenario": "interactive", "run": 12}
+{"ok": true, "tti_ms": 998.334810952656, "turns_ms": 1013.6545879067853, "wall_ms": 5153.7721490021795, "cpu_ms": 3236.763, "peak_mb": 500.015625, "build": "omp", "scenario": "interactive", "run": 12}
+{"ok": true, "tti_ms": 117.9803799604997, "turns_ms": 366.60886788740754, "wall_ms": 771.4673500740901, "cpu_ms": 795.827, "peak_mb": 205.609375, "build": "bun", "scenario": "interactive", "run": 12}
+{"ok": true, "tti_ms": 335.28679399751127, "turns_ms": 538.2205687928945, "wall_ms": 1222.1976339351386, "cpu_ms": 1244.1519999999998, "peak_mb": 213.8359375, "build": "node", "scenario": "interactive", "run": 12}
+{"ok": true, "tti_ms": 48.603861941955984, "turns_ms": 296.581219881773, "wall_ms": 609.0369669254869, "cpu_ms": 290.661, "peak_mb": 145.36328125, "build": "pi-bolt", "scenario": "interactive", "run": 13}
+{"ok": true, "tti_ms": 43.67270297370851, "turns_ms": 2561.324557173066, "wall_ms": 2878.2989240717143, "cpu_ms": 3367.007, "peak_mb": 81.1875, "build": "pig", "scenario": "interactive", "run": 13}
+{"ok": true, "tti_ms": 947.8620290756226, "turns_ms": 1008.179460070096, "wall_ms": 5068.717373069376, "cpu_ms": 3261.987, "peak_mb": 514.140625, "build": "omp", "scenario": "interactive", "run": 13}
+{"ok": true, "tti_ms": 127.88718799129128, "turns_ms": 399.457931984216, "wall_ms": 815.2176719158888, "cpu_ms": 843.146, "peak_mb": 204.6953125, "build": "bun", "scenario": "interactive", "run": 13}
+{"ok": true, "tti_ms": 307.44877795223147, "turns_ms": 562.0549068553373, "wall_ms": 1213.8564150081947, "cpu_ms": 1173.243, "peak_mb": 213.76953125, "build": "node", "scenario": "interactive", "run": 13}
+{"ok": true, "tti_ms": 40.762392920441926, "turns_ms": 291.01592989172786, "wall_ms": 596.4408689178526, "cpu_ms": 274.77399999999994, "peak_mb": 147.73046875, "build": "pi-bolt", "scenario": "interactive", "run": 14}
+{"ok": true, "tti_ms": 42.53871296532452, "turns_ms": 2315.624759881757, "wall_ms": 2673.3502380084246, "cpu_ms": 3050.1040000000003, "peak_mb": 82.68359375, "build": "pig", "scenario": "interactive", "run": 14}
+{"ok": true, "tti_ms": 953.4852090291679, "turns_ms": 1027.2475149249658, "wall_ms": 5090.182790067047, "cpu_ms": 3206.7380000000003, "peak_mb": 508.76953125, "build": "omp", "scenario": "interactive", "run": 14}
+{"ok": true, "tti_ms": 134.20982693787664, "turns_ms": 437.1237261220813, "wall_ms": 863.3573140250519, "cpu_ms": 899.338, "peak_mb": 202.48046875, "build": "bun", "scenario": "interactive", "run": 14}
+{"ok": true, "tti_ms": 308.4225580096245, "turns_ms": 561.8779042270035, "wall_ms": 1216.543945018202, "cpu_ms": 1214.5249999999999, "peak_mb": 212.4140625, "build": "node", "scenario": "interactive", "run": 14}
+{"ok": true, "tti_ms": 44.597851927392185, "turns_ms": 305.0090098986402, "wall_ms": 615.2021359885111, "cpu_ms": 292.31600000000003, "peak_mb": 145.8515625, "build": "pi-bolt", "scenario": "interactive", "run": 15}
+{"ok": true, "tti_ms": 40.85397394374013, "turns_ms": 2139.406188041903, "wall_ms": 2485.7709109783173, "cpu_ms": 2813.5060000000003, "peak_mb": 82.6796875, "build": "pig", "scenario": "interactive", "run": 15}
+{"ok": true, "tti_ms": 948.3274100348353, "turns_ms": 1032.116244896315, "wall_ms": 5051.083286991343, "cpu_ms": 3120.997, "peak_mb": 514.9609375, "build": "omp", "scenario": "interactive", "run": 15}
+{"ok": true, "tti_ms": 121.51481898035854, "turns_ms": 375.6178868934512, "wall_ms": 788.5165769839659, "cpu_ms": 803.0849999999999, "peak_mb": 202.26953125, "build": "bun", "scenario": "interactive", "run": 15}
+{"ok": true, "tti_ms": 356.785080046393, "turns_ms": 530.7440392207354, "wall_ms": 1233.2547219702974, "cpu_ms": 1241.4660000000001, "peak_mb": 211.33984375, "build": "node", "scenario": "interactive", "run": 15}
+{"ok": true, "tti_ms": 41.57388303428888, "turns_ms": 323.39666597545147, "wall_ms": 631.4567930530757, "cpu_ms": 308.80699999999996, "peak_mb": 146.125, "build": "pi-bolt", "scenario": "interactive", "run": 16}
+{"ok": true, "tti_ms": 37.82864392269403, "turns_ms": 2402.2244239458814, "wall_ms": 2745.6671060062945, "cpu_ms": 3119.472, "peak_mb": 82.859375, "build": "pig", "scenario": "interactive", "run": 16}
+{"ok": true, "tti_ms": 960.9466280089691, "turns_ms": 1005.2388608455658, "wall_ms": 5076.904671965167, "cpu_ms": 3181.168, "peak_mb": 502.25, "build": "omp", "scenario": "interactive", "run": 16}
+{"ok": true, "tti_ms": 118.65004000719637, "turns_ms": 427.8823669301346, "wall_ms": 843.6300379689783, "cpu_ms": 871.429, "peak_mb": 203.28515625, "build": "bun", "scenario": "interactive", "run": 16}
+{"ok": true, "tti_ms": 301.9401989877224, "turns_ms": 603.516285889782, "wall_ms": 1245.8508490817621, "cpu_ms": 1252.443, "peak_mb": 210.23046875, "build": "node", "scenario": "interactive", "run": 16}
+{"ok": true, "tti_ms": 47.30894207023084, "turns_ms": 319.0897179301828, "wall_ms": 630.2331740735099, "cpu_ms": 295.069, "peak_mb": 149.36328125, "build": "pi-bolt", "scenario": "interactive", "run": 17}
+{"ok": true, "tti_ms": 37.19772305339575, "turns_ms": 2233.837431995198, "wall_ms": 2571.0869850590825, "cpu_ms": 2914.868, "peak_mb": 80.06640625, "build": "pig", "scenario": "interactive", "run": 17}
+{"ok": true, "tti_ms": 989.7488229908049, "turns_ms": 1027.568325982429, "wall_ms": 5050.533356028609, "cpu_ms": 3236.244, "peak_mb": 504.57421875, "build": "omp", "scenario": "interactive", "run": 17}
+{"ok": true, "tti_ms": 130.6017079623416, "turns_ms": 362.10413777735084, "wall_ms": 781.6281080013141, "cpu_ms": 801.693, "peak_mb": 204.8671875, "build": "bun", "scenario": "interactive", "run": 17}
+{"ok": true, "tti_ms": 344.35613197274506, "turns_ms": 641.1985111190006, "wall_ms": 1397.6052639773116, "cpu_ms": 1336.1490000000001, "peak_mb": 211.5859375, "build": "node", "scenario": "interactive", "run": 17}
+{"ok": true, "tti_ms": 52.01249092351645, "turns_ms": 336.93744300398976, "wall_ms": 652.5415299693123, "cpu_ms": 336.57, "peak_mb": 147.36328125, "build": "pi-bolt", "scenario": "interactive", "run": 18}
+{"ok": true, "tti_ms": 34.933323971927166, "turns_ms": 2469.327051891014, "wall_ms": 2813.4676539339125, "cpu_ms": 3222.1830000000004, "peak_mb": 78.95703125, "build": "pig", "scenario": "interactive", "run": 18}
+{"ok": true, "tti_ms": 990.6126729911193, "turns_ms": 1036.7984561016783, "wall_ms": 5126.57946406398, "cpu_ms": 3374.281, "peak_mb": 497.8828125, "build": "omp", "scenario": "interactive", "run": 18}
+{"ok": true, "tti_ms": 120.81548909191042, "turns_ms": 396.85883303172886, "wall_ms": 813.9176020631567, "cpu_ms": 845.794, "peak_mb": 202.46484375, "build": "bun", "scenario": "interactive", "run": 18}
+{"ok": true, "tti_ms": 309.0347578981891, "turns_ms": 577.8239429928362, "wall_ms": 1227.9473129892722, "cpu_ms": 1194.743, "peak_mb": 212.0234375, "build": "node", "scenario": "interactive", "run": 18}
+{"ok": true, "tti_ms": 47.66960197594017, "turns_ms": 314.86825714819133, "wall_ms": 628.9103630697355, "cpu_ms": 302.926, "peak_mb": 147.7578125, "build": "pi-bolt", "scenario": "interactive", "run": 19}
+{"ok": true, "tti_ms": 39.86361296847463, "turns_ms": 2292.1368720708415, "wall_ms": 2634.4192039687186, "cpu_ms": 2989.876, "peak_mb": 82.89453125, "build": "pig", "scenario": "interactive", "run": 19}
+{"ok": true, "tti_ms": 949.8932099668309, "turns_ms": 1030.5727251106873, "wall_ms": 5083.413740969263, "cpu_ms": 3265.171, "peak_mb": 513.90625, "build": "omp", "scenario": "interactive", "run": 19}
+{"ok": true, "tti_ms": 119.7701800847426, "turns_ms": 403.72788172680885, "wall_ms": 826.3204200193286, "cpu_ms": 881.827, "peak_mb": 205.73828125, "build": "bun", "scenario": "interactive", "run": 19}
+{"ok": true, "tti_ms": 325.87871502619237, "turns_ms": 563.930134056136, "wall_ms": 1230.2168529713526, "cpu_ms": 1243.213, "peak_mb": 210.68359375, "build": "node", "scenario": "interactive", "run": 19}
+{"ok": true, "tti_ms": 40.73781298939139, "turns_ms": 315.3496478917077, "wall_ms": 620.6117949914187, "cpu_ms": 291.979, "peak_mb": 149.52734375, "build": "pi-bolt", "scenario": "interactive", "run": 20}
+{"ok": true, "tti_ms": 36.07970499433577, "turns_ms": 2296.3876308640465, "wall_ms": 2633.589126053266, "cpu_ms": 3002.164, "peak_mb": 80.40234375, "build": "pig", "scenario": "interactive", "run": 20}
+{"ok": true, "tti_ms": 987.834764062427, "turns_ms": 1004.5703500509262, "wall_ms": 5121.296214987524, "cpu_ms": 3230.223, "peak_mb": 510.03515625, "build": "omp", "scenario": "interactive", "run": 20}
+{"ok": true, "tti_ms": 130.34599798265845, "turns_ms": 431.33527820464224, "wall_ms": 859.4616849441081, "cpu_ms": 914.954, "peak_mb": 207.34765625, "build": "bun", "scenario": "interactive", "run": 20}
+{"ok": true, "tti_ms": 335.75207309331745, "turns_ms": 531.4087419537827, "wall_ms": 1206.3760760938749, "cpu_ms": 1210.956, "peak_mb": 210.09765625, "build": "node", "scenario": "interactive", "run": 20}
+{"ok": true, "tti_ms": 39.78483297396451, "turns_ms": 39.48633302934468, "wall_ms": 218.06378301698714, "cpu_ms": 92.967, "peak_mb": 124.47265625, "build": "pi-bolt", "scenario": "interactive-default-theme", "run": 0}
+{"ok": true, "tti_ms": 32.06621506251395, "turns_ms": 189.09019802231342, "wall_ms": 407.2073210263625, "cpu_ms": 389.42299999999994, "peak_mb": 63.78515625, "build": "pig", "scenario": "interactive-default-theme", "run": 0}
+{"ok": true, "tti_ms": 1062.4981700675562, "turns_ms": 434.35687699820846, "wall_ms": 4423.653681995347, "cpu_ms": 2656.7599999999998, "peak_mb": 491.296875, "build": "omp", "scenario": "interactive-default-theme", "run": 0}
+{"ok": true, "tti_ms": 124.82724792789668, "turns_ms": 108.25154196936637, "wall_ms": 392.49337289948016, "cpu_ms": 464.657, "peak_mb": 144.421875, "build": "bun", "scenario": "interactive-default-theme", "run": 0}
+{"ok": true, "tti_ms": 354.7839700477198, "turns_ms": 149.55824508797377, "wall_ms": 708.9559900341555, "cpu_ms": 780.9529999999999, "peak_mb": 143.7109375, "build": "node", "scenario": "interactive-default-theme", "run": 0}
+{"ok": true, "tti_ms": 42.66288294456899, "turns_ms": 39.85254396684468, "wall_ms": 219.7534729493782, "cpu_ms": 93.40399999999998, "peak_mb": 124.05859375, "build": "pi-bolt", "scenario": "interactive-default-theme", "run": 1}
+{"ok": true, "tti_ms": 33.70843396987766, "turns_ms": 186.0856879502535, "wall_ms": 396.1054830579087, "cpu_ms": 364.17499999999995, "peak_mb": 64.05078125, "build": "pig", "scenario": "interactive-default-theme", "run": 1}
+{"ok": true, "tti_ms": 1036.4763549296185, "turns_ms": 384.9280950380489, "wall_ms": 4354.964004014619, "cpu_ms": 2581.435, "peak_mb": 491.30859375, "build": "omp", "scenario": "interactive-default-theme", "run": 1}
+{"ok": true, "tti_ms": 124.05559897888452, "turns_ms": 79.1291369823739, "wall_ms": 363.6375379282981, "cpu_ms": 412.1239999999999, "peak_mb": 145.16796875, "build": "bun", "scenario": "interactive-default-theme", "run": 1}
+{"ok": true, "tti_ms": 308.1158479908481, "turns_ms": 155.41899402160197, "wall_ms": 727.4794970871881, "cpu_ms": 765.62, "peak_mb": 142.35546875, "build": "node", "scenario": "interactive-default-theme", "run": 1}
+{"ok": true, "tti_ms": 39.91960303392261, "turns_ms": 39.840962970629334, "wall_ms": 216.85205295216292, "cpu_ms": 94.02699999999999, "peak_mb": 124.03515625, "build": "pi-bolt", "scenario": "interactive-default-theme", "run": 2}
+{"ok": true, "tti_ms": 38.07160397991538, "turns_ms": 188.51052899844944, "wall_ms": 401.72886196523905, "cpu_ms": 372.554, "peak_mb": 61.890625, "build": "pig", "scenario": "interactive-default-theme", "run": 2}
+{"ok": true, "tti_ms": 1037.8725649788976, "turns_ms": 423.2696790713817, "wall_ms": 4391.183187952265, "cpu_ms": 2666.854, "peak_mb": 490.14453125, "build": "omp", "scenario": "interactive-default-theme", "run": 2}
+{"ok": true, "tti_ms": 126.01142900530249, "turns_ms": 85.14249604195356, "wall_ms": 373.9755969727412, "cpu_ms": 441.11, "peak_mb": 145.08203125, "build": "bun", "scenario": "interactive-default-theme", "run": 2}
+{"ok": true, "tti_ms": 330.91924397740513, "turns_ms": 162.58280305191875, "wall_ms": 714.6991089684889, "cpu_ms": 801.609, "peak_mb": 142.51953125, "build": "node", "scenario": "interactive-default-theme", "run": 2}
+{"ok": true, "tti_ms": 47.52733197528869, "turns_ms": 41.69779294170439, "wall_ms": 226.55361192300916, "cpu_ms": 100.46599999999998, "peak_mb": 124.47265625, "build": "pi-bolt", "scenario": "interactive-default-theme", "run": 3}
+{"ok": true, "tti_ms": 44.76259206421673, "turns_ms": 186.030218959786, "wall_ms": 421.26260802615434, "cpu_ms": 391.314, "peak_mb": 61.83203125, "build": "pig", "scenario": "interactive-default-theme", "run": 3}
+{"ok": true, "tti_ms": 1016.888867947273, "turns_ms": 391.22894406318665, "wall_ms": 4385.631548939273, "cpu_ms": 2594.1430000000005, "peak_mb": 479.12890625, "build": "omp", "scenario": "interactive-default-theme", "run": 3}
+{"ok": true, "tti_ms": 137.29888701345772, "turns_ms": 87.96734502539039, "wall_ms": 387.14036403689533, "cpu_ms": 459.41099999999994, "peak_mb": 146.26171875, "build": "bun", "scenario": "interactive-default-theme", "run": 3}
+{"ok": true, "tti_ms": 311.24304805416614, "turns_ms": 153.37906498461962, "wall_ms": 674.1535459877923, "cpu_ms": 758.093, "peak_mb": 143.32421875, "build": "node", "scenario": "interactive-default-theme", "run": 3}
+{"ok": true, "tti_ms": 49.30074198637158, "turns_ms": 56.44955101888627, "wall_ms": 244.47291903197765, "cpu_ms": 111.203, "peak_mb": 123.65234375, "build": "pi-bolt", "scenario": "interactive-default-theme", "run": 4}
+{"ok": true, "tti_ms": 40.50142294727266, "turns_ms": 188.41762898955494, "wall_ms": 409.62000098079443, "cpu_ms": 407.08, "peak_mb": 63.5625, "build": "pig", "scenario": "interactive-default-theme", "run": 4}
+{"ok": true, "tti_ms": 1105.37885397207, "turns_ms": 432.2117459960282, "wall_ms": 4468.493975000456, "cpu_ms": 2862.517, "peak_mb": 481.5, "build": "omp", "scenario": "interactive-default-theme", "run": 4}
+{"ok": true, "tti_ms": 147.6334349717945, "turns_ms": 81.97485702112317, "wall_ms": 391.0571939777583, "cpu_ms": 469.30499999999995, "peak_mb": 145.58203125, "build": "bun", "scenario": "interactive-default-theme", "run": 4}
+{"ok": true, "tti_ms": 316.581065999344, "turns_ms": 153.2720640534535, "wall_ms": 684.324314002879, "cpu_ms": 800.419, "peak_mb": 142.98828125, "build": "node", "scenario": "interactive-default-theme", "run": 4}
+{"ok": true, "tti_ms": 42.26038290653378, "turns_ms": 54.025170975364745, "wall_ms": 233.87902998365462, "cpu_ms": 98.219, "peak_mb": 124.1015625, "build": "pi-bolt", "scenario": "interactive-default-theme", "run": 5}
+{"ok": true, "tti_ms": 35.90894408989698, "turns_ms": 209.7980249673128, "wall_ms": 428.15111798699945, "cpu_ms": 427.631, "peak_mb": 64.984375, "build": "pig", "scenario": "interactive-default-theme", "run": 5}
+{"ok": true, "tti_ms": 975.8535450091586, "turns_ms": 429.59440709091723, "wall_ms": 4376.210350077599, "cpu_ms": 2677.055, "peak_mb": 495.0859375, "build": "omp", "scenario": "interactive-default-theme", "run": 5}
+{"ok": true, "tti_ms": 128.4237279323861, "turns_ms": 85.36531601566821, "wall_ms": 384.4521850114688, "cpu_ms": 473.715, "peak_mb": 145.5546875, "build": "bun", "scenario": "interactive-default-theme", "run": 5}
+{"ok": true, "tti_ms": 374.3665070505813, "turns_ms": 161.68075206223875, "wall_ms": 790.7373460475355, "cpu_ms": 850.603, "peak_mb": 143.546875, "build": "node", "scenario": "interactive-default-theme", "run": 5}
+{"ok": true, "tti_ms": 49.60000200662762, "turns_ms": 41.23303294181824, "wall_ms": 231.62971099372953, "cpu_ms": 105.69, "peak_mb": 123.66015625, "build": "pi-bolt", "scenario": "interactive-default-theme", "run": 6}
+{"ok": true, "tti_ms": 41.93793307058513, "turns_ms": 210.17170406412333, "wall_ms": 434.9908570293337, "cpu_ms": 423.351, "peak_mb": 64.0078125, "build": "pig", "scenario": "interactive-default-theme", "run": 6}
+{"ok": true, "tti_ms": 1070.8440790185705, "turns_ms": 422.61432798113674, "wall_ms": 4479.166642995551, "cpu_ms": 2868.423, "peak_mb": 498.21484375, "build": "omp", "scenario": "interactive-default-theme", "run": 6}
+{"ok": true, "tti_ms": 141.81691594421864, "turns_ms": 85.80608502961695, "wall_ms": 388.5351149365306, "cpu_ms": 458.79900000000004, "peak_mb": 145.40234375, "build": "bun", "scenario": "interactive-default-theme", "run": 6}
+{"ok": true, "tti_ms": 334.2258030315861, "turns_ms": 167.4835610901937, "wall_ms": 766.1266099894419, "cpu_ms": 817.1339999999999, "peak_mb": 143.8203125, "build": "node", "scenario": "interactive-default-theme", "run": 6}
+{"ok": true, "tti_ms": 57.01458000112325, "turns_ms": 62.00255895964801, "wall_ms": 258.19195597432554, "cpu_ms": 124.12699999999998, "peak_mb": 123.1796875, "build": "pi-bolt", "scenario": "interactive-default-theme", "run": 7}
+{"ok": true, "tti_ms": 38.75232406426221, "turns_ms": 201.68354490306228, "wall_ms": 381.72074605245143, "cpu_ms": 420.88899999999995, "peak_mb": 64.71484375, "build": "pig", "scenario": "interactive-default-theme", "run": 7}
+{"ok": true, "tti_ms": 1038.798814988695, "turns_ms": 426.6379280015826, "wall_ms": 4433.913271059282, "cpu_ms": 2758.842, "peak_mb": 482.984375, "build": "omp", "scenario": "interactive-default-theme", "run": 7}
+{"ok": true, "tti_ms": 130.09403797332197, "turns_ms": 93.09054398909211, "wall_ms": 382.43827503174543, "cpu_ms": 448.127, "peak_mb": 144.60546875, "build": "bun", "scenario": "interactive-default-theme", "run": 7}
+{"ok": true, "tti_ms": 308.9760079747066, "turns_ms": 147.89704501163214, "wall_ms": 659.7677890677005, "cpu_ms": 737.3169999999999, "peak_mb": 143.2109375, "build": "node", "scenario": "interactive-default-theme", "run": 7}
+{"ok": true, "tti_ms": 40.40351300500333, "turns_ms": 54.0930510032922, "wall_ms": 231.66556097567081, "cpu_ms": 94.15199999999999, "peak_mb": 123.87109375, "build": "pi-bolt", "scenario": "interactive-default-theme", "run": 8}
+{"ok": true, "tti_ms": 34.04483397025615, "turns_ms": 178.17765998188406, "wall_ms": 388.6951539898291, "cpu_ms": 365.051, "peak_mb": 62.015625, "build": "pig", "scenario": "interactive-default-theme", "run": 8}
+{"ok": true, "tti_ms": 1065.7490399898961, "turns_ms": 400.81464196555316, "wall_ms": 4436.024309950881, "cpu_ms": 2633.301, "peak_mb": 493.65234375, "build": "omp", "scenario": "interactive-default-theme", "run": 8}
+{"ok": true, "tti_ms": 136.45172701217234, "turns_ms": 88.45316502265632, "wall_ms": 387.76944391429424, "cpu_ms": 457.95599999999996, "peak_mb": 145.21875, "build": "bun", "scenario": "interactive-default-theme", "run": 8}
+{"ok": true, "tti_ms": 344.2905219271779, "turns_ms": 175.90890999417752, "wall_ms": 736.6015459410846, "cpu_ms": 810.4409999999999, "peak_mb": 142.109375, "build": "node", "scenario": "interactive-default-theme", "run": 8}
+{"ok": true, "tti_ms": 39.428743068128824, "turns_ms": 58.49657999351621, "wall_ms": 235.80449004657567, "cpu_ms": 98.92899999999999, "peak_mb": 123.171875, "build": "pi-bolt", "scenario": "interactive-default-theme", "run": 9}
+{"ok": true, "tti_ms": 38.93738298211247, "turns_ms": 191.11542694736272, "wall_ms": 412.1645500417799, "cpu_ms": 401.929, "peak_mb": 63.48828125, "build": "pig", "scenario": "interactive-default-theme", "run": 9}
+{"ok": true, "tti_ms": 986.8749730521813, "turns_ms": 430.31925696413964, "wall_ms": 4407.527785049751, "cpu_ms": 2589.772, "peak_mb": 495.27734375, "build": "omp", "scenario": "interactive-default-theme", "run": 9}
+{"ok": true, "tti_ms": 126.14657892845571, "turns_ms": 83.2937260856852, "wall_ms": 368.14227793365717, "cpu_ms": 409.431, "peak_mb": 144.5390625, "build": "bun", "scenario": "interactive-default-theme", "run": 9}
+{"ok": true, "tti_ms": 299.7546789702028, "turns_ms": 149.486864102073, "wall_ms": 660.5445079039782, "cpu_ms": 734.775, "peak_mb": 143.6875, "build": "node", "scenario": "interactive-default-theme", "run": 9}
+{"ok": true, "tti_ms": 44.077652040869, "turns_ms": 56.764720007777214, "wall_ms": 238.036880036816, "cpu_ms": 101.624, "peak_mb": 123.76953125, "build": "pi-bolt", "scenario": "interactive-default-theme", "run": 10}
+{"ok": true, "tti_ms": 32.875334029085934, "turns_ms": 175.900430069305, "wall_ms": 388.623274047859, "cpu_ms": 370.533, "peak_mb": 64.8828125, "build": "pig", "scenario": "interactive-default-theme", "run": 10}
+{"ok": true, "tti_ms": 1103.5690129501745, "turns_ms": 389.03046399354935, "wall_ms": 4428.99269098416, "cpu_ms": 2701.963, "peak_mb": 492.6328125, "build": "omp", "scenario": "interactive-default-theme", "run": 10}
+{"ok": true, "tti_ms": 154.5348340878263, "turns_ms": 111.03660101071, "wall_ms": 429.8692080192268, "cpu_ms": 497.558, "peak_mb": 144.0390625, "build": "bun", "scenario": "interactive-default-theme", "run": 10}
+{"ok": true, "tti_ms": 338.6535430327058, "turns_ms": 153.2220239751041, "wall_ms": 696.349993115291, "cpu_ms": 780.837, "peak_mb": 144.55078125, "build": "node", "scenario": "interactive-default-theme", "run": 10}
+{"ok": true, "tti_ms": 39.31735397782177, "turns_ms": 39.15898397099227, "wall_ms": 215.55385401006788, "cpu_ms": 90.307, "peak_mb": 124.47265625, "build": "pi-bolt", "scenario": "interactive-default-theme", "run": 11}
+{"ok": true, "tti_ms": 34.14322400931269, "turns_ms": 209.2442939756438, "wall_ms": 425.57617800775915, "cpu_ms": 403.72400000000005, "peak_mb": 64.26953125, "build": "pig", "scenario": "interactive-default-theme", "run": 11}
+{"ok": true, "tti_ms": 1008.8801400270313, "turns_ms": 399.31150304619223, "wall_ms": 4389.467368018813, "cpu_ms": 2583.462, "peak_mb": 492.52734375, "build": "omp", "scenario": "interactive-default-theme", "run": 11}
+{"ok": true, "tti_ms": 116.90690997056663, "turns_ms": 79.70435603056103, "wall_ms": 354.59477989934385, "cpu_ms": 408.659, "peak_mb": 146.3359375, "build": "bun", "scenario": "interactive-default-theme", "run": 11}
+{"ok": true, "tti_ms": 303.5246890503913, "turns_ms": 144.23966500908136, "wall_ms": 655.5944989668205, "cpu_ms": 753.2159999999999, "peak_mb": 143.4765625, "build": "node", "scenario": "interactive-default-theme", "run": 11}
+{"ok": true, "tti_ms": 39.29147298913449, "turns_ms": 42.10892191622406, "wall_ms": 220.56016197893769, "cpu_ms": 94.285, "peak_mb": 124.55859375, "build": "pi-bolt", "scenario": "interactive-default-theme", "run": 12}
+{"ok": true, "tti_ms": 36.859654006548226, "turns_ms": 191.66445697192103, "wall_ms": 417.9457590216771, "cpu_ms": 399.568, "peak_mb": 63.73046875, "build": "pig", "scenario": "interactive-default-theme", "run": 12}
+{"ok": true, "tti_ms": 949.9963890993968, "turns_ms": 361.03495804127306, "wall_ms": 4298.409849056043, "cpu_ms": 2496.3830000000003, "peak_mb": 498.90625, "build": "omp", "scenario": "interactive-default-theme", "run": 12}
+{"ok": true, "tti_ms": 119.01089991442859, "turns_ms": 81.40054601244628, "wall_ms": 358.68958896026015, "cpu_ms": 399.09099999999995, "peak_mb": 144.0546875, "build": "bun", "scenario": "interactive-default-theme", "run": 12}
+{"ok": true, "tti_ms": 320.79435500781983, "turns_ms": 153.43929396476597, "wall_ms": 679.2068540817127, "cpu_ms": 742.251, "peak_mb": 142.765625, "build": "node", "scenario": "interactive-default-theme", "run": 12}
+{"ok": true, "tti_ms": 39.06900400761515, "turns_ms": 40.55876296479255, "wall_ms": 216.59769397228956, "cpu_ms": 90.79699999999998, "peak_mb": 124.59765625, "build": "pi-bolt", "scenario": "interactive-default-theme", "run": 13}
+{"ok": true, "tti_ms": 34.754093969240785, "turns_ms": 172.00208001304418, "wall_ms": 379.42366499919444, "cpu_ms": 333.088, "peak_mb": 65.41015625, "build": "pig", "scenario": "interactive-default-theme", "run": 13}
+{"ok": true, "tti_ms": 984.9278619512916, "turns_ms": 436.245925957337, "wall_ms": 4412.406760035083, "cpu_ms": 2547.663, "peak_mb": 495.53515625, "build": "omp", "scenario": "interactive-default-theme", "run": 13}
+{"ok": true, "tti_ms": 127.0742480410263, "turns_ms": 83.13255594111979, "wall_ms": 370.55982707533985, "cpu_ms": 448.52599999999995, "peak_mb": 146.4609375, "build": "bun", "scenario": "interactive-default-theme", "run": 13}
+{"ok": true, "tti_ms": 348.6417509848252, "turns_ms": 156.01596294436604, "wall_ms": 770.7129799528047, "cpu_ms": 828.733, "peak_mb": 141.796875, "build": "node", "scenario": "interactive-default-theme", "run": 13}
+{"ok": true, "tti_ms": 42.32036299072206, "turns_ms": 54.23513997811824, "wall_ms": 234.25372096244246, "cpu_ms": 99.92399999999998, "peak_mb": 124.1875, "build": "pi-bolt", "scenario": "interactive-default-theme", "run": 14}
+{"ok": true, "tti_ms": 36.690634093247354, "turns_ms": 184.4198179896921, "wall_ms": 408.5536610800773, "cpu_ms": 403.158, "peak_mb": 64.1796875, "build": "pig", "scenario": "interactive-default-theme", "run": 14}
+{"ok": true, "tti_ms": 1088.9150749426335, "turns_ms": 417.52929997164756, "wall_ms": 4445.088793989271, "cpu_ms": 2772.3869999999997, "peak_mb": 493.8046875, "build": "omp", "scenario": "interactive-default-theme", "run": 14}
+{"ok": true, "tti_ms": 115.92055996879935, "turns_ms": 78.5214260686189, "wall_ms": 351.79982997942716, "cpu_ms": 390.036, "peak_mb": 145.36328125, "build": "bun", "scenario": "interactive-default-theme", "run": 14}
+{"ok": true, "tti_ms": 334.9012329708785, "turns_ms": 145.93538490589708, "wall_ms": 685.7766540488228, "cpu_ms": 768.3739999999999, "peak_mb": 142.31640625, "build": "node", "scenario": "interactive-default-theme", "run": 14}
+{"ok": true, "tti_ms": 52.97191103454679, "turns_ms": 41.01380298379809, "wall_ms": 231.1166509753093, "cpu_ms": 105.727, "peak_mb": 123.6640625, "build": "pi-bolt", "scenario": "interactive-default-theme", "run": 15}
+{"ok": true, "tti_ms": 34.5591539517045, "turns_ms": 198.22870602365583, "wall_ms": 413.5098500410095, "cpu_ms": 395.116, "peak_mb": 64.73828125, "build": "pig", "scenario": "interactive-default-theme", "run": 15}
+{"ok": true, "tti_ms": 999.878539936617, "turns_ms": 388.75308400020003, "wall_ms": 4371.891825925559, "cpu_ms": 2623.538, "peak_mb": 495.53125, "build": "omp", "scenario": "interactive-default-theme", "run": 15}
+{"ok": true, "tti_ms": 119.13432006258518, "turns_ms": 80.06175595801324, "wall_ms": 360.65282905474305, "cpu_ms": 415.02, "peak_mb": 145.8125, "build": "bun", "scenario": "interactive-default-theme", "run": 15}
+{"ok": true, "tti_ms": 332.6777829788625, "turns_ms": 160.76210304163396, "wall_ms": 706.5033100079745, "cpu_ms": 805.178, "peak_mb": 144.0546875, "build": "node", "scenario": "interactive-default-theme", "run": 15}
+{"ok": true, "tti_ms": 40.55660404264927, "turns_ms": 39.18534400872886, "wall_ms": 218.7832030467689, "cpu_ms": 93.963, "peak_mb": 123.6640625, "build": "pi-bolt", "scenario": "interactive-default-theme", "run": 16}
+{"ok": true, "tti_ms": 39.46307394653559, "turns_ms": 193.09160800185055, "wall_ms": 417.40187897812575, "cpu_ms": 399.145, "peak_mb": 63.55859375, "build": "pig", "scenario": "interactive-default-theme", "run": 16}
+{"ok": true, "tti_ms": 955.5241280468181, "turns_ms": 394.35032405890524, "wall_ms": 4330.179784097709, "cpu_ms": 2590.4860000000003, "peak_mb": 494.11328125, "build": "omp", "scenario": "interactive-default-theme", "run": 16}
+{"ok": true, "tti_ms": 134.7906069131568, "turns_ms": 80.4057460045442, "wall_ms": 375.1539059448987, "cpu_ms": 430.398, "peak_mb": 144.84375, "build": "bun", "scenario": "interactive-default-theme", "run": 16}
+{"ok": true, "tti_ms": 296.3448599912226, "turns_ms": 146.25564601738006, "wall_ms": 646.4177500456572, "cpu_ms": 731.7119999999999, "peak_mb": 143.265625, "build": "node", "scenario": "interactive-default-theme", "run": 16}
+{"ok": true, "tti_ms": 40.03073298372328, "turns_ms": 41.053773020394146, "wall_ms": 219.96768203098327, "cpu_ms": 94.341, "peak_mb": 123.2265625, "build": "pi-bolt", "scenario": "interactive-default-theme", "run": 17}
+{"ok": true, "tti_ms": 32.53308404237032, "turns_ms": 195.5745469313115, "wall_ms": 416.7721790727228, "cpu_ms": 401.102, "peak_mb": 63.171875, "build": "pig", "scenario": "interactive-default-theme", "run": 17}
+{"ok": true, "tti_ms": 990.7413510372862, "turns_ms": 390.1854540454224, "wall_ms": 4340.28245205991, "cpu_ms": 2604.977, "peak_mb": 496.8984375, "build": "omp", "scenario": "interactive-default-theme", "run": 17}
+{"ok": true, "tti_ms": 127.02482799068093, "turns_ms": 81.52999600861222, "wall_ms": 367.80897702556103, "cpu_ms": 436.304, "peak_mb": 145.80078125, "build": "bun", "scenario": "interactive-default-theme", "run": 17}
+{"ok": true, "tti_ms": 309.07271697651595, "turns_ms": 165.78599088825285, "wall_ms": 697.3024610197172, "cpu_ms": 787.875, "peak_mb": 142.82421875, "build": "node", "scenario": "interactive-default-theme", "run": 17}
+{"ok": true, "tti_ms": 42.3249329905957, "turns_ms": 40.00247293151915, "wall_ms": 220.3553329454735, "cpu_ms": 96.19599999999998, "peak_mb": 124.47265625, "build": "pi-bolt", "scenario": "interactive-default-theme", "run": 18}
+{"ok": true, "tti_ms": 33.23485399596393, "turns_ms": 182.95465898700058, "wall_ms": 397.22985203843564, "cpu_ms": 376.84999999999997, "peak_mb": 63.41796875, "build": "pig", "scenario": "interactive-default-theme", "run": 18}
+{"ok": true, "tti_ms": 953.7765479180962, "turns_ms": 403.7478710524738, "wall_ms": 4314.441495924257, "cpu_ms": 2576.5350000000003, "peak_mb": 492.87890625, "build": "omp", "scenario": "interactive-default-theme", "run": 18}
+{"ok": true, "tti_ms": 137.93016702402383, "turns_ms": 86.81587502360344, "wall_ms": 385.8692750800401, "cpu_ms": 459.75500000000005, "peak_mb": 144.8125, "build": "bun", "scenario": "interactive-default-theme", "run": 18}
+{"ok": true, "tti_ms": 314.9017859250307, "turns_ms": 161.3439319189638, "wall_ms": 736.9535840116441, "cpu_ms": 795.8810000000001, "peak_mb": 143.48046875, "build": "node", "scenario": "interactive-default-theme", "run": 18}
+{"ok": true, "tti_ms": 56.200241087935865, "turns_ms": 60.88757002726197, "wall_ms": 256.10360701102763, "cpu_ms": 131.269, "peak_mb": 123.9765625, "build": "pi-bolt", "scenario": "interactive-default-theme", "run": 19}
+{"ok": true, "tti_ms": 39.28036289289594, "turns_ms": 189.47005807422101, "wall_ms": 416.55253898352385, "cpu_ms": 409.73499999999996, "peak_mb": 62.5390625, "build": "pig", "scenario": "interactive-default-theme", "run": 19}
+{"ok": true, "tti_ms": 1105.8670920319855, "turns_ms": 387.4864139361307, "wall_ms": 4402.020902023651, "cpu_ms": 2787.247, "peak_mb": 489.8671875, "build": "omp", "scenario": "interactive-default-theme", "run": 19}
+{"ok": true, "tti_ms": 123.08011902496219, "turns_ms": 100.68861197214574, "wall_ms": 381.6472350154072, "cpu_ms": 440.532, "peak_mb": 145.41796875, "build": "bun", "scenario": "interactive-default-theme", "run": 19}
+{"ok": true, "tti_ms": 315.9507260425016, "turns_ms": 163.29997207503766, "wall_ms": 750.2610730007291, "cpu_ms": 779.9970000000001, "peak_mb": 143.93359375, "build": "node", "scenario": "interactive-default-theme", "run": 19}
+{"ok": true, "tti_ms": 43.2782230200246, "turns_ms": 54.15872996672988, "wall_ms": 236.17720999754965, "cpu_ms": 102.73199999999999, "peak_mb": 124.04296875, "build": "pi-bolt", "scenario": "interactive-default-theme", "run": 20}
+{"ok": true, "tti_ms": 33.551413915120065, "turns_ms": 178.23468905407935, "wall_ms": 396.31669293157756, "cpu_ms": 376.86899999999997, "peak_mb": 63.140625, "build": "pig", "scenario": "interactive-default-theme", "run": 20}
+{"ok": true, "tti_ms": 1012.1873880270869, "turns_ms": 425.7365179946646, "wall_ms": 4378.7115649320185, "cpu_ms": 2685.107, "peak_mb": 494.77734375, "build": "omp", "scenario": "interactive-default-theme", "run": 20}
+{"ok": true, "tti_ms": 127.205019001849, "turns_ms": 83.69369595311582, "wall_ms": 369.92011696565896, "cpu_ms": 434.103, "peak_mb": 143.91796875, "build": "bun", "scenario": "interactive-default-theme", "run": 20}
+{"ok": true, "tti_ms": 323.86649504769593, "turns_ms": 144.0007359487936, "wall_ms": 674.8781950445846, "cpu_ms": 747.5390000000001, "peak_mb": 143.0625, "build": "node", "scenario": "interactive-default-theme", "run": 20}

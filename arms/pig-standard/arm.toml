@@ -1,0 +1,9 @@
+name = "pig-standard"
+label = "PiG Standard (Piglet Binary: base Piglet + slots, one binary)"
+notes = "PiG Standard as a Piglet Binary: the explicit composition of ordinary extension Resources in piglets/standard/pig-standard.yaml of the pig-tip checkout (piglogin, pigrunner, angrypigs, bunruntime), built into one executable by `pig piglet build --format binary`. The report names its slots and its binary size."
+
+[derive]
+base = "pig-tip"
+
+[prepare]
+script = "prepare.py"

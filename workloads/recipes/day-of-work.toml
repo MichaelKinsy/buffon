@@ -1,0 +1,22 @@
+# Track 3, scenario 1. A fixed recipe of Track 1 and Track 2 benchmarks; it adds no metric of its own.
+id = "day-of-work"
+title = "A day of work"
+sentence = "One agent, a long session and real extensions on a laptop. How long does it take and how much memory does it hold?"
+machine = "laptop"
+conditions = "typical"
+uses = ["longsession/resume-n10", "overhead/print-ext10"]
+coming = ["real-extensions"]
+apis = ["openai-completions"]
+
+[params]
+session_n = 100
+
+[[reports]]
+label = "Total time"
+from = "longsession/resume-n10"
+metric = "wall_ms"
+
+[[reports]]
+label = "Peak memory"
+from = "longsession/resume-n10"
+metric = "peak_mem_mib"

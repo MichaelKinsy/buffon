@@ -1,0 +1,54 @@
+name = "nowa-gi"
+label = "nowa/gi (Go port of Pi)"
+homepage = "https://github.com/nowa/gi"
+relation = "pi-port"
+licence = "MIT"
+licence_url = "https://github.com/nowa/gi/blob/ccc4399b3a6f6c5949bf0abfb76ea4e88bef33f9/LICENSE"
+restrictions = "LICENSE file is MIT at the pinned commit (GitHub's licence detection may say NOASSERTION). Not vendored or redistributed: Buffon clones the public repository and builds it on the machine that runs it."
+version = "0.82.2+ccc4399"
+notes = "Go port of Pi with a Pi-compatible command line (--provider, --model, --mode rpc, --session) and models.json. Driver: print (-p) and rpc. Extension loading was not verified, so extension rows are N/A. Built from the pinned commit with the pinned Go toolchain."
+trust = "source"
+
+[source]
+repo_env = "BUFFON_SOURCE_REPO_NOWA_GI"
+repo_url = "https://github.com/nowa/gi"
+commit = "ccc4399b3a6f6c5949bf0abfb76ea4e88bef33f9"
+tree = "cdafcf050f89532f41a7e9d46f9243390dc69837"
+toolchain = "go"
+package = "./cmd/gi"
+build = ["go", "build", "-buildvcs=false", "-trimpath", "-pgo=off", "-ldflags", "-s -w", "-o", "{out}", "{package}"]
+env = { CGO_ENABLED = "0", GOFLAGS = "", GOTOOLCHAIN = "local" }
+
+[endpoint]
+apis = ["openai-completions", "anthropic-messages", "openai-responses"]
+writer = "writer.py"
+
+[env]
+PI_OFFLINE = "1"
+PI_SKIP_VERSION_CHECK = "1"
+PI_TELEMETRY = "0"
+PI_CODING_AGENT_DIR = "{agent_dir}"
+GI_OFFLINE = "1"
+GI_SKIP_VERSION_CHECK = "1"
+GI_TELEMETRY = "0"
+GI_CODING_AGENT_DIR = "{agent_dir}"
+
+[state]
+dirs = ["$HOME/.agent", "$XDG_CONFIG_HOME", "$XDG_DATA_HOME", "$XDG_CACHE_HOME", "$XDG_STATE_HOME"]
+
+[modes]
+version = ["--version"]
+print = ["--provider", "bench", "--model", "{model}", "--no-session", "-p", "{prompt}"]
+print_session = ["--provider", "bench", "--model", "{model}", "--session", "{session}", "-p", "{prompt}"]
+rpc = ["--mode", "rpc", "--provider", "bench", "--model", "{model}", "--no-session"]
+rpc_session = ["--mode", "rpc", "--provider", "bench", "--model", "{model}", "--session-dir", "{session_dir}"]
+rpc_resume = ["--mode", "rpc", "--provider", "bench", "--model", "{model}", "--session", "{session}"]
+pty = ["--provider", "bench", "--model", "{model}", "--no-session"]
+
+[capabilities]
+pi_extensions = "none"
+pi_session_format = true
+exact_requests = true
+
+[version_check]
+contains = "0.82.2"

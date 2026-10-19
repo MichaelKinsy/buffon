@@ -1,0 +1,55 @@
+{
+ "commit": "13ccac32afb94366fb8d3e15aff1dd7bb234fefa",
+ "files": {
+  "benchmark.jsonl": {
+   "bytes": 74153,
+   "rows": 420,
+   "sha256": "5e9431e2eb8aa3f2296b66f886fda71210e9e0bba6dde16ce3c08011f2c8fbff"
+  },
+  "environment.txt": {
+   "bytes": 260,
+   "rows": null,
+   "sha256": "0217b63952031268819034022a44d687c0d2d799aa0bd5313a61f136e30aebe2"
+  },
+  "large_write-1.txt": {
+   "bytes": 487,
+   "rows": null,
+   "sha256": "382ed612d8528e8b97721e1b92413b9a8a805478723f1980a600eb7dd710cf87"
+  },
+  "large_write-2.txt": {
+   "bytes": 487,
+   "rows": null,
+   "sha256": "993ea9478c6b8007f394bd86e1ebaad980d9fdd2b03fd79a04e7197be8212ed3"
+  },
+  "long.jsonl": {
+   "bytes": 6060,
+   "rows": 36,
+   "sha256": "39d1be3bd5b5df14d75b092ffac7489c1be2fc61fe772c39608c93dd5df04624"
+  },
+  "long_answer-1.txt": {
+   "bytes": 976,
+   "rows": null,
+   "sha256": "7d8d9ea4e5ffe361a5932b87057bc2ec34bec5827b2ec00a22c3f1f69aaa3a19"
+  },
+  "long_answer-2.txt": {
+   "bytes": 976,
+   "rows": null,
+   "sha256": "081270b1658e5dedbd48080e5c0c6ac1bdffa90e2ff018d3fe30fea83fc3b56c"
+  },
+  "tmux.jsonl": {
+   "bytes": 13498,
+   "rows": 25,
+   "sha256": "2ee87fd5d688519b1db56124b396a4844cfa4e265c2fe9ade8c8a8d0cb48aef1"
+  }
+ },
+ "host": "AMD EPYC 7B13, Linux 7.0.0-1013-gcp x86_64, cpus 40-43 of a shared VM, run on 2026-10-10T19:20Z (environment.txt)",
+ "id": "pi-bolt-2026-10-11-linux-x64-0.8.0",
+ "imported_utc": "2026-10-11T22:20:29Z",
+ "kind": "external-results",
+ "licence": "MIT (the repository's LICENSE, Copyright (c) 2025 Mario Zechner)",
+ "published": "2026-10-11",
+ "repo": "https://github.com/opensec-git/Pi-Bolt",
+ "source_url": "https://github.com/opensec-git/Pi-Bolt/tree/13ccac32afb94366fb8d3e15aff1dd7bb234fefa/bench/results/2026-10-11-linux-x64-0.8.0",
+ "title": "Pi-Bolt 0.8.0 benchmark, Linux x64 (Pi-Bolt, Pi-Bolt's PiG 0.4.1 build, omp, Pi on Bun, Pi on Node)",
+ "version": "pi-bolt 1.1.0 (Pi-Bolt 0.8.0, linux-x64, JIT off); pig 0.4.1+1.0.3; omp 18.8.7; bun: Pi 1.1.0 on Bun 1.4.2; node: Pi on Node v24.21.0"
+}

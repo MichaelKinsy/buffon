@@ -1,0 +1,7 @@
+# Every change needs a code owner's review (branch protection: "Require review from Code Owners"). A results pull request is checked by CI with the base branch's
+# code (.github/workflows/results.yml), and a maintainer still approves it before it merges. Add maintainers here as the project grows.
+*                         @MichaelKinsy
+# Governance files decide which runs are withdrawn and which operators may reproduce one.
+/results/MAINTAINERS.toml @MichaelKinsy
+/results/WITHDRAWN.toml   @MichaelKinsy
+/.github/                 @MichaelKinsy

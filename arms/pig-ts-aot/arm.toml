@@ -1,0 +1,19 @@
+name = "pig-ts-aot"
+label = "PiG, ten TypeScript extensions compiled into the AOT host image (pig-pi-bolt, compiled in)"
+notes = "The same TypeScript extensions as pig-ts-node, compiled into one executable image of the aot Piglet (PIG_TS_RUNTIME=aot) for exactly this set: the image is built by the Piglet's own worker and verified by PiG at start; the ten factories run inside pig-ts-host with no Bun or Node. bolt-aot calls this shape compiled in; its run-time-loading dynamic host (TestWriteConformanceSlot) is a separate variant not in this matrix yet."
+
+[derive]
+base = "pig-tip"
+
+[env]
+PIG_HOME = "{shared_dir}/pig-home"
+PIG_TS_RUNTIME = "aot"
+PIG_TS_RUNTIMES_DIR = "{install_dir}/slot"
+
+[extensions]
+default = false
+processes = 1
+host = "pig-ts-host"
+
+[prepare]
+script = "prepare.py"

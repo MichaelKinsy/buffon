@@ -1,0 +1,14 @@
+name = "pig-go-fused"
+label = "PiG, ten Go SDK extensions fused into a Piglet Binary"
+notes = "The same Go factories as pig-go-packed, compiled into the PiG executable by `pig piglet build --format binary`: no extension process and no IPC. Built from the pig-tip source checkout."
+
+[derive]
+base = "pig-tip"
+
+[extensions]
+default = false
+embedded = true
+processes = 0
+
+[prepare]
+script = "prepare.py"

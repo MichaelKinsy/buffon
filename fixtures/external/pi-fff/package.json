@@ -1,0 +1,8 @@
+{
+  "name": "fixture-pi-fff",
+  "private": true,
+  "description": "@ff-labs/pi-fff, frozen: the exact version, its lockfile and its integrity (Buffon compatibility row)",
+  "dependencies": {
+    "@ff-labs/pi-fff": "0.11.0"
+  }
+}

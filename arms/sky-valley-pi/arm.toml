@@ -1,0 +1,46 @@
+name = "sky-valley-pi"
+label = "sky-valley/pi (Go port of Pi)"
+homepage = "https://github.com/sky-valley/pi"
+relation = "pi-port"
+licence = "MIT"
+licence_url = "https://github.com/sky-valley/pi/blob/1067024e7cce0028602e638bbf6676c6d2883cda/LICENSE"
+restrictions = "LICENSE file is MIT at the pinned commit. Not vendored or redistributed: Buffon clones the public repository and builds it on the machine that runs it."
+version = "main+1067024"
+notes = "Go port of Pi (library packages plus cmd/pi). Driver: none. The command line has -m provider/id and -p but no setting for a provider base URL (models come from a built-in catalogue; credentials only from *_API_KEY variables), so it cannot be pointed at Buffon's local endpoint, and a run would need to reach the real providers, which Buffon forbids. Only the build and a models listing run. Its request-body differential harness is the model for the Faithfulness Score's wire probes."
+trust = "source"
+
+[source]
+repo_env = "BUFFON_SOURCE_REPO_SKY_VALLEY_PI"
+repo_url = "https://github.com/sky-valley/pi"
+commit = "1067024e7cce0028602e638bbf6676c6d2883cda"
+tree = "ced8f377b48b1185c5118276f3bbfc9aabfd866a"
+toolchain = "go"
+package = "./cmd/pi"
+build = ["go", "build", "-buildvcs=false", "-trimpath", "-pgo=off", "-ldflags", "-s -w", "-o", "{out}", "{package}"]
+env = { CGO_ENABLED = "0", GOFLAGS = "", GOTOOLCHAIN = "local" }
+
+[endpoint]
+apis = ["openai-completions"]
+writer = "writer.py"
+
+[env]
+PI_PACKAGE_DIR = "{agent_dir}"
+
+[state]
+dirs = ["$HOME/.agent", "$XDG_CONFIG_HOME", "$XDG_DATA_HOME", "$XDG_CACHE_HOME", "$XDG_STATE_HOME"]
+
+[modes]
+version = ["models"]
+
+[cannot_run]
+print = "no way to point it at a local endpoint: no provider base-URL setting (built-in model catalogue, *_API_KEY credentials only); a run would reach the real providers"
+rpc = "no RPC mode"
+pty = "no way to point it at a local endpoint (see print)"
+
+[capabilities]
+pi_extensions = "none"
+pi_session_format = false
+exact_requests = false
+
+[version_check]
+contains = "amazon-bedrock"

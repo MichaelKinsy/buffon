@@ -1,0 +1,41 @@
+# SPDX-License-Identifier: Apache-2.0
+# Publishes the results site (buffon dashboard, docs/design/DASHBOARD.md) to GitHub Pages: the newest published run in results/, or the DEMO site while
+# there is none (tools/pages_site.py). The owner enables Pages for this repository with "GitHub Actions" as the source.
+name: pages
+on:
+  push:
+    branches: [main]
+    paths: ["results/**", "buffon/**", "tools/pages_site.py", "docs/WHAT-WE-MEASURE.md", "docs/METHODOLOGY.md", "docs/GRADE.md", "docs/HEALTH.md", "docs/LIMITATIONS.md", ".github/workflows/pages.yml"]
+  workflow_dispatch:
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+concurrency:
+  group: pages
+  cancel-in-progress: true
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Build the site (Node renders the formulas with the vendored KaTeX; nothing is downloaded)
+        run: python3 tools/pages_site.py site
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

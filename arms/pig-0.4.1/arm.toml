@@ -1,0 +1,68 @@
+name = "pig-0.4.1"
+label = "PiG 0.4.1"
+homepage = "https://github.com/MichaelKinsy/PiG"
+relation = "pi-port"
+licence = "MIT"
+licence_url = "https://github.com/MichaelKinsy/PiG/blob/v0.4.1/LICENSE"
+restrictions = ""
+version = "0.4.1"
+notes = "Go port of Pi, release archive. Buffon's first public report needs an independent reproduction of every PiG cell (docs/DESIGN.md section 10)."
+
+[artifact.linux-x64]
+url = "https://github.com/MichaelKinsy/PiG/releases/download/v0.4.1/pig-0.4.1-linux-amd64.tar.gz"
+sha256 = "3b4de3587cbfb617def483ec62dddcf35827acc3436b1454cc5694c22dcdaf3f"
+checksums = "https://github.com/MichaelKinsy/PiG/releases/download/v0.4.1/SHA256SUMS"
+exe = "pig-0.4.1-linux-amd64/pig"
+
+[artifact.linux-arm64]
+url = "https://github.com/MichaelKinsy/PiG/releases/download/v0.4.1/pig-0.4.1-linux-arm64.tar.gz"
+sha256 = "e1768bbfce29b784d76001eb47ebd989f05ed042fbe81ad8629816e181fa5ac8"
+checksums = "https://github.com/MichaelKinsy/PiG/releases/download/v0.4.1/SHA256SUMS"
+exe = "pig-0.4.1-linux-arm64/pig"
+
+[artifact.darwin-arm64]
+url = "https://github.com/MichaelKinsy/PiG/releases/download/v0.4.1/pig-0.4.1-darwin-arm64.tar.gz"
+sha256 = "25a1e2bde685f28684e495b250dccad7b2960a840454d80c88c35d5c7a8c5966"
+checksums = "https://github.com/MichaelKinsy/PiG/releases/download/v0.4.1/SHA256SUMS"
+exe = "pig-0.4.1-darwin-arm64/pig"
+
+[artifact.darwin-x64]
+url = "https://github.com/MichaelKinsy/PiG/releases/download/v0.4.1/pig-0.4.1-darwin-amd64.tar.gz"
+sha256 = "9f29ef012cd34074ac02ad4a4ae6f7b93d42b4febd35aa08adf47702944d3a87"
+checksums = "https://github.com/MichaelKinsy/PiG/releases/download/v0.4.1/SHA256SUMS"
+exe = "pig-0.4.1-darwin-amd64/pig"
+
+[runtime]                          # the Node sidecar for TypeScript extensions (pi_extensions = "sidecar") needs Node 22.13 or later on PATH
+node = "24.19.0"
+
+[endpoint]
+apis = ["openai-completions", "anthropic-messages", "openai-responses"]
+writer = "writer.py"
+
+[env]
+PI_OFFLINE = "1"
+PIG_OFFLINE = "1"
+PI_SKIP_VERSION_CHECK = "1"
+PI_TELEMETRY = "0"
+PIG_HOME = "{disk}/pig"
+PIG_CODING_AGENT_DIR = "{agent_dir}"
+
+[state]
+dirs = ["$HOME/.agent", "$PIG_HOME", "$XDG_CONFIG_HOME", "$XDG_DATA_HOME", "$XDG_CACHE_HOME", "$XDG_STATE_HOME"]
+
+[modes]
+version = ["--version"]
+print = ["--provider", "bench", "--model", "{model}", "--no-session", "{extensions}", "-p", "{prompt}"]
+print_session = ["--provider", "bench", "--model", "{model}", "--session", "{session}", "-p", "{prompt}"]
+rpc = ["--mode", "rpc", "--provider", "bench", "--model", "{model}", "--no-session", "{extensions}"]
+rpc_session = ["--mode", "rpc", "--provider", "bench", "--model", "{model}", "--session-dir", "{session_dir}", "{extensions}"]
+rpc_resume = ["--mode", "rpc", "--provider", "bench", "--model", "{model}", "--session", "{session}", "{extensions}"]
+pty = ["--provider", "bench", "--model", "{model}", "--no-session", "{extensions}"]
+
+[capabilities]
+pi_extensions = "sidecar"
+pi_session_format = true
+exact_requests = true
+
+[renderer]
+pty = "fullscreen"

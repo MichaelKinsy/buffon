@@ -1,0 +1,44 @@
+name = "codex"
+label = "Codex CLI"
+homepage = "https://github.com/openai/codex"
+relation = "reference"
+licence = "Apache-2.0"
+licence_url = "https://github.com/openai/codex/blob/main/LICENSE"
+restrictions = ""
+version = "0.162.1"
+notes = "Unrelated to Pi; a reference point. Needs the OpenAI Responses endpoint. Its TUI contacts a GitHub content address even with remote catalogs off, so no PTY workload runs on it."
+
+[npm]
+package = "@openai/codex"
+version = "0.162.1"
+integrity = "sha512-NWZdi/kxyjv/8EUGFupziGU38YyleugZRM4JXgY5XFH7FUmaFA33NZS2Bmq0HPazf7S3jJQQWsZ/jAK9jsrV3Q=="
+
+
+package_lock = "package-lock.json"
+package_lock_sha256 = "a17117b06362c74b63de80e9c4cb525cf8556b5ead9d0d0e250473061365902d"
+bin = "node_modules/.bin/codex"
+runtime = "node"
+native_bin = { linux-x64 = "61b0194f3bb6534439c8d26a3ed57d0805f84b884588b761795323eeb92fcf70" }
+
+[endpoint]
+apis = ["openai-responses"]
+writer = "writer.py"
+
+[env]
+CODEX_HOME = "{home}/.codex"
+BENCH_API_KEY = "{dummy_key}"
+
+[state]
+dirs = ["$CODEX_HOME", "$XDG_CONFIG_HOME", "$XDG_DATA_HOME", "$XDG_CACHE_HOME", "$XDG_STATE_HOME"]
+
+[modes]
+version = ["--version"]
+print = ["exec", "-m", "{model}", "--skip-git-repo-check", "--sandbox", "danger-full-access", "{prompt}"]
+
+[cannot_run]
+pty = "tried at 0.162.1: no egress, but its TUI does not echo the PTY workload's first-input probe within 20 s (it shows its own startup screens), so first-input latency is not comparable; not measured in v0"
+rpc = "no Pi-dialect RPC mode"
+
+[capabilities]
+pi_extensions = "none"
+pi_session_format = false

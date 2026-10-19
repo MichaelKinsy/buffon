@@ -1,0 +1,42 @@
+project = "Octet"
+harnesses = ["octet"]
+maker = "Skaft Software"
+maker_url = "https://github.com/skaft-software"
+tagline = "A fast, native coding agent."
+tagline_source = "https://github.com/skaft-software/octet/blob/v0.9.4/README.md"
+readme_url = "https://github.com/skaft-software/octet/blob/v0.9.4/README.md"
+readme_ref = "v0.9.4"
+readme_title = "octet"
+readme_head = [
+    "A fast, native coding agent.",
+]
+mark = "octet-mark.svg"
+mark_source = "https://raw.githubusercontent.com/skaft-software/octet/v0.9.4/docs/assets/octet/marks/mark-gradient.svg"
+mark_ref = "v0.9.4"
+mark_sha256 = "0f04d5eb04a5de413be2901c2a9eb302705a1991d2a430248ee9c854a09b2386"
+retrieved = "2026-10-18"
+licence = "MIT"
+
+[links]
+home = "https://github.com/skaft-software/octet"
+repo = "https://github.com/skaft-software/octet"
+docs = "https://github.com/skaft-software/octet/blob/v0.9.4/docs/README.md"
+releases = "https://github.com/skaft-software/octet/releases"
+changelog = "https://github.com/skaft-software/octet/blob/v0.9.4/CHANGELOG.md"
+issues = "https://github.com/skaft-software/octet/issues"
+licence = "https://github.com/skaft-software/octet/blob/v0.9.4/LICENSE"
+
+[[quotes]]
+text = "octet reads code, edits files, and runs commands from your terminal. The core is native Rust: one process owns the agent loop, sessions, policy, persistence, the terminal interface and resource limits."
+source = "https://github.com/skaft-software/octet/blob/v0.9.4/README.md"
+about = "design"
+
+[[quotes]]
+text = "It works with cloud and local models, saves resumable sessions, and lets you add tools through subprocess extensions in any language."
+source = "https://github.com/skaft-software/octet/blob/v0.9.4/README.md"
+about = "compatibility"
+
+[[quotes]]
+text = "By default octet has full access and no sandbox. Commands, file edits, and enabled extensions run with your operating-system permissions, and nothing asks first."
+source = "https://github.com/skaft-software/octet/blob/v0.9.4/README.md"
+about = "design"

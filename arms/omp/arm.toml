@@ -1,0 +1,69 @@
+name = "omp"
+label = "omp (oh-my-pi)"
+homepage = "https://github.com/can1357/oh-my-pi"
+relation = "pi-fork"
+licence = "MIT"
+licence_url = "https://github.com/can1357/oh-my-pi/blob/main/LICENSE"
+restrictions = ""
+version = "18.8.8"
+caveat = "omp refreshes its model catalog from about six public hosts on every start and has no offline switch. Buffon sends those connections to a closed local port (proxy variables), so the refresh fails on every start: omp's startup numbers here are its failure path, not what a connected user sees. Nothing leaves the machine."
+notes = "Pi-derived runtime with its own configuration (models.yml, config.yml). A one-time seed (see [seed]) gives each sample the warm state a real user has; whether a seeded start still connects out is checked by the egress audit on every sample."
+
+[artifact.linux-x64]
+url = "https://github.com/can1357/oh-my-pi/releases/download/v18.8.8/omp-linux-x64"
+sha256 = "8d804761b7ed1a6910a6283f7c4df658c8e3ebc320886472c90d626abfa2d988"
+checksums = "https://github.com/can1357/oh-my-pi/releases/download/v18.8.8/SHA256SUMS.txt"
+exe = "omp"
+
+[artifact.linux-arm64]
+url = "https://github.com/can1357/oh-my-pi/releases/download/v18.8.8/omp-linux-arm64"
+sha256 = "9cc9060abd444cfaaf5174bafb12c6c17484c93549bc7792e8933a34692bc221"
+checksums = "https://github.com/can1357/oh-my-pi/releases/download/v18.8.8/SHA256SUMS.txt"
+exe = "omp"
+
+[artifact.darwin-arm64]
+url = "https://github.com/can1357/oh-my-pi/releases/download/v18.8.8/omp-darwin-arm64"
+sha256 = "19182e8a79eddea11a5e3f93a5d2d250b3e4951bab916409ab0288c4b550c310"
+checksums = "https://github.com/can1357/oh-my-pi/releases/download/v18.8.8/SHA256SUMS.txt"
+exe = "omp"
+
+[artifact.darwin-x64]
+url = "https://github.com/can1357/oh-my-pi/releases/download/v18.8.8/omp-darwin-x64"
+sha256 = "71da87f889fadcf48c9be8c4333d6a0871c5f91af6f94b759c8dc4d158fe407c"
+checksums = "https://github.com/can1357/oh-my-pi/releases/download/v18.8.8/SHA256SUMS.txt"
+exe = "omp"
+
+[endpoint]
+apis = ["openai-completions", "anthropic-messages"]
+writer = "writer.py"
+
+[env]
+PI_CODING_AGENT_DIR = "{agent_dir}"
+# omp refreshes model catalogs from about six public hosts on every start (observed at 18.8.8; no offline switch exists). Every outbound request is sent to a closed local port instead;
+# the mock endpoint is on NO_PROXY, which the harness sets for every arm. No connection leaves the machine, and the egress audit still checks that none does.
+HTTPS_PROXY = "http://127.0.0.1:9"
+HTTP_PROXY = "http://127.0.0.1:9"
+ALL_PROXY = "http://127.0.0.1:9"
+
+[state]
+dirs = ["$HOME/.agent", "$XDG_CONFIG_HOME", "$XDG_DATA_HOME", "$XDG_CACHE_HOME", "$XDG_STATE_HOME"]
+
+[seed]
+# First start unpacks ~200 MB of native libraries into $HOME/.omp; a real user pays that once. The seed runs once in a scratch HOME (outside every measured sample, with the same blocked
+# network) and is copied into each sample's HOME, so a sample measures a warm start.
+command = ["{binary}", "--provider", "bench", "--model", "bench-1", "--no-session", "-p", "seed"]
+timeout = 240
+exclude = ["run", "tmp"]
+
+[modes]
+version = ["--version"]
+print = ["--provider", "bench", "--model", "{model}", "--no-session", "-p", "{prompt}"]
+pty = ["--provider", "bench", "--model", "{model}", "--no-session"]
+rpc = ["--mode", "rpc", "--provider", "bench", "--model", "{model}", "--no-session"]
+
+[cannot_run]
+
+[capabilities]
+pi_extensions = "partial"
+pi_session_format = false
+

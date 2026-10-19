@@ -1,0 +1,22 @@
+# Example site profile for the Kubernetes backend. Replace every <placeholder>; the runner refuses a value that still holds one.
+# Keep your real profile out of version control (copy it to sites/<your-name>.toml).
+[site]
+name = "bench-pool"
+backend = "kubernetes"
+hardware = "dedicated"       # the node pool below runs nothing else
+
+[kubernetes]
+kubeconfig = ""              # empty: $KUBECONFIG or kubectl's default
+context = ""
+namespace = "<namespace>"
+image = "<registry>/<repository>@sha256:<64 hex digest>"
+cpus = 4                     # whole CPUs: Guaranteed QoS, exclusive cores under the static CPU manager
+memory = "16Gi"
+scratch_size = "16Gi"
+pin = "auto"                 # auto | none | a CPU list inside the pod
+arch = "amd64"               # amd64 | arm64: the nodes' architecture, which a bundle is built for
+node_selector = { "<label key>" = "<label value>" }
+tolerations = [ { key = "<taint key>", operator = "Equal", value = "<taint value>", effect = "NoSchedule" } ]
+max_cv = 0.05                # cross-node calibration gate: the largest coefficient of variation a gated metric may have
+# Credentials only as references to Kubernetes Secrets in the namespace (rendered as secretKeyRef); never put a value here.
+# secret_env = [ { name = "<VARIABLE>", secret = "<secret name>", key = "<key in the secret>" } ]

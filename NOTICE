@@ -1,0 +1,29 @@
+buffon
+Licence: Apache-2.0 (LICENSE).
+
+Code vendored from existing benchmark tools keeps its original licence and headers. Each such file starts with `SPDX-License-Identifier: MIT`:
+
+  buffon/mock/server.py, buffon/stats/core.py, buffon/runner/{cgroup,egress,procio,checkpoint}.py, buffon/runner/harness.py (adapted),
+  buffon/workloads/{overhead,soak,reliability}.py (adapted), buffon/arms/writers/{pi,omp,codex}.py (adapted), buffon/fixtures/*
+  from `pigbench` (bench/evals of the PiG repository, https://github.com/MichaelKinsy/PiG), MIT.
+
+  cluster/ (the Go module behind the Kubernetes backend: Job rendering, kubectl client, node ranking, in-pod session, pinning, governor refusal,
+  node facts and the calibration gate) from PiG's bench/k8s (https://github.com/MichaelKinsy/PiG), MIT.
+
+  The streaming workload's four answer shapes (prose, code, tables, lists) come from PiG's bench/compare `stream_shapes.py`, MIT.
+
+The MIT text for these files is in LICENSES/MIT.txt. Relicensing them is the copyright holder's decision (docs/DESIGN.md section 11, item 2); until then they stay MIT inside this Apache-2.0
+repository, with this notice.
+
+Provenance and headers. Each vendored file keeps the header its source had when it was copied; none was edited to add or remove a copyright line.
+  - pigbench (bench/evals) and cluster/ (bench/k8s): copied from PiG commit aea6c243e3 (the last commit touching those directories on the integration branch, 2026-10-11). Their files carry
+    only `SPDX-License-Identifier: MIT`; PiG's LICENSE at that commit reads "MIT License, Copyright Michael Kinsy". Published PiG releases up to 0.4.1 carry a Hewlett Packard
+    Enterprise Development LP copyright line in LICENSE that the later tree no longer has.
+  - bench/compare (buffon/mock/shapes.py and the streaming shapes): copied from PiG commit 22cc5639c4 of the bolt-bench branch. Those files carry
+    `SPDX-FileCopyrightText: Copyright Hewlett Packard Enterprise Development LP` and `SPDX-License-Identifier: MIT`, kept as they are.
+  Which copyright line applies to which file, and whether the code is relicensed, is the owner's decision (docs/DESIGN.md section 11, item 2).
+
+KaTeX 0.19.0 (MIT, Copyright (c) 2013-2020 Khan Academy and other contributors) is vendored unchanged in buffon/dashboard/vendor/katex/ (katex.min.js, katex.min.css, the woff2 fonts
+and its LICENSE): `buffon dashboard` runs it under Node to set formulas at build time, and the published site ships its CSS, fonts and LICENSE.
+
+Pi-Bolt's own benchmark suite (MIT) is not vendored: `buffon external run` runs it from a checkout. Pi-Bolt's published Linux results (bench/results/2026-10-11-linux-x64-0.8.0, MIT, Copyright (c) 2025 Mario Zechner) are copied unchanged into `external/results/` with their provenance (docs/EXTERNAL.md). The durable-bench method is not used (no licence found).

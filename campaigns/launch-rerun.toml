@@ -1,0 +1,51 @@
+# The launch rerun (`buffon campaign campaigns/launch-rerun.toml --site <your site> --out runs/launch-rerun`): the launch numbers measured again on one pinned Linux
+# machine after a PiG fix. docs/RUNNING.md, "The launch rerun", says how to run it and what it costs. Add --dry-run to print the steps and an estimate without measuring.
+#
+# Core: every harness, the same workloads, two wire APIs (Chat Completions and Messages), 12 rounds, every harness with its A/A copy.
+# Focus: the five harnesses the launch is about, on the workloads where they differ most. Focus families are adaptive: a cell stops once its answer is clear
+# (at least the rounds Holm needs for the compared arms, 8 for four), with 12 as the most; the slow cells of Pi on Node and Bun no longer take every round.
+# No `apis` key on the core family on purpose: `buffon run` then uses
+# Chat Completions and Messages, and adds Responses for Codex alone (it speaks nothing else), so Codex is not left out. The focus families name Chat Completions only.
+# claude-code and copilot run only under their vendors' terms: set BUFFON_ACCEPT_TERMS=claude-code,copilot after reading `python3 -m buffon harnesses`.
+
+[campaign]
+name = "launch-rerun"
+reference = "pi-node"
+description = "core workloads for every harness on two wire APIs (12 rounds), then the focus workloads for Pi on Node, Pi on Bun, PiG tip, PiG 0.4.1 and Pi-Bolt (adaptive, up to 12 rounds); A/A"
+
+# Local sites calibrate themselves (every session has its own A/A gate); this table is read on a cluster only and the plan format requires it.
+[calibrate]
+workloads = ["overhead/version", "overhead/print", "overhead/rpc"]
+rounds = 12
+
+[[family]]
+name = "core"
+workloads = ["overhead/version", "overhead/print", "overhead/print-tools", "overhead/rpc"]
+arms = ["pi-node", "pi-bun", "pibolt", "pig-tip", "pig-0.4.1", "rpi", "octet", "opencode-v2", "codex", "claude-code", "copilot"]
+rounds = 12
+
+[[family]]
+name = "focus-overhead"
+workloads = ["overhead/pty", "overhead/print-ext5", "overhead/rpc-ext5", "overhead/print-ext10", "overhead/rpc-ext10", "overhead/print-write"]
+arms = ["pi-node", "pi-bun", "pig-tip", "pig-0.4.1", "pibolt"]
+apis = ["openai-completions"]
+rounds = 12
+adaptive = true
+
+# stream_n = 6000 is the default: each streaming workload runs the 6,000-character answer and the 60,000-character one.
+[[family]]
+name = "focus-streaming"
+workloads = ["streaming/tui-prose", "streaming/print-prose"]
+arms = ["pi-node", "pi-bun", "pig-tip", "pig-0.4.1", "pibolt"]
+apis = ["openai-completions"]
+rounds = 12
+adaptive = true
+params = { stream_n = 6000 }
+
+[[family]]
+name = "focus-longsession"
+workloads = ["longsession/resume-n", "longsession/resume-n-varied"]
+arms = ["pi-node", "pi-bun", "pig-tip", "pig-0.4.1", "pibolt"]
+apis = ["openai-completions"]
+rounds = 12
+adaptive = true

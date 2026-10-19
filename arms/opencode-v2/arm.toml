@@ -1,0 +1,46 @@
+name = "opencode-v2"
+label = "OpenCode 2"
+homepage = "https://opencode.ai"
+relation = "reference"
+licence = "MIT"
+licence_url = "https://github.com/anomalyco/opencode/blob/dev/LICENSE"
+restrictions = ""
+version = "2.0.29"
+notes = "Unrelated to Pi; a reference point. The 2.x line (npm `@opencode/cli`, its `latest` tag since 2.0.0 of 2026-09-11; the command is still `opencode`, also installed as `opencode2`): it has a new plugin API, server API and terminal config, and still loads supported V1 server config (docs: migrate-v1). `run --standalone` starts a private server inside the measured process tree; without it the CLI would start or reuse one shared background service outside it. It sends a title-generation request without tools before the scripted turn, so its request counts are not exact."
+
+[npm]
+package = "@opencode/cli"
+version = "2.0.29"
+integrity = "sha512-1ZmbylUtiRvtN8YMLxBEN4u0tqhfKI0AQBPvgdCLYLbB8BS80e6cFnOhzHH6L663o4RVL5bMa/VleLh1hNX+NA=="
+package_lock = "package-lock.json"
+package_lock_sha256 = "afe4ef2f6eb18cd9e783a08b35e86e28a4a3fbd19ee931cf23375ad53b6a4843"
+bin = "node_modules/.bin/opencode"
+runtime = "node"
+
+[prepare]
+script = "prepare.py"
+
+[endpoint]
+apis = ["openai-completions"]
+writer = "writer.py"
+
+[env]
+BENCH_API_KEY = "{dummy_key}"
+OPENCODE_DISABLE_AUTOUPDATE = "true"
+OPENCODE_DISABLE_MODELS_FETCH = "true"
+
+[state]
+dirs = ["$XDG_CONFIG_HOME", "$XDG_DATA_HOME", "$XDG_CACHE_HOME", "$XDG_STATE_HOME"]
+
+[modes]
+version = ["--version"]
+print = ["run", "--standalone", "-m", "bench/{model}", "{prompt}"]
+pty = ["--standalone"]
+
+[cannot_run]
+print_session = "not wired: a session is a row in OpenCode's own SQLite database under XDG_DATA_HOME, addressed by an `ses_...` id it generates (`run --session <id>` continues one), so Buffon's `--session <file>` path template has no equivalent and the kill-and-resume workloads cannot use it"
+rpc = "no Pi-dialect RPC mode: V2 has an HTTP server API (`opencode serve`, `opencode api`) and ACP, neither is Pi's JSONL RPC"
+
+[capabilities]
+pi_extensions = "none"
+pi_session_format = false

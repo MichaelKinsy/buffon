@@ -1,0 +1,38 @@
+project = "Pi-Bolt"
+harnesses = ["pibolt", "pi-bolt-0.8.5"]
+maker = "OpenSec"
+maker_url = "https://github.com/opensec-git"
+tagline = "The Pi coding agent, compiled ahead of time to native code."
+tagline_source = "https://github.com/opensec-git/Pi-Bolt/blob/d82b859e811602994f482de351d941e2be9b63a5/README.md"
+readme_url = "https://github.com/opensec-git/Pi-Bolt/blob/bolt-v0.9.3/README.md"
+readme_ref = "bolt-v0.9.3"
+readme_title = "Pi-Bolt"
+readme_head = [
+    "The Pi coding agent, compiled ahead of time to native code.",
+    "One executable for Linux x86-64 and ARM64, macOS on Apple silicon and Windows x64. No JIT, no Node.js or Bun required.",
+]
+mark = "pi-bolt-mark.svg"
+mark_source = "https://raw.githubusercontent.com/opensec-git/Pi-Bolt/bolt-v0.9.3/docs/images/logo.svg"
+mark_ref = "bolt-v0.9.3"
+mark_sha256 = "234287d3ff90062f3de64b4ce1bd8f5b789b704a94c3d583be4de26e9e99d524"
+retrieved = "2026-10-18"
+licence = "MIT"
+
+[links]
+home = "https://pi-bolt.opensec.in"
+repo = "https://github.com/opensec-git/Pi-Bolt"
+docs = "https://github.com/opensec-git/Pi-Bolt/tree/pi-bolt/docs"
+releases = "https://github.com/opensec-git/Pi-Bolt/releases"
+issues = "https://github.com/opensec-git/Pi-Bolt/issues"
+licence = "https://github.com/opensec-git/Pi-Bolt/blob/pi-bolt/LICENSE"
+benchmarks = "https://github.com/opensec-git/Pi-Bolt/blob/pi-bolt/docs/BENCHMARKS.md"
+
+[[quotes]]
+text = "Pi-Bolt is the Pi you already use, with the same commands, sessions, settings, providers and extensions. Every function is compiled to machine code when the executable is built, so nothing is parsed or JIT-compiled at launch."
+source = "https://github.com/opensec-git/Pi-Bolt/blob/d82b859e811602994f482de351d941e2be9b63a5/README.md"
+about = "design"
+
+[[quotes]]
+text = "It starts two to three times sooner than Pi on Bun and uses about a third of its CPU over a session; against Pi on Node it streams long answers and writes large files 18 to 100 times more cheaply."
+source = "https://github.com/opensec-git/Pi-Bolt/blob/d82b859e811602994f482de351d941e2be9b63a5/README.md"
+about = "performance"

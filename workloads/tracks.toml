@@ -1,0 +1,75 @@
+# The three tracks of Buffon (docs/TRACKS.md). A track is a few plain questions; each question names the existing benchmarks that answer it.
+# `workloads` are wired and run. `coming` names benchmarks that are designed and not built: a screen shows them as a "coming" chip, never as a number.
+# Track 3 is not here: its scenarios are the recipes in workloads/recipes/, each a fixed combination of the benchmarks below.
+
+[track.common]
+title = "Common ground"
+about = "Every harness, compared fairly."
+conditions = ["typical", "lab"]
+
+[[track.common.question]]
+id = "speed"
+title = "Speed"
+sentence = "How fast does it start, answer and keep going in a long session?"
+workloads = ["overhead/version", "overhead/print", "overhead/print-tools", "longsession/resume-n", "longsession/resume-n-varied"]
+chart = "number"
+
+[[track.common.question]]
+id = "memory"
+title = "Memory"
+sentence = "How much memory does it hold when idle and after a long session?"
+workloads = ["overhead/print", "longsession/resume-n", "longsession/resume-n-varied", "longsession/resume-n10", "longsession/resume-n10-varied", "soak/realistic"]
+chart = "number"
+
+[[track.common.question]]
+id = "reliability"
+title = "Reliability"
+sentence = "Does it recover from faults and never lose work?"
+workloads = ["reliability/faults"]
+chart = "number"
+
+[track.pi]
+title = "Pi family"
+about = "Harnesses that run Pi's extensions, sessions or RPC: Pi on Node and Bun, PiG, Pi-Bolt and other Pi-compatible builds. A harness without one of these shows n/a where it is needed."
+conditions = ["typical", "lab"]
+isolation = "container"
+
+[[track.pi.question]]
+id = "compatibility"
+title = "Runs Pi's interfaces"
+sentence = "Does it load Pi extensions, resume Pi sessions and speak Pi's RPC? Each is a yes or no, proven by the workload running."
+workloads = ["overhead/print-ext10", "longsession/resume-n", "longsession/resume-n-varied", "overhead/rpc"]
+chart = "number"
+
+[[track.pi.question]]
+id = "agents"
+title = "Scales with parallel agents"
+sentence = "How many agents can one container hold, without and with ten extensions? A search doubles the agents in one container with a memory limit until one run fails, then bisects to the exact number."
+workloads = ["scale/agents-limit", "scale/agents-ext10", "scale/print-limit", "scale/print-ext10"]
+chart = "number"
+
+[[track.pi.question]]
+id = "extensions"
+title = "Scales with extensions"
+sentence = "What do more extensions cost at start-up and on every turn? Zero extensions is plain print and rpc."
+workloads = ["overhead/print", "overhead/print-ext5", "overhead/print-ext10", "overhead/print-ext50", "overhead/print-ext100", "overhead/rpc", "overhead/rpc-ext5", "overhead/rpc-ext10", "overhead/rpc-ext50", "overhead/rpc-ext100"]
+coming = ["real-extensions"]
+chart = "line"
+steps = [0, 5, 10, 50, 100]
+rungs = [{ at = "0", workload = "overhead/print" }, { at = "5", workload = "overhead/print-ext5" }, { at = "10", workload = "overhead/print-ext10" }, { at = "50", workload = "overhead/print-ext50" }, { at = "100", workload = "overhead/print-ext100" }]
+
+[[track.pi.question]]
+id = "session-size"
+title = "Scales with session size"
+sentence = "What does a bigger session cost in turn time, resume time and memory?"
+workloads = ["overhead/print", "longsession/resume-n", "longsession/resume-n-varied", "longsession/resume-n10", "longsession/resume-n10-varied", "longsession/resume-4m2", "longsession/grow-n"]
+chart = "line"
+steps = ["1 prompt", "1k turns", "4.2M tokens"]
+rungs = [{ at = "1 prompt", workload = "overhead/print" }, { at = "1k turns", workload = "longsession/resume-n10" }, { at = "4.2M tokens", workload = "longsession/resume-4m2" }]
+
+[[track.pi.question]]
+id = "streaming"
+title = "Streaming and wire efficiency"
+sentence = "What does rendering a streamed answer cost, for each kind of content?"
+workloads = ["streaming/print-prose", "streaming/print-code", "streaming/print-tables", "streaming/print-lists", "streaming/tui-prose", "streaming/tui-code", "streaming/tui-tables", "streaming/tui-lists"]
+chart = "number"

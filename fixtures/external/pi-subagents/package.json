@@ -1,0 +1,8 @@
+{
+  "name": "fixture-pi-subagents",
+  "private": true,
+  "description": "nicobailon/pi-subagents, frozen: the exact version, its lockfile and its integrity (Buffon compatibility row)",
+  "dependencies": {
+    "pi-subagents": "0.77.0"
+  }
+}

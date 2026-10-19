@@ -1,0 +1,1141 @@
+[
+{
+"pkg": "@earendil-works/pi-coding-agent",
+"spec": "@earendil-works/pi-coding-agent",
+"version": "1.1.0"
+},
+{
+"pkg": "@earendil-works/pi-coding-agent",
+"spec": "@earendil-works/pi-coding-agent/rpc-entry",
+"version": "1.1.0"
+},
+{
+"pkg": "@earendil-works/pi-coding-agent",
+"spec": "@earendil-works/pi-coding-agent/client",
+"version": "1.1.0"
+},
+{
+"pkg": "@earendil-works/pi-coding-agent",
+"spec": "@earendil-works/pi-coding-agent/experimental/plugin",
+"version": "1.1.0"
+},
+{
+"pkg": "@earendil-works/chord",
+"spec": "@earendil-works/chord",
+"version": "1.1.0"
+},
+{
+"pkg": "@earendil-works/chord",
+"spec": "@earendil-works/chord/context",
+"version": "1.1.0"
+},
+{
+"pkg": "@earendil-works/chord",
+"spec": "@earendil-works/chord/delta",
+"version": "1.1.0"
+},
+{
+"pkg": "@earendil-works/chord",
+"spec": "@earendil-works/chord/bundler",
+"version": "1.1.0"
+},
+{
+"pkg": "@earendil-works/chord",
+"spec": "@earendil-works/chord/node",
+"version": "1.1.0"
+},
+{
+"pkg": "@earendil-works/chord",
+"spec": "@earendil-works/chord/package.json",
+"version": "1.1.0"
+},
+{
+"pkg": "@earendil-works/pi-agent-core",
+"spec": "@earendil-works/pi-agent-core",
+"version": "1.1.0"
+},
+{
+"pkg": "@earendil-works/pi-agent-core",
+"spec": "@earendil-works/pi-agent-core/package.json",
+"version": "1.1.0"
+},
+{
+"pkg": "@earendil-works/pi-ai",
+"spec": "@earendil-works/pi-ai",
+"version": "1.1.0"
+},
+{
+"pkg": "@earendil-works/pi-ai",
+"spec": "@earendil-works/pi-ai/models",
+"version": "1.1.0"
+},
+{
+"pkg": "@earendil-works/pi-ai",
+"spec": "@earendil-works/pi-ai/compat",
+"version": "1.1.0"
+},
+{
+"pkg": "@earendil-works/pi-ai",
+"spec": "@earendil-works/pi-ai/providers/all",
+"version": "1.1.0",
+"wild": "./providers/*"
+},
+{
+"pkg": "@earendil-works/pi-ai",
+"spec": "@earendil-works/pi-ai/providers/amazon-bedrock",
+"version": "1.1.0",
+"wild": "./providers/*"
+},
+{
+"pkg": "@earendil-works/pi-ai",
+"spec": "@earendil-works/pi-ai/providers/amazon-bedrock.models",
+"version": "1.1.0",
+"wild": "./providers/*"
+},
+{
+"pkg": "@earendil-works/pi-ai",
+"spec": "@earendil-works/pi-ai/providers/ant-ling",
+"version": "1.1.0",
+"wild": "./providers/*"
+},
+{
+"pkg": "@earendil-works/pi-ai",
+"spec": "@earendil-works/pi-ai/providers/ant-ling.models",
+"version": "1.1.0",
+"wild": "./providers/*"
+},
+{
+"pkg": "@earendil-works/pi-ai",
+"spec": "@earendil-works/pi-ai/providers/anthropic",
+"version": "1.1.0",
+"wild": "./providers/*"
+},
+{
+"pkg": "@earendil-works/pi-ai",
+"spec": "@earendil-works/pi-ai/providers/anthropic.models",
+"version": "1.1.0",
+"wild": "./providers/*"
+},
+{
+"pkg": "@earendil-works/pi-ai",
+"spec": "@earendil-works/pi-ai/providers/azure",
+"version": "1.1.0",
+"wild": "./providers/*"
+},
+{
+"pkg": "@earendil-works/pi-ai",
+"spec": "@earendil-works/pi-ai/providers/azure.models",
+"version": "1.1.0",
+"wild": "./providers/*"
+},
+{
+"pkg": "@earendil-works/pi-ai",
+"spec": "@earendil-works/pi-ai/providers/baseten",
+"version": "1.1.0",
+"wild": "./providers/*"
+},
+{
+"pkg": "@earendil-works/pi-ai",
+"spec": "@earendil-works/pi-ai/providers/baseten.models",
+"version": "1.1.0",
+"wild": "./providers/*"
+},
+{
+"pkg": "@earendil-works/pi-ai",
+"spec": "@earendil-works/pi-ai/providers/cerebras",
+"version": "1.1.0",
+"wild": "./providers/*"
+},
+{
+"pkg": "@earendil-works/pi-ai",
+"spec": "@earendil-works/pi-ai/providers/cerebras.models",
+"version": "1.1.0",
+"wild": "./providers/*"
+},
+{
+"pkg": "@earendil-works/pi-ai",
+"spec": "@earendil-works/pi-ai/providers/cloudflare-ai-gateway",
+"version": "1.1.0",
+"wild": "./providers/*"
+},
+{
+"pkg": "@earendil-works/pi-ai",
+"spec": "@earendil-works/pi-ai/providers/cloudflare-ai-gateway.models",
+"version": "1.1.0",
+"wild": "./providers/*"
+},
+{
+"pkg": "@earendil-works/pi-ai",
+"spec": "@earendil-works/pi-ai/providers/cloudflare-auth",
+"version": "1.1.0",
+"wild": "./providers/*"
+},
+{
+"pkg": "@earendil-works/pi-ai",
+"spec": "@earendil-works/pi-ai/providers/cloudflare-stream",
+"version": "1.1.0",
+"wild": "./providers/*"
+},
+{
+"pkg": "@earendil-works/pi-ai",
+"spec": "@earendil-works/pi-ai/providers/cloudflare-workers-ai",
+"version": "1.1.0",
+"wild": "./providers/*"
+},
+{
+"pkg": "@earendil-works/pi-ai",
+"spec": "@earendil-works/pi-ai/providers/cloudflare-workers-ai.models",
+"version": "1.1.0",
+"wild": "./providers/*"
+},
+{
+"pkg": "@earendil-works/pi-ai",
+"spec": "@earendil-works/pi-ai/providers/deepseek",
+"version": "1.1.0",
+"wild": "./providers/*"
+},
+{
+"pkg": "@earendil-works/pi-ai",
+"spec": "@earendil-works/pi-ai/providers/deepseek.models",
+"version": "1.1.0",
+"wild": "./providers/*"
+},
+{
+"pkg": "@earendil-works/pi-ai",
+"spec": "@earendil-works/pi-ai/providers/faux",
+"version": "1.1.0",
+"wild": "./providers/*"
+},
+{
+"pkg": "@earendil-works/pi-ai",
+"spec": "@earendil-works/pi-ai/providers/fireworks",
+"version": "1.1.0",
+"wild": "./providers/*"
+},
+{
+"pkg": "@earendil-works/pi-ai",
+"spec": "@earendil-works/pi-ai/providers/fireworks.models",
+"version": "1.1.0",
+"wild": "./providers/*"
+},
+{
+"pkg": "@earendil-works/pi-ai",
+"spec": "@earendil-works/pi-ai/providers/github-copilot",
+"version": "1.1.0",
+"wild": "./providers/*"
+},
+{
+"pkg": "@earendil-works/pi-ai",
+"spec": "@earendil-works/pi-ai/providers/github-copilot.models",
+"version": "1.1.0",
+"wild": "./providers/*"
+},
+{
+"pkg": "@earendil-works/pi-ai",
+"spec": "@earendil-works/pi-ai/providers/google-vertex",
+"version": "1.1.0",
+"wild": "./providers/*"
+},
+{
+"pkg": "@earendil-works/pi-ai",
+"spec": "@earendil-works/pi-ai/providers/google-vertex.models",
+"version": "1.1.0",
+"wild": "./providers/*"
+},
+{
+"pkg": "@earendil-works/pi-ai",
+"spec": "@earendil-works/pi-ai/providers/google",
+"version": "1.1.0",
+"wild": "./providers/*"
+},
+{
+"pkg": "@earendil-works/pi-ai",
+"spec": "@earendil-works/pi-ai/providers/google.models",
+"version": "1.1.0",
+"wild": "./providers/*"
+},
+{
+"pkg": "@earendil-works/pi-ai",
+"spec": "@earendil-works/pi-ai/providers/groq",
+"version": "1.1.0",
+"wild": "./providers/*"
+},
+{
+"pkg": "@earendil-works/pi-ai",
+"spec": "@earendil-works/pi-ai/providers/groq.models",
+"version": "1.1.0",
+"wild": "./providers/*"
+},
+{
+"pkg": "@earendil-works/pi-ai",
+"spec": "@earendil-works/pi-ai/providers/huggingface",
+"version": "1.1.0",
+"wild": "./providers/*"
+},
+{
+"pkg": "@earendil-works/pi-ai",
+"spec": "@earendil-works/pi-ai/providers/huggingface.models",
+"version": "1.1.0",
+"wild": "./providers/*"
+},
+{
+"pkg": "@earendil-works/pi-ai",
+"spec": "@earendil-works/pi-ai/providers/kimi-coding",
+"version": "1.1.0",
+"wild": "./providers/*"
+},
+{
+"pkg": "@earendil-works/pi-ai",
+"spec": "@earendil-works/pi-ai/providers/kimi-coding.models",
+"version": "1.1.0",
+"wild": "./providers/*"
+},
+{
+"pkg": "@earendil-works/pi-ai",
+"spec": "@earendil-works/pi-ai/providers/meta",
+"version": "1.1.0",
+"wild": "./providers/*"
+},
+{
+"pkg": "@earendil-works/pi-ai",
+"spec": "@earendil-works/pi-ai/providers/meta.models",
+"version": "1.1.0",
+"wild": "./providers/*"
+},
+{
+"pkg": "@earendil-works/pi-ai",
+"spec": "@earendil-works/pi-ai/providers/minimax-cn",
+"version": "1.1.0",
+"wild": "./providers/*"
+},
+{
+"pkg": "@earendil-works/pi-ai",
+"spec": "@earendil-works/pi-ai/providers/minimax-cn.models",
+"version": "1.1.0",
+"wild": "./providers/*"
+},
+{
+"pkg": "@earendil-works/pi-ai",
+"spec": "@earendil-works/pi-ai/providers/minimax",
+"version": "1.1.0",
+"wild": "./providers/*"
+},
+{
+"pkg": "@earendil-works/pi-ai",
+"spec": "@earendil-works/pi-ai/providers/minimax.models",
+"version": "1.1.0",
+"wild": "./providers/*"
+},
+{
+"pkg": "@earendil-works/pi-ai",
+"spec": "@earendil-works/pi-ai/providers/mistral",
+"version": "1.1.0",
+"wild": "./providers/*"
+},
+{
+"pkg": "@earendil-works/pi-ai",
+"spec": "@earendil-works/pi-ai/providers/mistral.models",
+"version": "1.1.0",
+"wild": "./providers/*"
+},
+{
+"pkg": "@earendil-works/pi-ai",
+"spec": "@earendil-works/pi-ai/providers/moonshotai-cn",
+"version": "1.1.0",
+"wild": "./providers/*"
+},
+{
+"pkg": "@earendil-works/pi-ai",
+"spec": "@earendil-works/pi-ai/providers/moonshotai-cn.models",
+"version": "1.1.0",
+"wild": "./providers/*"
+},
+{
+"pkg": "@earendil-works/pi-ai",
+"spec": "@earendil-works/pi-ai/providers/moonshotai",
+"version": "1.1.0",
+"wild": "./providers/*"
+},
+{
+"pkg": "@earendil-works/pi-ai",
+"spec": "@earendil-works/pi-ai/providers/moonshotai.models",
+"version": "1.1.0",
+"wild": "./providers/*"
+},
+{
+"pkg": "@earendil-works/pi-ai",
+"spec": "@earendil-works/pi-ai/providers/nvidia",
+"version": "1.1.0",
+"wild": "./providers/*"
+},
+{
+"pkg": "@earendil-works/pi-ai",
+"spec": "@earendil-works/pi-ai/providers/nvidia.models",
+"version": "1.1.0",
+"wild": "./providers/*"
+},
+{
+"pkg": "@earendil-works/pi-ai",
+"spec": "@earendil-works/pi-ai/providers/openai-codex",
+"version": "1.1.0",
+"wild": "./providers/*"
+},
+{
+"pkg": "@earendil-works/pi-ai",
+"spec": "@earendil-works/pi-ai/providers/openai-codex.models",
+"version": "1.1.0",
+"wild": "./providers/*"
+},
+{
+"pkg": "@earendil-works/pi-ai",
+"spec": "@earendil-works/pi-ai/providers/openai",
+"version": "1.1.0",
+"wild": "./providers/*"
+},
+{
+"pkg": "@earendil-works/pi-ai",
+"spec": "@earendil-works/pi-ai/providers/openai.models",
+"version": "1.1.0",
+"wild": "./providers/*"
+},
+{
+"pkg": "@earendil-works/pi-ai",
+"spec": "@earendil-works/pi-ai/providers/opencode-go",
+"version": "1.1.0",
+"wild": "./providers/*"
+},
+{
+"pkg": "@earendil-works/pi-ai",
+"spec": "@earendil-works/pi-ai/providers/opencode-go.models",
+"version": "1.1.0",
+"wild": "./providers/*"
+},
+{
+"pkg": "@earendil-works/pi-ai",
+"spec": "@earendil-works/pi-ai/providers/opencode-headers",
+"version": "1.1.0",
+"wild": "./providers/*"
+},
+{
+"pkg": "@earendil-works/pi-ai",
+"spec": "@earendil-works/pi-ai/providers/opencode",
+"version": "1.1.0",
+"wild": "./providers/*"
+},
+{
+"pkg": "@earendil-works/pi-ai",
+"spec": "@earendil-works/pi-ai/providers/opencode.models",
+"version": "1.1.0",
+"wild": "./providers/*"
+},
+{
+"pkg": "@earendil-works/pi-ai",
+"spec": "@earendil-works/pi-ai/providers/openrouter",
+"version": "1.1.0",
+"wild": "./providers/*"
+},
+{
+"pkg": "@earendil-works/pi-ai",
+"spec": "@earendil-works/pi-ai/providers/openrouter.models",
+"version": "1.1.0",
+"wild": "./providers/*"
+},
+{
+"pkg": "@earendil-works/pi-ai",
+"spec": "@earendil-works/pi-ai/providers/qwen-token-plan-cn",
+"version": "1.1.0",
+"wild": "./providers/*"
+},
+{
+"pkg": "@earendil-works/pi-ai",
+"spec": "@earendil-works/pi-ai/providers/qwen-token-plan-cn.models",
+"version": "1.1.0",
+"wild": "./providers/*"
+},
+{
+"pkg": "@earendil-works/pi-ai",
+"spec": "@earendil-works/pi-ai/providers/qwen-token-plan-individual",
+"version": "1.1.0",
+"wild": "./providers/*"
+},
+{
+"pkg": "@earendil-works/pi-ai",
+"spec": "@earendil-works/pi-ai/providers/qwen-token-plan-individual.models",
+"version": "1.1.0",
+"wild": "./providers/*"
+},
+{
+"pkg": "@earendil-works/pi-ai",
+"spec": "@earendil-works/pi-ai/providers/qwen-token-plan",
+"version": "1.1.0",
+"wild": "./providers/*"
+},
+{
+"pkg": "@earendil-works/pi-ai",
+"spec": "@earendil-works/pi-ai/providers/qwen-token-plan.models",
+"version": "1.1.0",
+"wild": "./providers/*"
+},
+{
+"pkg": "@earendil-works/pi-ai",
+"spec": "@earendil-works/pi-ai/providers/radius-config",
+"version": "1.1.0",
+"wild": "./providers/*"
+},
+{
+"pkg": "@earendil-works/pi-ai",
+"spec": "@earendil-works/pi-ai/providers/radius",
+"version": "1.1.0",
+"wild": "./providers/*"
+},
+{
+"pkg": "@earendil-works/pi-ai",
+"spec": "@earendil-works/pi-ai/providers/radius.models",
+"version": "1.1.0",
+"wild": "./providers/*"
+},
+{
+"pkg": "@earendil-works/pi-ai",
+"spec": "@earendil-works/pi-ai/providers/together",
+"version": "1.1.0",
+"wild": "./providers/*"
+},
+{
+"pkg": "@earendil-works/pi-ai",
+"spec": "@earendil-works/pi-ai/providers/together.models",
+"version": "1.1.0",
+"wild": "./providers/*"
+},
+{
+"pkg": "@earendil-works/pi-ai",
+"spec": "@earendil-works/pi-ai/providers/typesafe",
+"version": "1.1.0",
+"wild": "./providers/*"
+},
+{
+"pkg": "@earendil-works/pi-ai",
+"spec": "@earendil-works/pi-ai/providers/typesafe.models",
+"version": "1.1.0",
+"wild": "./providers/*"
+},
+{
+"pkg": "@earendil-works/pi-ai",
+"spec": "@earendil-works/pi-ai/providers/vercel-ai-gateway",
+"version": "1.1.0",
+"wild": "./providers/*"
+},
+{
+"pkg": "@earendil-works/pi-ai",
+"spec": "@earendil-works/pi-ai/providers/vercel-ai-gateway.models",
+"version": "1.1.0",
+"wild": "./providers/*"
+},
+{
+"pkg": "@earendil-works/pi-ai",
+"spec": "@earendil-works/pi-ai/providers/xai",
+"version": "1.1.0",
+"wild": "./providers/*"
+},
+{
+"pkg": "@earendil-works/pi-ai",
+"spec": "@earendil-works/pi-ai/providers/xai.models",
+"version": "1.1.0",
+"wild": "./providers/*"
+},
+{
+"pkg": "@earendil-works/pi-ai",
+"spec": "@earendil-works/pi-ai/providers/xiaomi-token-plan-ams",
+"version": "1.1.0",
+"wild": "./providers/*"
+},
+{
+"pkg": "@earendil-works/pi-ai",
+"spec": "@earendil-works/pi-ai/providers/xiaomi-token-plan-ams.models",
+"version": "1.1.0",
+"wild": "./providers/*"
+},
+{
+"pkg": "@earendil-works/pi-ai",
+"spec": "@earendil-works/pi-ai/providers/xiaomi-token-plan-cn",
+"version": "1.1.0",
+"wild": "./providers/*"
+},
+{
+"pkg": "@earendil-works/pi-ai",
+"spec": "@earendil-works/pi-ai/providers/xiaomi-token-plan-cn.models",
+"version": "1.1.0",
+"wild": "./providers/*"
+},
+{
+"pkg": "@earendil-works/pi-ai",
+"spec": "@earendil-works/pi-ai/providers/xiaomi-token-plan-sgp",
+"version": "1.1.0",
+"wild": "./providers/*"
+},
+{
+"pkg": "@earendil-works/pi-ai",
+"spec": "@earendil-works/pi-ai/providers/xiaomi-token-plan-sgp.models",
+"version": "1.1.0",
+"wild": "./providers/*"
+},
+{
+"pkg": "@earendil-works/pi-ai",
+"spec": "@earendil-works/pi-ai/providers/xiaomi",
+"version": "1.1.0",
+"wild": "./providers/*"
+},
+{
+"pkg": "@earendil-works/pi-ai",
+"spec": "@earendil-works/pi-ai/providers/xiaomi.models",
+"version": "1.1.0",
+"wild": "./providers/*"
+},
+{
+"pkg": "@earendil-works/pi-ai",
+"spec": "@earendil-works/pi-ai/providers/zai-coding-cn",
+"version": "1.1.0",
+"wild": "./providers/*"
+},
+{
+"pkg": "@earendil-works/pi-ai",
+"spec": "@earendil-works/pi-ai/providers/zai-coding-cn.models",
+"version": "1.1.0",
+"wild": "./providers/*"
+},
+{
+"pkg": "@earendil-works/pi-ai",
+"spec": "@earendil-works/pi-ai/providers/zai",
+"version": "1.1.0",
+"wild": "./providers/*"
+},
+{
+"pkg": "@earendil-works/pi-ai",
+"spec": "@earendil-works/pi-ai/providers/zai.models",
+"version": "1.1.0",
+"wild": "./providers/*"
+},
+{
+"pkg": "@earendil-works/pi-ai",
+"spec": "@earendil-works/pi-ai/api/anthropic-messages",
+"version": "1.1.0",
+"wild": "./api/*"
+},
+{
+"pkg": "@earendil-works/pi-ai",
+"spec": "@earendil-works/pi-ai/api/anthropic-messages.lazy",
+"version": "1.1.0",
+"wild": "./api/*"
+},
+{
+"pkg": "@earendil-works/pi-ai",
+"spec": "@earendil-works/pi-ai/api/azure-openai-config",
+"version": "1.1.0",
+"wild": "./api/*"
+},
+{
+"pkg": "@earendil-works/pi-ai",
+"spec": "@earendil-works/pi-ai/api/azure-openai-responses",
+"version": "1.1.0",
+"wild": "./api/*"
+},
+{
+"pkg": "@earendil-works/pi-ai",
+"spec": "@earendil-works/pi-ai/api/azure-openai-responses.lazy",
+"version": "1.1.0",
+"wild": "./api/*"
+},
+{
+"pkg": "@earendil-works/pi-ai",
+"spec": "@earendil-works/pi-ai/api/bedrock-converse-stream",
+"version": "1.1.0",
+"wild": "./api/*"
+},
+{
+"pkg": "@earendil-works/pi-ai",
+"spec": "@earendil-works/pi-ai/api/bedrock-converse-stream.lazy",
+"version": "1.1.0",
+"wild": "./api/*"
+},
+{
+"pkg": "@earendil-works/pi-ai",
+"spec": "@earendil-works/pi-ai/api/classifier-shared",
+"version": "1.1.0",
+"wild": "./api/*"
+},
+{
+"pkg": "@earendil-works/pi-ai",
+"spec": "@earendil-works/pi-ai/api/cloudflare-ai-binding",
+"version": "1.1.0",
+"wild": "./api/*"
+},
+{
+"pkg": "@earendil-works/pi-ai",
+"spec": "@earendil-works/pi-ai/api/cloudflare-workers-ai-system-one",
+"version": "1.1.0",
+"wild": "./api/*"
+},
+{
+"pkg": "@earendil-works/pi-ai",
+"spec": "@earendil-works/pi-ai/api/cloudflare-workers-ai-system-one.lazy",
+"version": "1.1.0",
+"wild": "./api/*"
+},
+{
+"pkg": "@earendil-works/pi-ai",
+"spec": "@earendil-works/pi-ai/api/cloudflare",
+"version": "1.1.0",
+"wild": "./api/*"
+},
+{
+"pkg": "@earendil-works/pi-ai",
+"spec": "@earendil-works/pi-ai/api/constrained-sampling",
+"version": "1.1.0",
+"wild": "./api/*"
+},
+{
+"pkg": "@earendil-works/pi-ai",
+"spec": "@earendil-works/pi-ai/api/github-copilot-headers",
+"version": "1.1.0",
+"wild": "./api/*"
+},
+{
+"pkg": "@earendil-works/pi-ai",
+"spec": "@earendil-works/pi-ai/api/google-generative-ai",
+"version": "1.1.0",
+"wild": "./api/*"
+},
+{
+"pkg": "@earendil-works/pi-ai",
+"spec": "@earendil-works/pi-ai/api/google-generative-ai.lazy",
+"version": "1.1.0",
+"wild": "./api/*"
+},
+{
+"pkg": "@earendil-works/pi-ai",
+"spec": "@earendil-works/pi-ai/api/google-shared",
+"version": "1.1.0",
+"wild": "./api/*"
+},
+{
+"pkg": "@earendil-works/pi-ai",
+"spec": "@earendil-works/pi-ai/api/google-vertex",
+"version": "1.1.0",
+"wild": "./api/*"
+},
+{
+"pkg": "@earendil-works/pi-ai",
+"spec": "@earendil-works/pi-ai/api/google-vertex.lazy",
+"version": "1.1.0",
+"wild": "./api/*"
+},
+{
+"pkg": "@earendil-works/pi-ai",
+"spec": "@earendil-works/pi-ai/api/lazy",
+"version": "1.1.0",
+"wild": "./api/*"
+},
+{
+"pkg": "@earendil-works/pi-ai",
+"spec": "@earendil-works/pi-ai/api/llama-cpp-classify",
+"version": "1.1.0",
+"wild": "./api/*"
+},
+{
+"pkg": "@earendil-works/pi-ai",
+"spec": "@earendil-works/pi-ai/api/llama-cpp-classify.lazy",
+"version": "1.1.0",
+"wild": "./api/*"
+},
+{
+"pkg": "@earendil-works/pi-ai",
+"spec": "@earendil-works/pi-ai/api/mistral-conversations",
+"version": "1.1.0",
+"wild": "./api/*"
+},
+{
+"pkg": "@earendil-works/pi-ai",
+"spec": "@earendil-works/pi-ai/api/mistral-conversations.lazy",
+"version": "1.1.0",
+"wild": "./api/*"
+},
+{
+"pkg": "@earendil-works/pi-ai",
+"spec": "@earendil-works/pi-ai/api/openai-codex-responses",
+"version": "1.1.0",
+"wild": "./api/*"
+},
+{
+"pkg": "@earendil-works/pi-ai",
+"spec": "@earendil-works/pi-ai/api/openai-codex-responses.lazy",
+"version": "1.1.0",
+"wild": "./api/*"
+},
+{
+"pkg": "@earendil-works/pi-ai",
+"spec": "@earendil-works/pi-ai/api/openai-completions",
+"version": "1.1.0",
+"wild": "./api/*"
+},
+{
+"pkg": "@earendil-works/pi-ai",
+"spec": "@earendil-works/pi-ai/api/openai-completions.lazy",
+"version": "1.1.0",
+"wild": "./api/*"
+},
+{
+"pkg": "@earendil-works/pi-ai",
+"spec": "@earendil-works/pi-ai/api/openai-decisions",
+"version": "1.1.0",
+"wild": "./api/*"
+},
+{
+"pkg": "@earendil-works/pi-ai",
+"spec": "@earendil-works/pi-ai/api/openai-decisions.lazy",
+"version": "1.1.0",
+"wild": "./api/*"
+},
+{
+"pkg": "@earendil-works/pi-ai",
+"spec": "@earendil-works/pi-ai/api/openai-prompt-cache",
+"version": "1.1.0",
+"wild": "./api/*"
+},
+{
+"pkg": "@earendil-works/pi-ai",
+"spec": "@earendil-works/pi-ai/api/openai-responses-shared",
+"version": "1.1.0",
+"wild": "./api/*"
+},
+{
+"pkg": "@earendil-works/pi-ai",
+"spec": "@earendil-works/pi-ai/api/openai-responses",
+"version": "1.1.0",
+"wild": "./api/*"
+},
+{
+"pkg": "@earendil-works/pi-ai",
+"spec": "@earendil-works/pi-ai/api/openai-responses.lazy",
+"version": "1.1.0",
+"wild": "./api/*"
+},
+{
+"pkg": "@earendil-works/pi-ai",
+"spec": "@earendil-works/pi-ai/api/openrouter-images",
+"version": "1.1.0",
+"wild": "./api/*"
+},
+{
+"pkg": "@earendil-works/pi-ai",
+"spec": "@earendil-works/pi-ai/api/openrouter-images.lazy",
+"version": "1.1.0",
+"wild": "./api/*"
+},
+{
+"pkg": "@earendil-works/pi-ai",
+"spec": "@earendil-works/pi-ai/api/pi-messages",
+"version": "1.1.0",
+"wild": "./api/*"
+},
+{
+"pkg": "@earendil-works/pi-ai",
+"spec": "@earendil-works/pi-ai/api/pi-messages.lazy",
+"version": "1.1.0",
+"wild": "./api/*"
+},
+{
+"pkg": "@earendil-works/pi-ai",
+"spec": "@earendil-works/pi-ai/api/simple-options",
+"version": "1.1.0",
+"wild": "./api/*"
+},
+{
+"pkg": "@earendil-works/pi-ai",
+"spec": "@earendil-works/pi-ai/api/system-one-shared",
+"version": "1.1.0",
+"wild": "./api/*"
+},
+{
+"pkg": "@earendil-works/pi-ai",
+"spec": "@earendil-works/pi-ai/api/transform-messages",
+"version": "1.1.0",
+"wild": "./api/*"
+},
+{
+"pkg": "@earendil-works/pi-ai",
+"spec": "@earendil-works/pi-ai/api/typesafe-system-one",
+"version": "1.1.0",
+"wild": "./api/*"
+},
+{
+"pkg": "@earendil-works/pi-ai",
+"spec": "@earendil-works/pi-ai/api/typesafe-system-one.lazy",
+"version": "1.1.0",
+"wild": "./api/*"
+},
+{
+"pkg": "@earendil-works/pi-ai",
+"spec": "@earendil-works/pi-ai/utils/abort-signals",
+"version": "1.1.0",
+"wild": "./utils/*"
+},
+{
+"pkg": "@earendil-works/pi-ai",
+"spec": "@earendil-works/pi-ai/utils/abort",
+"version": "1.1.0",
+"wild": "./utils/*"
+},
+{
+"pkg": "@earendil-works/pi-ai",
+"spec": "@earendil-works/pi-ai/utils/assistant-message-frame",
+"version": "1.1.0",
+"wild": "./utils/*"
+},
+{
+"pkg": "@earendil-works/pi-ai",
+"spec": "@earendil-works/pi-ai/utils/diagnostics",
+"version": "1.1.0",
+"wild": "./utils/*"
+},
+{
+"pkg": "@earendil-works/pi-ai",
+"spec": "@earendil-works/pi-ai/utils/error-body",
+"version": "1.1.0",
+"wild": "./utils/*"
+},
+{
+"pkg": "@earendil-works/pi-ai",
+"spec": "@earendil-works/pi-ai/utils/estimate",
+"version": "1.1.0",
+"wild": "./utils/*"
+},
+{
+"pkg": "@earendil-works/pi-ai",
+"spec": "@earendil-works/pi-ai/utils/event-stream",
+"version": "1.1.0",
+"wild": "./utils/*"
+},
+{
+"pkg": "@earendil-works/pi-ai",
+"spec": "@earendil-works/pi-ai/utils/hash",
+"version": "1.1.0",
+"wild": "./utils/*"
+},
+{
+"pkg": "@earendil-works/pi-ai",
+"spec": "@earendil-works/pi-ai/utils/headers",
+"version": "1.1.0",
+"wild": "./utils/*"
+},
+{
+"pkg": "@earendil-works/pi-ai",
+"spec": "@earendil-works/pi-ai/utils/json-parse",
+"version": "1.1.0",
+"wild": "./utils/*"
+},
+{
+"pkg": "@earendil-works/pi-ai",
+"spec": "@earendil-works/pi-ai/utils/model-operations",
+"version": "1.1.0",
+"wild": "./utils/*"
+},
+{
+"pkg": "@earendil-works/pi-ai",
+"spec": "@earendil-works/pi-ai/utils/models-error",
+"version": "1.1.0",
+"wild": "./utils/*"
+},
+{
+"pkg": "@earendil-works/pi-ai",
+"spec": "@earendil-works/pi-ai/utils/node-http-proxy",
+"version": "1.1.0",
+"wild": "./utils/*"
+},
+{
+"pkg": "@earendil-works/pi-ai",
+"spec": "@earendil-works/pi-ai/utils/oauth-page",
+"version": "1.1.0",
+"wild": "./utils/*"
+},
+{
+"pkg": "@earendil-works/pi-ai",
+"spec": "@earendil-works/pi-ai/utils/overflow",
+"version": "1.1.0",
+"wild": "./utils/*"
+},
+{
+"pkg": "@earendil-works/pi-ai",
+"spec": "@earendil-works/pi-ai/utils/pi-user-agent",
+"version": "1.1.0",
+"wild": "./utils/*"
+},
+{
+"pkg": "@earendil-works/pi-ai",
+"spec": "@earendil-works/pi-ai/utils/provider-env",
+"version": "1.1.0",
+"wild": "./utils/*"
+},
+{
+"pkg": "@earendil-works/pi-ai",
+"spec": "@earendil-works/pi-ai/utils/provider-retry",
+"version": "1.1.0",
+"wild": "./utils/*"
+},
+{
+"pkg": "@earendil-works/pi-ai",
+"spec": "@earendil-works/pi-ai/utils/retry",
+"version": "1.1.0",
+"wild": "./utils/*"
+},
+{
+"pkg": "@earendil-works/pi-ai",
+"spec": "@earendil-works/pi-ai/utils/sanitize-unicode",
+"version": "1.1.0",
+"wild": "./utils/*"
+},
+{
+"pkg": "@earendil-works/pi-ai",
+"spec": "@earendil-works/pi-ai/utils/sleep",
+"version": "1.1.0",
+"wild": "./utils/*"
+},
+{
+"pkg": "@earendil-works/pi-ai",
+"spec": "@earendil-works/pi-ai/utils/text",
+"version": "1.1.0",
+"wild": "./utils/*"
+},
+{
+"pkg": "@earendil-works/pi-ai",
+"spec": "@earendil-works/pi-ai/utils/transcript",
+"version": "1.1.0",
+"wild": "./utils/*"
+},
+{
+"pkg": "@earendil-works/pi-ai",
+"spec": "@earendil-works/pi-ai/utils/typebox-helpers",
+"version": "1.1.0",
+"wild": "./utils/*"
+},
+{
+"pkg": "@earendil-works/pi-ai",
+"spec": "@earendil-works/pi-ai/utils/uuid",
+"version": "1.1.0",
+"wild": "./utils/*"
+},
+{
+"pkg": "@earendil-works/pi-ai",
+"spec": "@earendil-works/pi-ai/utils/validation",
+"version": "1.1.0",
+"wild": "./utils/*"
+},
+{
+"pkg": "@earendil-works/pi-ai",
+"spec": "@earendil-works/pi-ai/oauth",
+"version": "1.1.0"
+},
+{
+"pkg": "@earendil-works/pi-ai",
+"spec": "@earendil-works/pi-ai/bedrock-provider",
+"version": "1.1.0"
+},
+{
+"pkg": "@earendil-works/pi-ai",
+"spec": "@earendil-works/pi-ai/bun-oauth",
+"version": "1.1.0"
+},
+{
+"pkg": "@earendil-works/pi-tui",
+"spec": "@earendil-works/pi-tui",
+"version": "1.1.0"
+},
+{
+"pkg": "@earendil-works/pi-codemode",
+"spec": "@earendil-works/pi-codemode",
+"version": "1.1.0"
+},
+{
+"pkg": "@earendil-works/pi-codemode",
+"spec": "@earendil-works/pi-codemode/declarations",
+"version": "1.1.0"
+},
+{
+"pkg": "@earendil-works/pi-codemode",
+"spec": "@earendil-works/pi-codemode/source",
+"version": "1.1.0"
+},
+{
+"pkg": "@earendil-works/pi-codemode",
+"spec": "@earendil-works/pi-codemode/worker",
+"version": "1.1.0"
+},
+{
+"pkg": "@earendil-works/pi-mcp",
+"spec": "@earendil-works/pi-mcp",
+"version": "1.1.0"
+},
+{
+"pkg": "@earendil-works/pi-mcp",
+"spec": "@earendil-works/pi-mcp/oauth",
+"version": "1.1.0"
+},
+{
+"pkg": "@earendil-works/pi-mcp",
+"spec": "@earendil-works/pi-mcp/testing",
+"version": "1.1.0"
+},
+{
+"pkg": "@earendil-works/pi-telemetry",
+"spec": "@earendil-works/pi-telemetry",
+"version": "1.1.0"
+},
+{
+"pkg": "@earendil-works/pi-telemetry",
+"spec": "@earendil-works/pi-telemetry/testing",
+"version": "1.1.0"
+},
+{
+"pkg": "typebox",
+"spec": "typebox/compile",
+"version": "1.3.27"
+},
+{
+"pkg": "typebox",
+"spec": "typebox/error",
+"version": "1.3.27"
+},
+{
+"pkg": "typebox",
+"spec": "typebox/format",
+"version": "1.3.27"
+},
+{
+"pkg": "typebox",
+"spec": "typebox/guard",
+"version": "1.3.27"
+},
+{
+"pkg": "typebox",
+"spec": "typebox/schema",
+"version": "1.3.27"
+},
+{
+"pkg": "typebox",
+"spec": "typebox/system",
+"version": "1.3.27"
+},
+{
+"pkg": "typebox",
+"spec": "typebox/type",
+"version": "1.3.27"
+},
+{
+"pkg": "typebox",
+"spec": "typebox/value",
+"version": "1.3.27"
+},
+{
+"pkg": "typebox",
+"spec": "typebox",
+"version": "1.3.27"
+}
+]

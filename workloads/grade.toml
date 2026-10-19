@@ -1,0 +1,147 @@
+# Pi Harness Score, method version 1 (docs/GRADE.md): the one place every family, metric, weight, band and gate of the grade lives.
+# Published before any run it judges: a change here is a new method version, never applied to an earlier run without a re-run.
+# `buffon grade --weights <file>` may replace only the weights (families and kinds), never anything else in this file.
+
+[method]
+version = 1
+reference_score = 70        # the reference arm scores this in every family by construction
+points_per_halving = 10     # each halving of cost adds this, each doubling subtracts it
+coverage_floor = 6          # an entry covering fewer families than this gets no overall score
+min_cell_fraction = 0.5     # a family is covered when the entry has at least this share of the reference's cells in it
+faithfulness_floor = 90     # below: "not Pi-equivalent", ranked in its own table
+gate_max_failed_fraction = 0.0   # correctness gate: a family in which more than this share of an entry's measured samples failed scores 0 (never applied to the reference)
+resamples = 1000            # bootstrap replicates for the overall score's interval
+level = 0.95
+
+[gate]
+# Only a correctness failure in the faithfulness probes (a tool that leaves wrong files or a wrong or missing result, a crash, a hang) gates a performance family, and only the families
+# that run tools. A presentation or semantics difference never gates; it is a deduction of the faithfulness score, which is shown beside the grade and ranks entries in separate tables.
+correctness_families = ["core", "ext10", "long-session"]
+
+[bands]
+# letter bands on the rounded score; the top and bottom `edge` points of a band take + and - (F has neither)
+A = 90
+B = 80
+C = 70
+D = 60
+edge = 3
+
+[weights.default]
+families = { core = 2, ext10 = 2, streaming = 2, large-write = 1, long-session = 1, scale = 1, search = 1, reliability = 2, devloop = 1 }
+kinds = { cpu = 1, memory = 1, time = 1 }
+
+[weights.equal]
+families = { core = 1, ext10 = 1, streaming = 1, large-write = 1, long-session = 1, scale = 1, search = 1, reliability = 1, devloop = 1 }
+kinds = { cpu = 1, memory = 1, time = 1 }
+
+[weights.cpu-heavy]
+families = { core = 2, ext10 = 2, streaming = 2, large-write = 1, long-session = 1, scale = 1, search = 1, reliability = 2, devloop = 1 }
+kinds = { cpu = 3, memory = 1, time = 1 }
+
+[weights.memory-heavy]
+families = { core = 2, ext10 = 2, streaming = 2, large-write = 1, long-session = 1, scale = 1, search = 1, reliability = 2, devloop = 1 }
+kinds = { cpu = 1, memory = 3, time = 1 }
+
+[weights.extension-heavy]
+families = { core = 2, ext10 = 6, streaming = 2, large-write = 1, long-session = 1, scale = 1, search = 1, reliability = 2, devloop = 1 }
+kinds = { cpu = 1, memory = 1, time = 1 }
+
+# Families, in report order. `needs` are the manifest claims the family requires (an entry that does not claim one is out of scope for the family, or missing it when
+# it is a Pi port and the claim is core). A family with no workload yet has no `metric` rows: it is listed, never scored, and counts against coverage.
+# Instructions are the headline CPU metric (M1): where a cell's instruction twin exists (`instructions` for `cpu_ms`, `*instructions_per_1k_tokens` for `*cpu_ms_per_1k_tokens`) the CPU-time cell is
+# shown in the report but left out of the grade, so one CPU cost is never counted twice and instructions are never mixed with CPU time in one number.
+# Wire metrics (requests, request_bytes, request_bytes_per_turn, side_requests) are shown in the report and never listed here: what a harness sends is a fact about it, not a cost the grade weighs.
+# Each metric row: scenario glob, metric glob, kind (cpu, memory, time), direction (lower is better unless `higher`).
+[[family]]
+id = "core"
+title = "Core: print, RPC turn, PTY first input"
+needs = []
+metric = [
+  { scenario = "overhead/print", metric = "instructions", kind = "cpu" },
+  { scenario = "overhead/print", metric = "cpu_ms", kind = "cpu" },
+  { scenario = "overhead/print", metric = "peak_rss_mib", kind = "memory" },
+  { scenario = "overhead/print-tools", metric = "instructions", kind = "cpu" },
+  { scenario = "overhead/print-tools", metric = "cpu_ms", kind = "cpu" },
+  { scenario = "overhead/print-tools", metric = "peak_rss_mib", kind = "memory" },
+  { scenario = "overhead/rpc", metric = "instructions", kind = "cpu" },
+  { scenario = "overhead/rpc", metric = "cpu_ms", kind = "cpu" },
+  { scenario = "overhead/rpc", metric = "peak_rss_mib", kind = "memory" },
+  { scenario = "overhead/pty", metric = "instructions", kind = "cpu" },
+  { scenario = "overhead/pty", metric = "cpu_ms", kind = "cpu" },
+  { scenario = "overhead/pty", metric = "peak_rss_mib", kind = "memory" },
+]
+
+[[family]]
+id = "ext10"
+title = "Ten extensions loaded"
+needs = ["pi-extensions"]
+metric = [
+  { scenario = "overhead/*-ext10", metric = "instructions", kind = "cpu" },
+  { scenario = "overhead/*-ext10", metric = "cpu_ms", kind = "cpu" },
+  { scenario = "overhead/*-ext10", metric = "peak_rss_mib", kind = "memory" },
+]
+
+[[family]]
+id = "streaming"
+title = "Streaming: prose, code, tables, lists"
+needs = []
+metric = [
+  { scenario = "streaming/*", metric = "*instructions_per_1k_tokens", kind = "cpu" },
+  { scenario = "streaming/*", metric = "*cpu_ms_per_1k_tokens", kind = "cpu" },
+  { scenario = "streaming/*", metric = "*_wall_ms", kind = "time" },
+]
+
+[[family]]
+id = "large-write"
+title = "Large streamed tool write (no workload yet)"
+needs = []
+metric = []
+
+[[family]]
+id = "long-session"
+title = "Long session: N and 10N turns, resume"
+needs = ["pi-rpc", "pi-sessions"]
+metric = [
+  { scenario = "longsession/grow-*", metric = "instructions", kind = "cpu" },
+  { scenario = "longsession/grow-*", metric = "turn_cpu_ms", kind = "cpu" },
+  { scenario = "longsession/grow-*", metric = "peak_rss_mib", kind = "memory" },
+  { scenario = "longsession/resume-n", metric = "ready_cpu_ms", kind = "cpu" },
+  { scenario = "longsession/resume-n", metric = "ready_rss_mib", kind = "memory" },
+  { scenario = "longsession/resume-n10", metric = "ready_cpu_ms", kind = "cpu" },
+  { scenario = "longsession/resume-n10", metric = "ready_rss_mib", kind = "memory" },
+  { scenario = "longsession/resume-4m2", metric = "ready_cpu_ms", kind = "cpu" },
+  { scenario = "longsession/resume-4m2", metric = "ready_rss_mib", kind = "memory" },
+]
+
+[[family]]
+id = "scale"
+title = "Many agents (no workload yet)"
+needs = []
+metric = []
+
+[[family]]
+id = "search"
+title = "Search and @-mention (no workload yet)"
+needs = []
+metric = []
+
+[[family]]
+id = "reliability"
+title = "Reliability: fault scenarios recovered correctly"
+needs = []
+special = "reliability"
+metric = []
+
+[[family]]
+id = "devloop"
+title = "Dev loop: install, build, first run"
+needs = []
+metric = [
+  { scenario = "devloop/*", metric = "wall_ms", kind = "time" },
+]
+
+[claims]
+# Claims an arm manifest may list in `claims`; `core` claims cannot be declared out of scope by a Pi port, fork or compatible harness.
+vocabulary = ["pi-extensions", "pi-sessions", "pi-rpc"]
+core = ["pi-rpc"]
+pi_harness_relations = ["pi-fork", "pi-port", "pi-compatible"]

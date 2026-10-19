@@ -1,0 +1,38 @@
+# Ticket 1 on a Kubernetes cluster (`buffon campaign campaigns/ticket1.toml --site <your cluster profile> --out runs/ticket1`): the same families as
+# quiet-v1 for four arms, each as its own session on the nodes the calibration vouches for. docs/RUNNING.md, "Campaigns", describes the file.
+# pig-tip is a Go source build of a private integration commit (BUFFON_SOURCE_REPO_PIG_TIP names a clone that holds it, or the bundle carries the build);
+# pig-0.4.1 and pi-bolt-0.8.5 install from pinned release archives and pi-node from the pinned npm lock.
+
+[campaign]
+name = "ticket1"
+reference = "pi-node"
+description = "ticket 1 on a cluster: overhead, ten extensions, streaming and long sessions; pig-tip (int-050 9544ab9049fb, release flags), pig-0.4.1 and pi-bolt-0.8.5 against Pi on Node, each with its A/A copy"
+
+# The noise floor of the nodes: the reference arm against its own A/A copy on every node, judged against [kubernetes] max_cv.
+[calibrate]
+workloads = ["overhead/version", "overhead/print", "overhead/rpc"]
+rounds = 12
+
+[[family]]
+name = "overhead"
+workloads = ["overhead/version", "overhead/print", "overhead/rpc", "overhead/pty"]
+arms = ["pi-node", "pig-tip", "pig-0.4.1", "pi-bolt-0.8.5"]
+rounds = 12
+
+[[family]]
+name = "ext10"
+workloads = ["overhead/rpc-ext10", "overhead/print-ext10"]
+arms = ["pi-node", "pig-tip", "pig-0.4.1", "pi-bolt-0.8.5"]
+rounds = 12
+
+[[family]]
+name = "streaming"
+workloads = ["streaming"]
+arms = ["pi-node", "pig-tip", "pig-0.4.1", "pi-bolt-0.8.5"]
+rounds = 12
+
+[[family]]
+name = "longsession"
+workloads = ["longsession"]
+arms = ["pi-node", "pig-tip", "pig-0.4.1", "pi-bolt-0.8.5"]
+rounds = 12

@@ -1,0 +1,11 @@
+--- a/coding/extension/host/subprocess/source_resolver.go
++++ b/coding/extension/host/subprocess/source_resolver.go
+@@ -57,7 +57,7 @@
+ 	// support (they stay external, D19); packing and fusibility are separate
+ 	// questions here.
+ 	if definition.Form == extsource.Factory && (definition.Packable || definition.Language == "node") {
+-		config.Isolation = "shared-ok"
++		config.Isolation = "isolated"
+ 	}
+ 	if definition.Form == extsource.Factory {
+ 		config.Source = definition.Root

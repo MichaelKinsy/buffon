@@ -1,0 +1,57 @@
+name = "octet"
+label = "Octet"
+homepage = "https://github.com/skaft-software/octet"
+relation = "reference"
+licence = "MIT"
+licence_url = "https://github.com/skaft-software/octet/blob/v0.9.4/LICENSE"
+restrictions = ""
+version = "0.9.4"
+notes = "Octet 0.9.4, the Rust coding agent from Skaft Software (MIT), stock release binary. Unrelated to Pi in code; its `--mode rpc` frames JSONL like Pi's (commands `prompt`, `get_state`, `get_commands`, events `agent_start`, `agent_end`, `tool_execution_end`) but the docs say it is not tested against a pinned Pi release. It reaches the mock only through its custom-provider registry (`~/.octet/credentials/custom.json`), which speaks OpenAI Chat Completions; the Anthropic and OpenAI providers are built in with fixed hosts, so Messages and Responses cannot be pointed at the mock. Full access is the default (no approval prompts). `OCTET_OFFLINE` skips model discovery, the models.dev refresh and the interactive start-up release check; the arm declares the model with its limits, so no `GET /models` is sent. The release is signed with Sigstore (keyless, GitHub Actions): the pinned archive hashes are those of `OCTET_SHA256SUMS`, whose signature was checked with cosign 3.1.3 the way `install-octet.sh` does (`verify-blob --bundle OCTET_SHA256SUMS.sigstore.json`, identity `release-octet.yml@refs/tags/v0.9.4`, workflow commit 7d31ad64). The task named v0.9.5, which has no published release (the repository version is 0.9.5 and the latest release tag is v0.9.4), so 0.9.4 is pinned."
+
+[artifact.linux-x64]
+url = "https://github.com/skaft-software/octet/releases/download/v0.9.4/octet-0.9.4-x86_64-unknown-linux-gnu.tar.gz"
+sha256 = "966e75a5551f46627080a4619383dbb402b5a72280a88e658bf2ce36e1059048"
+checksums = "https://github.com/skaft-software/octet/releases/download/v0.9.4/OCTET_SHA256SUMS"
+exe = "octet-0.9.4-x86_64-unknown-linux-gnu/octet"
+
+[artifact.darwin-arm64]
+url = "https://github.com/skaft-software/octet/releases/download/v0.9.4/octet-0.9.4-aarch64-apple-darwin.tar.gz"
+sha256 = "c302fb238adfc94286dd8115b86b98f19f48e33536c4a156f6a207c82806a1c5"
+checksums = "https://github.com/skaft-software/octet/releases/download/v0.9.4/OCTET_SHA256SUMS"
+exe = "octet-0.9.4-aarch64-apple-darwin/octet"
+
+[artifact.darwin-x64]
+url = "https://github.com/skaft-software/octet/releases/download/v0.9.4/octet-0.9.4-x86_64-apple-darwin.tar.gz"
+sha256 = "3fc90d92bac94d5668550c5670ee2b34496f36ee357f78ed7f1e04f3f06c7575"
+checksums = "https://github.com/skaft-software/octet/releases/download/v0.9.4/OCTET_SHA256SUMS"
+exe = "octet-0.9.4-x86_64-apple-darwin/octet"
+
+[endpoint]
+apis = ["openai-completions"]
+writer = "writer.py"
+
+[env]
+OCTET_OFFLINE = "true"
+
+[state]
+dirs = ["$HOME/.octet"]
+
+[modes]
+version = ["--version"]
+print = ["--no-session", "--model", "custom/bench/{model}", "-p", "{prompt}"]
+rpc = ["--no-session", "--model", "custom/bench/{model}", "--mode", "rpc"]
+pty = ["--tui-mode", "fullscreen", "--model", "custom/bench/{model}"]
+
+[cannot_run]
+print_session = "not wired: Octet keeps a session as its own durable graph under ~/.octet/sessions, addressed by a session id (`--session-id`, `--resume`), not as the Pi session file Buffon's `--session <file>` template names, so the kill-and-resume workloads cannot use it"
+rpc_session = "not wired: its sessions are Octet's own durable graph, not Pi v3 session files, so the long-session and resume workloads have no equivalent"
+rpc_resume = "not wired: its sessions are Octet's own durable graph, not Pi v3 session files, so a Pi session file cannot be resumed"
+extensions = "Pi's TypeScript extensions are not loaded (the Pi compatibility adapter is experimental and not in the release), and the ten bench extensions cannot be realized in Octet's own subprocess protocol with the same results: its RPC `tool_execution_end` carries only the tool's text (`result` is `{content}`), never Pi's `details` (the bench tools return `details: {events}`), so the results cannot match Pi's byte for byte"
+
+[capabilities]
+pi_extensions = "none"
+pi_session_format = false
+exact_requests = true
+
+[renderer]
+pty = "fullscreen"

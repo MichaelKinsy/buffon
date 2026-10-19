@@ -1,0 +1,48 @@
+name = "rpi"
+label = "rpi (Rust port of Pi)"
+homepage = "https://github.com/bigfish1913/pi-rust"
+relation = "pi-port"
+licence = "MIT"
+licence_url = "https://github.com/bigfish1913/pi-rust/blob/main/LICENSE"
+restrictions = ""
+version = "0.3.19"
+notes = "Rust port of Pi, release binary built by its author. It reads Pi's models.json (RPI_CODING_AGENT_DIR). Its RPC dialect differs: `prompt` takes `content` and get_state answers with the request id only, and it compacts its context (a tool-less summarisation request) without emitting Pi's compaction_end RPC event, so Buffon counts compactions at the mock. Pinned at 0.3.19 (published 2026-10-10, linux-x64 digest verified against the release's .sha256): this is younger than the 7-day minimum release age the arms notes recommend, kept because the RPC dialect and the --tui-mode flag were verified at this version; the author ships almost daily (0.3.21 on 2026-10-11) and older pins (0.3.9) lack those. Only linux-x64 is pinned here."
+
+[artifact.linux-x64]
+url = "https://github.com/bigfish1913/pi-rust/releases/download/v0.3.19/rpi-v0.3.19-x86_64-unknown-linux-gnu.tar.gz"
+sha256 = "c48ef652be3093a28f06076e5a21f2746e155959a181aadd2d17dbdb819991bd"
+checksums = "https://github.com/bigfish1913/pi-rust/releases/download/v0.3.19/rpi-v0.3.19-x86_64-unknown-linux-gnu.tar.gz.sha256"
+exe = "rpi"
+
+[endpoint]
+apis = ["openai-completions", "anthropic-messages", "openai-responses"]   # verified at 0.3.19: print and rpc send the right wire format on each
+writer = "writer.py"
+
+[env]
+RPI_DISABLE_UPDATE_CHECK = "1"
+PI_OFFLINE = "1"
+PI_SKIP_VERSION_CHECK = "1"
+RPI_CODING_AGENT_DIR = "{agent_dir}"
+
+[state]
+dirs = ["$HOME/.agent", "$XDG_CONFIG_HOME", "$XDG_DATA_HOME", "$XDG_CACHE_HOME", "$XDG_STATE_HOME"]
+
+[modes]
+version = ["--version"]
+print = ["--provider", "bench", "--model", "{model}", "--no-session", "-p", "{prompt}"]
+print_session = ["--provider", "bench", "--model", "{model}", "--session", "{session}", "-p", "{prompt}"]
+rpc = ["--mode", "rpc", "--provider", "bench", "--model", "{model}", "--no-session"]
+rpc_session = ["--mode", "rpc", "--provider", "bench", "--model", "{model}", "--session-dir", "{session_dir}"]
+rpc_resume = ["--mode", "rpc", "--provider", "bench", "--model", "{model}", "--session", "{session}"]
+pty = ["--provider", "bench", "--model", "{model}", "--no-session", "--tui-mode", "fullscreen"]
+
+[rpc]
+prompt_field = "content"
+
+[capabilities]
+pi_extensions = "none"
+pi_session_format = false   # 0.3.19 never answered get_state after --session on a generated Pi v3 session file (observed), so resume workloads skip with this reason
+exact_requests = true
+
+[renderer]
+pty = "fullscreen"   # pinned with --tui-mode (rpi 0.3.19 --help: regular or fullscreen; regular is the macOS default)

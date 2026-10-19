@@ -1,0 +1,13 @@
+# Example site profile for a macOS laptop or desktop. macOS has no CPU pinning (no sched_setaffinity) and no cgroups,
+# so `cpus` is omitted and `pinning = "none"`: the run works and every output is labelled PROVISIONAL.
+# Copy it to sites/<your-name>.toml (any other name; it is yours) and edit; see sites/SCHEMA.md.
+[site]
+name = "my-laptop"
+backend = "local"
+hardware = "shared"          # a laptop is never quiet dedicated hardware
+notes = "free text for the report"
+
+[local]
+pinning = "none"             # no `cpus`: pinning = "none" with a `cpus` list is refused
+meter = "auto"
+# cache_dir = "~/Library/Caches/buffon"

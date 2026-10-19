@@ -1,0 +1,13 @@
+# Example site profile for a macOS machine that runs every arm in the container envelope (`buffon run --isolation container`).
+# Docker runs in a virtual machine (Docker Desktop, colima, Podman machine): `cpus` are that VM's CPU ids and go to `docker run --cpuset-cpus`, which pins inside the VM.
+# The host itself cannot pin, so every output is labelled PROVISIONAL. Size the VM with at least len(cpus) + 1 CPUs.
+# Copy it to sites/<your-name>.toml (any other name; it is yours) and edit; see sites/SCHEMA.md.
+[site]
+name = "my-mac-container"
+backend = "local"
+hardware = "shared"
+
+[local]
+cpus = "1-3"                 # VM CPU ids for the arms (not host cores)
+pinning = "preferred"        # `required` is also accepted with --isolation container
+meter = "auto"

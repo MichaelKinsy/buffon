@@ -1,0 +1,58 @@
+name = "pi-bolt-0.8.5"
+label = "Pi-Bolt 0.8.5"
+homepage = "https://github.com/opensec-git/Pi-Bolt"
+relation = "pi-fork"
+licence = "MIT"
+licence_url = "https://github.com/opensec-git/Pi-Bolt/blob/bolt-v0.8.5/LICENSE"
+restrictions = ""
+version = "0.8.5"
+notes = "Release 0.8.5 (published 2026-10-12), stock AOT linux-x64 and darwin-arm64 archives (the -jit and -baseline variants are separate artifacts and are not measured here); checksums are those of the release's SHA256SUMS, verified against the downloaded archive. Pi-compatible runtime (AOT on Bun/JSC), stock linux-x64 build. It differs from Pi in three output paths (throttled tool-call argument events, `$$` Markdown lexing, alt-screen scroll regions); a number on those paths is a number for different work."
+
+[artifact.linux-x64]
+url = "https://github.com/opensec-git/Pi-Bolt/releases/download/bolt-v0.8.5/pi-bolt-linux-x64.tar.gz"
+sha256 = "c8c8189df02a0d0ba658fb3ba828a68f36bea151060ec829deb9b5b534120a33"
+checksums = "https://github.com/opensec-git/Pi-Bolt/releases/download/bolt-v0.8.5/SHA256SUMS"
+exe = "pi-bolt-linux-x64/pi"
+
+[artifact.darwin-arm64]
+url = "https://github.com/opensec-git/Pi-Bolt/releases/download/bolt-v0.8.5/pi-bolt-darwin-arm64.tar.gz"
+sha256 = "b13680b3d9d8623f3805e24659db6322ba158b620ca98660f312ef2c1c217569"
+checksums = "https://github.com/opensec-git/Pi-Bolt/releases/download/bolt-v0.8.5/SHA256SUMS"
+exe = "pi-bolt-darwin-arm64/pi"
+
+[endpoint]
+apis = ["openai-completions", "anthropic-messages", "openai-responses"]
+writer = "writer.py"
+
+[env]
+PI_OFFLINE = "1"
+PI_SKIP_VERSION_CHECK = "1"
+PI_TELEMETRY = "0"
+PI_CODING_AGENT_DIR = "{agent_dir}"
+
+[state]
+dirs = ["$HOME/.agent", "$HOME/.pig", "$XDG_CONFIG_HOME", "$XDG_DATA_HOME", "$XDG_CACHE_HOME", "$XDG_STATE_HOME"]
+
+[modes]
+version = ["--version"]
+print = ["--provider", "bench", "--model", "{model}", "--no-session", "{extensions}", "-p", "{prompt}"]
+print_session = ["--provider", "bench", "--model", "{model}", "--session", "{session}", "-p", "{prompt}"]
+rpc = ["--mode", "rpc", "--provider", "bench", "--model", "{model}", "--no-session", "{extensions}"]
+rpc_session = ["--mode", "rpc", "--provider", "bench", "--model", "{model}", "--session-dir", "{session_dir}", "{extensions}"]
+rpc_resume = ["--mode", "rpc", "--provider", "bench", "--model", "{model}", "--session", "{session}", "{extensions}"]
+pty = ["--provider", "bench", "--model", "{model}", "--no-session", "{extensions}"]
+
+[capabilities]
+pi_extensions = "native"
+pi_session_format = true
+exact_requests = true
+
+[renderer]
+pty = "fullscreen"
+
+# Where Pi-Bolt does different work by its own account (docs/METHODOLOGY.md section 15). The report shows its median and does not compare it.
+# overhead/print-write (the 200 KB write) stays scored: see arms/pibolt/arm.toml.
+[[divergence]]
+workloads = ["streaming/tui-*"]
+reason = "Pi-Bolt's fullscreen TUI scrolls the rows that only moved (a scroll region) and draws only the rows that changed"
+source = "https://github.com/opensec-git/Pi-Bolt/blob/bolt-v0.8.5/packages/tui/src/tui-alt-screen.ts"

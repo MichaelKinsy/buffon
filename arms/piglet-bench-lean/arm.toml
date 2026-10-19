@@ -1,0 +1,32 @@
+name = "piglet-bench-lean"
+label = "PiG, the bench-lean Piglet (Piglet Binary, every built-in extension, extra API and feature stripped)"
+notes = "The bench-lean Piglet of the Pigpen commit 09eaf32e62cedc0a69fa6a411534d21bfd4b1192, built by `pig piglet build --format binary` from the pig-tip executable and source. Keep mode: no extension runtime, so the extension workloads do not apply to this arm. The built-in tools and slash commands stay, so the request tool declarations match every other arm."
+
+[derive]
+base = "pig-tip"
+
+[piglet]
+name = "bench-lean"
+pigpen_commit = "09eaf32e62cedc0a69fa6a411534d21bfd4b1192"
+repo_env = "BUFFON_SOURCE_REPO_PIGPEN"
+manifest = "piglets/bench-lean/piglet.yaml"
+manifest_sha256 = "6d64deaf8dbac6ad2480f01c9dd0dcbcb7c06bfe0340dfd6d3527d21f70e356a"
+release_version = "0.1.0"
+
+[piglet.identity]
+component_plan_digest = "ac46fd24bd501fa7297f0a2945bcc7f5d655b9bcf8bfbf16718a9d25c0c2c018"
+
+# The Piglet strips every extension runtime (its manifest: `pig -e <file>` fails), so the inherited pig-tip value (sidecar) is wrong here: the extension
+# workloads skip this arm as out of scope instead of running and failing, and the grade derives no pi-extensions claim.
+[capabilities]
+pi_extensions = "none"
+
+[extensions]
+default = false
+embedded = false
+paths = []
+count = 0
+processes = 0
+
+[prepare]
+script = "prepare.py"

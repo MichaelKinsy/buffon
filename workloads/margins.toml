@@ -1,0 +1,27 @@
+# Equivalence margins (docs/METHODOLOGY.md section 7): the one place that says how close two arms must be to be called equivalent on a metric.
+# The margin is declared before a run and read with the checkout the report is built from. A metric with no entry here has no equivalence claim: the report shows none.
+# An entry matches metric names by glob (fnmatch); the first entry that matches decides. `relative` is a fraction of the reference median (0.05 = within 5%).
+# `absolute`, when present, is a floor in the metric's own unit: the margin is the larger of `relative` and absolute / reference median.
+# A margin of 0 means exact: the arms are equivalent only when every paired round has the same value.
+# Equivalence holds when the 90% interval of the paired ratio (arm over reference, rounds paired, resampled by round) lies inside 1/(1+margin) .. 1+margin: the TOST at alpha 0.05.
+
+[[margin]]
+# Bytes and tokens sent per turn are the same for harnesses that send the same request, so the margin is exact.
+metrics = ["*_bytes_per_turn", "*_tokens_per_turn"]
+relative = 0.0
+
+[[margin]]
+# Peak and steady memory: 5% or 2 MiB, whichever is larger.
+metrics = ["*_mib", "*_mib_per_*"]
+relative = 0.05
+absolute = 2.0
+
+[[margin]]
+# CPU time, instructions, cycles and wall time: 5%.
+metrics = ["cpu_ms*", "*_cpu_ms", "*_cpu_ms_*", "instructions", "*_instructions", "*_instructions_*", "cycles", "*_cycles", "*_cycles_*", "*_ms", "*_ms_p50", "*_ms_p95", "*_ms_max", "*_ms_per_*"]
+relative = 0.05
+
+[[margin]]
+# Pass/fail rates: any difference is a difference. The agent-bench lift compares them by exact McNemar on paired cases, not as a report cell; no report cell has these names today.
+metrics = ["pass", "passed", "pass_rate", "*_pass", "*_pass_rate"]
+relative = 0.0

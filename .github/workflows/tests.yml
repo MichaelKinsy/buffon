@@ -1,0 +1,49 @@
+# SPDX-License-Identifier: Apache-2.0
+# The unit suite on Linux and macOS. macOS cannot pin CPUs and has no /proc: the suite must pass there with those facts reported, not assumed.
+name: tests
+on:
+  push:
+    branches: [main]
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  unit:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+        python: ["3.11", "3.13"]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      - name: "Unit tests (one way only: the package root is the top-level directory)"
+        run: python3 -m unittest discover -s tests -t .
+  signoff:
+    # CONTRIBUTING.md: every commit, merge commits included, carries a Signed-off-by line (`git commit -s`, `git merge --signoff`).
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Every commit of the pull request has a Signed-off-by line
+        env:
+          BASE: ${{ github.event.pull_request.base.sha }}
+          HEAD: ${{ github.event.pull_request.head.sha }}
+        run: |
+          set -eu
+          missing=0
+          for c in $(git rev-list "$BASE..$HEAD"); do
+            if ! git show -s --format=%B "$c" | grep -Eq '^Signed-off-by: .+ <.+>$'; then
+              echo "no Signed-off-by: $(git log -1 --format='%h %s' "$c")"
+              missing=1
+            fi
+          done
+          if [ "$missing" = 1 ]; then
+            echo "fix: git rebase --signoff $BASE   (then git push --force-with-lease); next time use git commit -s and git merge --signoff"
+            exit 1
+          fi

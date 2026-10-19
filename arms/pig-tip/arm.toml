@@ -1,0 +1,58 @@
+name = "pig-tip"
+label = "PiG 0.5.0"
+homepage = "https://github.com/MichaelKinsy/PiG"
+relation = "pi-port"
+licence = "MIT"
+licence_url = "https://github.com/MichaelKinsy/PiG/blob/main/LICENSE"
+restrictions = ""
+version = "0.5.0+1.3.0"
+notes = "PiG 0.5.0, built the way its release workflow builds the release binary (.github/workflows/release-candidate.yml at this commit): Go from .go-version (1.27.2, also Buffon's pin in runtimes.toml), CGO off, -trimpath, and the same -ldflags, update URL, trust root and source version included. Go builds are reproducible, so once the release is published Buffon checks this binary's sha256 against the release archive's and switches to the archive (arms/pig-0.5.0). -buildvcs=false matches the release, which builds from a source archive with no VCS metadata. The repository location is not part of the manifest: the site profile or the environment names it (BUFFON_SOURCE_REPO_PIG_TIP), as a URL or a local clone."
+trust = "source"
+caveat = "This PiG build (the 0.5.0 release) tracks Pi 1.3.0 (its UpstreamVersion), the same Pi version as the reference arm pi-node."
+previous = "pig-0.4.1"
+
+[source]
+repo_env = "BUFFON_SOURCE_REPO_PIG_TIP"
+commit = "a136850c38f4097e1cd965ab989efb58960709f9"
+tree = "593786aecf8c8606fdfb1cddd63aab544a032048"
+toolchain = "go"
+package = "./cmd/pig"
+build = ["go", "build", "-buildvcs=false", "-trimpath", "-ldflags", "-s -w -X github.com/MichaelKinsy/PiG/coding/cli.Build=a136850c38f4097e1cd965ab989efb58960709f9 -X github.com/MichaelKinsy/PiG/internal/codingagent.DefaultUpdateURL=https://github.com/MichaelKinsy/PiG/releases/latest/download/update.json -X github.com/MichaelKinsy/PiG/internal/codingagent.DefaultUpdateTrustRoot=LS0tLS1CRUdJTiBQVUJMSUMgS0VZLS0tLS0KTUNvd0JRWURLMlZ3QXlFQVFBdUtJTHRmc0FpbWdabnRpZ2UydzRGRy9QeDFQeU5HampHYXlEalREM0k9Ci0tLS0tRU5EIFBVQkxJQyBLRVktLS0tLQo= -X github.com/MichaelKinsy/PiG/coding/pigletbuild.releaseSourceVersion=v0.5.0", "-o", "{out}", "{package}"]
+env = { CGO_ENABLED = "0", GOFLAGS = "", GOTOOLCHAIN = "local" }
+
+[runtime]                          # the Node sidecar for TypeScript extensions (pi_extensions = "sidecar") needs Node 22.13 or later on PATH
+node = "24.19.0"
+
+[endpoint]
+apis = ["openai-completions", "anthropic-messages", "openai-responses"]
+writer = "writer.py"
+
+[env]
+PI_OFFLINE = "1"
+PIG_OFFLINE = "1"
+PI_SKIP_VERSION_CHECK = "1"
+PI_TELEMETRY = "0"
+PIG_HOME = "{disk}/pig"
+PIG_CODING_AGENT_DIR = "{agent_dir}"
+
+[state]
+dirs = ["$HOME/.agent", "$PIG_HOME", "$XDG_CONFIG_HOME", "$XDG_DATA_HOME", "$XDG_CACHE_HOME", "$XDG_STATE_HOME"]
+
+[modes]
+version = ["--version"]
+print = ["--provider", "bench", "--model", "{model}", "--no-session", "{extensions}", "-p", "{prompt}"]
+print_session = ["--provider", "bench", "--model", "{model}", "--session", "{session}", "-p", "{prompt}"]
+rpc = ["--mode", "rpc", "--provider", "bench", "--model", "{model}", "--no-session", "{extensions}"]
+rpc_session = ["--mode", "rpc", "--provider", "bench", "--model", "{model}", "--session-dir", "{session_dir}", "{extensions}"]
+rpc_resume = ["--mode", "rpc", "--provider", "bench", "--model", "{model}", "--session", "{session}", "{extensions}"]
+pty = ["--provider", "bench", "--model", "{model}", "--no-session", "{extensions}"]
+
+[capabilities]
+pi_extensions = "sidecar"
+pi_session_format = true
+exact_requests = true
+
+[renderer]
+pty = "fullscreen"
+[version_check]
+contains = "0.5.0"

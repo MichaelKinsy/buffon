@@ -1,0 +1,49 @@
+name = "claude-code"
+label = "Claude Code"
+homepage = "https://code.claude.com"
+relation = "reference"
+licence = "proprietary (Anthropic legal agreements)"
+licence_url = "https://code.claude.com/docs/en/legal-and-compliance"
+restrictions = "Vendor terms: the operator accepts Anthropic's terms; Buffon never redistributes the CLI (docs/DESIGN.md section 9)."
+operator_terms = "Claude Code is installed from the vendor's npm package at run time and is used under Anthropic's Commercial Terms of Service (they forbid using the service to build a competing product, and require the binary to run unmodified); run it only if you and your employer accept those terms: https://code.claude.com/docs/en/legal-and-compliance"
+version = "2.1.296"
+notes = "Unrelated to Pi; a reference point. Runs against Buffon's mock on the Anthropic Messages wire API with a dummy key: no Anthropic service is contacted and no Claude account is used. The npm package's `claude` is a stub that only its postinstall script (not run: `npm ci --ignore-scripts`) replaces, so the arm runs the executable in the platform package `@anthropic-ai/claude-code-<platform>`, pinned by sha256 below."
+
+[npm]
+package = "@anthropic-ai/claude-code"
+version = "2.1.296"
+integrity = "sha512-OX/k/rpcthMqnFKOWcpNcbiLsMKtAjLOpQNJHlYiDCFUznWCIwdRTyl/p9SdHVrsrzZuPMCNqZjnpakIni6upw=="
+package_lock = "package-lock.json"
+package_lock_sha256 = "8024fbbdc141e946abcfb87d71d873f3ac021cbee3b8080df5cdbe7a16622712"
+bin = "node_modules/.bin/claude"
+runtime = "node"
+bin_native = { darwin-arm64 = "node_modules/@anthropic-ai/claude-code-darwin-arm64/claude", linux-x64 = "node_modules/@anthropic-ai/claude-code-linux-x64/claude" }
+native_bin = { darwin-arm64 = "c9b5341637becbd423ddffc5b254afb645682a3868cb708bbc6cc0e7bb419937", linux-x64 = "24972e3bc859fab2b46ed4c1e51f7d6130f06d3bd550811a114640de3370d0de" }
+
+[endpoint]
+apis = ["anthropic-messages"]
+writer = "writer.py"
+
+[env]
+CLAUDE_CONFIG_DIR = "{home}/.claude"
+ANTHROPIC_API_KEY = "{dummy_key}"
+CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC = "1"
+DISABLE_AUTOUPDATER = "1"
+DISABLE_TELEMETRY = "1"
+DISABLE_ERROR_REPORTING = "1"
+DISABLE_BUG_COMMAND = "1"
+
+[state]
+dirs = ["$CLAUDE_CONFIG_DIR", "$XDG_CONFIG_HOME", "$XDG_DATA_HOME", "$XDG_CACHE_HOME", "$XDG_STATE_HOME"]
+
+[modes]
+version = ["--version"]
+print = ["-p", "{prompt}", "--model", "{model}", "--dangerously-skip-permissions"]
+
+[cannot_run]
+pty = "not measured: the interactive UI shows its own start-up screens (trust prompt, theme, login) that the PTY workload's first-input probe does not echo through, so first-input latency is not comparable"
+rpc = "no Pi-dialect RPC mode: `--input-format stream-json` is Claude Code's own streaming protocol, not Pi's JSONL RPC"
+
+[capabilities]
+pi_extensions = "none"
+pi_session_format = false

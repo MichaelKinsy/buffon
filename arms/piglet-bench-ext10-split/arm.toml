@@ -1,0 +1,17 @@
+name = "piglet-bench-ext10-split"
+label = "PiG, the bench-ext10-split Piglet (five Go extensions fused, five TypeScript through the aot runtime)"
+held = "Held until the aot image step is wired for Piglets: the Piglet builds and its identity is pinned, but a sample would start on the Bun fallback, not the compiled host. The arm's builds are the Pigpen commit 09eaf32e62cedc0a69fa6a411534d21bfd4b1192's bench-ext10-split manifest."
+notes = "bench-ext-01..05 are Go factories fused into the Binary, bench-ext-06..10 are the TypeScript originals the aot runtime compiles on the user's machine."
+version = "0.5.0+1.1.0"
+homepage = "https://github.com/MichaelKinsy/PiG"
+relation = "pi-port"
+licence = "MIT"
+licence_url = "https://github.com/MichaelKinsy/PiG/blob/main/LICENSE"
+
+[piglet]
+name = "bench-ext10-split"
+pigpen_commit = "09eaf32e62cedc0a69fa6a411534d21bfd4b1192"
+repo_env = "BUFFON_SOURCE_REPO_PIGPEN"
+manifest = "piglets/bench-ext10-split/piglet.yaml"
+manifest_sha256 = "71d0c40b6db6afdbae3dc4e0552b39e8cf45cc28533a2a91cb360cd07370a97b"
+release_version = "0.1.0"

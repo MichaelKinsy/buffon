@@ -1,0 +1,25 @@
+name = "piglet-bench-ext10"
+label = "PiG, the bench-ext10 Piglet (ten Go SDK extensions fused into the Piglet Binary)"
+notes = "The bench-ext10 Piglet of the Pigpen commit 09eaf32e62cedc0a69fa6a411534d21bfd4b1192: the ten bench-ext Go factories fused into one Piglet Binary by `pig piglet build --format binary`. No extension process and no IPC. Built from the pig-tip source and executable."
+
+[derive]
+base = "pig-tip"
+
+[piglet]
+name = "bench-ext10"
+pigpen_commit = "09eaf32e62cedc0a69fa6a411534d21bfd4b1192"
+repo_env = "BUFFON_SOURCE_REPO_PIGPEN"
+manifest = "piglets/bench-ext10/piglet.yaml"
+manifest_sha256 = "508c2959e624321c755a90d88325f46c1c4d5cb6a96f79984ba2c2680276443b"
+release_version = "0.1.0"
+
+[piglet.identity]
+component_plan_digest = "dd40cc452fe1efaee082e8248a25236e3f30d684c70cdbd72b8bb08a6bc368c7"
+
+[extensions]
+default = false
+embedded = true
+processes = 0
+
+[prepare]
+script = "prepare.py"

@@ -1,0 +1,131 @@
+# SPDX-License-Identifier: Apache-2.0
+# Re-validates a results submission before the results index accepts it (docs/SUBMITTING.md). A pull request adds one run directory under results/<id>/ and nothing else.
+#
+# Trust model: the checks are the base branch's code, never the pull request's. `pull_request_target` runs this file as it is on the base branch, and every
+# `python3 -m buffon` below runs from the base branch checkout (working-directory: base). The pull request's files are checked out into pr/ as data only: nothing in
+# pr/ is executed, imported or installed, and the checkout keeps no credentials. The first check refuses a change that touches anything outside results/.
+name: results
+on:
+  pull_request_target:
+    paths: ["results/**"]
+permissions:
+  contents: read
+jobs:
+  changes:
+    runs-on: ubuntu-latest
+    outputs:
+      governance: ${{ steps.diff.outputs.governance }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.base.sha }}
+          path: base
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          repository: ${{ github.event.pull_request.head.repo.full_name }}
+          ref: ${{ github.event.pull_request.head.sha }}
+          path: pr
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Make the base commit known to the pull request's checkout
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+        run: git -C pr fetch --no-tags --quiet "$GITHUB_WORKSPACE/base" "$BASE_SHA:refs/buffon/base"
+      - id: diff
+        name: Does the change touch a governance file?
+        run: |
+          set -eu
+          if git -C pr diff --name-only "$(git -C pr merge-base HEAD refs/buffon/base)" -- results/MAINTAINERS.toml results/WITHDRAWN.toml | grep -q .; then echo "governance=true" >> "$GITHUB_OUTPUT"; else echo "governance=false" >> "$GITHUB_OUTPUT"; fi
+  revalidate:
+    needs: changes
+    if: needs.changes.outputs.governance == 'false'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.base.sha }}
+          path: base
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          repository: ${{ github.event.pull_request.head.repo.full_name }}
+          ref: ${{ github.event.pull_request.head.sha }}
+          path: pr
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Make the base commit known to the pull request's checkout
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+        run: git -C pr fetch --no-tags --quiet "$GITHUB_WORKSPACE/base" "$BASE_SHA:refs/buffon/base"
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Nothing outside results/ changes; only new files in new run directories
+        working-directory: base
+        run: python3 -m buffon index "$GITHUB_WORKSPACE/pr/results" --repo "$GITHUB_WORKSPACE/pr" --immutable-against refs/buffon/base
+      - name: Re-validate every added run directory (seal, pins, integrity, telemetry; run notes are listed)
+        working-directory: base
+        run: |
+          set -eu
+          dirs=$(git -C "$GITHUB_WORKSPACE/pr" diff --name-only --diff-filter=A "$(git -C "$GITHUB_WORKSPACE/pr" merge-base HEAD refs/buffon/base)" -- results | awk -F/ 'NF>2 {print $1"/"$2}' | sort -u)
+          test -n "$dirs" || { echo "no run directory added"; exit 1; }
+          for d in $dirs; do python3 -m buffon verify "$GITHUB_WORKSPACE/pr/$d" --repo "$GITHUB_WORKSPACE/pr" --submission; done
+      - name: The committed index equals the regenerated one
+        working-directory: base
+        run: python3 -m buffon index "$GITHUB_WORKSPACE/pr/results" --repo "$GITHUB_WORKSPACE/pr" --check
+  # A change to results/MAINTAINERS.toml or results/WITHDRAWN.toml carries no run directory. Only this job passes the governance flag to `buffon index`, and it runs in the
+  # `results-maintainers` environment, which the repository's settings protect with required reviewers; CODEOWNERS also names the maintainers for both files.
+  governance:
+    needs: changes
+    if: needs.changes.outputs.governance == 'true'
+    runs-on: ubuntu-latest
+    environment: results-maintainers
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.base.sha }}
+          path: base
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          repository: ${{ github.event.pull_request.head.repo.full_name }}
+          ref: ${{ github.event.pull_request.head.sha }}
+          path: pr
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Make the base commit known to the pull request's checkout
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+        run: git -C pr fetch --no-tags --quiet "$GITHUB_WORKSPACE/base" "$BASE_SHA:refs/buffon/base"
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Only the governance files and the index may change, and no run directory with them
+        working-directory: base
+        run: python3 -m buffon index "$GITHUB_WORKSPACE/pr/results" --repo "$GITHUB_WORKSPACE/pr" --immutable-against refs/buffon/base --allow-governance
+      - name: The committed index equals the regenerated one
+        working-directory: base
+        run: python3 -m buffon index "$GITHUB_WORKSPACE/pr/results" --repo "$GITHUB_WORKSPACE/pr" --check
+  # The one check to mark required in branch protection. GitHub counts a skipped required job as passed: with only `revalidate` required, a change that touched a
+  # governance file skipped it and could merge while `governance` failed. This job always runs and passes only when the path the change needed passed.
+  result:
+    needs: [changes, revalidate, governance]
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - name: The path this change needs passed
+        env:
+          CHANGES: ${{ needs.changes.result }}
+          GOVERNANCE: ${{ needs.changes.outputs.governance }}
+          REVALIDATE: ${{ needs.revalidate.result }}
+          GOVERNANCE_JOB: ${{ needs.governance.result }}
+        run: |
+          set -eu
+          case "$CHANGES/$GOVERNANCE/$REVALIDATE/$GOVERNANCE_JOB" in
+            success/false/success/skipped|success/true/skipped/success) echo "ok" ;;
+            *) echo "changes=$CHANGES governance=$GOVERNANCE revalidate=$REVALIDATE governance-job=$GOVERNANCE_JOB"; exit 1 ;;
+          esac

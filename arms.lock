@@ -1,0 +1,3819 @@
+{
+  "arms": {
+    "claude-code": {
+      "files": {
+        "package-lock.json": "8024fbbdc141e946abcfb87d71d873f3ac021cbee3b8080df5cdbe7a16622712",
+        "writer.py": "112d0f9d4e383b0adccd13265d39631745515af6333b53ddd8cebfaf756d10b0"
+      },
+      "held": null,
+      "licence": "proprietary (Anthropic legal agreements)",
+      "manifest_sha256": "7af7a5bd60f05a16c83f35d7a403f88723334bdaf99b4d8b2a431dc7fafea28a",
+      "spec": {
+        "cannot_run": {
+          "pty": "not measured: the interactive UI shows its own start-up screens (trust prompt, theme, login) that the PTY workload's first-input probe does not echo through, so first-input latency is not comparable",
+          "rpc": "no Pi-dialect RPC mode: `--input-format stream-json` is Claude Code's own streaming protocol, not Pi's JSONL RPC"
+        },
+        "capabilities": {
+          "pi_extensions": "none",
+          "pi_session_format": false
+        },
+        "endpoint": {
+          "apis": [
+            "anthropic-messages"
+          ],
+          "writer": "writer.py"
+        },
+        "env": {
+          "ANTHROPIC_API_KEY": "{dummy_key}",
+          "CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC": "1",
+          "CLAUDE_CONFIG_DIR": "{home}/.claude",
+          "DISABLE_AUTOUPDATER": "1",
+          "DISABLE_BUG_COMMAND": "1",
+          "DISABLE_ERROR_REPORTING": "1",
+          "DISABLE_TELEMETRY": "1"
+        },
+        "homepage": "https://code.claude.com",
+        "label": "Claude Code",
+        "licence": "proprietary (Anthropic legal agreements)",
+        "licence_url": "https://code.claude.com/docs/en/legal-and-compliance",
+        "modes": {
+          "print": [
+            "-p",
+            "{prompt}",
+            "--model",
+            "{model}",
+            "--dangerously-skip-permissions"
+          ],
+          "version": [
+            "--version"
+          ]
+        },
+        "name": "claude-code",
+        "notes": "Unrelated to Pi; a reference point. Runs against Buffon's mock on the Anthropic Messages wire API with a dummy key: no Anthropic service is contacted and no Claude account is used. The npm package's `claude` is a stub that only its postinstall script (not run: `npm ci --ignore-scripts`) replaces, so the arm runs the executable in the platform package `@anthropic-ai/claude-code-<platform>`, pinned by sha256 below.",
+        "npm": {
+          "bin": "node_modules/.bin/claude",
+          "bin_native": {
+            "darwin-arm64": "node_modules/@anthropic-ai/claude-code-darwin-arm64/claude",
+            "linux-x64": "node_modules/@anthropic-ai/claude-code-linux-x64/claude"
+          },
+          "integrity": "sha512-OX/k/rpcthMqnFKOWcpNcbiLsMKtAjLOpQNJHlYiDCFUznWCIwdRTyl/p9SdHVrsrzZuPMCNqZjnpakIni6upw==",
+          "native_bin": {
+            "darwin-arm64": "c9b5341637becbd423ddffc5b254afb645682a3868cb708bbc6cc0e7bb419937",
+            "linux-x64": "24972e3bc859fab2b46ed4c1e51f7d6130f06d3bd550811a114640de3370d0de"
+          },
+          "package": "@anthropic-ai/claude-code",
+          "package_lock": "package-lock.json",
+          "package_lock_sha256": "8024fbbdc141e946abcfb87d71d873f3ac021cbee3b8080df5cdbe7a16622712",
+          "runtime": "node",
+          "version": "2.1.296"
+        },
+        "operator_terms": "Claude Code is installed from the vendor's npm package at run time and is used under Anthropic's Commercial Terms of Service (they forbid using the service to build a competing product, and require the binary to run unmodified); run it only if you and your employer accept those terms: https://code.claude.com/docs/en/legal-and-compliance",
+        "relation": "reference",
+        "restrictions": "Vendor terms: the operator accepts Anthropic's terms; Buffon never redistributes the CLI (docs/DESIGN.md section 9).",
+        "state": {
+          "dirs": [
+            "$CLAUDE_CONFIG_DIR",
+            "$XDG_CONFIG_HOME",
+            "$XDG_DATA_HOME",
+            "$XDG_CACHE_HOME",
+            "$XDG_STATE_HOME"
+          ]
+        },
+        "version": "2.1.296"
+      },
+      "version": "2.1.296"
+    },
+    "codex": {
+      "files": {
+        "package-lock.json": "a17117b06362c74b63de80e9c4cb525cf8556b5ead9d0d0e250473061365902d",
+        "writer.py": "d32b673a9ae99140320aa08913edeff87add2d901d0539d65804e5e08ace422b"
+      },
+      "held": null,
+      "licence": "Apache-2.0",
+      "manifest_sha256": "8f6e750426be308d9e377ae0e01e0fbfc7835643f9b2b74878e759042f7b1b12",
+      "spec": {
+        "cannot_run": {
+          "pty": "tried at 0.162.1: no egress, but its TUI does not echo the PTY workload's first-input probe within 20 s (it shows its own startup screens), so first-input latency is not comparable; not measured in v0",
+          "rpc": "no Pi-dialect RPC mode"
+        },
+        "capabilities": {
+          "pi_extensions": "none",
+          "pi_session_format": false
+        },
+        "endpoint": {
+          "apis": [
+            "openai-responses"
+          ],
+          "writer": "writer.py"
+        },
+        "env": {
+          "BENCH_API_KEY": "{dummy_key}",
+          "CODEX_HOME": "{home}/.codex"
+        },
+        "homepage": "https://github.com/openai/codex",
+        "label": "Codex CLI",
+        "licence": "Apache-2.0",
+        "licence_url": "https://github.com/openai/codex/blob/main/LICENSE",
+        "modes": {
+          "print": [
+            "exec",
+            "-m",
+            "{model}",
+            "--skip-git-repo-check",
+            "--sandbox",
+            "danger-full-access",
+            "{prompt}"
+          ],
+          "version": [
+            "--version"
+          ]
+        },
+        "name": "codex",
+        "notes": "Unrelated to Pi; a reference point. Needs the OpenAI Responses endpoint. Its TUI contacts a GitHub content address even with remote catalogs off, so no PTY workload runs on it.",
+        "npm": {
+          "bin": "node_modules/.bin/codex",
+          "integrity": "sha512-NWZdi/kxyjv/8EUGFupziGU38YyleugZRM4JXgY5XFH7FUmaFA33NZS2Bmq0HPazf7S3jJQQWsZ/jAK9jsrV3Q==",
+          "native_bin": {
+            "linux-x64": "61b0194f3bb6534439c8d26a3ed57d0805f84b884588b761795323eeb92fcf70"
+          },
+          "package": "@openai/codex",
+          "package_lock": "package-lock.json",
+          "package_lock_sha256": "a17117b06362c74b63de80e9c4cb525cf8556b5ead9d0d0e250473061365902d",
+          "runtime": "node",
+          "version": "0.162.1"
+        },
+        "relation": "reference",
+        "restrictions": "",
+        "state": {
+          "dirs": [
+            "$CODEX_HOME",
+            "$XDG_CONFIG_HOME",
+            "$XDG_DATA_HOME",
+            "$XDG_CACHE_HOME",
+            "$XDG_STATE_HOME"
+          ]
+        },
+        "version": "0.162.1"
+      },
+      "version": "0.162.1"
+    },
+    "copilot": {
+      "files": {
+        "package-lock.json": "719cc494d4518865e011f319d354b1dcd52250fe4b45124f2b0f781e0620b9f8",
+        "writer.py": "62149a13628629ced4f939bc0dfabc7e0fe779c37932a2618e932350f1c19040"
+      },
+      "held": null,
+      "licence": "GitHub Copilot CLI License",
+      "manifest_sha256": "fed4d99a3a7bb66c5a015567c61bb343f86acb6e19e88b3a83696eee9be9bb78",
+      "spec": {
+        "cannot_run": {
+          "pty": "not measured: the interactive UI shows its own start-up screens that the PTY workload's first-input probe does not echo through, so first-input latency is not comparable",
+          "rpc": "no Pi-dialect RPC mode: `--acp` and `--output-format json` are Copilot's own protocols, not Pi's JSONL RPC"
+        },
+        "capabilities": {
+          "pi_extensions": "none",
+          "pi_session_format": false
+        },
+        "endpoint": {
+          "apis": [
+            "openai-completions",
+            "anthropic-messages",
+            "openai-responses"
+          ],
+          "writer": "writer.py"
+        },
+        "env": {
+          "COPILOT_AUTO_UPDATE": "false",
+          "COPILOT_HOME": "{home}/.copilot",
+          "COPILOT_OFFLINE": "true",
+          "COPILOT_PROVIDER_API_KEY": "{dummy_key}"
+        },
+        "homepage": "https://github.com/github/copilot-cli",
+        "label": "GitHub Copilot CLI",
+        "licence": "GitHub Copilot CLI License",
+        "licence_url": "https://github.com/github/copilot-cli/blob/main/LICENSE.md",
+        "modes": {
+          "print": [
+            "-p",
+            "{prompt}",
+            "--allow-all-tools",
+            "--no-auto-update",
+            "-s"
+          ],
+          "version": [
+            "--version"
+          ]
+        },
+        "name": "copilot",
+        "notes": "Unrelated to Pi; a reference point. Runs in the CLI's bring-your-own-key mode (`copilot help providers`) against Buffon's mock with a dummy key: no GitHub account is signed in and COPILOT_OFFLINE=true stops its GitHub, telemetry and update traffic. The arm runs the executable in the platform package `@github/copilot-<platform>` (the npm `copilot` is a Node loader that spawns it), pinned by sha256 below.",
+        "npm": {
+          "bin": "node_modules/.bin/copilot",
+          "bin_native": {
+            "darwin-arm64": "node_modules/@github/copilot-darwin-arm64/copilot",
+            "linux-x64": "node_modules/@github/copilot-linux-x64/copilot"
+          },
+          "integrity": "sha512-TAYlgMwjTnHi04ZGRc6Z+41piGeUC6xuA8z7gWVc5qOTqJLi/B3vCVg9ttkwvxnahbTWjX8x0DORwrJMXOQxGg==",
+          "native_bin": {
+            "darwin-arm64": "35d33e040e8aa0554a02385f02648396ba3b853f026ed1db17d30d051a764e4b",
+            "linux-x64": "9cf62455c0fef57658c976b737f57ddc4b87c2f513a17864846f2d0e16a18a99"
+          },
+          "package": "@github/copilot",
+          "package_lock": "package-lock.json",
+          "package_lock_sha256": "719cc494d4518865e011f319d354b1dcd52250fe4b45124f2b0f781e0620b9f8",
+          "runtime": "node",
+          "version": "1.0.95"
+        },
+        "operator_terms": "GitHub Copilot CLI is installed from the vendor's npm package at run time and is used under the GitHub Copilot CLI License (no modification or redistribution) and GitHub's terms for Copilot, whose Competitive Benchmarking clause requires anyone offering a competing product to waive their own benchmark restrictions; run it only if you and your employer accept those terms: https://github.com/github/copilot-cli/blob/main/LICENSE.md",
+        "relation": "reference",
+        "restrictions": "Vendor terms: the operator accepts GitHub's terms; Buffon never redistributes or modifies the CLI (docs/DESIGN.md section 9).",
+        "state": {
+          "dirs": [
+            "$COPILOT_HOME",
+            "$XDG_CONFIG_HOME",
+            "$XDG_DATA_HOME",
+            "$XDG_CACHE_HOME",
+            "$XDG_STATE_HOME"
+          ]
+        },
+        "version": "1.0.95"
+      },
+      "version": "1.0.95"
+    },
+    "guanshan-pi-go": {
+      "files": {
+        "writer.py": "5319f83e14904789e6c0821d3925cb3ba601ce62e36a26730665d417b0c23bb6"
+      },
+      "held": null,
+      "licence": "MIT",
+      "manifest_sha256": "2b09947125ae38442fdc90a5c52b98c92d7d6dbd226187c79cbef8e120b4a586",
+      "spec": {
+        "cannot_run": {
+          "pty": "tried at the pinned commit: its TUI never reaches a screen the PTY driver can call settled, so first-input and streaming latency cannot be read; not measured in v0"
+        },
+        "capabilities": {
+          "exact_requests": true,
+          "pi_extensions": "none",
+          "pi_session_format": true
+        },
+        "endpoint": {
+          "apis": [
+            "openai-completions",
+            "anthropic-messages",
+            "openai-responses"
+          ],
+          "writer": "writer.py"
+        },
+        "env": {
+          "PI_CODING_AGENT_DIR": "{agent_dir}",
+          "PI_OFFLINE": "1",
+          "PI_SKIP_VERSION_CHECK": "1",
+          "PI_TELEMETRY": "0"
+        },
+        "homepage": "https://github.com/guanshan/pi-go",
+        "label": "guanshan/pi-go (Go port of Pi)",
+        "licence": "MIT",
+        "licence_url": "https://github.com/guanshan/pi-go/blob/995990d176a0fe039a8b6b9abdd63613b94b6224/LICENSE",
+        "modes": {
+          "print": [
+            "--provider",
+            "bench",
+            "--model",
+            "{model}",
+            "--no-session",
+            "-p",
+            "{prompt}"
+          ],
+          "print_session": [
+            "--provider",
+            "bench",
+            "--model",
+            "{model}",
+            "--session",
+            "{session}",
+            "-p",
+            "{prompt}"
+          ],
+          "pty": [
+            "--provider",
+            "bench",
+            "--model",
+            "{model}",
+            "--no-session"
+          ],
+          "rpc": [
+            "--mode",
+            "rpc",
+            "--provider",
+            "bench",
+            "--model",
+            "{model}",
+            "--no-session"
+          ],
+          "rpc_resume": [
+            "--mode",
+            "rpc",
+            "--provider",
+            "bench",
+            "--model",
+            "{model}",
+            "--session",
+            "{session}"
+          ],
+          "rpc_session": [
+            "--mode",
+            "rpc",
+            "--provider",
+            "bench",
+            "--model",
+            "{model}",
+            "--session-dir",
+            "{session_dir}"
+          ],
+          "version": [
+            "--version"
+          ]
+        },
+        "name": "guanshan-pi-go",
+        "notes": "Go port of Pi with a Pi-compatible command line (--provider, --model, --mode rpc, --session) and models.json. Driver: print (-p) and rpc. Extension loading was not verified, so extension rows are N/A. Built from the pinned commit with the pinned Go toolchain.",
+        "relation": "pi-port",
+        "restrictions": "LICENSE file is MIT at the pinned commit (GitHub's licence detection may say NOASSERTION). Not vendored or redistributed: Buffon clones the public repository and builds it on the machine that runs it.",
+        "source": {
+          "build": [
+            "go",
+            "build",
+            "-buildvcs=false",
+            "-trimpath",
+            "-pgo=off",
+            "-ldflags",
+            "-s -w",
+            "-o",
+            "{out}",
+            "{package}"
+          ],
+          "commit": "995990d176a0fe039a8b6b9abdd63613b94b6224",
+          "env": {
+            "CGO_ENABLED": "0",
+            "GOFLAGS": "",
+            "GOTOOLCHAIN": "local"
+          },
+          "package": "./cmd/pi",
+          "repo_env": "BUFFON_SOURCE_REPO_GUANSHAN_PI_GO",
+          "repo_url": "https://github.com/guanshan/pi-go",
+          "toolchain": "go",
+          "tree": "5ea4abe55b28586d950d8c005688d35b73ba7aec"
+        },
+        "state": {
+          "dirs": [
+            "$HOME/.agent",
+            "$XDG_CONFIG_HOME",
+            "$XDG_DATA_HOME",
+            "$XDG_CACHE_HOME",
+            "$XDG_STATE_HOME"
+          ]
+        },
+        "trust": "source",
+        "version": "dev+995990d",
+        "version_check": {
+          "contains": "dev"
+        }
+      },
+      "version": "dev+995990d"
+    },
+    "nowa-gi": {
+      "files": {
+        "writer.py": "5319f83e14904789e6c0821d3925cb3ba601ce62e36a26730665d417b0c23bb6"
+      },
+      "held": null,
+      "licence": "MIT",
+      "manifest_sha256": "67559ac2727f2a2698c138ea19e0ca9f71075ff979ada7abf8ca359932187d02",
+      "spec": {
+        "capabilities": {
+          "exact_requests": true,
+          "pi_extensions": "none",
+          "pi_session_format": true
+        },
+        "endpoint": {
+          "apis": [
+            "openai-completions",
+            "anthropic-messages",
+            "openai-responses"
+          ],
+          "writer": "writer.py"
+        },
+        "env": {
+          "GI_CODING_AGENT_DIR": "{agent_dir}",
+          "GI_OFFLINE": "1",
+          "GI_SKIP_VERSION_CHECK": "1",
+          "GI_TELEMETRY": "0",
+          "PI_CODING_AGENT_DIR": "{agent_dir}",
+          "PI_OFFLINE": "1",
+          "PI_SKIP_VERSION_CHECK": "1",
+          "PI_TELEMETRY": "0"
+        },
+        "homepage": "https://github.com/nowa/gi",
+        "label": "nowa/gi (Go port of Pi)",
+        "licence": "MIT",
+        "licence_url": "https://github.com/nowa/gi/blob/ccc4399b3a6f6c5949bf0abfb76ea4e88bef33f9/LICENSE",
+        "modes": {
+          "print": [
+            "--provider",
+            "bench",
+            "--model",
+            "{model}",
+            "--no-session",
+            "-p",
+            "{prompt}"
+          ],
+          "print_session": [
+            "--provider",
+            "bench",
+            "--model",
+            "{model}",
+            "--session",
+            "{session}",
+            "-p",
+            "{prompt}"
+          ],
+          "pty": [
+            "--provider",
+            "bench",
+            "--model",
+            "{model}",
+            "--no-session"
+          ],
+          "rpc": [
+            "--mode",
+            "rpc",
+            "--provider",
+            "bench",
+            "--model",
+            "{model}",
+            "--no-session"
+          ],
+          "rpc_resume": [
+            "--mode",
+            "rpc",
+            "--provider",
+            "bench",
+            "--model",
+            "{model}",
+            "--session",
+            "{session}"
+          ],
+          "rpc_session": [
+            "--mode",
+            "rpc",
+            "--provider",
+            "bench",
+            "--model",
+            "{model}",
+            "--session-dir",
+            "{session_dir}"
+          ],
+          "version": [
+            "--version"
+          ]
+        },
+        "name": "nowa-gi",
+        "notes": "Go port of Pi with a Pi-compatible command line (--provider, --model, --mode rpc, --session) and models.json. Driver: print (-p) and rpc. Extension loading was not verified, so extension rows are N/A. Built from the pinned commit with the pinned Go toolchain.",
+        "relation": "pi-port",
+        "restrictions": "LICENSE file is MIT at the pinned commit (GitHub's licence detection may say NOASSERTION). Not vendored or redistributed: Buffon clones the public repository and builds it on the machine that runs it.",
+        "source": {
+          "build": [
+            "go",
+            "build",
+            "-buildvcs=false",
+            "-trimpath",
+            "-pgo=off",
+            "-ldflags",
+            "-s -w",
+            "-o",
+            "{out}",
+            "{package}"
+          ],
+          "commit": "ccc4399b3a6f6c5949bf0abfb76ea4e88bef33f9",
+          "env": {
+            "CGO_ENABLED": "0",
+            "GOFLAGS": "",
+            "GOTOOLCHAIN": "local"
+          },
+          "package": "./cmd/gi",
+          "repo_env": "BUFFON_SOURCE_REPO_NOWA_GI",
+          "repo_url": "https://github.com/nowa/gi",
+          "toolchain": "go",
+          "tree": "cdafcf050f89532f41a7e9d46f9243390dc69837"
+        },
+        "state": {
+          "dirs": [
+            "$HOME/.agent",
+            "$XDG_CONFIG_HOME",
+            "$XDG_DATA_HOME",
+            "$XDG_CACHE_HOME",
+            "$XDG_STATE_HOME"
+          ]
+        },
+        "trust": "source",
+        "version": "0.82.2+ccc4399",
+        "version_check": {
+          "contains": "0.82.2"
+        }
+      },
+      "version": "0.82.2+ccc4399"
+    },
+    "octet": {
+      "files": {
+        "writer.py": "6af32b994e51c46901519029720b33e31aeae35b239155fdc59f65595e2d80bb"
+      },
+      "held": null,
+      "licence": "MIT",
+      "manifest_sha256": "a5f57ec6b6af729ca12c9f0e5de5647edd101dcdc5786c1fccc8cf4ac206f699",
+      "spec": {
+        "artifact": {
+          "darwin-arm64": {
+            "checksums": "https://github.com/skaft-software/octet/releases/download/v0.9.4/OCTET_SHA256SUMS",
+            "exe": "octet-0.9.4-aarch64-apple-darwin/octet",
+            "sha256": "c302fb238adfc94286dd8115b86b98f19f48e33536c4a156f6a207c82806a1c5",
+            "url": "https://github.com/skaft-software/octet/releases/download/v0.9.4/octet-0.9.4-aarch64-apple-darwin.tar.gz"
+          },
+          "darwin-x64": {
+            "checksums": "https://github.com/skaft-software/octet/releases/download/v0.9.4/OCTET_SHA256SUMS",
+            "exe": "octet-0.9.4-x86_64-apple-darwin/octet",
+            "sha256": "3fc90d92bac94d5668550c5670ee2b34496f36ee357f78ed7f1e04f3f06c7575",
+            "url": "https://github.com/skaft-software/octet/releases/download/v0.9.4/octet-0.9.4-x86_64-apple-darwin.tar.gz"
+          },
+          "linux-x64": {
+            "checksums": "https://github.com/skaft-software/octet/releases/download/v0.9.4/OCTET_SHA256SUMS",
+            "exe": "octet-0.9.4-x86_64-unknown-linux-gnu/octet",
+            "sha256": "966e75a5551f46627080a4619383dbb402b5a72280a88e658bf2ce36e1059048",
+            "url": "https://github.com/skaft-software/octet/releases/download/v0.9.4/octet-0.9.4-x86_64-unknown-linux-gnu.tar.gz"
+          }
+        },
+        "cannot_run": {
+          "extensions": "Pi's TypeScript extensions are not loaded (the Pi compatibility adapter is experimental and not in the release), and the ten bench extensions cannot be realized in Octet's own subprocess protocol with the same results: its RPC `tool_execution_end` carries only the tool's text (`result` is `{content}`), never Pi's `details` (the bench tools return `details: {events}`), so the results cannot match Pi's byte for byte",
+          "print_session": "not wired: Octet keeps a session as its own durable graph under ~/.octet/sessions, addressed by a session id (`--session-id`, `--resume`), not as the Pi session file Buffon's `--session <file>` template names, so the kill-and-resume workloads cannot use it",
+          "rpc_resume": "not wired: its sessions are Octet's own durable graph, not Pi v3 session files, so a Pi session file cannot be resumed",
+          "rpc_session": "not wired: its sessions are Octet's own durable graph, not Pi v3 session files, so the long-session and resume workloads have no equivalent"
+        },
+        "capabilities": {
+          "exact_requests": true,
+          "pi_extensions": "none",
+          "pi_session_format": false
+        },
+        "endpoint": {
+          "apis": [
+            "openai-completions"
+          ],
+          "writer": "writer.py"
+        },
+        "env": {
+          "OCTET_OFFLINE": "true"
+        },
+        "homepage": "https://github.com/skaft-software/octet",
+        "label": "Octet",
+        "licence": "MIT",
+        "licence_url": "https://github.com/skaft-software/octet/blob/v0.9.4/LICENSE",
+        "modes": {
+          "print": [
+            "--no-session",
+            "--model",
+            "custom/bench/{model}",
+            "-p",
+            "{prompt}"
+          ],
+          "pty": [
+            "--tui-mode",
+            "fullscreen",
+            "--model",
+            "custom/bench/{model}"
+          ],
+          "rpc": [
+            "--no-session",
+            "--model",
+            "custom/bench/{model}",
+            "--mode",
+            "rpc"
+          ],
+          "version": [
+            "--version"
+          ]
+        },
+        "name": "octet",
+        "notes": "Octet 0.9.4, the Rust coding agent from Skaft Software (MIT), stock release binary. Unrelated to Pi in code; its `--mode rpc` frames JSONL like Pi's (commands `prompt`, `get_state`, `get_commands`, events `agent_start`, `agent_end`, `tool_execution_end`) but the docs say it is not tested against a pinned Pi release. It reaches the mock only through its custom-provider registry (`~/.octet/credentials/custom.json`), which speaks OpenAI Chat Completions; the Anthropic and OpenAI providers are built in with fixed hosts, so Messages and Responses cannot be pointed at the mock. Full access is the default (no approval prompts). `OCTET_OFFLINE` skips model discovery, the models.dev refresh and the interactive start-up release check; the arm declares the model with its limits, so no `GET /models` is sent. The release is signed with Sigstore (keyless, GitHub Actions): the pinned archive hashes are those of `OCTET_SHA256SUMS`, whose signature was checked with cosign 3.1.3 the way `install-octet.sh` does (`verify-blob --bundle OCTET_SHA256SUMS.sigstore.json`, identity `release-octet.yml@refs/tags/v0.9.4`, workflow commit 7d31ad64). The task named v0.9.5, which has no published release (the repository version is 0.9.5 and the latest release tag is v0.9.4), so 0.9.4 is pinned.",
+        "relation": "reference",
+        "renderer": {
+          "pty": "fullscreen"
+        },
+        "restrictions": "",
+        "state": {
+          "dirs": [
+            "$HOME/.octet"
+          ]
+        },
+        "version": "0.9.4"
+      },
+      "version": "0.9.4"
+    },
+    "omp": {
+      "files": {
+        "writer.py": "24462a9f4e67af882626e5399395a31a36bff60fe8d6299d27e8d51be2e7671a"
+      },
+      "held": null,
+      "licence": "MIT",
+      "manifest_sha256": "1e70b7f03525590fee0dd00c174913913cdeb2c6d667767ae94b28af9c588c16",
+      "spec": {
+        "artifact": {
+          "darwin-arm64": {
+            "checksums": "https://github.com/can1357/oh-my-pi/releases/download/v18.8.8/SHA256SUMS.txt",
+            "exe": "omp",
+            "sha256": "19182e8a79eddea11a5e3f93a5d2d250b3e4951bab916409ab0288c4b550c310",
+            "url": "https://github.com/can1357/oh-my-pi/releases/download/v18.8.8/omp-darwin-arm64"
+          },
+          "darwin-x64": {
+            "checksums": "https://github.com/can1357/oh-my-pi/releases/download/v18.8.8/SHA256SUMS.txt",
+            "exe": "omp",
+            "sha256": "71da87f889fadcf48c9be8c4333d6a0871c5f91af6f94b759c8dc4d158fe407c",
+            "url": "https://github.com/can1357/oh-my-pi/releases/download/v18.8.8/omp-darwin-x64"
+          },
+          "linux-arm64": {
+            "checksums": "https://github.com/can1357/oh-my-pi/releases/download/v18.8.8/SHA256SUMS.txt",
+            "exe": "omp",
+            "sha256": "9cc9060abd444cfaaf5174bafb12c6c17484c93549bc7792e8933a34692bc221",
+            "url": "https://github.com/can1357/oh-my-pi/releases/download/v18.8.8/omp-linux-arm64"
+          },
+          "linux-x64": {
+            "checksums": "https://github.com/can1357/oh-my-pi/releases/download/v18.8.8/SHA256SUMS.txt",
+            "exe": "omp",
+            "sha256": "8d804761b7ed1a6910a6283f7c4df658c8e3ebc320886472c90d626abfa2d988",
+            "url": "https://github.com/can1357/oh-my-pi/releases/download/v18.8.8/omp-linux-x64"
+          }
+        },
+        "cannot_run": {},
+        "capabilities": {
+          "pi_extensions": "partial",
+          "pi_session_format": false
+        },
+        "caveat": "omp refreshes its model catalog from about six public hosts on every start and has no offline switch. Buffon sends those connections to a closed local port (proxy variables), so the refresh fails on every start: omp's startup numbers here are its failure path, not what a connected user sees. Nothing leaves the machine.",
+        "endpoint": {
+          "apis": [
+            "openai-completions",
+            "anthropic-messages"
+          ],
+          "writer": "writer.py"
+        },
+        "env": {
+          "ALL_PROXY": "http://127.0.0.1:9",
+          "HTTPS_PROXY": "http://127.0.0.1:9",
+          "HTTP_PROXY": "http://127.0.0.1:9",
+          "PI_CODING_AGENT_DIR": "{agent_dir}"
+        },
+        "homepage": "https://github.com/can1357/oh-my-pi",
+        "label": "omp (oh-my-pi)",
+        "licence": "MIT",
+        "licence_url": "https://github.com/can1357/oh-my-pi/blob/main/LICENSE",
+        "modes": {
+          "print": [
+            "--provider",
+            "bench",
+            "--model",
+            "{model}",
+            "--no-session",
+            "-p",
+            "{prompt}"
+          ],
+          "pty": [
+            "--provider",
+            "bench",
+            "--model",
+            "{model}",
+            "--no-session"
+          ],
+          "rpc": [
+            "--mode",
+            "rpc",
+            "--provider",
+            "bench",
+            "--model",
+            "{model}",
+            "--no-session"
+          ],
+          "version": [
+            "--version"
+          ]
+        },
+        "name": "omp",
+        "notes": "Pi-derived runtime with its own configuration (models.yml, config.yml). A one-time seed (see [seed]) gives each sample the warm state a real user has; whether a seeded start still connects out is checked by the egress audit on every sample.",
+        "relation": "pi-fork",
+        "restrictions": "",
+        "seed": {
+          "command": [
+            "{binary}",
+            "--provider",
+            "bench",
+            "--model",
+            "bench-1",
+            "--no-session",
+            "-p",
+            "seed"
+          ],
+          "exclude": [
+            "run",
+            "tmp"
+          ],
+          "timeout": 240
+        },
+        "state": {
+          "dirs": [
+            "$HOME/.agent",
+            "$XDG_CONFIG_HOME",
+            "$XDG_DATA_HOME",
+            "$XDG_CACHE_HOME",
+            "$XDG_STATE_HOME"
+          ]
+        },
+        "version": "18.8.8"
+      },
+      "version": "18.8.8"
+    },
+    "opencode": {
+      "files": {
+        "package-lock.json": "b675d717283b753f9841b40e71f6d46a45a9b216c06b38294811689712e2513d",
+        "prepare.py": "eda374642c2b32bc1efe8caa7c91c35319e1c3e2c7db3323220cb4263198ba16",
+        "writer.py": "55c704345d6f7e5809b36d0336cad6ce0cb98973312f2657fef1def4d1a15ee7"
+      },
+      "held": null,
+      "licence": "MIT",
+      "manifest_sha256": "b56d037ab605d7d60c36c73b336313906db065f91b12afad7d8b9441fe415af2",
+      "spec": {
+        "cannot_run": {
+          "print_session": "not wired: a session is a row in OpenCode's own SQLite database under XDG_DATA_HOME, addressed by an `ses_...` id it generates (`run --session <id>` continues one), so Buffon's `--session <file>` path template has no equivalent and the kill-and-resume workloads cannot use it",
+          "rpc": "no Pi-dialect RPC mode: `opencode serve` is an HTTP server and `opencode acp` speaks the Agent Client Protocol, neither is Pi's JSONL RPC"
+        },
+        "capabilities": {
+          "pi_extensions": "none",
+          "pi_session_format": false
+        },
+        "endpoint": {
+          "apis": [
+            "openai-completions"
+          ],
+          "writer": "writer.py"
+        },
+        "env": {
+          "BENCH_API_KEY": "{dummy_key}",
+          "OPENCODE_DISABLE_AUTOUPDATE": "true",
+          "OPENCODE_DISABLE_LSP_DOWNLOAD": "true",
+          "OPENCODE_DISABLE_MODELS_FETCH": "true",
+          "npm_config_offline": "true"
+        },
+        "homepage": "https://opencode.ai",
+        "label": "OpenCode 1",
+        "licence": "MIT",
+        "licence_url": "https://github.com/anomalyco/opencode/blob/dev/LICENSE",
+        "modes": {
+          "print": [
+            "run",
+            "-m",
+            "bench/{model}",
+            "{prompt}"
+          ],
+          "pty": [
+            "-m",
+            "bench/{model}"
+          ],
+          "version": [
+            "--version"
+          ]
+        },
+        "name": "opencode",
+        "notes": "Unrelated to Pi; a reference point. The 1.x line (npm `opencode-ai`, its `latest` tag); OpenCode 2 is the separate arm `opencode-v2`. It sends a title-generation request without tools before the scripted turn, so its request counts are not exact. At first start it installs `@opencode-ai/plugin` from the npm registry in the background; the arm turns npm offline so no connection leaves, and the plugin API is not used.",
+        "npm": {
+          "bin": "node_modules/.bin/opencode",
+          "integrity": "sha512-lddJhFwZI3GLlw8VyOo4yNwBVGeVN/mxH6ORh60h69zAXL7QhjSWY9orj10rwO2kxVnxH9dh45uDCWNuiqPb8A==",
+          "package": "opencode-ai",
+          "package_lock": "package-lock.json",
+          "package_lock_sha256": "b675d717283b753f9841b40e71f6d46a45a9b216c06b38294811689712e2513d",
+          "runtime": "node",
+          "version": "1.19.0"
+        },
+        "prepare": {
+          "script": "prepare.py"
+        },
+        "relation": "reference",
+        "restrictions": "",
+        "state": {
+          "dirs": [
+            "$XDG_CONFIG_HOME",
+            "$XDG_DATA_HOME",
+            "$XDG_CACHE_HOME",
+            "$XDG_STATE_HOME"
+          ]
+        },
+        "version": "1.19.0"
+      },
+      "version": "1.19.0"
+    },
+    "opencode-v2": {
+      "files": {
+        "package-lock.json": "afe4ef2f6eb18cd9e783a08b35e86e28a4a3fbd19ee931cf23375ad53b6a4843",
+        "prepare.py": "51facb4272b3a0280587bb719b7e6ceecd9cc0b29cc2df95f145652ef3a06a98",
+        "writer.py": "da814c60643a63f65e48839ba0e4efc4ae50dd1122466616105bb053f22be73e"
+      },
+      "held": null,
+      "licence": "MIT",
+      "manifest_sha256": "9d1a1af05b40bf19f6b7035e723b3aea173284161d189d1a6cd9a3fc5ba939cd",
+      "spec": {
+        "cannot_run": {
+          "print_session": "not wired: a session is a row in OpenCode's own SQLite database under XDG_DATA_HOME, addressed by an `ses_...` id it generates (`run --session <id>` continues one), so Buffon's `--session <file>` path template has no equivalent and the kill-and-resume workloads cannot use it",
+          "rpc": "no Pi-dialect RPC mode: V2 has an HTTP server API (`opencode serve`, `opencode api`) and ACP, neither is Pi's JSONL RPC"
+        },
+        "capabilities": {
+          "pi_extensions": "none",
+          "pi_session_format": false
+        },
+        "endpoint": {
+          "apis": [
+            "openai-completions"
+          ],
+          "writer": "writer.py"
+        },
+        "env": {
+          "BENCH_API_KEY": "{dummy_key}",
+          "OPENCODE_DISABLE_AUTOUPDATE": "true",
+          "OPENCODE_DISABLE_MODELS_FETCH": "true"
+        },
+        "homepage": "https://opencode.ai",
+        "label": "OpenCode 2",
+        "licence": "MIT",
+        "licence_url": "https://github.com/anomalyco/opencode/blob/dev/LICENSE",
+        "modes": {
+          "print": [
+            "run",
+            "--standalone",
+            "-m",
+            "bench/{model}",
+            "{prompt}"
+          ],
+          "pty": [
+            "--standalone"
+          ],
+          "version": [
+            "--version"
+          ]
+        },
+        "name": "opencode-v2",
+        "notes": "Unrelated to Pi; a reference point. The 2.x line (npm `@opencode/cli`, its `latest` tag since 2.0.0 of 2026-09-11; the command is still `opencode`, also installed as `opencode2`): it has a new plugin API, server API and terminal config, and still loads supported V1 server config (docs: migrate-v1). `run --standalone` starts a private server inside the measured process tree; without it the CLI would start or reuse one shared background service outside it. It sends a title-generation request without tools before the scripted turn, so its request counts are not exact.",
+        "npm": {
+          "bin": "node_modules/.bin/opencode",
+          "integrity": "sha512-1ZmbylUtiRvtN8YMLxBEN4u0tqhfKI0AQBPvgdCLYLbB8BS80e6cFnOhzHH6L663o4RVL5bMa/VleLh1hNX+NA==",
+          "package": "@opencode/cli",
+          "package_lock": "package-lock.json",
+          "package_lock_sha256": "afe4ef2f6eb18cd9e783a08b35e86e28a4a3fbd19ee931cf23375ad53b6a4843",
+          "runtime": "node",
+          "version": "2.0.29"
+        },
+        "prepare": {
+          "script": "prepare.py"
+        },
+        "relation": "reference",
+        "restrictions": "",
+        "state": {
+          "dirs": [
+            "$XDG_CONFIG_HOME",
+            "$XDG_DATA_HOME",
+            "$XDG_CACHE_HOME",
+            "$XDG_STATE_HOME"
+          ]
+        },
+        "version": "2.0.29"
+      },
+      "version": "2.0.29"
+    },
+    "pi-agent-rust": {
+      "files": {},
+      "held": "Held: the licence rider grants no rights to OpenAI, Anthropic or anyone acting on behalf of them, and its use definition includes executing, benchmarking and testing. Needs a legal reading and a run operated by people outside the rider (docs/DESIGN.md section 9).",
+      "licence": "MIT with a rider",
+      "manifest_sha256": "b4f846692df327ceeb9f78525a2dab333394aa4e234fc87ae020575aafa079b4",
+      "spec": {
+        "held": "Held: the licence rider grants no rights to OpenAI, Anthropic or anyone acting on behalf of them, and its use definition includes executing, benchmarking and testing. Needs a legal reading and a run operated by people outside the rider (docs/DESIGN.md section 9).",
+        "homepage": "https://github.com/Dicklesworthstone/pi_agent_rust",
+        "label": "pi_agent_rust",
+        "licence": "MIT with a rider",
+        "licence_url": "https://github.com/Dicklesworthstone/pi_agent_rust",
+        "name": "pi-agent-rust",
+        "relation": "reference",
+        "restrictions": "Held: the licence rider grants no rights to OpenAI, Anthropic or anyone acting on behalf of them, and its use definition includes executing, benchmarking and testing. Needs a legal reading and a run operated by people outside the rider (docs/DESIGN.md section 9).",
+        "version": "0.7.1"
+      },
+      "version": "0.7.1"
+    },
+    "pi-bolt-0.8.5": {
+      "files": {
+        "writer.py": "5319f83e14904789e6c0821d3925cb3ba601ce62e36a26730665d417b0c23bb6"
+      },
+      "held": null,
+      "licence": "MIT",
+      "manifest_sha256": "830f0aa5e045de5429f2dc16f19e5acc25741435f4b6dea05302b485709cef89",
+      "spec": {
+        "artifact": {
+          "darwin-arm64": {
+            "checksums": "https://github.com/opensec-git/Pi-Bolt/releases/download/bolt-v0.8.5/SHA256SUMS",
+            "exe": "pi-bolt-darwin-arm64/pi",
+            "sha256": "b13680b3d9d8623f3805e24659db6322ba158b620ca98660f312ef2c1c217569",
+            "url": "https://github.com/opensec-git/Pi-Bolt/releases/download/bolt-v0.8.5/pi-bolt-darwin-arm64.tar.gz"
+          },
+          "linux-x64": {
+            "checksums": "https://github.com/opensec-git/Pi-Bolt/releases/download/bolt-v0.8.5/SHA256SUMS",
+            "exe": "pi-bolt-linux-x64/pi",
+            "sha256": "c8c8189df02a0d0ba658fb3ba828a68f36bea151060ec829deb9b5b534120a33",
+            "url": "https://github.com/opensec-git/Pi-Bolt/releases/download/bolt-v0.8.5/pi-bolt-linux-x64.tar.gz"
+          }
+        },
+        "capabilities": {
+          "exact_requests": true,
+          "pi_extensions": "native",
+          "pi_session_format": true
+        },
+        "divergence": [
+          {
+            "reason": "Pi-Bolt's fullscreen TUI scrolls the rows that only moved (a scroll region) and draws only the rows that changed",
+            "source": "https://github.com/opensec-git/Pi-Bolt/blob/bolt-v0.8.5/packages/tui/src/tui-alt-screen.ts",
+            "workloads": [
+              "streaming/tui-*"
+            ]
+          }
+        ],
+        "endpoint": {
+          "apis": [
+            "openai-completions",
+            "anthropic-messages",
+            "openai-responses"
+          ],
+          "writer": "writer.py"
+        },
+        "env": {
+          "PI_CODING_AGENT_DIR": "{agent_dir}",
+          "PI_OFFLINE": "1",
+          "PI_SKIP_VERSION_CHECK": "1",
+          "PI_TELEMETRY": "0"
+        },
+        "homepage": "https://github.com/opensec-git/Pi-Bolt",
+        "label": "Pi-Bolt 0.8.5",
+        "licence": "MIT",
+        "licence_url": "https://github.com/opensec-git/Pi-Bolt/blob/bolt-v0.8.5/LICENSE",
+        "modes": {
+          "print": [
+            "--provider",
+            "bench",
+            "--model",
+            "{model}",
+            "--no-session",
+            "{extensions}",
+            "-p",
+            "{prompt}"
+          ],
+          "print_session": [
+            "--provider",
+            "bench",
+            "--model",
+            "{model}",
+            "--session",
+            "{session}",
+            "-p",
+            "{prompt}"
+          ],
+          "pty": [
+            "--provider",
+            "bench",
+            "--model",
+            "{model}",
+            "--no-session",
+            "{extensions}"
+          ],
+          "rpc": [
+            "--mode",
+            "rpc",
+            "--provider",
+            "bench",
+            "--model",
+            "{model}",
+            "--no-session",
+            "{extensions}"
+          ],
+          "rpc_resume": [
+            "--mode",
+            "rpc",
+            "--provider",
+            "bench",
+            "--model",
+            "{model}",
+            "--session",
+            "{session}",
+            "{extensions}"
+          ],
+          "rpc_session": [
+            "--mode",
+            "rpc",
+            "--provider",
+            "bench",
+            "--model",
+            "{model}",
+            "--session-dir",
+            "{session_dir}",
+            "{extensions}"
+          ],
+          "version": [
+            "--version"
+          ]
+        },
+        "name": "pi-bolt-0.8.5",
+        "notes": "Release 0.8.5 (published 2026-10-12), stock AOT linux-x64 and darwin-arm64 archives (the -jit and -baseline variants are separate artifacts and are not measured here); checksums are those of the release's SHA256SUMS, verified against the downloaded archive. Pi-compatible runtime (AOT on Bun/JSC), stock linux-x64 build. It differs from Pi in three output paths (throttled tool-call argument events, `$$` Markdown lexing, alt-screen scroll regions); a number on those paths is a number for different work.",
+        "relation": "pi-fork",
+        "renderer": {
+          "pty": "fullscreen"
+        },
+        "restrictions": "",
+        "state": {
+          "dirs": [
+            "$HOME/.agent",
+            "$HOME/.pig",
+            "$XDG_CONFIG_HOME",
+            "$XDG_DATA_HOME",
+            "$XDG_CACHE_HOME",
+            "$XDG_STATE_HOME"
+          ]
+        },
+        "version": "0.8.5"
+      },
+      "version": "0.8.5"
+    },
+    "pi-bun": {
+      "files": {
+        "writer.py": "5319f83e14904789e6c0821d3925cb3ba601ce62e36a26730665d417b0c23bb6"
+      },
+      "held": null,
+      "licence": "MIT",
+      "manifest_sha256": "c88c8ca00f64b4f9ea566de62b8a6d8826ef41f96a733e592e84bbc300c7ac6a",
+      "spec": {
+        "artifact": {
+          "darwin-arm64": {
+            "checksums": "https://github.com/earendil-works/pi/releases/download/v1.3.0/SHA256SUMS",
+            "exe": "pi/pi",
+            "sha256": "1f9ae61cdeae04dd68caf1a1e8ab8ec9b292062f6ccb3252e0a9cbe93b5b16f1",
+            "url": "https://github.com/earendil-works/pi/releases/download/v1.3.0/pi-darwin-arm64.tar.gz"
+          },
+          "darwin-x64": {
+            "checksums": "https://github.com/earendil-works/pi/releases/download/v1.3.0/SHA256SUMS",
+            "exe": "pi/pi",
+            "sha256": "9ff562e2e439f50971b1f6bd9b62b30946600d9e9baa4ea19635cf630a553066",
+            "url": "https://github.com/earendil-works/pi/releases/download/v1.3.0/pi-darwin-x64.tar.gz"
+          },
+          "linux-arm64": {
+            "checksums": "https://github.com/earendil-works/pi/releases/download/v1.3.0/SHA256SUMS",
+            "exe": "pi/pi",
+            "sha256": "7fd2ea14fca390ebf9f47438baaef07c4b3d13db7cc8e459831118391b7ea65b",
+            "url": "https://github.com/earendil-works/pi/releases/download/v1.3.0/pi-linux-arm64.tar.gz"
+          },
+          "linux-x64": {
+            "checksums": "https://github.com/earendil-works/pi/releases/download/v1.3.0/SHA256SUMS",
+            "exe": "pi/pi",
+            "sha256": "24f5be328b66d4da36876296989501974f43ab8434fbb57c35c523a3ea505ded",
+            "url": "https://github.com/earendil-works/pi/releases/download/v1.3.0/pi-linux-x64.tar.gz"
+          }
+        },
+        "capabilities": {
+          "exact_requests": true,
+          "pi_extensions": "native",
+          "pi_session_format": true
+        },
+        "endpoint": {
+          "apis": [
+            "openai-completions",
+            "anthropic-messages",
+            "openai-responses"
+          ],
+          "writer": "writer.py"
+        },
+        "env": {
+          "PI_CODING_AGENT_DIR": "{agent_dir}",
+          "PI_OFFLINE": "1",
+          "PI_SKIP_VERSION_CHECK": "1",
+          "PI_TELEMETRY": "0"
+        },
+        "homepage": "https://github.com/earendil-works/pi",
+        "label": "Pi on Bun",
+        "licence": "MIT",
+        "licence_url": "https://github.com/earendil-works/pi/blob/v1.3.0/LICENSE",
+        "modes": {
+          "print": [
+            "--provider",
+            "bench",
+            "--model",
+            "{model}",
+            "--no-session",
+            "{extensions}",
+            "-p",
+            "{prompt}"
+          ],
+          "print_session": [
+            "--provider",
+            "bench",
+            "--model",
+            "{model}",
+            "--session",
+            "{session}",
+            "-p",
+            "{prompt}"
+          ],
+          "pty": [
+            "--provider",
+            "bench",
+            "--model",
+            "{model}",
+            "--no-session",
+            "{extensions}"
+          ],
+          "rpc": [
+            "--mode",
+            "rpc",
+            "--provider",
+            "bench",
+            "--model",
+            "{model}",
+            "--no-session",
+            "{extensions}"
+          ],
+          "rpc_resume": [
+            "--mode",
+            "rpc",
+            "--provider",
+            "bench",
+            "--model",
+            "{model}",
+            "--session",
+            "{session}",
+            "{extensions}"
+          ],
+          "rpc_session": [
+            "--mode",
+            "rpc",
+            "--provider",
+            "bench",
+            "--model",
+            "{model}",
+            "--session-dir",
+            "{session_dir}",
+            "{extensions}"
+          ],
+          "version": [
+            "--version"
+          ]
+        },
+        "name": "pi-bun",
+        "notes": "Pi's own release binary (Bun runtime inside). A `bun build --compile` arm on a pinned Bun is a later addition.",
+        "relation": "pi-reference",
+        "renderer": {
+          "pty": "fullscreen"
+        },
+        "restrictions": "",
+        "state": {
+          "dirs": [
+            "$HOME/.agent",
+            "$HOME/.pig",
+            "$XDG_CONFIG_HOME",
+            "$XDG_DATA_HOME",
+            "$XDG_CACHE_HOME",
+            "$XDG_STATE_HOME"
+          ]
+        },
+        "version": "1.3.0"
+      },
+      "version": "1.3.0"
+    },
+    "pi-node": {
+      "files": {
+        "install-package-lock.json": "65eacda789c30e1c3859a96eee2fd53cf4a18629d27dcf2aa6d7bdb3da02d719",
+        "install-package.json": "efa2ca2695c003c92febb3bca40c5de5f94d43a8aa78e1ba88420b30156d5e21",
+        "writer.py": "5319f83e14904789e6c0821d3925cb3ba601ce62e36a26730665d417b0c23bb6"
+      },
+      "held": null,
+      "licence": "MIT",
+      "manifest_sha256": "17662e8cd8bd784c3f3dd8a8b4e0864387babb4075d66aa52a60b3b02ba56457",
+      "spec": {
+        "capabilities": {
+          "exact_requests": true,
+          "pi_extensions": "native",
+          "pi_session_format": true
+        },
+        "endpoint": {
+          "apis": [
+            "openai-completions",
+            "anthropic-messages",
+            "openai-responses"
+          ],
+          "writer": "writer.py"
+        },
+        "env": {
+          "NODE_COMPILE_CACHE": "{install_dir}/node-compile-cache",
+          "PI_CODING_AGENT_DIR": "{agent_dir}",
+          "PI_OFFLINE": "1",
+          "PI_SKIP_VERSION_CHECK": "1",
+          "PI_TELEMETRY": "0"
+        },
+        "homepage": "https://github.com/earendil-works/pi",
+        "label": "Pi on Node",
+        "licence": "MIT",
+        "licence_url": "https://github.com/earendil-works/pi/blob/v1.3.0/LICENSE",
+        "modes": {
+          "print": [
+            "--provider",
+            "bench",
+            "--model",
+            "{model}",
+            "--no-session",
+            "{extensions}",
+            "-p",
+            "{prompt}"
+          ],
+          "print_session": [
+            "--provider",
+            "bench",
+            "--model",
+            "{model}",
+            "--session",
+            "{session}",
+            "-p",
+            "{prompt}"
+          ],
+          "pty": [
+            "--provider",
+            "bench",
+            "--model",
+            "{model}",
+            "--no-session",
+            "{extensions}"
+          ],
+          "rpc": [
+            "--mode",
+            "rpc",
+            "--provider",
+            "bench",
+            "--model",
+            "{model}",
+            "--no-session",
+            "{extensions}"
+          ],
+          "rpc_resume": [
+            "--mode",
+            "rpc",
+            "--provider",
+            "bench",
+            "--model",
+            "{model}",
+            "--session",
+            "{session}",
+            "{extensions}"
+          ],
+          "rpc_session": [
+            "--mode",
+            "rpc",
+            "--provider",
+            "bench",
+            "--model",
+            "{model}",
+            "--session-dir",
+            "{session_dir}",
+            "{extensions}"
+          ],
+          "version": [
+            "--version"
+          ]
+        },
+        "name": "pi-node",
+        "notes": "The reference arm: every ratio in a report is relative to it. Installed from the install pair Pi publishes with its release (SHA256SUMS lists both files), npm ci --ignore-scripts, on the pinned Node. Pi turns on Node's compile cache (module.enableCompileCache()), which is kept in the temporary directory by default. Each sample gets a new temporary directory, so the cache would be cold in every sample. NODE_COMPILE_CACHE puts it in the arm's own install directory instead: the warm-up round fills it and the measured rounds start warm, as a person's second start does. Each A/A copy has its own install directory, so its own cache.",
+        "npm": {
+          "bin": "node_modules/.bin/pi",
+          "checksums": "https://github.com/earendil-works/pi/releases/download/v1.3.0/SHA256SUMS",
+          "integrity": "sha512-V/WoCjA2hQSe3QLWIUB24cTRdtEdeLiIzkDqU5RMXV6VWuD+KGZnzVBMhglwdnQTySkehZsjt8a3g6Jd2g4nnw==",
+          "package": "@earendil-works/pi-coding-agent",
+          "package_json": "install-package.json",
+          "package_json_published": "pi-coding-agent-install-package.json",
+          "package_json_sha256": "efa2ca2695c003c92febb3bca40c5de5f94d43a8aa78e1ba88420b30156d5e21",
+          "package_lock": "install-package-lock.json",
+          "package_lock_published": "pi-coding-agent-install-package-lock.json",
+          "package_lock_sha256": "65eacda789c30e1c3859a96eee2fd53cf4a18629d27dcf2aa6d7bdb3da02d719",
+          "runtime": "node",
+          "version": "1.3.0"
+        },
+        "relation": "pi-reference",
+        "renderer": {
+          "pty": "fullscreen"
+        },
+        "restrictions": "",
+        "state": {
+          "dirs": [
+            "$HOME/.agent",
+            "$HOME/.pig",
+            "$XDG_CONFIG_HOME",
+            "$XDG_DATA_HOME",
+            "$XDG_CACHE_HOME",
+            "$XDG_STATE_HOME"
+          ]
+        },
+        "version": "1.3.0"
+      },
+      "version": "1.3.0"
+    },
+    "pibolt": {
+      "files": {
+        "writer.py": "5319f83e14904789e6c0821d3925cb3ba601ce62e36a26730665d417b0c23bb6"
+      },
+      "held": null,
+      "licence": "MIT",
+      "manifest_sha256": "db1434d8b8ede5b781e9b6cbb7f166bf33c5f8ec6592d3f11e8ebfd3b0047227",
+      "spec": {
+        "artifact": {
+          "darwin-arm64": {
+            "checksums": "https://github.com/opensec-git/Pi-Bolt/releases/download/bolt-v0.9.3/SHA256SUMS",
+            "exe": "pi-bolt-darwin-arm64/pi",
+            "sha256": "a9f12db8785f76a4690049035643f47580c25ab1aef8c80f57762f2f96a4b945",
+            "url": "https://github.com/opensec-git/Pi-Bolt/releases/download/bolt-v0.9.3/pi-bolt-darwin-arm64.tar.gz"
+          },
+          "linux-x64": {
+            "checksums": "https://github.com/opensec-git/Pi-Bolt/releases/download/bolt-v0.9.3/SHA256SUMS",
+            "exe": "pi-bolt-linux-x64/pi",
+            "sha256": "333f44ab2a1f602dbeb36228927bcafabd3e132da32be1d6a7deb54bd09e90ce",
+            "url": "https://github.com/opensec-git/Pi-Bolt/releases/download/bolt-v0.9.3/pi-bolt-linux-x64.tar.gz"
+          }
+        },
+        "capabilities": {
+          "exact_requests": true,
+          "pi_extensions": "native",
+          "pi_session_format": true
+        },
+        "divergence": [
+          {
+            "reason": "Pi-Bolt's fullscreen TUI scrolls the rows that only moved (a scroll region) and draws only the rows that changed",
+            "source": "https://github.com/opensec-git/Pi-Bolt/blob/bolt-v0.9.3/packages/tui/src/tui-alt-screen.ts",
+            "workloads": [
+              "streaming/tui-*"
+            ]
+          }
+        ],
+        "endpoint": {
+          "apis": [
+            "openai-completions",
+            "anthropic-messages",
+            "openai-responses"
+          ],
+          "writer": "writer.py"
+        },
+        "env": {
+          "PI_CODING_AGENT_DIR": "{agent_dir}",
+          "PI_OFFLINE": "1",
+          "PI_SKIP_VERSION_CHECK": "1",
+          "PI_TELEMETRY": "0"
+        },
+        "homepage": "https://github.com/opensec-git/Pi-Bolt",
+        "label": "Pi-Bolt",
+        "licence": "MIT",
+        "licence_url": "https://github.com/opensec-git/Pi-Bolt/blob/bolt-v0.9.3/LICENSE",
+        "modes": {
+          "print": [
+            "--provider",
+            "bench",
+            "--model",
+            "{model}",
+            "--no-session",
+            "{extensions}",
+            "-p",
+            "{prompt}"
+          ],
+          "print_session": [
+            "--provider",
+            "bench",
+            "--model",
+            "{model}",
+            "--session",
+            "{session}",
+            "-p",
+            "{prompt}"
+          ],
+          "pty": [
+            "--provider",
+            "bench",
+            "--model",
+            "{model}",
+            "--no-session",
+            "{extensions}"
+          ],
+          "rpc": [
+            "--mode",
+            "rpc",
+            "--provider",
+            "bench",
+            "--model",
+            "{model}",
+            "--no-session",
+            "{extensions}"
+          ],
+          "rpc_resume": [
+            "--mode",
+            "rpc",
+            "--provider",
+            "bench",
+            "--model",
+            "{model}",
+            "--session",
+            "{session}",
+            "{extensions}"
+          ],
+          "rpc_session": [
+            "--mode",
+            "rpc",
+            "--provider",
+            "bench",
+            "--model",
+            "{model}",
+            "--session-dir",
+            "{session_dir}",
+            "{extensions}"
+          ],
+          "version": [
+            "--version"
+          ]
+        },
+        "name": "pibolt",
+        "notes": "Pi-compatible runtime (AOT on Bun/JSC), stock linux-x64 build; Pi-Bolt 0.9.3 is Pi 1.3.0 compiled ahead of time, the same Pi version as the reference arm. It differs from Pi in three output paths (throttled tool-call argument events, `$$` Markdown lexing, alt-screen scroll regions), all still in the 0.9.3 source; since 0.9.2 a tool-call argument chunk also draws a frame only when the arguments shown change. A number on those paths is a number for different work. The checksums are signed with Pi-Bolt's Ed25519 release key (keys/release.pub; the same key is in its install.sh); the pinned SHA256SUMS signature was checked with OpenSSL 3 `pkeyutl -verify -rawin`.",
+        "relation": "pi-fork",
+        "renderer": {
+          "pty": "fullscreen"
+        },
+        "restrictions": "",
+        "state": {
+          "dirs": [
+            "$HOME/.agent",
+            "$HOME/.pig",
+            "$XDG_CONFIG_HOME",
+            "$XDG_DATA_HOME",
+            "$XDG_CACHE_HOME",
+            "$XDG_STATE_HOME"
+          ]
+        },
+        "version": "0.9.3"
+      },
+      "version": "0.9.3"
+    },
+    "pig-0.4.1": {
+      "files": {
+        "writer.py": "5319f83e14904789e6c0821d3925cb3ba601ce62e36a26730665d417b0c23bb6"
+      },
+      "held": null,
+      "licence": "MIT",
+      "manifest_sha256": "a51378256ee5fdb0af8f190268b7b5e3f6c0d19da03d90b607eaa70efd58a161",
+      "spec": {
+        "artifact": {
+          "darwin-arm64": {
+            "checksums": "https://github.com/MichaelKinsy/PiG/releases/download/v0.4.1/SHA256SUMS",
+            "exe": "pig-0.4.1-darwin-arm64/pig",
+            "sha256": "25a1e2bde685f28684e495b250dccad7b2960a840454d80c88c35d5c7a8c5966",
+            "url": "https://github.com/MichaelKinsy/PiG/releases/download/v0.4.1/pig-0.4.1-darwin-arm64.tar.gz"
+          },
+          "darwin-x64": {
+            "checksums": "https://github.com/MichaelKinsy/PiG/releases/download/v0.4.1/SHA256SUMS",
+            "exe": "pig-0.4.1-darwin-amd64/pig",
+            "sha256": "9f29ef012cd34074ac02ad4a4ae6f7b93d42b4febd35aa08adf47702944d3a87",
+            "url": "https://github.com/MichaelKinsy/PiG/releases/download/v0.4.1/pig-0.4.1-darwin-amd64.tar.gz"
+          },
+          "linux-arm64": {
+            "checksums": "https://github.com/MichaelKinsy/PiG/releases/download/v0.4.1/SHA256SUMS",
+            "exe": "pig-0.4.1-linux-arm64/pig",
+            "sha256": "e1768bbfce29b784d76001eb47ebd989f05ed042fbe81ad8629816e181fa5ac8",
+            "url": "https://github.com/MichaelKinsy/PiG/releases/download/v0.4.1/pig-0.4.1-linux-arm64.tar.gz"
+          },
+          "linux-x64": {
+            "checksums": "https://github.com/MichaelKinsy/PiG/releases/download/v0.4.1/SHA256SUMS",
+            "exe": "pig-0.4.1-linux-amd64/pig",
+            "sha256": "3b4de3587cbfb617def483ec62dddcf35827acc3436b1454cc5694c22dcdaf3f",
+            "url": "https://github.com/MichaelKinsy/PiG/releases/download/v0.4.1/pig-0.4.1-linux-amd64.tar.gz"
+          }
+        },
+        "capabilities": {
+          "exact_requests": true,
+          "pi_extensions": "sidecar",
+          "pi_session_format": true
+        },
+        "endpoint": {
+          "apis": [
+            "openai-completions",
+            "anthropic-messages",
+            "openai-responses"
+          ],
+          "writer": "writer.py"
+        },
+        "env": {
+          "PIG_CODING_AGENT_DIR": "{agent_dir}",
+          "PIG_HOME": "{disk}/pig",
+          "PIG_OFFLINE": "1",
+          "PI_OFFLINE": "1",
+          "PI_SKIP_VERSION_CHECK": "1",
+          "PI_TELEMETRY": "0"
+        },
+        "homepage": "https://github.com/MichaelKinsy/PiG",
+        "label": "PiG 0.4.1",
+        "licence": "MIT",
+        "licence_url": "https://github.com/MichaelKinsy/PiG/blob/v0.4.1/LICENSE",
+        "modes": {
+          "print": [
+            "--provider",
+            "bench",
+            "--model",
+            "{model}",
+            "--no-session",
+            "{extensions}",
+            "-p",
+            "{prompt}"
+          ],
+          "print_session": [
+            "--provider",
+            "bench",
+            "--model",
+            "{model}",
+            "--session",
+            "{session}",
+            "-p",
+            "{prompt}"
+          ],
+          "pty": [
+            "--provider",
+            "bench",
+            "--model",
+            "{model}",
+            "--no-session",
+            "{extensions}"
+          ],
+          "rpc": [
+            "--mode",
+            "rpc",
+            "--provider",
+            "bench",
+            "--model",
+            "{model}",
+            "--no-session",
+            "{extensions}"
+          ],
+          "rpc_resume": [
+            "--mode",
+            "rpc",
+            "--provider",
+            "bench",
+            "--model",
+            "{model}",
+            "--session",
+            "{session}",
+            "{extensions}"
+          ],
+          "rpc_session": [
+            "--mode",
+            "rpc",
+            "--provider",
+            "bench",
+            "--model",
+            "{model}",
+            "--session-dir",
+            "{session_dir}",
+            "{extensions}"
+          ],
+          "version": [
+            "--version"
+          ]
+        },
+        "name": "pig-0.4.1",
+        "notes": "Go port of Pi, release archive. Buffon's first public report needs an independent reproduction of every PiG cell (docs/DESIGN.md section 10).",
+        "relation": "pi-port",
+        "renderer": {
+          "pty": "fullscreen"
+        },
+        "restrictions": "",
+        "runtime": {
+          "node": "24.19.0"
+        },
+        "state": {
+          "dirs": [
+            "$HOME/.agent",
+            "$PIG_HOME",
+            "$XDG_CONFIG_HOME",
+            "$XDG_DATA_HOME",
+            "$XDG_CACHE_HOME",
+            "$XDG_STATE_HOME"
+          ]
+        },
+        "version": "0.4.1"
+      },
+      "version": "0.4.1"
+    },
+    "pig-go-fused": {
+      "files": {
+        "prepare.py": "a6dd7c913f23b72ffb80bd0fe66ca116fd00bae40f8c69d4a78ea030a520cca8"
+      },
+      "held": null,
+      "licence": "MIT",
+      "manifest_sha256": "115b16dd85c40f67cd2ad0c68d43785e186e0c1a2158fd0a7b0e2ad7152c20ef",
+      "spec": {
+        "capabilities": {
+          "exact_requests": true,
+          "pi_extensions": "sidecar",
+          "pi_session_format": true
+        },
+        "derive": {
+          "base": "pig-tip"
+        },
+        "endpoint": {
+          "apis": [
+            "openai-completions",
+            "anthropic-messages",
+            "openai-responses"
+          ],
+          "writer": "writer.py"
+        },
+        "env": {
+          "PIG_CODING_AGENT_DIR": "{agent_dir}",
+          "PIG_HOME": "{disk}/pig",
+          "PIG_OFFLINE": "1",
+          "PI_OFFLINE": "1",
+          "PI_SKIP_VERSION_CHECK": "1",
+          "PI_TELEMETRY": "0"
+        },
+        "extensions": {
+          "default": false,
+          "embedded": true,
+          "processes": 0
+        },
+        "homepage": "https://github.com/MichaelKinsy/PiG",
+        "label": "PiG, ten Go SDK extensions fused into a Piglet Binary",
+        "licence": "MIT",
+        "licence_url": "https://github.com/MichaelKinsy/PiG/blob/main/LICENSE",
+        "modes": {
+          "print": [
+            "--provider",
+            "bench",
+            "--model",
+            "{model}",
+            "--no-session",
+            "{extensions}",
+            "-p",
+            "{prompt}"
+          ],
+          "print_session": [
+            "--provider",
+            "bench",
+            "--model",
+            "{model}",
+            "--session",
+            "{session}",
+            "-p",
+            "{prompt}"
+          ],
+          "pty": [
+            "--provider",
+            "bench",
+            "--model",
+            "{model}",
+            "--no-session",
+            "{extensions}"
+          ],
+          "rpc": [
+            "--mode",
+            "rpc",
+            "--provider",
+            "bench",
+            "--model",
+            "{model}",
+            "--no-session",
+            "{extensions}"
+          ],
+          "rpc_resume": [
+            "--mode",
+            "rpc",
+            "--provider",
+            "bench",
+            "--model",
+            "{model}",
+            "--session",
+            "{session}",
+            "{extensions}"
+          ],
+          "rpc_session": [
+            "--mode",
+            "rpc",
+            "--provider",
+            "bench",
+            "--model",
+            "{model}",
+            "--session-dir",
+            "{session_dir}",
+            "{extensions}"
+          ],
+          "version": [
+            "--version"
+          ]
+        },
+        "name": "pig-go-fused",
+        "notes": "The same Go factories as pig-go-packed, compiled into the PiG executable by `pig piglet build --format binary`: no extension process and no IPC. Built from the pig-tip source checkout.",
+        "prepare": {
+          "script": "prepare.py"
+        },
+        "relation": "pi-port",
+        "renderer": {
+          "pty": "fullscreen"
+        },
+        "restrictions": "",
+        "runtime": {
+          "node": "24.19.0"
+        },
+        "state": {
+          "dirs": [
+            "$HOME/.agent",
+            "$PIG_HOME",
+            "$XDG_CONFIG_HOME",
+            "$XDG_DATA_HOME",
+            "$XDG_CACHE_HOME",
+            "$XDG_STATE_HOME"
+          ]
+        },
+        "version": "0.5.0+1.3.0",
+        "version_check": {
+          "contains": "0.5.0"
+        }
+      },
+      "version": "0.5.0+1.3.0"
+    },
+    "pig-go-isolated": {
+      "files": {
+        "prepare.py": "c0812dc6f2cedfde98ec0e4bf5962768ea52eb639d25bf618ce7487c60c4a8c9"
+      },
+      "held": null,
+      "licence": "MIT",
+      "manifest_sha256": "e09b020d69714b763ac0c5559d2bb49410dcde483c56bc0b1d6dacb2fcf93a4a",
+      "spec": {
+        "capabilities": {
+          "exact_requests": true,
+          "pi_extensions": "sidecar",
+          "pi_session_format": true
+        },
+        "derive": {
+          "base": "pig-tip"
+        },
+        "endpoint": {
+          "apis": [
+            "openai-completions",
+            "anthropic-messages",
+            "openai-responses"
+          ],
+          "writer": "writer.py"
+        },
+        "env": {
+          "PIG_CODING_AGENT_DIR": "{agent_dir}",
+          "PIG_HOME": "{shared_dir}/pig-home",
+          "PIG_OFFLINE": "1",
+          "PIG_SDK_GO_ROOT": "{source_dir}/extensions/sdk",
+          "PI_OFFLINE": "1",
+          "PI_SKIP_VERSION_CHECK": "1",
+          "PI_TELEMETRY": "0"
+        },
+        "extensions": {
+          "default": false,
+          "paths": [
+            "fixtures/extensions-go/standalone/bench-ext-*"
+          ],
+          "processes": 10
+        },
+        "homepage": "https://github.com/MichaelKinsy/PiG",
+        "label": "PiG, ten Go SDK extensions, one process each",
+        "licence": "MIT",
+        "licence_url": "https://github.com/MichaelKinsy/PiG/blob/main/LICENSE",
+        "modes": {
+          "print": [
+            "--provider",
+            "bench",
+            "--model",
+            "{model}",
+            "--no-session",
+            "{extensions}",
+            "-p",
+            "{prompt}"
+          ],
+          "print_session": [
+            "--provider",
+            "bench",
+            "--model",
+            "{model}",
+            "--session",
+            "{session}",
+            "-p",
+            "{prompt}"
+          ],
+          "pty": [
+            "--provider",
+            "bench",
+            "--model",
+            "{model}",
+            "--no-session",
+            "{extensions}"
+          ],
+          "rpc": [
+            "--mode",
+            "rpc",
+            "--provider",
+            "bench",
+            "--model",
+            "{model}",
+            "--no-session",
+            "{extensions}"
+          ],
+          "rpc_resume": [
+            "--mode",
+            "rpc",
+            "--provider",
+            "bench",
+            "--model",
+            "{model}",
+            "--session",
+            "{session}",
+            "{extensions}"
+          ],
+          "rpc_session": [
+            "--mode",
+            "rpc",
+            "--provider",
+            "bench",
+            "--model",
+            "{model}",
+            "--session-dir",
+            "{session_dir}",
+            "{extensions}"
+          ],
+          "version": [
+            "--version"
+          ]
+        },
+        "name": "pig-go-isolated",
+        "notes": "The same Go bodies as pig-go-packed, as ten exact standalone modules (package main): PiG builds and runs each as its own process.",
+        "prepare": {
+          "script": "prepare.py"
+        },
+        "relation": "pi-port",
+        "renderer": {
+          "pty": "fullscreen"
+        },
+        "restrictions": "",
+        "runtime": {
+          "go": "1.27.2",
+          "node": "24.19.0"
+        },
+        "state": {
+          "dirs": [
+            "$HOME/.agent",
+            "$PIG_HOME",
+            "$XDG_CONFIG_HOME",
+            "$XDG_DATA_HOME",
+            "$XDG_CACHE_HOME",
+            "$XDG_STATE_HOME"
+          ]
+        },
+        "version": "0.5.0+1.3.0",
+        "version_check": {
+          "contains": "0.5.0"
+        }
+      },
+      "version": "0.5.0+1.3.0"
+    },
+    "pig-go-packed": {
+      "files": {
+        "prepare.py": "c0812dc6f2cedfde98ec0e4bf5962768ea52eb639d25bf618ce7487c60c4a8c9"
+      },
+      "held": null,
+      "licence": "MIT",
+      "manifest_sha256": "259db4d049310152a86a3108c4c1319a56b9500e19360212488bea84253a127f",
+      "spec": {
+        "capabilities": {
+          "exact_requests": true,
+          "pi_extensions": "sidecar",
+          "pi_session_format": true
+        },
+        "derive": {
+          "base": "pig-tip"
+        },
+        "endpoint": {
+          "apis": [
+            "openai-completions",
+            "anthropic-messages",
+            "openai-responses"
+          ],
+          "writer": "writer.py"
+        },
+        "env": {
+          "PIG_CODING_AGENT_DIR": "{agent_dir}",
+          "PIG_HOME": "{shared_dir}/pig-home",
+          "PIG_OFFLINE": "1",
+          "PIG_SDK_GO_ROOT": "{source_dir}/extensions/sdk",
+          "PI_OFFLINE": "1",
+          "PI_SKIP_VERSION_CHECK": "1",
+          "PI_TELEMETRY": "0"
+        },
+        "extensions": {
+          "default": false,
+          "paths": [
+            "fixtures/extensions-go/factory/bench-ext-*"
+          ],
+          "processes": 1
+        },
+        "homepage": "https://github.com/MichaelKinsy/PiG",
+        "label": "PiG, ten Go SDK extensions, packed cell",
+        "licence": "MIT",
+        "licence_url": "https://github.com/MichaelKinsy/PiG/blob/main/LICENSE",
+        "modes": {
+          "print": [
+            "--provider",
+            "bench",
+            "--model",
+            "{model}",
+            "--no-session",
+            "{extensions}",
+            "-p",
+            "{prompt}"
+          ],
+          "print_session": [
+            "--provider",
+            "bench",
+            "--model",
+            "{model}",
+            "--session",
+            "{session}",
+            "-p",
+            "{prompt}"
+          ],
+          "pty": [
+            "--provider",
+            "bench",
+            "--model",
+            "{model}",
+            "--no-session",
+            "{extensions}"
+          ],
+          "rpc": [
+            "--mode",
+            "rpc",
+            "--provider",
+            "bench",
+            "--model",
+            "{model}",
+            "--no-session",
+            "{extensions}"
+          ],
+          "rpc_resume": [
+            "--mode",
+            "rpc",
+            "--provider",
+            "bench",
+            "--model",
+            "{model}",
+            "--session",
+            "{session}",
+            "{extensions}"
+          ],
+          "rpc_session": [
+            "--mode",
+            "rpc",
+            "--provider",
+            "bench",
+            "--model",
+            "{model}",
+            "--session-dir",
+            "{session_dir}",
+            "{extensions}"
+          ],
+          "version": [
+            "--version"
+          ]
+        },
+        "name": "pig-go-packed",
+        "notes": "The ten bench extensions ported to the Go SDK as conventional factories. PiG compiles them into one generated runner and runs it as one process; one registration socket per extension.",
+        "prepare": {
+          "script": "prepare.py"
+        },
+        "relation": "pi-port",
+        "renderer": {
+          "pty": "fullscreen"
+        },
+        "restrictions": "",
+        "runtime": {
+          "go": "1.27.2",
+          "node": "24.19.0"
+        },
+        "state": {
+          "dirs": [
+            "$HOME/.agent",
+            "$PIG_HOME",
+            "$XDG_CONFIG_HOME",
+            "$XDG_DATA_HOME",
+            "$XDG_CACHE_HOME",
+            "$XDG_STATE_HOME"
+          ]
+        },
+        "version": "0.5.0+1.3.0",
+        "version_check": {
+          "contains": "0.5.0"
+        }
+      },
+      "version": "0.5.0+1.3.0"
+    },
+    "pig-standard": {
+      "files": {
+        "prepare.py": "b3b60289b3c87554697b1bf7edaea7d7485df8d77d91e612243b58d6fbbc6dfb"
+      },
+      "held": null,
+      "licence": "MIT",
+      "manifest_sha256": "6f1719fc16fcb9fccde5b2be78017e9325a1c4c08989ec232b532f6bc8eb2404",
+      "spec": {
+        "capabilities": {
+          "exact_requests": true,
+          "pi_extensions": "sidecar",
+          "pi_session_format": true
+        },
+        "derive": {
+          "base": "pig-tip"
+        },
+        "endpoint": {
+          "apis": [
+            "openai-completions",
+            "anthropic-messages",
+            "openai-responses"
+          ],
+          "writer": "writer.py"
+        },
+        "env": {
+          "PIG_CODING_AGENT_DIR": "{agent_dir}",
+          "PIG_HOME": "{disk}/pig",
+          "PIG_OFFLINE": "1",
+          "PI_OFFLINE": "1",
+          "PI_SKIP_VERSION_CHECK": "1",
+          "PI_TELEMETRY": "0"
+        },
+        "homepage": "https://github.com/MichaelKinsy/PiG",
+        "label": "PiG Standard (Piglet Binary: base Piglet + slots, one binary)",
+        "licence": "MIT",
+        "licence_url": "https://github.com/MichaelKinsy/PiG/blob/main/LICENSE",
+        "modes": {
+          "print": [
+            "--provider",
+            "bench",
+            "--model",
+            "{model}",
+            "--no-session",
+            "{extensions}",
+            "-p",
+            "{prompt}"
+          ],
+          "print_session": [
+            "--provider",
+            "bench",
+            "--model",
+            "{model}",
+            "--session",
+            "{session}",
+            "-p",
+            "{prompt}"
+          ],
+          "pty": [
+            "--provider",
+            "bench",
+            "--model",
+            "{model}",
+            "--no-session",
+            "{extensions}"
+          ],
+          "rpc": [
+            "--mode",
+            "rpc",
+            "--provider",
+            "bench",
+            "--model",
+            "{model}",
+            "--no-session",
+            "{extensions}"
+          ],
+          "rpc_resume": [
+            "--mode",
+            "rpc",
+            "--provider",
+            "bench",
+            "--model",
+            "{model}",
+            "--session",
+            "{session}",
+            "{extensions}"
+          ],
+          "rpc_session": [
+            "--mode",
+            "rpc",
+            "--provider",
+            "bench",
+            "--model",
+            "{model}",
+            "--session-dir",
+            "{session_dir}",
+            "{extensions}"
+          ],
+          "version": [
+            "--version"
+          ]
+        },
+        "name": "pig-standard",
+        "notes": "PiG Standard as a Piglet Binary: the explicit composition of ordinary extension Resources in piglets/standard/pig-standard.yaml of the pig-tip checkout (piglogin, pigrunner, angrypigs, bunruntime), built into one executable by `pig piglet build --format binary`. The report names its slots and its binary size.",
+        "prepare": {
+          "script": "prepare.py"
+        },
+        "relation": "pi-port",
+        "renderer": {
+          "pty": "fullscreen"
+        },
+        "restrictions": "",
+        "runtime": {
+          "node": "24.19.0"
+        },
+        "state": {
+          "dirs": [
+            "$HOME/.agent",
+            "$PIG_HOME",
+            "$XDG_CONFIG_HOME",
+            "$XDG_DATA_HOME",
+            "$XDG_CACHE_HOME",
+            "$XDG_STATE_HOME"
+          ]
+        },
+        "version": "0.5.0+1.3.0",
+        "version_check": {
+          "contains": "0.5.0"
+        }
+      },
+      "version": "0.5.0+1.3.0"
+    },
+    "pig-strip-min": {
+      "files": {
+        "prepare.py": "d094a173313dcf0e6615fc19f597bcf46a6c349831f444056d8cfa6df385f2eb"
+      },
+      "held": null,
+      "licence": "MIT",
+      "manifest_sha256": "3b08db5d5115e4cb8bdffbdada43b6f44ae12636d691df59aba6eb31d194df00",
+      "spec": {
+        "capabilities": {
+          "exact_requests": true,
+          "pi_extensions": "none",
+          "pi_session_format": true
+        },
+        "derive": {
+          "base": "pig-tip"
+        },
+        "endpoint": {
+          "apis": [
+            "openai-completions",
+            "anthropic-messages",
+            "openai-responses"
+          ],
+          "writer": "writer.py"
+        },
+        "env": {
+          "PIG_CODING_AGENT_DIR": "{agent_dir}",
+          "PIG_HOME": "{disk}/pig",
+          "PIG_OFFLINE": "1",
+          "PI_OFFLINE": "1",
+          "PI_SKIP_VERSION_CHECK": "1",
+          "PI_TELEMETRY": "0"
+        },
+        "homepage": "https://github.com/MichaelKinsy/PiG",
+        "label": "PiG strip Piglet pig-min (opt-in strip: base Piglet + slots, one binary)",
+        "licence": "MIT",
+        "licence_url": "https://github.com/MichaelKinsy/PiG/blob/main/LICENSE",
+        "modes": {
+          "print": [
+            "--provider",
+            "bench",
+            "--model",
+            "{model}",
+            "--no-session",
+            "{extensions}",
+            "-p",
+            "{prompt}"
+          ],
+          "print_session": [
+            "--provider",
+            "bench",
+            "--model",
+            "{model}",
+            "--session",
+            "{session}",
+            "-p",
+            "{prompt}"
+          ],
+          "pty": [
+            "--provider",
+            "bench",
+            "--model",
+            "{model}",
+            "--no-session",
+            "{extensions}"
+          ],
+          "rpc": [
+            "--mode",
+            "rpc",
+            "--provider",
+            "bench",
+            "--model",
+            "{model}",
+            "--no-session",
+            "{extensions}"
+          ],
+          "rpc_resume": [
+            "--mode",
+            "rpc",
+            "--provider",
+            "bench",
+            "--model",
+            "{model}",
+            "--session",
+            "{session}",
+            "{extensions}"
+          ],
+          "rpc_session": [
+            "--mode",
+            "rpc",
+            "--provider",
+            "bench",
+            "--model",
+            "{model}",
+            "--session-dir",
+            "{session_dir}",
+            "{extensions}"
+          ],
+          "version": [
+            "--version"
+          ]
+        },
+        "name": "pig-strip-min",
+        "notes": "An opt-in strip Piglet in keep mode (fixtures/piglets/pig-min.yaml, from PiG's bench/evals footprint comparison): every built-in extension, extra provider API and feature not listed is compiled out; the built-in tools and slash commands stay so the scripted requests match the other arms. It has no extension runtime, so extension workloads are N/A. Built by `pig piglet build --format binary` from the pig-tip checkout.",
+        "prepare": {
+          "script": "prepare.py"
+        },
+        "relation": "pi-port",
+        "renderer": {
+          "pty": "fullscreen"
+        },
+        "restrictions": "",
+        "runtime": {
+          "node": "24.19.0"
+        },
+        "state": {
+          "dirs": [
+            "$HOME/.agent",
+            "$PIG_HOME",
+            "$XDG_CONFIG_HOME",
+            "$XDG_DATA_HOME",
+            "$XDG_CACHE_HOME",
+            "$XDG_STATE_HOME"
+          ]
+        },
+        "version": "0.5.0+1.3.0",
+        "version_check": {
+          "contains": "0.5.0"
+        }
+      },
+      "version": "0.5.0+1.3.0"
+    },
+    "pig-tip": {
+      "files": {
+        "writer.py": "5319f83e14904789e6c0821d3925cb3ba601ce62e36a26730665d417b0c23bb6"
+      },
+      "held": null,
+      "licence": "MIT",
+      "manifest_sha256": "09024d418927cdb86538f03f810348cac4ff4a24fd0ede18570094e862d75205",
+      "spec": {
+        "capabilities": {
+          "exact_requests": true,
+          "pi_extensions": "sidecar",
+          "pi_session_format": true
+        },
+        "caveat": "This PiG build (the 0.5.0 release) tracks Pi 1.3.0 (its UpstreamVersion), the same Pi version as the reference arm pi-node.",
+        "endpoint": {
+          "apis": [
+            "openai-completions",
+            "anthropic-messages",
+            "openai-responses"
+          ],
+          "writer": "writer.py"
+        },
+        "env": {
+          "PIG_CODING_AGENT_DIR": "{agent_dir}",
+          "PIG_HOME": "{disk}/pig",
+          "PIG_OFFLINE": "1",
+          "PI_OFFLINE": "1",
+          "PI_SKIP_VERSION_CHECK": "1",
+          "PI_TELEMETRY": "0"
+        },
+        "homepage": "https://github.com/MichaelKinsy/PiG",
+        "label": "PiG 0.5.0",
+        "licence": "MIT",
+        "licence_url": "https://github.com/MichaelKinsy/PiG/blob/main/LICENSE",
+        "modes": {
+          "print": [
+            "--provider",
+            "bench",
+            "--model",
+            "{model}",
+            "--no-session",
+            "{extensions}",
+            "-p",
+            "{prompt}"
+          ],
+          "print_session": [
+            "--provider",
+            "bench",
+            "--model",
+            "{model}",
+            "--session",
+            "{session}",
+            "-p",
+            "{prompt}"
+          ],
+          "pty": [
+            "--provider",
+            "bench",
+            "--model",
+            "{model}",
+            "--no-session",
+            "{extensions}"
+          ],
+          "rpc": [
+            "--mode",
+            "rpc",
+            "--provider",
+            "bench",
+            "--model",
+            "{model}",
+            "--no-session",
+            "{extensions}"
+          ],
+          "rpc_resume": [
+            "--mode",
+            "rpc",
+            "--provider",
+            "bench",
+            "--model",
+            "{model}",
+            "--session",
+            "{session}",
+            "{extensions}"
+          ],
+          "rpc_session": [
+            "--mode",
+            "rpc",
+            "--provider",
+            "bench",
+            "--model",
+            "{model}",
+            "--session-dir",
+            "{session_dir}",
+            "{extensions}"
+          ],
+          "version": [
+            "--version"
+          ]
+        },
+        "name": "pig-tip",
+        "notes": "PiG 0.5.0, built the way its release workflow builds the release binary (.github/workflows/release-candidate.yml at this commit): Go from .go-version (1.27.2, also Buffon's pin in runtimes.toml), CGO off, -trimpath, and the same -ldflags, update URL, trust root and source version included. Go builds are reproducible, so once the release is published Buffon checks this binary's sha256 against the release archive's and switches to the archive (arms/pig-0.5.0). -buildvcs=false matches the release, which builds from a source archive with no VCS metadata. The repository location is not part of the manifest: the site profile or the environment names it (BUFFON_SOURCE_REPO_PIG_TIP), as a URL or a local clone.",
+        "previous": "pig-0.4.1",
+        "relation": "pi-port",
+        "renderer": {
+          "pty": "fullscreen"
+        },
+        "restrictions": "",
+        "runtime": {
+          "node": "24.19.0"
+        },
+        "source": {
+          "build": [
+            "go",
+            "build",
+            "-buildvcs=false",
+            "-trimpath",
+            "-ldflags",
+            "-s -w -X github.com/MichaelKinsy/PiG/coding/cli.Build=a136850c38f4097e1cd965ab989efb58960709f9 -X github.com/MichaelKinsy/PiG/internal/codingagent.DefaultUpdateURL=https://github.com/MichaelKinsy/PiG/releases/latest/download/update.json -X github.com/MichaelKinsy/PiG/internal/codingagent.DefaultUpdateTrustRoot=LS0tLS1CRUdJTiBQVUJMSUMgS0VZLS0tLS0KTUNvd0JRWURLMlZ3QXlFQVFBdUtJTHRmc0FpbWdabnRpZ2UydzRGRy9QeDFQeU5HampHYXlEalREM0k9Ci0tLS0tRU5EIFBVQkxJQyBLRVktLS0tLQo= -X github.com/MichaelKinsy/PiG/coding/pigletbuild.releaseSourceVersion=v0.5.0",
+            "-o",
+            "{out}",
+            "{package}"
+          ],
+          "commit": "a136850c38f4097e1cd965ab989efb58960709f9",
+          "env": {
+            "CGO_ENABLED": "0",
+            "GOFLAGS": "",
+            "GOTOOLCHAIN": "local"
+          },
+          "package": "./cmd/pig",
+          "repo_env": "BUFFON_SOURCE_REPO_PIG_TIP",
+          "toolchain": "go",
+          "tree": "593786aecf8c8606fdfb1cddd63aab544a032048"
+        },
+        "state": {
+          "dirs": [
+            "$HOME/.agent",
+            "$PIG_HOME",
+            "$XDG_CONFIG_HOME",
+            "$XDG_DATA_HOME",
+            "$XDG_CACHE_HOME",
+            "$XDG_STATE_HOME"
+          ]
+        },
+        "trust": "source",
+        "version": "0.5.0+1.3.0",
+        "version_check": {
+          "contains": "0.5.0"
+        }
+      },
+      "version": "0.5.0+1.3.0"
+    },
+    "pig-ts-aot": {
+      "files": {
+        "prepare.py": "c74ee83bc44bc82502c523df64d7241c19ce0a87bb87b4b09e304dd85503cf91"
+      },
+      "held": null,
+      "licence": "MIT",
+      "manifest_sha256": "bfe803854206f8b9e3f3d656544b73f79372577c0b2573ae0d29e01f8c0fadf8",
+      "spec": {
+        "capabilities": {
+          "exact_requests": true,
+          "pi_extensions": "sidecar",
+          "pi_session_format": true
+        },
+        "derive": {
+          "base": "pig-tip"
+        },
+        "endpoint": {
+          "apis": [
+            "openai-completions",
+            "anthropic-messages",
+            "openai-responses"
+          ],
+          "writer": "writer.py"
+        },
+        "env": {
+          "PIG_CODING_AGENT_DIR": "{agent_dir}",
+          "PIG_HOME": "{shared_dir}/pig-home",
+          "PIG_OFFLINE": "1",
+          "PIG_TS_RUNTIME": "aot",
+          "PIG_TS_RUNTIMES_DIR": "{install_dir}/slot",
+          "PI_OFFLINE": "1",
+          "PI_SKIP_VERSION_CHECK": "1",
+          "PI_TELEMETRY": "0"
+        },
+        "extensions": {
+          "default": false,
+          "host": "pig-ts-host",
+          "processes": 1
+        },
+        "homepage": "https://github.com/MichaelKinsy/PiG",
+        "label": "PiG, ten TypeScript extensions compiled into the AOT host image (pig-pi-bolt, compiled in)",
+        "licence": "MIT",
+        "licence_url": "https://github.com/MichaelKinsy/PiG/blob/main/LICENSE",
+        "modes": {
+          "print": [
+            "--provider",
+            "bench",
+            "--model",
+            "{model}",
+            "--no-session",
+            "{extensions}",
+            "-p",
+            "{prompt}"
+          ],
+          "print_session": [
+            "--provider",
+            "bench",
+            "--model",
+            "{model}",
+            "--session",
+            "{session}",
+            "-p",
+            "{prompt}"
+          ],
+          "pty": [
+            "--provider",
+            "bench",
+            "--model",
+            "{model}",
+            "--no-session",
+            "{extensions}"
+          ],
+          "rpc": [
+            "--mode",
+            "rpc",
+            "--provider",
+            "bench",
+            "--model",
+            "{model}",
+            "--no-session",
+            "{extensions}"
+          ],
+          "rpc_resume": [
+            "--mode",
+            "rpc",
+            "--provider",
+            "bench",
+            "--model",
+            "{model}",
+            "--session",
+            "{session}",
+            "{extensions}"
+          ],
+          "rpc_session": [
+            "--mode",
+            "rpc",
+            "--provider",
+            "bench",
+            "--model",
+            "{model}",
+            "--session-dir",
+            "{session_dir}",
+            "{extensions}"
+          ],
+          "version": [
+            "--version"
+          ]
+        },
+        "name": "pig-ts-aot",
+        "notes": "The same TypeScript extensions as pig-ts-node, compiled into one executable image of the aot Piglet (PIG_TS_RUNTIME=aot) for exactly this set: the image is built by the Piglet's own worker and verified by PiG at start; the ten factories run inside pig-ts-host with no Bun or Node. bolt-aot calls this shape compiled in; its run-time-loading dynamic host (TestWriteConformanceSlot) is a separate variant not in this matrix yet.",
+        "prepare": {
+          "script": "prepare.py"
+        },
+        "relation": "pi-port",
+        "renderer": {
+          "pty": "fullscreen"
+        },
+        "restrictions": "",
+        "runtime": {
+          "node": "24.19.0"
+        },
+        "state": {
+          "dirs": [
+            "$HOME/.agent",
+            "$PIG_HOME",
+            "$XDG_CONFIG_HOME",
+            "$XDG_DATA_HOME",
+            "$XDG_CACHE_HOME",
+            "$XDG_STATE_HOME"
+          ]
+        },
+        "version": "0.5.0+1.3.0",
+        "version_check": {
+          "contains": "0.5.0"
+        }
+      },
+      "version": "0.5.0+1.3.0"
+    },
+    "pig-ts-bun": {
+      "files": {
+        "prepare.py": "6b73baa047ee2da142831388f68558eaa42a80ce6b494ae12021b330fc6598d8"
+      },
+      "held": null,
+      "licence": "MIT",
+      "manifest_sha256": "29663b95af56276f8161547ed275edb55eda0c3da25fef0fc84cc562e3ee5648",
+      "spec": {
+        "capabilities": {
+          "exact_requests": true,
+          "pi_extensions": "sidecar",
+          "pi_session_format": true
+        },
+        "derive": {
+          "base": "pig-tip"
+        },
+        "endpoint": {
+          "apis": [
+            "openai-completions",
+            "anthropic-messages",
+            "openai-responses"
+          ],
+          "writer": "writer.py"
+        },
+        "env": {
+          "PIG_CODING_AGENT_DIR": "{agent_dir}",
+          "PIG_HOME": "{shared_dir}/pig-home",
+          "PIG_OFFLINE": "1",
+          "PIG_TS_RUNTIME": "bun",
+          "PIG_TS_RUNTIMES_DIR": "{install_dir}/slot",
+          "PI_OFFLINE": "1",
+          "PI_SKIP_VERSION_CHECK": "1",
+          "PI_TELEMETRY": "0"
+        },
+        "extensions": {
+          "default": false,
+          "host": "bun",
+          "processes": 1
+        },
+        "homepage": "https://github.com/MichaelKinsy/PiG",
+        "label": "PiG, ten TypeScript extensions, Bun, packed cell",
+        "licence": "MIT",
+        "licence_url": "https://github.com/MichaelKinsy/PiG/blob/main/LICENSE",
+        "modes": {
+          "print": [
+            "--provider",
+            "bench",
+            "--model",
+            "{model}",
+            "--no-session",
+            "{extensions}",
+            "-p",
+            "{prompt}"
+          ],
+          "print_session": [
+            "--provider",
+            "bench",
+            "--model",
+            "{model}",
+            "--session",
+            "{session}",
+            "-p",
+            "{prompt}"
+          ],
+          "pty": [
+            "--provider",
+            "bench",
+            "--model",
+            "{model}",
+            "--no-session",
+            "{extensions}"
+          ],
+          "rpc": [
+            "--mode",
+            "rpc",
+            "--provider",
+            "bench",
+            "--model",
+            "{model}",
+            "--no-session",
+            "{extensions}"
+          ],
+          "rpc_resume": [
+            "--mode",
+            "rpc",
+            "--provider",
+            "bench",
+            "--model",
+            "{model}",
+            "--session",
+            "{session}",
+            "{extensions}"
+          ],
+          "rpc_session": [
+            "--mode",
+            "rpc",
+            "--provider",
+            "bench",
+            "--model",
+            "{model}",
+            "--session-dir",
+            "{session_dir}",
+            "{extensions}"
+          ],
+          "version": [
+            "--version"
+          ]
+        },
+        "name": "pig-ts-bun",
+        "notes": "The same TypeScript extensions as pig-ts-node, run by stock Bun 1.4.2 through the runtime slot (`PIG_TS_RUNTIME=bun`), as the Bun Piglet installs it. The Bun executable's sha256 must be in PiG's runtime lock.",
+        "prepare": {
+          "script": "prepare.py"
+        },
+        "relation": "pi-port",
+        "renderer": {
+          "pty": "fullscreen"
+        },
+        "restrictions": "",
+        "runtime": {
+          "node": "24.19.0"
+        },
+        "state": {
+          "dirs": [
+            "$HOME/.agent",
+            "$PIG_HOME",
+            "$XDG_CONFIG_HOME",
+            "$XDG_DATA_HOME",
+            "$XDG_CACHE_HOME",
+            "$XDG_STATE_HOME"
+          ]
+        },
+        "version": "0.5.0+1.3.0",
+        "version_check": {
+          "contains": "0.5.0"
+        }
+      },
+      "version": "0.5.0+1.3.0"
+    },
+    "pig-ts-node": {
+      "files": {
+        "prepare.py": "c0812dc6f2cedfde98ec0e4bf5962768ea52eb639d25bf618ce7487c60c4a8c9"
+      },
+      "held": null,
+      "licence": "MIT",
+      "manifest_sha256": "d1293cf1ebdb4af525cde4f0bf476b3e8c111670b70c252ed8c2883325f51805",
+      "spec": {
+        "capabilities": {
+          "exact_requests": true,
+          "pi_extensions": "sidecar",
+          "pi_session_format": true
+        },
+        "derive": {
+          "base": "pig-tip"
+        },
+        "endpoint": {
+          "apis": [
+            "openai-completions",
+            "anthropic-messages",
+            "openai-responses"
+          ],
+          "writer": "writer.py"
+        },
+        "env": {
+          "PIG_CODING_AGENT_DIR": "{agent_dir}",
+          "PIG_HOME": "{shared_dir}/pig-home",
+          "PIG_OFFLINE": "1",
+          "PI_OFFLINE": "1",
+          "PI_SKIP_VERSION_CHECK": "1",
+          "PI_TELEMETRY": "0"
+        },
+        "extensions": {
+          "default": false,
+          "host": "node",
+          "processes": 1
+        },
+        "homepage": "https://github.com/MichaelKinsy/PiG",
+        "label": "PiG, ten TypeScript extensions, Node, packed cell",
+        "licence": "MIT",
+        "licence_url": "https://github.com/MichaelKinsy/PiG/blob/main/LICENSE",
+        "modes": {
+          "print": [
+            "--provider",
+            "bench",
+            "--model",
+            "{model}",
+            "--no-session",
+            "{extensions}",
+            "-p",
+            "{prompt}"
+          ],
+          "print_session": [
+            "--provider",
+            "bench",
+            "--model",
+            "{model}",
+            "--session",
+            "{session}",
+            "-p",
+            "{prompt}"
+          ],
+          "pty": [
+            "--provider",
+            "bench",
+            "--model",
+            "{model}",
+            "--no-session",
+            "{extensions}"
+          ],
+          "rpc": [
+            "--mode",
+            "rpc",
+            "--provider",
+            "bench",
+            "--model",
+            "{model}",
+            "--no-session",
+            "{extensions}"
+          ],
+          "rpc_resume": [
+            "--mode",
+            "rpc",
+            "--provider",
+            "bench",
+            "--model",
+            "{model}",
+            "--session",
+            "{session}",
+            "{extensions}"
+          ],
+          "rpc_session": [
+            "--mode",
+            "rpc",
+            "--provider",
+            "bench",
+            "--model",
+            "{model}",
+            "--session-dir",
+            "{session_dir}",
+            "{extensions}"
+          ],
+          "version": [
+            "--version"
+          ]
+        },
+        "name": "pig-ts-node",
+        "notes": "The PiG tip with the ten bench extensions as Pi-compatible TypeScript factories on Node. PiG packs conventional factories into one Node process (the default placement).",
+        "prepare": {
+          "script": "prepare.py"
+        },
+        "relation": "pi-port",
+        "renderer": {
+          "pty": "fullscreen"
+        },
+        "restrictions": "",
+        "runtime": {
+          "node": "24.19.0"
+        },
+        "state": {
+          "dirs": [
+            "$HOME/.agent",
+            "$PIG_HOME",
+            "$XDG_CONFIG_HOME",
+            "$XDG_DATA_HOME",
+            "$XDG_CACHE_HOME",
+            "$XDG_STATE_HOME"
+          ]
+        },
+        "version": "0.5.0+1.3.0",
+        "version_check": {
+          "contains": "0.5.0"
+        }
+      },
+      "version": "0.5.0+1.3.0"
+    },
+    "pig-ts-node-isolated-diag": {
+      "files": {
+        "isolate-node-factories.patch": "fa204f646dc77384f9a17e98980242e1e8728d4b7bf216e08d2897c7386263f6",
+        "prepare.py": "de145969f3d2de5938df175d90bfd805154fba631d2273e3dcbb4ce81dcdf99e"
+      },
+      "held": null,
+      "licence": "MIT",
+      "manifest_sha256": "10eae5ecc46d0f10618fde6e5a5f986e83745d90569857cb016693508473db11",
+      "spec": {
+        "capabilities": {
+          "exact_requests": true,
+          "pi_extensions": "sidecar",
+          "pi_session_format": true
+        },
+        "derive": {
+          "base": "pig-tip"
+        },
+        "endpoint": {
+          "apis": [
+            "openai-completions",
+            "anthropic-messages",
+            "openai-responses"
+          ],
+          "writer": "writer.py"
+        },
+        "env": {
+          "PIG_CODING_AGENT_DIR": "{agent_dir}",
+          "PIG_HOME": "{shared_dir}/pig-home",
+          "PIG_OFFLINE": "1",
+          "PI_OFFLINE": "1",
+          "PI_SKIP_VERSION_CHECK": "1",
+          "PI_TELEMETRY": "0"
+        },
+        "extensions": {
+          "default": false,
+          "host": "node",
+          "processes": 10
+        },
+        "homepage": "https://github.com/MichaelKinsy/PiG",
+        "label": "DIAGNOSTIC: PiG, ten TypeScript extensions, Node, one process each (patched build, not user-selectable)",
+        "licence": "MIT",
+        "licence_url": "https://github.com/MichaelKinsy/PiG/blob/main/LICENSE",
+        "modes": {
+          "print": [
+            "--provider",
+            "bench",
+            "--model",
+            "{model}",
+            "--no-session",
+            "{extensions}",
+            "-p",
+            "{prompt}"
+          ],
+          "print_session": [
+            "--provider",
+            "bench",
+            "--model",
+            "{model}",
+            "--session",
+            "{session}",
+            "-p",
+            "{prompt}"
+          ],
+          "pty": [
+            "--provider",
+            "bench",
+            "--model",
+            "{model}",
+            "--no-session",
+            "{extensions}"
+          ],
+          "rpc": [
+            "--mode",
+            "rpc",
+            "--provider",
+            "bench",
+            "--model",
+            "{model}",
+            "--no-session",
+            "{extensions}"
+          ],
+          "rpc_resume": [
+            "--mode",
+            "rpc",
+            "--provider",
+            "bench",
+            "--model",
+            "{model}",
+            "--session",
+            "{session}",
+            "{extensions}"
+          ],
+          "rpc_session": [
+            "--mode",
+            "rpc",
+            "--provider",
+            "bench",
+            "--model",
+            "{model}",
+            "--session-dir",
+            "{session_dir}",
+            "{extensions}"
+          ],
+          "version": [
+            "--version"
+          ]
+        },
+        "name": "pig-ts-node-isolated-diag",
+        "notes": "Not a configuration a user can select: PiG packs every Node factory into one process and no setting isolates a factory (source_resolver.go gives Node factories Isolation shared-ok). This arm builds the pig-tip checkout with one line changed (isolate-node-factories.patch: Isolation isolated), so the cost of the Node cell's packing against ten Node processes is visible. Never a headline arm.",
+        "prepare": {
+          "script": "prepare.py"
+        },
+        "relation": "pi-port",
+        "renderer": {
+          "pty": "fullscreen"
+        },
+        "restrictions": "",
+        "runtime": {
+          "node": "24.19.0"
+        },
+        "state": {
+          "dirs": [
+            "$HOME/.agent",
+            "$PIG_HOME",
+            "$XDG_CONFIG_HOME",
+            "$XDG_DATA_HOME",
+            "$XDG_CACHE_HOME",
+            "$XDG_STATE_HOME"
+          ]
+        },
+        "version": "0.5.0+1.3.0",
+        "version_check": {
+          "contains": "0.5.0"
+        }
+      },
+      "version": "0.5.0+1.3.0"
+    },
+    "piglet-bench-ext10": {
+      "files": {
+        "prepare.py": "68c736b77e230f42c8f89ce2a99b7d10a645216414ed84a1936974b496b89f6a"
+      },
+      "held": null,
+      "licence": "MIT",
+      "manifest_sha256": "d6011103e8d62c80c45aa257b13e7e637bfbbed4f3fc3115290671e0d42af605",
+      "spec": {
+        "capabilities": {
+          "exact_requests": true,
+          "pi_extensions": "sidecar",
+          "pi_session_format": true
+        },
+        "derive": {
+          "base": "pig-tip"
+        },
+        "endpoint": {
+          "apis": [
+            "openai-completions",
+            "anthropic-messages",
+            "openai-responses"
+          ],
+          "writer": "writer.py"
+        },
+        "env": {
+          "PIG_CODING_AGENT_DIR": "{agent_dir}",
+          "PIG_HOME": "{disk}/pig",
+          "PIG_OFFLINE": "1",
+          "PI_OFFLINE": "1",
+          "PI_SKIP_VERSION_CHECK": "1",
+          "PI_TELEMETRY": "0"
+        },
+        "extensions": {
+          "default": false,
+          "embedded": true,
+          "processes": 0
+        },
+        "homepage": "https://github.com/MichaelKinsy/PiG",
+        "label": "PiG, the bench-ext10 Piglet (ten Go SDK extensions fused into the Piglet Binary)",
+        "licence": "MIT",
+        "licence_url": "https://github.com/MichaelKinsy/PiG/blob/main/LICENSE",
+        "modes": {
+          "print": [
+            "--provider",
+            "bench",
+            "--model",
+            "{model}",
+            "--no-session",
+            "{extensions}",
+            "-p",
+            "{prompt}"
+          ],
+          "print_session": [
+            "--provider",
+            "bench",
+            "--model",
+            "{model}",
+            "--session",
+            "{session}",
+            "-p",
+            "{prompt}"
+          ],
+          "pty": [
+            "--provider",
+            "bench",
+            "--model",
+            "{model}",
+            "--no-session",
+            "{extensions}"
+          ],
+          "rpc": [
+            "--mode",
+            "rpc",
+            "--provider",
+            "bench",
+            "--model",
+            "{model}",
+            "--no-session",
+            "{extensions}"
+          ],
+          "rpc_resume": [
+            "--mode",
+            "rpc",
+            "--provider",
+            "bench",
+            "--model",
+            "{model}",
+            "--session",
+            "{session}",
+            "{extensions}"
+          ],
+          "rpc_session": [
+            "--mode",
+            "rpc",
+            "--provider",
+            "bench",
+            "--model",
+            "{model}",
+            "--session-dir",
+            "{session_dir}",
+            "{extensions}"
+          ],
+          "version": [
+            "--version"
+          ]
+        },
+        "name": "piglet-bench-ext10",
+        "notes": "The bench-ext10 Piglet of the Pigpen commit 09eaf32e62cedc0a69fa6a411534d21bfd4b1192: the ten bench-ext Go factories fused into one Piglet Binary by `pig piglet build --format binary`. No extension process and no IPC. Built from the pig-tip source and executable.",
+        "piglet": {
+          "identity": {
+            "component_plan_digest": "dd40cc452fe1efaee082e8248a25236e3f30d684c70cdbd72b8bb08a6bc368c7"
+          },
+          "manifest": "piglets/bench-ext10/piglet.yaml",
+          "manifest_sha256": "508c2959e624321c755a90d88325f46c1c4d5cb6a96f79984ba2c2680276443b",
+          "name": "bench-ext10",
+          "pigpen_commit": "09eaf32e62cedc0a69fa6a411534d21bfd4b1192",
+          "release_version": "0.1.0",
+          "repo_env": "BUFFON_SOURCE_REPO_PIGPEN"
+        },
+        "prepare": {
+          "script": "prepare.py"
+        },
+        "relation": "pi-port",
+        "renderer": {
+          "pty": "fullscreen"
+        },
+        "restrictions": "",
+        "runtime": {
+          "node": "24.19.0"
+        },
+        "state": {
+          "dirs": [
+            "$HOME/.agent",
+            "$PIG_HOME",
+            "$XDG_CONFIG_HOME",
+            "$XDG_DATA_HOME",
+            "$XDG_CACHE_HOME",
+            "$XDG_STATE_HOME"
+          ]
+        },
+        "version": "0.5.0+1.3.0",
+        "version_check": {
+          "contains": "0.5.0"
+        }
+      },
+      "version": "0.5.0+1.3.0"
+    },
+    "piglet-bench-ext10-aot": {
+      "files": {},
+      "held": "Held until the aot image step is wired for Piglets: the Piglet builds and its identity is pinned, but a sample would start on the Bun fallback, not the compiled host. The Pigpen commit is 09eaf32e62cedc0a69fa6a411534d21bfd4b1192.",
+      "licence": "MIT",
+      "manifest_sha256": "907dd761fb9a8f530a3f419fa63b5c384090405bde90546419bee13fb3f5dc10",
+      "spec": {
+        "held": "Held until the aot image step is wired for Piglets: the Piglet builds and its identity is pinned, but a sample would start on the Bun fallback, not the compiled host. The Pigpen commit is 09eaf32e62cedc0a69fa6a411534d21bfd4b1192.",
+        "homepage": "https://github.com/MichaelKinsy/PiG",
+        "label": "PiG, the bench-ext10-aot Piglet (ten TypeScript extensions through the aot runtime)",
+        "licence": "MIT",
+        "licence_url": "https://github.com/MichaelKinsy/PiG/blob/main/LICENSE",
+        "name": "piglet-bench-ext10-aot",
+        "notes": "The ten bench-ext TypeScript extensions carried in the Binary; the aot runtime compiles them on the user's machine at first start.",
+        "piglet": {
+          "manifest": "piglets/bench-ext10-aot/piglet.yaml",
+          "manifest_sha256": "ac0bdf846085bbc093ca54a63bf1d778ad279446e66107fa74929258208d6e7a",
+          "name": "bench-ext10-aot",
+          "pigpen_commit": "09eaf32e62cedc0a69fa6a411534d21bfd4b1192",
+          "release_version": "0.1.0",
+          "repo_env": "BUFFON_SOURCE_REPO_PIGPEN"
+        },
+        "relation": "pi-port",
+        "version": "0.5.0+1.1.0"
+      },
+      "version": "0.5.0+1.1.0"
+    },
+    "piglet-bench-ext10-split": {
+      "files": {},
+      "held": "Held until the aot image step is wired for Piglets: the Piglet builds and its identity is pinned, but a sample would start on the Bun fallback, not the compiled host. The arm's builds are the Pigpen commit 09eaf32e62cedc0a69fa6a411534d21bfd4b1192's bench-ext10-split manifest.",
+      "licence": "MIT",
+      "manifest_sha256": "77fa316820ea2c3e09576580e3af7c9e5184331193c6a5ea4f92d241992cfd76",
+      "spec": {
+        "held": "Held until the aot image step is wired for Piglets: the Piglet builds and its identity is pinned, but a sample would start on the Bun fallback, not the compiled host. The arm's builds are the Pigpen commit 09eaf32e62cedc0a69fa6a411534d21bfd4b1192's bench-ext10-split manifest.",
+        "homepage": "https://github.com/MichaelKinsy/PiG",
+        "label": "PiG, the bench-ext10-split Piglet (five Go extensions fused, five TypeScript through the aot runtime)",
+        "licence": "MIT",
+        "licence_url": "https://github.com/MichaelKinsy/PiG/blob/main/LICENSE",
+        "name": "piglet-bench-ext10-split",
+        "notes": "bench-ext-01..05 are Go factories fused into the Binary, bench-ext-06..10 are the TypeScript originals the aot runtime compiles on the user's machine.",
+        "piglet": {
+          "manifest": "piglets/bench-ext10-split/piglet.yaml",
+          "manifest_sha256": "71d0c40b6db6afdbae3dc4e0552b39e8cf45cc28533a2a91cb360cd07370a97b",
+          "name": "bench-ext10-split",
+          "pigpen_commit": "09eaf32e62cedc0a69fa6a411534d21bfd4b1192",
+          "release_version": "0.1.0",
+          "repo_env": "BUFFON_SOURCE_REPO_PIGPEN"
+        },
+        "relation": "pi-port",
+        "version": "0.5.0+1.1.0"
+      },
+      "version": "0.5.0+1.1.0"
+    },
+    "piglet-bench-lean": {
+      "files": {
+        "prepare.py": "68c736b77e230f42c8f89ce2a99b7d10a645216414ed84a1936974b496b89f6a"
+      },
+      "held": null,
+      "licence": "MIT",
+      "manifest_sha256": "ebb3b00de534a356d2864fecd93722b1949b1f49df8cacec8aacbc9cf045bcdd",
+      "spec": {
+        "capabilities": {
+          "exact_requests": true,
+          "pi_extensions": "none",
+          "pi_session_format": true
+        },
+        "derive": {
+          "base": "pig-tip"
+        },
+        "endpoint": {
+          "apis": [
+            "openai-completions",
+            "anthropic-messages",
+            "openai-responses"
+          ],
+          "writer": "writer.py"
+        },
+        "env": {
+          "PIG_CODING_AGENT_DIR": "{agent_dir}",
+          "PIG_HOME": "{disk}/pig",
+          "PIG_OFFLINE": "1",
+          "PI_OFFLINE": "1",
+          "PI_SKIP_VERSION_CHECK": "1",
+          "PI_TELEMETRY": "0"
+        },
+        "extensions": {
+          "count": 0,
+          "default": false,
+          "embedded": false,
+          "paths": [],
+          "processes": 0
+        },
+        "homepage": "https://github.com/MichaelKinsy/PiG",
+        "label": "PiG, the bench-lean Piglet (Piglet Binary, every built-in extension, extra API and feature stripped)",
+        "licence": "MIT",
+        "licence_url": "https://github.com/MichaelKinsy/PiG/blob/main/LICENSE",
+        "modes": {
+          "print": [
+            "--provider",
+            "bench",
+            "--model",
+            "{model}",
+            "--no-session",
+            "{extensions}",
+            "-p",
+            "{prompt}"
+          ],
+          "print_session": [
+            "--provider",
+            "bench",
+            "--model",
+            "{model}",
+            "--session",
+            "{session}",
+            "-p",
+            "{prompt}"
+          ],
+          "pty": [
+            "--provider",
+            "bench",
+            "--model",
+            "{model}",
+            "--no-session",
+            "{extensions}"
+          ],
+          "rpc": [
+            "--mode",
+            "rpc",
+            "--provider",
+            "bench",
+            "--model",
+            "{model}",
+            "--no-session",
+            "{extensions}"
+          ],
+          "rpc_resume": [
+            "--mode",
+            "rpc",
+            "--provider",
+            "bench",
+            "--model",
+            "{model}",
+            "--session",
+            "{session}",
+            "{extensions}"
+          ],
+          "rpc_session": [
+            "--mode",
+            "rpc",
+            "--provider",
+            "bench",
+            "--model",
+            "{model}",
+            "--session-dir",
+            "{session_dir}",
+            "{extensions}"
+          ],
+          "version": [
+            "--version"
+          ]
+        },
+        "name": "piglet-bench-lean",
+        "notes": "The bench-lean Piglet of the Pigpen commit 09eaf32e62cedc0a69fa6a411534d21bfd4b1192, built by `pig piglet build --format binary` from the pig-tip executable and source. Keep mode: no extension runtime, so the extension workloads do not apply to this arm. The built-in tools and slash commands stay, so the request tool declarations match every other arm.",
+        "piglet": {
+          "identity": {
+            "component_plan_digest": "ac46fd24bd501fa7297f0a2945bcc7f5d655b9bcf8bfbf16718a9d25c0c2c018"
+          },
+          "manifest": "piglets/bench-lean/piglet.yaml",
+          "manifest_sha256": "6d64deaf8dbac6ad2480f01c9dd0dcbcb7c06bfe0340dfd6d3527d21f70e356a",
+          "name": "bench-lean",
+          "pigpen_commit": "09eaf32e62cedc0a69fa6a411534d21bfd4b1192",
+          "release_version": "0.1.0",
+          "repo_env": "BUFFON_SOURCE_REPO_PIGPEN"
+        },
+        "prepare": {
+          "script": "prepare.py"
+        },
+        "relation": "pi-port",
+        "renderer": {
+          "pty": "fullscreen"
+        },
+        "restrictions": "",
+        "runtime": {
+          "node": "24.19.0"
+        },
+        "state": {
+          "dirs": [
+            "$HOME/.agent",
+            "$PIG_HOME",
+            "$XDG_CONFIG_HOME",
+            "$XDG_DATA_HOME",
+            "$XDG_CACHE_HOME",
+            "$XDG_STATE_HOME"
+          ]
+        },
+        "version": "0.5.0+1.3.0",
+        "version_check": {
+          "contains": "0.5.0"
+        }
+      },
+      "version": "0.5.0+1.3.0"
+    },
+    "piglet-combined": {
+      "files": {},
+      "held": "Held: no combined manifest exists at the pinned Pigpen commit. The Go and TypeScript ext10 sets name the same extensions, so one Binary cannot load both; the shape waits for bolt-aot's confirmation (Pigpen owner item, 2026-10-11 23:59Z).",
+      "licence": "MIT",
+      "manifest_sha256": "bae9a58b6bcf3326900ed6f36343e87fcd450970dddd569e7cdb68a7b94b4d2b",
+      "spec": {
+        "held": "Held: no combined manifest exists at the pinned Pigpen commit. The Go and TypeScript ext10 sets name the same extensions, so one Binary cannot load both; the shape waits for bolt-aot's confirmation (Pigpen owner item, 2026-10-11 23:59Z).",
+        "homepage": "https://github.com/MichaelKinsy/PiG",
+        "label": "PiG, the combined Go-fused and aot ext10 Piglet",
+        "licence": "MIT",
+        "licence_url": "https://github.com/MichaelKinsy/PiG/blob/main/LICENSE",
+        "name": "piglet-combined",
+        "relation": "pi-port",
+        "version": "0.5.0+1.1.0"
+      },
+      "version": "0.5.0+1.1.0"
+    },
+    "pulseaiclub-phi": {
+      "files": {
+        "writer.py": "104fdf3cd12dbf870932abff7fd2e284e529a017be81b9e12d2ca3c2162b7edd"
+      },
+      "held": null,
+      "licence": "MIT",
+      "manifest_sha256": "ef2801fa6f61315a22af40f00b6249986fe62c9179c9247acc171c6098dc9123",
+      "spec": {
+        "cannot_run": {
+          "pty": "tried at the pinned commit (phi tui): its screen never settles under the PTY driver, so first-input and streaming latency cannot be read; not measured in v0",
+          "rpc": "no Pi RPC mode (its extension RPC is a different protocol)"
+        },
+        "capabilities": {
+          "exact_requests": false,
+          "pi_extensions": "none",
+          "pi_session_format": false
+        },
+        "endpoint": {
+          "apis": [
+            "openai-completions",
+            "anthropic-messages",
+            "openai-responses"
+          ],
+          "writer": "writer.py"
+        },
+        "env": {
+          "PHI_OFFLINE": "1",
+          "PHI_SKIP_VERSION_CHECK": "1"
+        },
+        "homepage": "https://github.com/pulseaiclub/phi",
+        "label": "pulseaiclub/phi (Go coding agent)",
+        "licence": "MIT",
+        "licence_url": "https://github.com/pulseaiclub/phi/blob/f35c44effff5f0a271e12187a460c49650260aa8/LICENSE",
+        "modes": {
+          "print": [
+            "run",
+            "--yolo",
+            "--jsonl",
+            "--session-dir",
+            "{session_dir}",
+            "-p",
+            "{prompt}"
+          ],
+          "version": [
+            "run",
+            "--help"
+          ]
+        },
+        "name": "pulseaiclub-phi",
+        "notes": "A Go terminal coding agent (own config, sub-agents, hashline edits, MCP), not a Pi port: Pi-specific rows (session format, extensions, Pi RPC) are N/A. Driver: print (`phi run -p PROMPT --jsonl`, the JSONL events are not parsed: Buffon reads the mock's view and the exit code). It has no version flag, so the version check runs `phi run --help` and reads its usage text.",
+        "relation": "pi-compatible",
+        "restrictions": "LICENSE file is MIT at the pinned commit. Not vendored or redistributed: Buffon clones the public repository and builds it on the machine that runs it.",
+        "source": {
+          "build": [
+            "go",
+            "build",
+            "-buildvcs=false",
+            "-trimpath",
+            "-pgo=off",
+            "-ldflags",
+            "-s -w",
+            "-o",
+            "{out}",
+            "{package}"
+          ],
+          "commit": "f35c44effff5f0a271e12187a460c49650260aa8",
+          "env": {
+            "CGO_ENABLED": "0",
+            "GOFLAGS": "",
+            "GOTOOLCHAIN": "local"
+          },
+          "package": "./cmd",
+          "repo_env": "BUFFON_SOURCE_REPO_PULSEAICLUB_PHI",
+          "repo_url": "https://github.com/pulseaiclub/phi",
+          "toolchain": "go",
+          "tree": "60298ada21f0ff2dd77d9cfa9da340ee66f0e752"
+        },
+        "state": {
+          "dirs": [
+            "$HOME/.phi",
+            "$XDG_CONFIG_HOME",
+            "$XDG_DATA_HOME",
+            "$XDG_CACHE_HOME",
+            "$XDG_STATE_HOME"
+          ]
+        },
+        "trust": "source",
+        "version": "main+f35c44e",
+        "version_check": {
+          "contains": "run one agent loop headlessly"
+        }
+      },
+      "version": "main+f35c44e"
+    },
+    "rcarmo-gi": {
+      "files": {
+        "writer.py": "5319f83e14904789e6c0821d3925cb3ba601ce62e36a26730665d417b0c23bb6"
+      },
+      "held": null,
+      "licence": "MIT",
+      "manifest_sha256": "b2a7b7a1f7fd739e4cc9fd4faab4a19e11ce65addca30d99cab50860f1730c23",
+      "spec": {
+        "cannot_run": {
+          "print": "web-sse driver not implemented: the agent runs as a web server (gi -web, REST and /sse/stream); Buffon drives command-line, JSON-RPC and PTY agents only",
+          "pty": "no terminal interface in web mode",
+          "rpc": "no Pi RPC mode (web server)"
+        },
+        "capabilities": {
+          "exact_requests": false,
+          "pi_extensions": "none",
+          "pi_session_format": false
+        },
+        "endpoint": {
+          "apis": [
+            "openai-completions"
+          ],
+          "writer": "writer.py"
+        },
+        "env": {
+          "XDG_STATE_HOME": "{home}/.local/state"
+        },
+        "homepage": "https://github.com/rcarmo/gi",
+        "label": "rcarmo/gi (Go web coding agent)",
+        "licence": "MIT",
+        "licence_url": "https://github.com/rcarmo/gi/blob/7078df0d59bf4e763c9d5c80a38f309860c930de/LICENSE",
+        "modes": {
+          "version": [
+            "--version"
+          ]
+        },
+        "name": "rcarmo-gi",
+        "notes": "A Go coding agent served as a web application (`gi -web`: REST plus a server-sent-event stream, state in a SQLite database), not a command-line agent. Driver type: web-sse, which Buffon does not have yet, so only the build and `--version` run; every workload row is listed as cannot run with that reason.",
+        "relation": "pi-compatible",
+        "restrictions": "LICENSE file is MIT at the pinned commit. Not vendored or redistributed: Buffon clones the public repository (with its one submodule, pinned by the commit) and builds it on the machine that runs it.",
+        "source": {
+          "build": [
+            "go",
+            "build",
+            "-buildvcs=false",
+            "-trimpath",
+            "-pgo=off",
+            "-ldflags",
+            "-s -w",
+            "-o",
+            "{out}",
+            "{package}"
+          ],
+          "commit": "7078df0d59bf4e763c9d5c80a38f309860c930de",
+          "env": {
+            "CGO_ENABLED": "0",
+            "GOFLAGS": "",
+            "GOTOOLCHAIN": "local"
+          },
+          "package": "./cmd/gi",
+          "repo_env": "BUFFON_SOURCE_REPO_RCARMO_GI",
+          "repo_url": "https://github.com/rcarmo/gi",
+          "submodules": true,
+          "toolchain": "go",
+          "tree": "08c3a9d527eedcff25498aa85e966957c057017c"
+        },
+        "state": {
+          "dirs": [
+            "$HOME/.agent",
+            "$XDG_CONFIG_HOME",
+            "$XDG_DATA_HOME",
+            "$XDG_CACHE_HOME",
+            "$XDG_STATE_HOME"
+          ]
+        },
+        "trust": "source",
+        "version": "dev+7078df0",
+        "version_check": {
+          "contains": "gi"
+        }
+      },
+      "version": "dev+7078df0"
+    },
+    "rpi": {
+      "files": {
+        "writer.py": "5319f83e14904789e6c0821d3925cb3ba601ce62e36a26730665d417b0c23bb6"
+      },
+      "held": null,
+      "licence": "MIT",
+      "manifest_sha256": "2ed08713cf4168ead42831b40ce7dd9aceaac9c14aa3852edfb3d11f012a64ee",
+      "spec": {
+        "artifact": {
+          "linux-x64": {
+            "checksums": "https://github.com/bigfish1913/pi-rust/releases/download/v0.3.19/rpi-v0.3.19-x86_64-unknown-linux-gnu.tar.gz.sha256",
+            "exe": "rpi",
+            "sha256": "c48ef652be3093a28f06076e5a21f2746e155959a181aadd2d17dbdb819991bd",
+            "url": "https://github.com/bigfish1913/pi-rust/releases/download/v0.3.19/rpi-v0.3.19-x86_64-unknown-linux-gnu.tar.gz"
+          }
+        },
+        "capabilities": {
+          "exact_requests": true,
+          "pi_extensions": "none",
+          "pi_session_format": false
+        },
+        "endpoint": {
+          "apis": [
+            "openai-completions",
+            "anthropic-messages",
+            "openai-responses"
+          ],
+          "writer": "writer.py"
+        },
+        "env": {
+          "PI_OFFLINE": "1",
+          "PI_SKIP_VERSION_CHECK": "1",
+          "RPI_CODING_AGENT_DIR": "{agent_dir}",
+          "RPI_DISABLE_UPDATE_CHECK": "1"
+        },
+        "homepage": "https://github.com/bigfish1913/pi-rust",
+        "label": "rpi (Rust port of Pi)",
+        "licence": "MIT",
+        "licence_url": "https://github.com/bigfish1913/pi-rust/blob/main/LICENSE",
+        "modes": {
+          "print": [
+            "--provider",
+            "bench",
+            "--model",
+            "{model}",
+            "--no-session",
+            "-p",
+            "{prompt}"
+          ],
+          "print_session": [
+            "--provider",
+            "bench",
+            "--model",
+            "{model}",
+            "--session",
+            "{session}",
+            "-p",
+            "{prompt}"
+          ],
+          "pty": [
+            "--provider",
+            "bench",
+            "--model",
+            "{model}",
+            "--no-session",
+            "--tui-mode",
+            "fullscreen"
+          ],
+          "rpc": [
+            "--mode",
+            "rpc",
+            "--provider",
+            "bench",
+            "--model",
+            "{model}",
+            "--no-session"
+          ],
+          "rpc_resume": [
+            "--mode",
+            "rpc",
+            "--provider",
+            "bench",
+            "--model",
+            "{model}",
+            "--session",
+            "{session}"
+          ],
+          "rpc_session": [
+            "--mode",
+            "rpc",
+            "--provider",
+            "bench",
+            "--model",
+            "{model}",
+            "--session-dir",
+            "{session_dir}"
+          ],
+          "version": [
+            "--version"
+          ]
+        },
+        "name": "rpi",
+        "notes": "Rust port of Pi, release binary built by its author. It reads Pi's models.json (RPI_CODING_AGENT_DIR). Its RPC dialect differs: `prompt` takes `content` and get_state answers with the request id only, and it compacts its context (a tool-less summarisation request) without emitting Pi's compaction_end RPC event, so Buffon counts compactions at the mock. Pinned at 0.3.19 (published 2026-10-10, linux-x64 digest verified against the release's .sha256): this is younger than the 7-day minimum release age the arms notes recommend, kept because the RPC dialect and the --tui-mode flag were verified at this version; the author ships almost daily (0.3.21 on 2026-10-11) and older pins (0.3.9) lack those. Only linux-x64 is pinned here.",
+        "relation": "pi-port",
+        "renderer": {
+          "pty": "fullscreen"
+        },
+        "restrictions": "",
+        "rpc": {
+          "prompt_field": "content"
+        },
+        "state": {
+          "dirs": [
+            "$HOME/.agent",
+            "$XDG_CONFIG_HOME",
+            "$XDG_DATA_HOME",
+            "$XDG_CACHE_HOME",
+            "$XDG_STATE_HOME"
+          ]
+        },
+        "version": "0.3.19"
+      },
+      "version": "0.3.19"
+    },
+    "sky-valley-pi": {
+      "files": {
+        "writer.py": "5319f83e14904789e6c0821d3925cb3ba601ce62e36a26730665d417b0c23bb6"
+      },
+      "held": null,
+      "licence": "MIT",
+      "manifest_sha256": "28a66f87659a18907b4a89c9e80e0571c75f750df5e7fd21521f1c2925107c89",
+      "spec": {
+        "cannot_run": {
+          "print": "no way to point it at a local endpoint: no provider base-URL setting (built-in model catalogue, *_API_KEY credentials only); a run would reach the real providers",
+          "pty": "no way to point it at a local endpoint (see print)",
+          "rpc": "no RPC mode"
+        },
+        "capabilities": {
+          "exact_requests": false,
+          "pi_extensions": "none",
+          "pi_session_format": false
+        },
+        "endpoint": {
+          "apis": [
+            "openai-completions"
+          ],
+          "writer": "writer.py"
+        },
+        "env": {
+          "PI_PACKAGE_DIR": "{agent_dir}"
+        },
+        "homepage": "https://github.com/sky-valley/pi",
+        "label": "sky-valley/pi (Go port of Pi)",
+        "licence": "MIT",
+        "licence_url": "https://github.com/sky-valley/pi/blob/1067024e7cce0028602e638bbf6676c6d2883cda/LICENSE",
+        "modes": {
+          "version": [
+            "models"
+          ]
+        },
+        "name": "sky-valley-pi",
+        "notes": "Go port of Pi (library packages plus cmd/pi). Driver: none. The command line has -m provider/id and -p but no setting for a provider base URL (models come from a built-in catalogue; credentials only from *_API_KEY variables), so it cannot be pointed at Buffon's local endpoint, and a run would need to reach the real providers, which Buffon forbids. Only the build and a models listing run. Its request-body differential harness is the model for the Faithfulness Score's wire probes.",
+        "relation": "pi-port",
+        "restrictions": "LICENSE file is MIT at the pinned commit. Not vendored or redistributed: Buffon clones the public repository and builds it on the machine that runs it.",
+        "source": {
+          "build": [
+            "go",
+            "build",
+            "-buildvcs=false",
+            "-trimpath",
+            "-pgo=off",
+            "-ldflags",
+            "-s -w",
+            "-o",
+            "{out}",
+            "{package}"
+          ],
+          "commit": "1067024e7cce0028602e638bbf6676c6d2883cda",
+          "env": {
+            "CGO_ENABLED": "0",
+            "GOFLAGS": "",
+            "GOTOOLCHAIN": "local"
+          },
+          "package": "./cmd/pi",
+          "repo_env": "BUFFON_SOURCE_REPO_SKY_VALLEY_PI",
+          "repo_url": "https://github.com/sky-valley/pi",
+          "toolchain": "go",
+          "tree": "ced8f377b48b1185c5118276f3bbfc9aabfd866a"
+        },
+        "state": {
+          "dirs": [
+            "$HOME/.agent",
+            "$XDG_CONFIG_HOME",
+            "$XDG_DATA_HOME",
+            "$XDG_CACHE_HOME",
+            "$XDG_STATE_HOME"
+          ]
+        },
+        "trust": "source",
+        "version": "main+1067024",
+        "version_check": {
+          "contains": "amazon-bedrock"
+        }
+      },
+      "version": "main+1067024"
+    }
+  },
+  "runtimes": {
+    "bun": {
+      "artifact": {
+        "darwin-arm64": {
+          "root": "bun-darwin-aarch64",
+          "sha256": "90987a3a16d7db556d886ac3d551e7b6d3edf0a1cf43acaed622e8676be1d12f",
+          "url": "https://github.com/oven-sh/bun/releases/download/bun-v1.4.2/bun-darwin-aarch64.zip"
+        },
+        "linux-arm64": {
+          "root": "bun-linux-aarch64",
+          "sha256": "54328bbc2d9c8e0c9f892c544d66c57a83b84139e34909e5ee81758f1ac8fda7",
+          "url": "https://github.com/oven-sh/bun/releases/download/bun-v1.4.2/bun-linux-aarch64.zip"
+        },
+        "linux-x64": {
+          "root": "bun-linux-x64",
+          "sha256": "36368faef7527875d5ffa52e53cd48021741f2a83eb6208a8dd64068d422a913",
+          "url": "https://github.com/oven-sh/bun/releases/download/bun-v1.4.2/bun-linux-x64.zip"
+        }
+      },
+      "bin": ".",
+      "checksums": "https://github.com/oven-sh/bun/releases/download/bun-v1.4.2/SHASUMS256.txt",
+      "version": "1.4.2"
+    },
+    "go": {
+      "artifact": {
+        "darwin-arm64": {
+          "root": "go",
+          "sha256": "76812b213b1b2302c978d28fa52fa92d541704b9e7d9d5db8002c50e4018c4c5",
+          "url": "https://go.dev/dl/go1.27.2.darwin-arm64.tar.gz"
+        },
+        "darwin-x64": {
+          "root": "go",
+          "sha256": "587b59182488b23aa6e5fc25110405a3e0e5b38ed2f5b2f46ed13c32aee356fe",
+          "url": "https://go.dev/dl/go1.27.2.darwin-amd64.tar.gz"
+        },
+        "linux-arm64": {
+          "root": "go",
+          "sha256": "94f3e30b8e374bc285e7dadc11e0865726b9bc6e85b841ccceaabc0214c6b7c8",
+          "url": "https://go.dev/dl/go1.27.2.linux-arm64.tar.gz"
+        },
+        "linux-x64": {
+          "root": "go",
+          "sha256": "ecbadb99091a3f46e31f5f934b068b1864eafa7995211b39eaddf76996045fe5",
+          "url": "https://go.dev/dl/go1.27.2.linux-amd64.tar.gz"
+        }
+      },
+      "bin": "bin",
+      "checksums": "https://go.dev/dl/?mode=json&include=all",
+      "version": "1.27.2"
+    },
+    "node": {
+      "artifact": {
+        "darwin-arm64": {
+          "root": "node-v24.19.0-darwin-arm64",
+          "sha256": "3f1cf157479c1480352083105e13faf9d008ede98e7e157746b6df940d197b94",
+          "url": "https://nodejs.org/dist/v24.19.0/node-v24.19.0-darwin-arm64.tar.xz"
+        },
+        "darwin-x64": {
+          "root": "node-v24.19.0-darwin-x64",
+          "sha256": "d35e95230f46f6f0751df497c56622c6735e05d5e1fb1630996a005b9d328fe4",
+          "url": "https://nodejs.org/dist/v24.19.0/node-v24.19.0-darwin-x64.tar.xz"
+        },
+        "linux-arm64": {
+          "root": "node-v24.19.0-linux-arm64",
+          "sha256": "01443c1e1a29e531ccad5a46fefa6df490d2189c49f7955904aecdbb0fe86fdc",
+          "url": "https://nodejs.org/dist/v24.19.0/node-v24.19.0-linux-arm64.tar.xz"
+        },
+        "linux-x64": {
+          "root": "node-v24.19.0-linux-x64",
+          "sha256": "14b342e71204f811bde6153be8e04b62aef63c236fef92b55f9c83154b409647",
+          "url": "https://nodejs.org/dist/v24.19.0/node-v24.19.0-linux-x64.tar.xz"
+        }
+      },
+      "bin": "bin",
+      "checksums": "https://nodejs.org/dist/v24.19.0/SHASUMS256.txt",
+      "version": "24.19.0"
+    }
+  }
+}

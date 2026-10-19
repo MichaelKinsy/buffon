@@ -1,0 +1,9 @@
+date: 2026-10-10T19:20Z
+Linux 7.0.0-1013-gcp x86_64
+model name	: AMD EPYC 7B13
+cpus: 40-43
+pi-bolt: 1.1.0 (Pi-Bolt 0.8.0, linux-x64, JIT off)
+pig: 0.4.1+1.0.3
+omp: omp/18.8.7
+bun: Pi 1.1.0 as released, on stock Bun 1.4.2
+node: Pi as released, on Node v24.21.0

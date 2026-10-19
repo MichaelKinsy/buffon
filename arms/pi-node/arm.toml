@@ -1,0 +1,54 @@
+name = "pi-node"
+label = "Pi on Node"
+homepage = "https://github.com/earendil-works/pi"
+relation = "pi-reference"
+licence = "MIT"
+licence_url = "https://github.com/earendil-works/pi/blob/v1.3.0/LICENSE"
+restrictions = ""
+version = "1.3.0"
+notes = "The reference arm: every ratio in a report is relative to it. Installed from the install pair Pi publishes with its release (SHA256SUMS lists both files), npm ci --ignore-scripts, on the pinned Node. Pi turns on Node's compile cache (module.enableCompileCache()), which is kept in the temporary directory by default. Each sample gets a new temporary directory, so the cache would be cold in every sample. NODE_COMPILE_CACHE puts it in the arm's own install directory instead: the warm-up round fills it and the measured rounds start warm, as a person's second start does. Each A/A copy has its own install directory, so its own cache."
+
+[npm]
+package = "@earendil-works/pi-coding-agent"
+version = "1.3.0"
+integrity = "sha512-V/WoCjA2hQSe3QLWIUB24cTRdtEdeLiIzkDqU5RMXV6VWuD+KGZnzVBMhglwdnQTySkehZsjt8a3g6Jd2g4nnw=="
+package_json = "install-package.json"
+package_json_sha256 = "efa2ca2695c003c92febb3bca40c5de5f94d43a8aa78e1ba88420b30156d5e21"
+package_lock = "install-package-lock.json"
+package_lock_sha256 = "65eacda789c30e1c3859a96eee2fd53cf4a18629d27dcf2aa6d7bdb3da02d719"
+checksums = "https://github.com/earendil-works/pi/releases/download/v1.3.0/SHA256SUMS"
+package_json_published = "pi-coding-agent-install-package.json"        # the names SHA256SUMS lists them under
+package_lock_published = "pi-coding-agent-install-package-lock.json"
+bin = "node_modules/.bin/pi"
+runtime = "node"
+
+[endpoint]
+apis = ["openai-completions", "anthropic-messages", "openai-responses"]
+writer = "writer.py"
+
+[env]
+PI_OFFLINE = "1"
+PI_SKIP_VERSION_CHECK = "1"
+PI_TELEMETRY = "0"
+PI_CODING_AGENT_DIR = "{agent_dir}"
+NODE_COMPILE_CACHE = "{install_dir}/node-compile-cache"
+
+[state]
+dirs = ["$HOME/.agent", "$HOME/.pig", "$XDG_CONFIG_HOME", "$XDG_DATA_HOME", "$XDG_CACHE_HOME", "$XDG_STATE_HOME"]
+
+[modes]
+version = ["--version"]
+print = ["--provider", "bench", "--model", "{model}", "--no-session", "{extensions}", "-p", "{prompt}"]
+print_session = ["--provider", "bench", "--model", "{model}", "--session", "{session}", "-p", "{prompt}"]
+rpc = ["--mode", "rpc", "--provider", "bench", "--model", "{model}", "--no-session", "{extensions}"]
+rpc_session = ["--mode", "rpc", "--provider", "bench", "--model", "{model}", "--session-dir", "{session_dir}", "{extensions}"]
+rpc_resume = ["--mode", "rpc", "--provider", "bench", "--model", "{model}", "--session", "{session}", "{extensions}"]
+pty = ["--provider", "bench", "--model", "{model}", "--no-session", "{extensions}"]
+
+[capabilities]
+pi_extensions = "native"
+pi_session_format = true
+exact_requests = true
+
+[renderer]
+pty = "fullscreen"   # Pi's tuiMode default (settings-defaults.ts, v1.3.0); the writer sets it explicitly

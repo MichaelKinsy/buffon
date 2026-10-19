@@ -1,0 +1,23 @@
+# Track 3, scenario 4. Track 1 speed and memory, run on a small server and on a laptop; the same ratios, each labelled by its machine.
+id = "cheap-machine"
+title = "A cheap machine"
+sentence = "The same speed and memory questions as Track 1, on a small server next to a laptop. Do the ratios hold?"
+machine = "small-vps"
+conditions = "lab"
+uses = ["overhead/version", "overhead/print", "longsession/resume-n"]
+apis = ["openai-completions"]
+
+[[reports]]
+label = "Start-up"
+from = "overhead/version"
+metric = "wall_ms"
+
+[[reports]]
+label = "One turn"
+from = "overhead/print"
+metric = "wall_ms"
+
+[[reports]]
+label = "Peak memory"
+from = "overhead/print"
+metric = "peak_mem_mib"

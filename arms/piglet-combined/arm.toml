@@ -1,0 +1,8 @@
+name = "piglet-combined"
+label = "PiG, the combined Go-fused and aot ext10 Piglet"
+held = "Held: no combined manifest exists at the pinned Pigpen commit. The Go and TypeScript ext10 sets name the same extensions, so one Binary cannot load both; the shape waits for bolt-aot's confirmation (Pigpen owner item, 2026-10-11 23:59Z)."
+version = "0.5.0+1.1.0"
+homepage = "https://github.com/MichaelKinsy/PiG"
+relation = "pi-port"
+licence = "MIT"
+licence_url = "https://github.com/MichaelKinsy/PiG/blob/main/LICENSE"

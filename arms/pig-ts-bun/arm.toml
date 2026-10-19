@@ -1,0 +1,19 @@
+name = "pig-ts-bun"
+label = "PiG, ten TypeScript extensions, Bun, packed cell"
+notes = "The same TypeScript extensions as pig-ts-node, run by stock Bun 1.4.2 through the runtime slot (`PIG_TS_RUNTIME=bun`), as the Bun Piglet installs it. The Bun executable's sha256 must be in PiG's runtime lock."
+
+[derive]
+base = "pig-tip"
+
+[env]
+PIG_HOME = "{shared_dir}/pig-home"
+PIG_TS_RUNTIME = "bun"
+PIG_TS_RUNTIMES_DIR = "{install_dir}/slot"
+
+[extensions]
+default = false
+processes = 1
+host = "bun"
+
+[prepare]
+script = "prepare.py"

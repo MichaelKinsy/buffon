@@ -1,0 +1,2 @@
+# Image reference of each arm's container, pinned by digest (guarantee G1). `default` is used for an arm with no entry.
+default = "debian@sha256:7c7b2c966bc9ee8cedfeef67e0e279108992c77681fa595db4a9d65c06ccc587"   # debian:bookworm-slim, images/base/Dockerfile

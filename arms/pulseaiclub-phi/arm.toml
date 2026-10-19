@@ -1,0 +1,47 @@
+name = "pulseaiclub-phi"
+label = "pulseaiclub/phi (Go coding agent)"
+homepage = "https://github.com/pulseaiclub/phi"
+relation = "pi-compatible"
+licence = "MIT"
+licence_url = "https://github.com/pulseaiclub/phi/blob/f35c44effff5f0a271e12187a460c49650260aa8/LICENSE"
+restrictions = "LICENSE file is MIT at the pinned commit. Not vendored or redistributed: Buffon clones the public repository and builds it on the machine that runs it."
+version = "main+f35c44e"
+notes = "A Go terminal coding agent (own config, sub-agents, hashline edits, MCP), not a Pi port: Pi-specific rows (session format, extensions, Pi RPC) are N/A. Driver: print (`phi run -p PROMPT --jsonl`, the JSONL events are not parsed: Buffon reads the mock's view and the exit code). It has no version flag, so the version check runs `phi run --help` and reads its usage text."
+trust = "source"
+
+[source]
+repo_env = "BUFFON_SOURCE_REPO_PULSEAICLUB_PHI"
+repo_url = "https://github.com/pulseaiclub/phi"
+commit = "f35c44effff5f0a271e12187a460c49650260aa8"
+tree = "60298ada21f0ff2dd77d9cfa9da340ee66f0e752"
+toolchain = "go"
+package = "./cmd"
+build = ["go", "build", "-buildvcs=false", "-trimpath", "-pgo=off", "-ldflags", "-s -w", "-o", "{out}", "{package}"]
+env = { CGO_ENABLED = "0", GOFLAGS = "", GOTOOLCHAIN = "local" }
+
+[endpoint]
+apis = ["openai-completions", "anthropic-messages", "openai-responses"]
+writer = "writer.py"
+
+[env]
+PHI_OFFLINE = "1"
+PHI_SKIP_VERSION_CHECK = "1"
+
+[state]
+dirs = ["$HOME/.phi", "$XDG_CONFIG_HOME", "$XDG_DATA_HOME", "$XDG_CACHE_HOME", "$XDG_STATE_HOME"]
+
+[modes]
+version = ["run", "--help"]
+print = ["run", "--yolo", "--jsonl", "--session-dir", "{session_dir}", "-p", "{prompt}"]
+
+[cannot_run]
+rpc = "no Pi RPC mode (its extension RPC is a different protocol)"
+pty = "tried at the pinned commit (phi tui): its screen never settles under the PTY driver, so first-input and streaming latency cannot be read; not measured in v0"
+
+[capabilities]
+pi_extensions = "none"
+pi_session_format = false
+exact_requests = false
+
+[version_check]
+contains = "run one agent loop headlessly"

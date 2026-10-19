@@ -1,0 +1,13 @@
+compare::#/
+compare-ratio::#/?v=ratio&base=pibolt
+scale::#/scale
+scale-swarm::#/swarm/4g-8c/rpc/pibolt/32
+scale-swarm-print::#/swarm/4g-8c/print/copilot/32
+method::#/method
+runs::#/runs
+harness::#/harness/pibolt
+metric::#/metric/overhead-print.cpu_ms
+metric-write::#/metric/overhead-print-write.kb200_wall_ms
+cell::#/cell/overhead-print-anthropic-cpu-ms/claude-code
+glossary::#/glossary
+doc-method::#/doc/METHODOLOGY

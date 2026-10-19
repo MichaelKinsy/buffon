@@ -1,0 +1,48 @@
+name = "opencode"
+label = "OpenCode 1"
+homepage = "https://opencode.ai"
+relation = "reference"
+licence = "MIT"
+licence_url = "https://github.com/anomalyco/opencode/blob/dev/LICENSE"
+restrictions = ""
+version = "1.19.0"
+notes = "Unrelated to Pi; a reference point. The 1.x line (npm `opencode-ai`, its `latest` tag); OpenCode 2 is the separate arm `opencode-v2`. It sends a title-generation request without tools before the scripted turn, so its request counts are not exact. At first start it installs `@opencode-ai/plugin` from the npm registry in the background; the arm turns npm offline so no connection leaves, and the plugin API is not used."
+
+[npm]
+package = "opencode-ai"
+version = "1.19.0"
+integrity = "sha512-lddJhFwZI3GLlw8VyOo4yNwBVGeVN/mxH6ORh60h69zAXL7QhjSWY9orj10rwO2kxVnxH9dh45uDCWNuiqPb8A=="
+package_lock = "package-lock.json"
+package_lock_sha256 = "b675d717283b753f9841b40e71f6d46a45a9b216c06b38294811689712e2513d"
+bin = "node_modules/.bin/opencode"
+runtime = "node"
+
+[prepare]
+script = "prepare.py"
+
+[endpoint]
+apis = ["openai-completions"]
+writer = "writer.py"
+
+[env]
+BENCH_API_KEY = "{dummy_key}"
+OPENCODE_DISABLE_AUTOUPDATE = "true"
+OPENCODE_DISABLE_MODELS_FETCH = "true"
+OPENCODE_DISABLE_LSP_DOWNLOAD = "true"
+npm_config_offline = "true"
+
+[state]
+dirs = ["$XDG_CONFIG_HOME", "$XDG_DATA_HOME", "$XDG_CACHE_HOME", "$XDG_STATE_HOME"]
+
+[modes]
+version = ["--version"]
+print = ["run", "-m", "bench/{model}", "{prompt}"]
+pty = ["-m", "bench/{model}"]
+
+[cannot_run]
+print_session = "not wired: a session is a row in OpenCode's own SQLite database under XDG_DATA_HOME, addressed by an `ses_...` id it generates (`run --session <id>` continues one), so Buffon's `--session <file>` path template has no equivalent and the kill-and-resume workloads cannot use it"
+rpc = "no Pi-dialect RPC mode: `opencode serve` is an HTTP server and `opencode acp` speaks the Agent Client Protocol, neither is Pi's JSONL RPC"
+
+[capabilities]
+pi_extensions = "none"
+pi_session_format = false

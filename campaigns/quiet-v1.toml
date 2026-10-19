@@ -1,0 +1,38 @@
+# The quiet cluster run (`buffon campaign campaigns/quiet-v1.toml --site <your kubernetes site> --out runs/quiet-v1`): the measured families of the
+# buffon's first ticket, each as its own session on the nodes the calibration vouches for. docs/RUNNING.md, "Campaigns", describes the file.
+# Every arm here installs from a pinned artifact, npm or a Go source build, so a bundle carries all of them. rpi needs glibc 2.39 or later:
+# the site's base image must be at least that new (Debian trixie or later).
+
+[campaign]
+name = "quiet-v1"
+reference = "pi-node"
+description = "overhead, ten extensions, streaming and long sessions; the six launch arms against Pi on Node, each with its A/A copy"
+
+# The noise floor of the nodes: the reference arm against its own A/A copy on every node, judged against [kubernetes] max_cv.
+[calibrate]
+workloads = ["overhead/version", "overhead/print", "overhead/rpc"]
+rounds = 12
+
+[[family]]
+name = "overhead"
+workloads = ["overhead/version", "overhead/print", "overhead/rpc", "overhead/pty"]
+arms = ["pi-node", "pi-bun", "pibolt", "pig-tip", "pig-0.4.1", "rpi"]
+rounds = 12
+
+[[family]]
+name = "ext10"
+workloads = ["overhead/rpc-ext10", "overhead/print-ext10"]
+arms = ["pi-node", "pi-bun", "pibolt", "pig-tip", "pig-0.4.1", "rpi"]
+rounds = 12
+
+[[family]]
+name = "streaming"
+workloads = ["streaming"]
+arms = ["pi-node", "pi-bun", "pibolt", "pig-tip", "pig-0.4.1", "rpi"]
+rounds = 12
+
+[[family]]
+name = "longsession"
+workloads = ["longsession"]
+arms = ["pi-node", "pi-bun", "pibolt", "pig-tip", "pig-0.4.1", "rpi"]
+rounds = 12

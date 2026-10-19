@@ -1,0 +1,39 @@
+project = "Codex CLI"
+harnesses = ["codex"]
+maker = "OpenAI"
+maker_url = "https://github.com/openai"
+tagline = "Codex CLI is a coding agent from OpenAI that runs locally on your computer."
+tagline_source = "https://github.com/openai/codex/blob/ce0323f2f2d3b25e82806cd555237da3db4e1897/README.md"
+readme_url = "https://github.com/openai/codex/blob/rust-v0.162.1/README.md"
+readme_ref = "rust-v0.162.1"
+readme_title = "Codex CLI"
+readme_head = [
+    "Codex CLI is a coding agent from OpenAI that runs locally on your computer.",
+    "If you want Codex in your code editor (VS Code, Cursor, Windsurf), install in your IDE.",
+]
+logo = "codex.webp"
+logo_source = "https://raw.githubusercontent.com/openai/codex/main/.github/codex-cli-splash.png"
+logo_sha256 = "fcb1d422789d37f65338f25419469e128a4f812a74cc6c7df5d31c45b1c868d2"
+logo_alt = "Codex CLI splash"
+monogram = "Cx"
+retrieved = "2026-10-18"
+licence = "Apache-2.0"
+
+[links]
+home = "https://developers.openai.com/codex/cli"
+repo = "https://github.com/openai/codex"
+docs = "https://developers.openai.com/codex"
+releases = "https://github.com/openai/codex/releases"
+changelog = "https://developers.openai.com/codex/changelog"
+issues = "https://github.com/openai/codex/issues"
+licence = "https://github.com/openai/codex/blob/main/LICENSE"
+
+[[quotes]]
+text = "Inspect code, make changes, run commands, and automate repeatable work without leaving your terminal."
+source = "https://developers.openai.com/codex/cli"
+about = "goal"
+
+[[quotes]]
+text = "Choose the model, reasoning effort, permissions, and commands that fit the task."
+source = "https://developers.openai.com/codex/cli"
+about = "design"

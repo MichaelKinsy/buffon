@@ -1,0 +1,42 @@
+project = "OpenCode"
+harnesses = ["opencode-v2", "opencode"]
+maker = "Anomaly"
+maker_url = "https://github.com/anomalyco"
+tagline = "The open source AI coding agent"
+tagline_source = "https://opencode.ai"
+readme_url = "https://github.com/anomalyco/opencode/blob/v1.19.0/README.md"
+readme_ref = "v1.19.0"
+readme_title = "OpenCode"
+readme_head = [
+    "The open source AI coding agent.",
+]
+mark = "opencode-mark.svg"
+mark_source = "https://raw.githubusercontent.com/anomalyco/opencode/v1.19.0/packages/console/app/src/asset/brand/opencode-logo-light-square.svg"
+mark_ref = "v1.19.0"
+mark_sha256 = "60b00d14b7ab0e9632de2f852c526bf1c13c80d14cae74918234b44d16ab6355"
+retrieved = "2026-10-18"
+licence = "MIT"
+
+[links]
+home = "https://opencode.ai"
+repo = "https://github.com/anomalyco/opencode"
+docs = "https://opencode.ai/docs"
+releases = "https://github.com/anomalyco/opencode/releases"
+changelog = "https://opencode.ai/changelog"
+issues = "https://github.com/anomalyco/opencode/issues"
+licence = "https://github.com/anomalyco/opencode/blob/dev/LICENSE"
+
+[[quotes]]
+text = "OpenCode is an open source agent that helps you write code in your terminal, IDE, or desktop."
+source = "https://opencode.ai"
+about = "goal"
+
+[[quotes]]
+text = "Free models included or connect any model from any provider, including Claude, GPT, Gemini and more."
+source = "https://opencode.ai"
+about = "compatibility"
+
+[[quotes]]
+text = "OpenCode does not store any of your code or context data, so that it can operate in privacy sensitive environments."
+source = "https://opencode.ai"
+about = "design"

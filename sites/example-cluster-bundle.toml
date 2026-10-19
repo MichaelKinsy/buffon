@@ -1,0 +1,23 @@
+# Site profile template for a Kubernetes cluster run from a bundle (no registry for Buffon: the pod runs a digest-pinned base image and `kubectl cp` hands it the bundle).
+# Copy it to sites/<your-name>.toml (git ignores that path) and replace every <placeholder>; the runner refuses a value that still holds one.
+# The kubeconfig is named by PATH only: Buffon never reads, copies or records its contents. Keep the file itself (and every cluster value) out of version control and out of run directories.
+[site]
+name = "cluster"
+backend = "kubernetes"
+hardware = "dedicated"       # only when the node pool below runs nothing else
+
+[kubernetes]
+kubeconfig = "~/.kube/<your kubeconfig file>"   # a path; empty would use $KUBECONFIG or kubectl's default
+context = ""
+namespace = "<namespace>"
+bundle = true
+base_image = "<registry>/<python image>@sha256:<64 hex digest>"   # Python 3.11 or later, sh, tar, sha256sum (docs/RUNNING.md, "Bundle mode")
+arch = "amd64"
+cpus = 4                     # whole CPUs: Guaranteed QoS, exclusive cores under the static CPU manager
+memory = "16Gi"
+scratch_size = "16Gi"        # the pod's scratch is a disk emptyDir: binaries run from disk, never from memory-backed storage
+pin = "auto"
+node_selector = { "<label key>" = "<label value>" }
+tolerations = [ { key = "<taint key>", operator = "Equal", value = "<taint value>", effect = "NoSchedule" } ]
+nodes = ["<node a>", "<node b>"]   # the target nodes: the perf preflight runs one pod on each, the calibration vouches for them, each family runs on a pair
+max_cv = 0.05

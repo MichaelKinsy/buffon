@@ -1,0 +1,17 @@
+name = "piglet-bench-ext10-aot"
+label = "PiG, the bench-ext10-aot Piglet (ten TypeScript extensions through the aot runtime)"
+held = "Held until the aot image step is wired for Piglets: the Piglet builds and its identity is pinned, but a sample would start on the Bun fallback, not the compiled host. The Pigpen commit is 09eaf32e62cedc0a69fa6a411534d21bfd4b1192."
+notes = "The ten bench-ext TypeScript extensions carried in the Binary; the aot runtime compiles them on the user's machine at first start."
+version = "0.5.0+1.1.0"
+homepage = "https://github.com/MichaelKinsy/PiG"
+relation = "pi-port"
+licence = "MIT"
+licence_url = "https://github.com/MichaelKinsy/PiG/blob/main/LICENSE"
+
+[piglet]
+name = "bench-ext10-aot"
+pigpen_commit = "09eaf32e62cedc0a69fa6a411534d21bfd4b1192"
+repo_env = "BUFFON_SOURCE_REPO_PIGPEN"
+manifest = "piglets/bench-ext10-aot/piglet.yaml"
+manifest_sha256 = "ac0bdf846085bbc093ca54a63bf1d778ad279446e66107fa74929258208d6e7a"
+release_version = "0.1.0"

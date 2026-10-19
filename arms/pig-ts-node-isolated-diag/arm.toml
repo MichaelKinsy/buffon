@@ -1,0 +1,17 @@
+name = "pig-ts-node-isolated-diag"
+label = "DIAGNOSTIC: PiG, ten TypeScript extensions, Node, one process each (patched build, not user-selectable)"
+notes = "Not a configuration a user can select: PiG packs every Node factory into one process and no setting isolates a factory (source_resolver.go gives Node factories Isolation shared-ok). This arm builds the pig-tip checkout with one line changed (isolate-node-factories.patch: Isolation isolated), so the cost of the Node cell's packing against ten Node processes is visible. Never a headline arm."
+
+[derive]
+base = "pig-tip"
+
+[env]
+PIG_HOME = "{shared_dir}/pig-home"
+
+[extensions]
+default = false
+processes = 10
+host = "node"
+
+[prepare]
+script = "prepare.py"

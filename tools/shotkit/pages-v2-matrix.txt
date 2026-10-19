@@ -1,0 +1,2 @@
+sec-prompts-dots::#/r/prompts-and-tools?m=overhead-print.cpu_ms,overhead-print.peak_rss_mib,overhead-print.wall_ms
+sec-prompts-rounds::#/r/prompts-and-tools?m=overhead-print.cpu_ms,overhead-print.peak_rss_mib,overhead-print.wall_ms&view=rounds

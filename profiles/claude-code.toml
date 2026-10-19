@@ -1,0 +1,42 @@
+project = "Claude Code"
+harnesses = ["claude-code"]
+maker = "Anthropic"
+maker_url = "https://github.com/anthropics"
+tagline = "Claude Code is an agentic coding tool that reads your codebase, edits files, runs commands, and integrates with your development tools."
+tagline_source = "https://code.claude.com/docs/en/overview"
+readme_url = "https://github.com/anthropics/claude-code/blob/v2.1.296/README.md"
+readme_ref = "v2.1.296"
+readme_title = "Claude Code"
+readme_head = [
+    "Claude Code is an agentic coding tool that lives in your terminal, understands your codebase, and helps you code faster by executing routine tasks, explaining complex code, and handling git workflows -- all through natural language commands. Use it in your terminal, IDE, or tag @claude on Github.",
+    "Learn more in the official documentation.",
+]
+logo = "claude-code.png"
+logo_source = "https://raw.githubusercontent.com/anthropics/claude-code/v2.1.296/demo.gif"
+logo_sha256 = "7e81a409ebe4412ae8147e838d69479128616624efaf44ba4fe99b75fb7b0385"
+mark = "claude-code-mark.png"
+mark_source = "https://raw.githubusercontent.com/anthropics/claude-code/v2.1.296/demo.gif"
+mark_ref = "v2.1.296"
+mark_sha256 = "46731a428537baaa0573c62d7bd383d2ada98054af10e170427031107f152e1f"
+mark_crop = [50, 108, 172, 172]
+retrieved = "2026-10-18"
+licence = "All rights reserved. Use is subject to Anthropic's Commercial Terms of Service."
+
+[links]
+home = "https://code.claude.com"
+repo = "https://github.com/anthropics/claude-code"
+docs = "https://code.claude.com/docs/en/overview"
+releases = "https://github.com/anthropics/claude-code/releases"
+changelog = "https://code.claude.com/docs/en/changelog"
+issues = "https://github.com/anthropics/claude-code/issues"
+licence = "https://github.com/anthropics/claude-code/blob/main/LICENSE.md"
+
+[[quotes]]
+text = "Claude Code is an AI-powered coding assistant that helps you build features, fix bugs, and automate development tasks. It understands your entire codebase and can work across multiple files and tools to get things done."
+source = "https://code.claude.com/docs/en/overview"
+about = "goal"
+
+[[quotes]]
+text = "The full-featured CLI for working with Claude Code directly in your terminal. Edit files, run commands, and manage your entire project from the command line."
+source = "https://code.claude.com/docs/en/overview"
+about = "design"

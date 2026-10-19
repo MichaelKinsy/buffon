@@ -1,0 +1,47 @@
+name = "rcarmo-gi"
+label = "rcarmo/gi (Go web coding agent)"
+homepage = "https://github.com/rcarmo/gi"
+relation = "pi-compatible"
+licence = "MIT"
+licence_url = "https://github.com/rcarmo/gi/blob/7078df0d59bf4e763c9d5c80a38f309860c930de/LICENSE"
+restrictions = "LICENSE file is MIT at the pinned commit. Not vendored or redistributed: Buffon clones the public repository (with its one submodule, pinned by the commit) and builds it on the machine that runs it."
+version = "dev+7078df0"
+notes = "A Go coding agent served as a web application (`gi -web`: REST plus a server-sent-event stream, state in a SQLite database), not a command-line agent. Driver type: web-sse, which Buffon does not have yet, so only the build and `--version` run; every workload row is listed as cannot run with that reason."
+trust = "source"
+
+[source]
+repo_env = "BUFFON_SOURCE_REPO_RCARMO_GI"
+repo_url = "https://github.com/rcarmo/gi"
+commit = "7078df0d59bf4e763c9d5c80a38f309860c930de"
+tree = "08c3a9d527eedcff25498aa85e966957c057017c"
+submodules = true
+toolchain = "go"
+package = "./cmd/gi"
+build = ["go", "build", "-buildvcs=false", "-trimpath", "-pgo=off", "-ldflags", "-s -w", "-o", "{out}", "{package}"]
+env = { CGO_ENABLED = "0", GOFLAGS = "", GOTOOLCHAIN = "local" }
+
+[endpoint]
+apis = ["openai-completions"]
+writer = "writer.py"
+
+[env]
+XDG_STATE_HOME = "{home}/.local/state"
+
+[state]
+dirs = ["$HOME/.agent", "$XDG_CONFIG_HOME", "$XDG_DATA_HOME", "$XDG_CACHE_HOME", "$XDG_STATE_HOME"]
+
+[modes]
+version = ["--version"]
+
+[cannot_run]
+print = "web-sse driver not implemented: the agent runs as a web server (gi -web, REST and /sse/stream); Buffon drives command-line, JSON-RPC and PTY agents only"
+rpc = "no Pi RPC mode (web server)"
+pty = "no terminal interface in web mode"
+
+[capabilities]
+pi_extensions = "none"
+pi_session_format = false
+exact_requests = false
+
+[version_check]
+contains = "gi"

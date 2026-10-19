@@ -1,0 +1,48 @@
+project = "GitHub Copilot CLI"
+harnesses = ["copilot"]
+maker = "GitHub"
+maker_url = "https://github.com/github"
+tagline = "The power of GitHub Copilot, now in your terminal."
+tagline_source = "https://github.com/github/copilot-cli/blob/c01c66377d25426dda70c21750e1956e4dd25657/README.md"
+readme_url = "https://github.com/github/copilot-cli/blob/v1.0.95/README.md"
+readme_ref = "v1.0.95"
+readme_title = "GitHub Copilot CLI"
+readme_head = [
+    "The power of GitHub Copilot, now in your terminal.",
+    "GitHub Copilot CLI brings AI-powered coding assistance directly to your command line, enabling you to build, debug, and understand code through natural language conversations. Powered by the same agentic harness as GitHub's Copilot coding agent, it provides intelligent assistance while staying deeply integrated with your GitHub workflow.",
+]
+logo = "copilot.png"
+logo_source = "https://github.com/user-attachments/assets/f40aa23d-09dd-499e-9457-1d57d3368887"
+logo_sha256 = "de775d257b2b877db7c6802da7ded75cb153b77510663ea7fa80d03f64d1a07d"
+logo_alt = "Image of the splash screen for the Copilot CLI"
+mark = "copilot-mark.png"
+mark_source = "https://github.com/user-attachments/assets/f40aa23d-09dd-499e-9457-1d57d3368887"
+mark_ref = "v1.0.95"
+mark_sha256 = "01feb57b8af78d69f8b04056216b1ea5e626fbc655f5805fa6e504608daa058d"
+mark_crop = [1358, 64, 590, 590]
+retrieved = "2026-10-18"
+licence = "GitHub Copilot CLI License"
+
+[links]
+home = "https://github.com/features/copilot/cli"
+repo = "https://github.com/github/copilot-cli"
+docs = "https://docs.github.com/copilot/concepts/agents/about-copilot-cli"
+releases = "https://github.com/github/copilot-cli/releases"
+changelog = "https://github.com/github/copilot-cli/blob/main/changelog.md"
+issues = "https://github.com/github/copilot-cli/issues"
+licence = "https://github.com/github/copilot-cli/blob/main/LICENSE.md"
+
+[[quotes]]
+text = "GitHub Copilot CLI brings AI-powered coding assistance directly to your command line, enabling you to build, debug, and understand code through natural language conversations."
+source = "https://github.com/github/copilot-cli/blob/c01c66377d25426dda70c21750e1956e4dd25657/README.md"
+about = "goal"
+
+[[quotes]]
+text = "Full control: Preview every action before execution — nothing happens without your explicit approval."
+source = "https://github.com/github/copilot-cli/blob/c01c66377d25426dda70c21750e1956e4dd25657/README.md"
+about = "design"
+
+[[quotes]]
+text = "We're still early in our journey, but with your feedback, we're rapidly iterating to make the GitHub Copilot CLI the best possible companion in your terminal."
+source = "https://github.com/github/copilot-cli/blob/c01c66377d25426dda70c21750e1956e4dd25657/README.md"
+about = "status"

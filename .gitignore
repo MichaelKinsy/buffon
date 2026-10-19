@@ -1,0 +1,8 @@
+__pycache__/
+*.pyc
+/runs/
+/sites/*.toml
+!/sites/example-*.toml
+.cache/
+tools/shotkit/node_modules/
+tools/shotkit/package*.json

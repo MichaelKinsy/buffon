@@ -1,0 +1,44 @@
+project = "rpi"
+harnesses = ["rpi"]
+maker = "bigfish1913"
+maker_url = "https://github.com/bigfish1913"
+tagline = "rpi — a Rust-native coding-agent runtime"
+tagline_source = "https://github.com/bigfish1913/pi-rust/blob/1409907e8bb7f94d0b30565b6b5d6b19be852d17/README.md"
+readme_url = "https://github.com/bigfish1913/pi-rust/blob/v0.3.19/README.md"
+readme_ref = "v0.3.19"
+readme_title = "rpi — a Rust-native coding-agent runtime"
+readme_head = [
+    "rpi is a library-first coding-agent runtime written in Rust, plus a terminal agent built on top of it. Nine composable crates span provider adapters, a durable crash-resumable agent loop, a terminal UI, and a stable plugin ABI — so the same code works as an embedded SDK or as a ready-to-run rpi command.",
+]
+logo = "rpi.png"
+logo_source = "https://raw.githubusercontent.com/bigfish1913/pi-rust/v0.3.19/docs/images/rpi-interactive.png"
+logo_sha256 = "080cd10f9c5480aa3bb19a9886132e0eff2f694cdbb6e2a3314019a30af99f12"
+logo_alt = "rpi interactive session"
+mark = "rpi-mark.svg"
+mark_source = "https://raw.githubusercontent.com/bigfish1913/pi-rust/v0.3.19/website/favicon.svg"
+mark_ref = "v0.3.19"
+mark_sha256 = "4031acf3d148d5454dece2d47fd32c5a68cfa5fa29118c5c9c41a2e565d4405c"
+mark_bg = "#101113"
+retrieved = "2026-10-18"
+licence = "MIT"
+licence_note = "The licence file credits Mario Zechner and the pi-rust contributors."
+
+[links]
+home = "https://rpi.laofu.online/"
+repo = "https://github.com/bigfish1913/pi-rust"
+docs = "https://rpi.laofu.online/docs.html"
+releases = "https://github.com/bigfish1913/pi-rust/releases"
+changelog = "https://github.com/bigfish1913/pi-rust/blob/main/CHANGELOG.md"
+issues = "https://github.com/bigfish1913/pi-rust/issues"
+licence = "https://github.com/bigfish1913/pi-rust/blob/main/LICENSE"
+benchmarks = "https://github.com/bigfish1913/pi-rust/blob/main/docs/performance/benchmark-vs-pi.md"
+
+[[quotes]]
+text = "Durable. Sessions are a tree with JSONL persistence and per-frame progress. A crash mid-tool-call resumes instead of losing the turn or double-executing the tool."
+source = "https://github.com/bigfish1913/pi-rust/blob/1409907e8bb7f94d0b30565b6b5d6b19be852d17/README.md"
+about = "design"
+
+[[quotes]]
+text = "Config, session, harness and the six built-in tools add nothing over process creation."
+source = "https://github.com/bigfish1913/pi-rust/blob/1409907e8bb7f94d0b30565b6b5d6b19be852d17/docs/performance/benchmark-vs-pi.md"
+about = "performance"

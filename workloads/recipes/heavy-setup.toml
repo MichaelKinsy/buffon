@@ -1,0 +1,24 @@
+# Track 3, scenario 3. The two heavy things this scenario combines, each measured by the benchmark that owns it: start-up with 50 extensions and the resume of a 4.2M-token session.
+id = "heavy-setup"
+title = "A heavy setup"
+sentence = "Fifty extensions and a session of 4.2 million tokens, then a resume. How long does the resume take and how much memory does it hold?"
+machine = "laptop"
+conditions = "typical"
+uses = ["overhead/rpc-ext50", "longsession/resume-4m2"]
+apis = ["openai-completions"]
+isolation = "container"
+
+[[reports]]
+label = "Start-up with 50 extensions"
+from = "overhead/rpc-ext50"
+metric = "extensions_ready_ms"
+
+[[reports]]
+label = "Resume time"
+from = "longsession/resume-4m2"
+metric = "ready_ms"
+
+[[reports]]
+label = "Peak memory after the resume"
+from = "longsession/resume-4m2"
+metric = "peak_mem_mib"

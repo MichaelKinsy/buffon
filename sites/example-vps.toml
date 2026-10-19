@@ -1,0 +1,20 @@
+# Site profile template for ONE dedicated virtual machine (a VPS with dedicated vCPUs), run from a bundle (docs/RUNNING.md, "A dedicated VPS").
+# Copy it to sites/<your-name>.toml (git ignores that path) and edit. Nothing here names a host: the machine you run on is the one that is measured.
+#
+# Layout for 4 vCPUs: CPU 0 stays free for the operating system, sshd and the container runtime (housekeeping); the mock endpoint and the runner run on CPU 1; the harness runs on CPUs 2-3.
+# `buffon preflight --site <this file>` says whether the machine really is class A and why not when it is not (SMT siblings, a CPU quota, other tasks on the bench CPUs).
+[site]
+name = "vps"
+backend = "local"
+hardware = "dedicated"          # a claim: the vCPUs are dedicated to this machine. The runner also checks that nothing else runs on them.
+notes = "one dedicated 4-vCPU virtual machine; runs are serial"
+
+[local]
+cpus = "2-3"
+mock_cpus = "1"
+pinning = "required"
+host_claim = "A"                # the site declares the CPUs dedicated; preflight checks that nothing else runs there and downgrades the run to class B when it does
+clock_claim = "hypervisor"      # a VM shows no cpufreq or turbo interface, so the runner cannot read the clock policy: the site says the platform fixes it (a claim, stated in every report)
+# require_class = "A"           # uncomment to refuse to run at all when the machine is not class A (a night's run is then never wasted on PROVISIONAL numbers)
+work_dir = "/var/tmp"           # a disk directory: the runner refuses a work directory on tmpfs (code mapped from memory-backed storage counts as the process's own memory)
+meter = "auto"

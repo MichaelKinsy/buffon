@@ -1,0 +1,22 @@
+name = "pig-go-isolated"
+label = "PiG, ten Go SDK extensions, one process each"
+notes = "The same Go bodies as pig-go-packed, as ten exact standalone modules (package main): PiG builds and runs each as its own process."
+
+[derive]
+base = "pig-tip"
+
+[env]
+PIG_HOME = "{shared_dir}/pig-home"
+# The generated cell's cache key includes the SDK path: one path shared by every sample and A/A copy keeps the warm cache valid in every fresh HOME.
+PIG_SDK_GO_ROOT = "{source_dir}/extensions/sdk"
+
+[runtime]                          # the pinned Go toolchain on PATH: PiG's generated-cell cache key includes the toolchain it resolves, so a warm cache only hits when the sample sees the same Go
+go = "1.27.2"
+
+[extensions]
+default = false
+paths = ["fixtures/extensions-go/standalone/bench-ext-*"]
+processes = 10
+
+[prepare]
+script = "prepare.py"

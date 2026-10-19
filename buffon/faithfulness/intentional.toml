@@ -1,0 +1,9 @@
+# Mismatches that a harness's own recorded divergence explains. Format:
+#
+# [[intentional]]
+# arms = ["pig-*"]                       # fnmatch patterns on arm ids
+# probes = ["F2.*.system"]               # fnmatch patterns on probe ids
+# divergence = "D12"
+# note = "why"
+#
+# A listed mismatch is still a mismatch: it counts against the score and the report shows it separately as intentional, so a harness gets no credit for its own divergences.

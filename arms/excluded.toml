@@ -1,0 +1,12 @@
+# Go (and other) projects that look like Pi implementations but are not measured, with the reason. The report lists them so nobody wonders why they are missing.
+[[excluded]]
+repo = "chinudotdev/pi-go"
+reason = "a Go library for building agents, not a runnable coding agent: there is no command to start, so there is nothing to put through a workload"
+
+[[excluded]]
+repo = "qiz029/pi-agent-go"
+reason = "a Go SDK (client) for Pi's RPC protocol: it drives a Pi process, it is not an implementation of Pi; measuring it would measure Pi"
+
+[[excluded]]
+repo = "rcarmo/go-ai"
+reason = "an inference API library (the model layer under rcarmo/gi), not a coding agent"

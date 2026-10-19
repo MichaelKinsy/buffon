@@ -1,0 +1,54 @@
+name = "guanshan-pi-go"
+label = "guanshan/pi-go (Go port of Pi)"
+homepage = "https://github.com/guanshan/pi-go"
+relation = "pi-port"
+licence = "MIT"
+licence_url = "https://github.com/guanshan/pi-go/blob/995990d176a0fe039a8b6b9abdd63613b94b6224/LICENSE"
+restrictions = "LICENSE file is MIT at the pinned commit (GitHub's licence detection may say NOASSERTION). Not vendored or redistributed: Buffon clones the public repository and builds it on the machine that runs it."
+version = "dev+995990d"
+notes = "Go port of Pi with a Pi-compatible command line (--provider, --model, --mode rpc, --session) and models.json. Driver: print (-p) and rpc. Extension loading was not verified, so extension rows are N/A. Built from the pinned commit with the pinned Go toolchain."
+trust = "source"
+
+[source]
+repo_env = "BUFFON_SOURCE_REPO_GUANSHAN_PI_GO"
+repo_url = "https://github.com/guanshan/pi-go"
+commit = "995990d176a0fe039a8b6b9abdd63613b94b6224"
+tree = "5ea4abe55b28586d950d8c005688d35b73ba7aec"
+toolchain = "go"
+package = "./cmd/pi"
+build = ["go", "build", "-buildvcs=false", "-trimpath", "-pgo=off", "-ldflags", "-s -w", "-o", "{out}", "{package}"]
+env = { CGO_ENABLED = "0", GOFLAGS = "", GOTOOLCHAIN = "local" }
+
+[endpoint]
+apis = ["openai-completions", "anthropic-messages", "openai-responses"]
+writer = "writer.py"
+
+[env]
+PI_OFFLINE = "1"
+PI_SKIP_VERSION_CHECK = "1"
+PI_TELEMETRY = "0"
+PI_CODING_AGENT_DIR = "{agent_dir}"
+
+
+[state]
+dirs = ["$HOME/.agent", "$XDG_CONFIG_HOME", "$XDG_DATA_HOME", "$XDG_CACHE_HOME", "$XDG_STATE_HOME"]
+
+[modes]
+version = ["--version"]
+print = ["--provider", "bench", "--model", "{model}", "--no-session", "-p", "{prompt}"]
+print_session = ["--provider", "bench", "--model", "{model}", "--session", "{session}", "-p", "{prompt}"]
+rpc = ["--mode", "rpc", "--provider", "bench", "--model", "{model}", "--no-session"]
+rpc_session = ["--mode", "rpc", "--provider", "bench", "--model", "{model}", "--session-dir", "{session_dir}"]
+rpc_resume = ["--mode", "rpc", "--provider", "bench", "--model", "{model}", "--session", "{session}"]
+pty = ["--provider", "bench", "--model", "{model}", "--no-session"]
+
+[cannot_run]
+pty = "tried at the pinned commit: its TUI never reaches a screen the PTY driver can call settled, so first-input and streaming latency cannot be read; not measured in v0"
+
+[capabilities]
+pi_extensions = "none"
+pi_session_format = true
+exact_requests = true
+
+[version_check]
+contains = "dev"

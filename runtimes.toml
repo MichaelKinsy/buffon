@@ -1,0 +1,72 @@
+# Runtimes and toolchains the arms need, pinned by version and sha256. Buffon never uses whichever Node or Go the host has.
+# `checksums` is the project's own checksum file; `buffon lock --online` checks every hash below against it.
+
+[node]
+version = "24.19.0"
+checksums = "https://nodejs.org/dist/v24.19.0/SHASUMS256.txt"
+bin = "bin"                        # directory inside the unpacked archive that holds node and npm
+
+[node.artifact.linux-x64]
+url = "https://nodejs.org/dist/v24.19.0/node-v24.19.0-linux-x64.tar.xz"
+sha256 = "14b342e71204f811bde6153be8e04b62aef63c236fef92b55f9c83154b409647"
+root = "node-v24.19.0-linux-x64"
+
+[node.artifact.linux-arm64]
+url = "https://nodejs.org/dist/v24.19.0/node-v24.19.0-linux-arm64.tar.xz"
+sha256 = "01443c1e1a29e531ccad5a46fefa6df490d2189c49f7955904aecdbb0fe86fdc"
+root = "node-v24.19.0-linux-arm64"
+
+[node.artifact.darwin-x64]
+url = "https://nodejs.org/dist/v24.19.0/node-v24.19.0-darwin-x64.tar.xz"
+sha256 = "d35e95230f46f6f0751df497c56622c6735e05d5e1fb1630996a005b9d328fe4"
+root = "node-v24.19.0-darwin-x64"
+
+[node.artifact.darwin-arm64]
+url = "https://nodejs.org/dist/v24.19.0/node-v24.19.0-darwin-arm64.tar.xz"
+sha256 = "3f1cf157479c1480352083105e13faf9d008ede98e7e157746b6df940d197b94"
+root = "node-v24.19.0-darwin-arm64"
+
+[go]
+version = "1.27.2"
+checksums = "https://go.dev/dl/?mode=json&include=all"
+bin = "bin"
+
+[go.artifact.linux-x64]
+url = "https://go.dev/dl/go1.27.2.linux-amd64.tar.gz"
+sha256 = "ecbadb99091a3f46e31f5f934b068b1864eafa7995211b39eaddf76996045fe5"
+root = "go"
+
+[go.artifact.linux-arm64]
+url = "https://go.dev/dl/go1.27.2.linux-arm64.tar.gz"
+sha256 = "94f3e30b8e374bc285e7dadc11e0865726b9bc6e85b841ccceaabc0214c6b7c8"
+root = "go"
+
+[go.artifact.darwin-x64]
+url = "https://go.dev/dl/go1.27.2.darwin-amd64.tar.gz"
+sha256 = "587b59182488b23aa6e5fc25110405a3e0e5b38ed2f5b2f46ed13c32aee356fe"
+root = "go"
+
+[go.artifact.darwin-arm64]
+url = "https://go.dev/dl/go1.27.2.darwin-arm64.tar.gz"
+sha256 = "76812b213b1b2302c978d28fa52fa92d541704b9e7d9d5db8002c50e4018c4c5"
+root = "go"
+
+[bun]
+version = "1.4.2"
+checksums = "https://github.com/oven-sh/bun/releases/download/bun-v1.4.2/SHASUMS256.txt"
+bin = "."                          # the unpacked archive's directory holds bun itself
+
+[bun.artifact.linux-x64]
+url = "https://github.com/oven-sh/bun/releases/download/bun-v1.4.2/bun-linux-x64.zip"
+sha256 = "36368faef7527875d5ffa52e53cd48021741f2a83eb6208a8dd64068d422a913"
+root = "bun-linux-x64"
+
+[bun.artifact.linux-arm64]
+url = "https://github.com/oven-sh/bun/releases/download/bun-v1.4.2/bun-linux-aarch64.zip"
+sha256 = "54328bbc2d9c8e0c9f892c544d66c57a83b84139e34909e5ee81758f1ac8fda7"
+root = "bun-linux-aarch64"
+
+[bun.artifact.darwin-arm64]
+url = "https://github.com/oven-sh/bun/releases/download/bun-v1.4.2/bun-darwin-aarch64.zip"
+sha256 = "90987a3a16d7db556d886ac3d551e7b6d3edf0a1cf43acaed622e8676be1d12f"
+root = "bun-darwin-aarch64"

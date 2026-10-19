@@ -1,0 +1,44 @@
+project = "Pi"
+harnesses = ["pi-node", "pi-bun"]
+maker = "Earendil Inc."
+maker_url = "https://github.com/earendil-works"
+tagline = "Pi is a minimal, extensible agent harness that you can make your own."
+tagline_source = "https://github.com/earendil-works/pi/blob/c268154ca1171c2f9eefe75d3d7372a68aada2d5/README.md"
+readme_url = "https://github.com/earendil-works/pi/blob/v1.3.0/README.md"
+readme_ref = "v1.3.0"
+readme_title = "Pi"
+readme_head = [
+    "Pi is a minimal, extensible agent harness that you can make your own.",
+    "Adapt Pi to your workflows, not the other way around. Customize Pi with extensions, skills, prompt templates, and themes. Bundle them as Pi packages and share via npm or git.",
+]
+mark = "pi-mark.svg"
+mark_source = "https://pi.dev/logo-auto.svg"
+mark_ref = "v1.3.0"
+mark_sha256 = "6e8de1f97d0ace6283c7f8fccca81a00832d2079e80b474f9b7c7c96a0e44e9e"
+mark_note = "pi.dev serves this file without a version. The README at v1.3.0 links it, and its sha256 is the pin."
+retrieved = "2026-10-18"
+licence = "MIT"
+
+[links]
+home = "https://pi.dev"
+repo = "https://github.com/earendil-works/pi"
+docs = "https://pi.dev/docs/latest"
+releases = "https://github.com/earendil-works/pi/releases"
+changelog = "https://pi.dev/changelog"
+issues = "https://github.com/earendil-works/pi/issues"
+licence = "https://github.com/earendil-works/pi/blob/main/LICENSE"
+
+[[quotes]]
+text = "Adapt Pi to your workflows, not the other way around."
+source = "https://github.com/earendil-works/pi/blob/c268154ca1171c2f9eefe75d3d7372a68aada2d5/README.md"
+about = "goal"
+
+[[quotes]]
+text = "Pi ships with powerful defaults but skips features like sub-agents and plan mode. Ask Pi to build what you want, or install a package that does it your way."
+source = "https://github.com/earendil-works/pi/blob/c268154ca1171c2f9eefe75d3d7372a68aada2d5/README.md"
+about = "design"
+
+[[quotes]]
+text = "Pi supports skills, AGENTS.md files and is very token efficient due to its minimal system prompt."
+source = "https://pi.dev"
+about = "performance"

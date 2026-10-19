@@ -1,0 +1,46 @@
+name = "copilot"
+label = "GitHub Copilot CLI"
+homepage = "https://github.com/github/copilot-cli"
+relation = "reference"
+licence = "GitHub Copilot CLI License"
+licence_url = "https://github.com/github/copilot-cli/blob/main/LICENSE.md"
+restrictions = "Vendor terms: the operator accepts GitHub's terms; Buffon never redistributes or modifies the CLI (docs/DESIGN.md section 9)."
+operator_terms = "GitHub Copilot CLI is installed from the vendor's npm package at run time and is used under the GitHub Copilot CLI License (no modification or redistribution) and GitHub's terms for Copilot, whose Competitive Benchmarking clause requires anyone offering a competing product to waive their own benchmark restrictions; run it only if you and your employer accept those terms: https://github.com/github/copilot-cli/blob/main/LICENSE.md"
+version = "1.0.95"
+notes = "Unrelated to Pi; a reference point. Runs in the CLI's bring-your-own-key mode (`copilot help providers`) against Buffon's mock with a dummy key: no GitHub account is signed in and COPILOT_OFFLINE=true stops its GitHub, telemetry and update traffic. The arm runs the executable in the platform package `@github/copilot-<platform>` (the npm `copilot` is a Node loader that spawns it), pinned by sha256 below."
+
+[npm]
+package = "@github/copilot"
+version = "1.0.95"
+integrity = "sha512-TAYlgMwjTnHi04ZGRc6Z+41piGeUC6xuA8z7gWVc5qOTqJLi/B3vCVg9ttkwvxnahbTWjX8x0DORwrJMXOQxGg=="
+package_lock = "package-lock.json"
+package_lock_sha256 = "719cc494d4518865e011f319d354b1dcd52250fe4b45124f2b0f781e0620b9f8"
+bin = "node_modules/.bin/copilot"
+runtime = "node"
+bin_native = { darwin-arm64 = "node_modules/@github/copilot-darwin-arm64/copilot", linux-x64 = "node_modules/@github/copilot-linux-x64/copilot" }
+native_bin = { darwin-arm64 = "35d33e040e8aa0554a02385f02648396ba3b853f026ed1db17d30d051a764e4b", linux-x64 = "9cf62455c0fef57658c976b737f57ddc4b87c2f513a17864846f2d0e16a18a99" }
+
+[endpoint]
+apis = ["openai-completions", "anthropic-messages", "openai-responses"]
+writer = "writer.py"
+
+[env]
+COPILOT_HOME = "{home}/.copilot"
+COPILOT_PROVIDER_API_KEY = "{dummy_key}"
+COPILOT_OFFLINE = "true"
+COPILOT_AUTO_UPDATE = "false"
+
+[state]
+dirs = ["$COPILOT_HOME", "$XDG_CONFIG_HOME", "$XDG_DATA_HOME", "$XDG_CACHE_HOME", "$XDG_STATE_HOME"]
+
+[modes]
+version = ["--version"]
+print = ["-p", "{prompt}", "--allow-all-tools", "--no-auto-update", "-s"]
+
+[cannot_run]
+pty = "not measured: the interactive UI shows its own start-up screens that the PTY workload's first-input probe does not echo through, so first-input latency is not comparable"
+rpc = "no Pi-dialect RPC mode: `--acp` and `--output-format json` are Copilot's own protocols, not Pi's JSONL RPC"
+
+[capabilities]
+pi_extensions = "none"
+pi_session_format = false

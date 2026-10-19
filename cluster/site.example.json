@@ -1,0 +1,13 @@
+{
+  "kubeContext": "<kubectl context>",
+  "namespace": "<namespace>",
+  "bundle": "<local bundle directory>",
+  "baseImage": "<image with python3 and coreutils>@sha256:<digest>",
+  "cpus": 2,
+  "memory": "8Gi",
+  "scratchSize": "8Gi",
+  "nodeSelector": {"<label>": "<value>"},
+  "tolerations": [{"key": "<taint key>", "operator": "Equal", "value": "<taint value>", "effect": "NoSchedule"}],
+  "deadlineSeconds": 21600,
+  "maxCv": 0.05
+}

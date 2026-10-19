@@ -1,0 +1,207 @@
+# Run-notes thresholds (docs/HEALTH.md): the one place the "usual range" of every run-health check lives.
+# A run-health check has a measured value and a status: `ok` when the value is inside the usual range, `note` when it is outside. A note is information for the reader.
+# It never grades, rejects or hides a run. `buffon health` and `buffon verify` recompute the notes from the raw data with the file of the checkout they run in.
+# The sha256 of this file is written into health.json and printed in every report. "above" means strictly greater.
+
+[flags]
+# A measured sample carries a flag when its telemetry crosses one of these. Flagged samples stay in the statistics (never dropped silently).
+throttled_periods = 1       # CFS throttling: nr_throttled grew by at least this many periods on the sample's cgroup, any ancestor, or the session
+foreign_frac = 0.03         # busy time on the pinned CPUs that the sample's own cgroup does not explain, as a share of the CPU set's capacity ...
+foreign_ticks = 2.0         # ... and above this many clock ticks times the square root of the CPUs (/proc/stat counts in ticks; a smaller figure is rounding)
+steal_frac = 0.001          # time a hypervisor took from the pinned CPUs, as a share of their capacity
+clock_move = 0.05           # the pinned CPUs' clock moved by more than this (max / min - 1) during the sample
+swap_pages = 1              # pages the host swapped during the sample
+thermal_events = 1          # thermal throttling events on the pinned CPUs during the sample
+# iowait is recorded in every sample (cpuset_iowait_ms) and never gated: the kernel documents it as unreliable.
+
+[outliers]
+# |x - median| > mad_k * 1.4826 * MAD flags a measured value (the modified-z rule hyperfine uses, with a stricter k). Flagged values are counted, never removed.
+mad_k = 5.0
+min_n = 4
+
+[changepoint]
+# One change-point test on the reference arm's per-round series (a geometric-mean index over every scored cell): the split with the largest Welch t, tested by a seeded permutation test.
+alpha = 0.01
+min_segment = 3
+permutations = 999
+
+[aa]
+# An A/A pair counts as "different" only when its gap is significant and also larger than this. A systematic gap under 1% on a near-deterministic counter is not noise that matters.
+min_gap = 0.01
+
+[[check]]
+id = "calibration_cv"
+title = "Calibration: CV of the reference's CPU time between identical runs"
+unit = "fraction"
+usual = 0.02
+meaning = "How much the reference's CPU time varied between identical calibration runs. Lower means a quieter host."
+
+[[check]]
+id = "aa_cv_cpu"
+title = "A/A CV of CPU metrics, median over arms and cells"
+unit = "fraction"
+usual = 0.02
+meaning = "How much CPU time varies from round to round for one harness. Lower means a quieter host."
+
+[[check]]
+id = "aa_significant_fraction"
+title = "A/A pairs with a significant gap (paired p < 0.05, before Holm) that is also larger than 1%"
+unit = "fraction"
+usual = 0.05
+meaning = "Share of harness and copy pairs that differ by more than 1% and also pass a significance test. A gap under 1% on a steady counter is not counted. About 5% can happen by chance."
+
+[[check]]
+id = "aa_gap_median"
+title = "A/A gap between a harness and its own copy, median over cells"
+unit = "fraction"
+usual = 0.01
+meaning = "The usual gap between a harness and its identical copy. A real difference between two harnesses should be larger than this."
+
+[[check]]
+id = "aa_gap_max"
+title = "A/A gap between a harness and its own copy, largest cell"
+unit = "fraction"
+usual = 0.05
+meaning = "The largest gap between a harness and its identical copy, and the cell where it happened."
+
+[[check]]
+id = "aa_floor_median"
+title = "A/A noise floor, median over scored cells"
+unit = "fraction"
+usual = 0.03
+meaning = "The smallest difference the identical copies cannot tell from noise, in the usual cell. Smaller differences than this are not resolved."
+
+[[check]]
+id = "aa_floor_max"
+title = "A/A noise floor, worst scored cell"
+unit = "fraction"
+usual = 0.15
+meaning = "The same floor in the noisiest cell. Comparisons in that cell resolve only larger differences."
+
+[[check]]
+id = "outlier_fraction"
+title = "Measured values flagged by the MAD rule"
+unit = "fraction"
+usual = 0.02
+meaning = "Share of measured values far from the median of their cell. Outliers are counted and never removed."
+
+[[check]]
+id = "flagged_fraction"
+title = "Measured samples with at least one host flag"
+unit = "fraction"
+usual = 0.05
+meaning = "Share of samples where the host showed a disturbance: throttling, foreign CPU, steal, a clock change, swap or a memory event."
+
+[[check]]
+id = "throttled_samples"
+title = "Measured samples with CFS throttling (arm cgroup, every ancestor, session)"
+unit = "count"
+usual = 0
+meaning = "Samples where the kernel held the process back for a CPU quota. Their time then describes the quota, not the harness."
+
+[[check]]
+id = "steal_share"
+title = "Steal: share of the pinned CPUs' capacity taken by a hypervisor"
+unit = "fraction"
+usual = 0.001
+meaning = "Share of the pinned CPUs' time that a hypervisor took away. It only matters on virtual machines."
+
+[[check]]
+id = "foreign_cpu_p95"
+title = "Foreign CPU on the pinned CPUs during a sample, p95 over samples, as a share of the sample's CPU time"
+unit = "fraction"
+usual = 0.01
+meaning = "CPU time that other processes used on the pinned cores during a sample, as a share of the sample's own CPU time (95th percentile)."
+
+[[check]]
+id = "gate_slow_fraction"
+title = "Samples that waited more than 1 s for the host to quiet down"
+unit = "fraction"
+usual = 0.01
+meaning = "Share of samples that had to wait for the quiet-host gate. A busy host makes the gate wait."
+
+[[check]]
+id = "gate_gave_up"
+title = "Samples for which the host never quieted down"
+unit = "count"
+usual = 0
+meaning = "Samples that did not start because the host stayed busy. They are not in the numbers."
+
+[[check]]
+id = "clock_deviation"
+title = "Effective clock: largest deviation of a sample's mean MHz from the run median"
+unit = "fraction"
+usual = 0.02
+meaning = "How far a sample's mean CPU clock moved from the run median. A moving clock changes CPU time for the same work."
+
+[[check]]
+id = "infra_failed_fraction"
+title = "Infrastructure failures (envelope OOM, no process started, runner fault) over measured samples"
+unit = "fraction"
+usual = 0.0
+meaning = "Share of samples that failed because of the host or the runner. They are never charged to a harness."
+
+[[check]]
+id = "arm_failed_fraction"
+title = "Arm failures over measured samples (a swarm ladder's designed stops are results and not counted)"
+unit = "fraction"
+usual = 0.02
+meaning = "Share of samples where the harness itself failed. A scale sample that stopped because the kernel's limit was reached (stop_cause oom, pids or timeout) is a result and is in neither the failures nor the samples counted; a scale error stop is a failure."
+
+[[check]]
+id = "drift"
+title = "Drift: median absolute change over the run of an arm's value, over cells"
+unit = "fraction"
+usual = 0.02
+meaning = "How much a harness's value moved from the start of the run to the end. Drift means the host changed during the run."
+
+# Checks that are either met or not.
+[[pass]]
+id = "reference_changepoint"
+title = "No change point in the reference arm's per-round series"
+meaning = "The host's speed did not shift during the run. A shift moves every comparison the same way."
+
+[[pass]]
+id = "rounds"
+title = "At least 12 measured rounds"
+meaning = "With fewer rounds the intervals are wide."
+
+[[pass]]
+id = "aa_copies"
+title = "Every arm has an A/A copy"
+meaning = "Without a copy there is no noise floor for that harness."
+
+[[pass]]
+id = "hardware"
+title = "Quiet dedicated hardware by the runner's own detection"
+meaning = "On shared hardware other work can disturb the numbers."
+
+[[pass]]
+id = "egress"
+title = "No harness connected outside the loopback"
+meaning = "A harness that talks to the network is not measured alone."
+
+[[pass]]
+id = "integrity"
+title = "Every executable and install tree unchanged during the run"
+meaning = "A changed executable means the arm is not what the lock names."
+
+[[pass]]
+id = "calibration_ran"
+title = "Calibration ran and the reference stayed within its 5% limit"
+meaning = "Calibration shows the host's noise before the run. Above 5% the run is labelled Noisy."
+
+[[pass]]
+id = "telemetry"
+title = "Telemetry recorded for every measured sample"
+meaning = "Telemetry is how the other checks see the host."
+
+[[pass]]
+id = "cpu_quota"
+title = "No CPU quota (cpu.max) on the arm cgroup or any ancestor"
+meaning = "A quota can throttle a sample."
+
+[[pass]]
+id = "clock_policy"
+title = "The pinned CPUs have a fixed clock policy"
+meaning = "A clock that scales with load changes CPU time for the same work."

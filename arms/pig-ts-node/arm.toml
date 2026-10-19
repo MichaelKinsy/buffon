@@ -1,0 +1,17 @@
+name = "pig-ts-node"
+label = "PiG, ten TypeScript extensions, Node, packed cell"
+notes = "The PiG tip with the ten bench extensions as Pi-compatible TypeScript factories on Node. PiG packs conventional factories into one Node process (the default placement)."
+
+[derive]
+base = "pig-tip"
+
+[env]
+PIG_HOME = "{shared_dir}/pig-home"
+
+[extensions]
+default = false
+processes = 1
+host = "node"
+
+[prepare]
+script = "prepare.py"

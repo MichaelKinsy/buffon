@@ -1,0 +1,16 @@
+# Example site profile for the local backend. Copy it to sites/<your-name>.toml (any other name; it is yours) and edit.
+# Every machine-specific value lives here or in an BUFFON_* environment variable; see sites/SCHEMA.md.
+[site]
+name = "my-workstation"
+backend = "local"
+hardware = "shared"          # say "dedicated" only when nothing else runs on the pinned cores
+notes = "free text for the report"
+
+[local]
+cpus = "2-5"                 # cores the harness processes are pinned to
+mock_cpus = "1"              # core for the runner and the mock endpoint; must not overlap cpus
+pinning = "preferred"        # required | preferred | none
+meter = "auto"
+allow_frequency_scaling = false
+# cache_dir = "~/.cache/buffon"
+# work_dir = "/var/tmp"

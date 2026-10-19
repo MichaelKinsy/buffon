@@ -1,0 +1,5 @@
+sec-prompts-bars::#/r/prompts-and-tools?m=overhead-print.cpu_ms,overhead-print.peak_rss_mib,overhead-print.wall_ms&view=bars
+all-metrics::#/all
+harnesses::#/harnesses
+harness-claude::#/harness/claude-code
+harness-pig::#/harness/pig-tip
