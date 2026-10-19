@@ -303,7 +303,8 @@ class Runs(unittest.TestCase):
         os.chdir(os.path.dirname(site))
         code, _ = self.go(site=os.path.basename(site), parallel=True)
         self.assertEqual(code, 0)
-        self.assertEqual({a[a.index("--site") + 1] for a in self.calls}, {site})
+        self.assertEqual({os.path.realpath(a[a.index("--site") + 1]) for a in self.calls}, {os.path.realpath(site)})   # absolute, and the same file: macOS reports a temporary directory as /private/var, not its /var link
+        self.assertTrue(all(os.path.isabs(a[a.index("--site") + 1]) for a in self.calls))
 
     def test_each_unfinished_attempt_is_kept_under_its_own_number_with_its_log(self):
         """Two failed parallel attempts that both wrote output: each is kept (attempt-1, attempt-2) with its own log, and the third attempt starts clean."""
