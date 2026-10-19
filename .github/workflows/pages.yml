@@ -1,11 +1,9 @@
 # SPDX-License-Identifier: Apache-2.0
-# Publishes the results site (buffon dashboard, docs/design/DASHBOARD.md) to GitHub Pages: the newest published run in results/, or the DEMO site while
-# there is none (tools/pages_site.py). The owner enables Pages for this repository with "GitHub Actions" as the source.
+# Builds the results site (buffon dashboard, docs/design/DASHBOARD.md) over every published run in results/, or the DEMO site while there is none
+# (tools/pages_site.py), and deploys it to GitHub Pages. Manual only: the live site is served from the gh-pages branch, and a deploy from here
+# replaces it, so run this only when Pages' source is "GitHub Actions" and you mean to replace the site.
 name: pages
 on:
-  push:
-    branches: [main]
-    paths: ["results/**", "buffon/**", "tools/pages_site.py", "docs/WHAT-WE-MEASURE.md", "docs/METHODOLOGY.md", "docs/GRADE.md", "docs/HEALTH.md", "docs/LIMITATIONS.md", ".github/workflows/pages.yml"]
   workflow_dispatch:
 permissions:
   contents: read
