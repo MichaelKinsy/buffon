@@ -78,8 +78,10 @@ class VersionCheckEnvironment(unittest.TestCase):
         a = types.SimpleNamespace(id="x", env={"PI_OFFLINE": "1"}, spec={"state": {"dirs": []}}, path_dirs=[], writer_path=lambda: None)
         server = types.SimpleNamespace(base_url="http://127.0.0.1:1/v1", origin="http://127.0.0.1:1")
         saved_env, saved_loader = dict(os.environ), Harness.__init__.__globals__["load_writer"]
+        for k in [k for k in os.environ if k.startswith("LC_")]:
+            del os.environ[k]   # the host's own locale variables (a macOS shell exports LC_CTYPE) are not what this test sets
         os.environ.update(AGENT="codex", AI_AGENT="x", ANTHROPIC_API_KEY="sk-real", ANTHROPIC_BASE_URL="https://example.invalid", OPENAI_API_KEY="sk-real", GITHUB_TOKEN="t",
-                          HTTPS_PROXY="http://proxy", GOMEMLIMIT="1GiB", LANG="C", TZ="UTC", LC_ALL="C")
+                          HTTPS_PROXY="http://proxy", GOMEMLIMIT="1GiB", LANG="C", TZ="UTC", LC_ALL="C", LC_CTYPE="C")
         Harness.__init__.__globals__["load_writer"] = lambda arm: (lambda spec: {})
         try:
             env = Harness(a, work, server).env
@@ -87,8 +89,8 @@ class VersionCheckEnvironment(unittest.TestCase):
             os.environ.clear()
             os.environ.update(saved_env)
             Harness.__init__.__globals__["load_writer"] = saved_loader
-        self.assertEqual(set(env) - self.HARNESS_KEYS - {"LC_ALL"}, set())
-        self.assertEqual((env["LANG"], env["TZ"], env["LC_ALL"]), ("C", "UTC", "C"))
+        self.assertEqual(set(env) - self.HARNESS_KEYS - {"LC_ALL", "LC_CTYPE"}, set())   # the operator's locale (LANG and LC_*) is inherited
+        self.assertEqual((env["LANG"], env["TZ"], env["LC_ALL"], env["LC_CTYPE"]), ("C", "UTC", "C", "C"))
 
 
 class HarnessPath(unittest.TestCase):

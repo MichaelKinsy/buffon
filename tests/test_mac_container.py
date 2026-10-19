@@ -44,14 +44,15 @@ class VmCpus(unittest.TestCase):
         self.assertIn("pinned inside the VM by --cpuset-cpus", why[0])
 
     def test_the_site_check_accepts_cpus_for_container_isolation_and_refuses_them_otherwise(self):
-        b = LocalBackend(site.from_dict({"local": {"cpus": "1-3"}}, env={}))
+        cpus = "0"   # a CPU this host has: with ids it lacks (a 3-core runner and "1-3") the check names them before it reaches the pinning refusal under test
+        b = LocalBackend(site.from_dict({"local": {"cpus": cpus}}, env={}))
         with without_affinity():
             b.check(isolation="container")
             with self.assertRaisesRegex(backend.BackendError, "--isolation container"):
                 b.check()
             with self.assertRaisesRegex(backend.BackendError, "--isolation container"):
                 b.check(isolation="none")
-            LocalBackend(site.from_dict({"local": {"cpus": "1-3", "pinning": "required"}}, env={})).check(isolation="container")
+            LocalBackend(site.from_dict({"local": {"cpus": cpus, "pinning": "required"}}, env={})).check(isolation="container")
 
     def test_vm_cpu_ids_are_not_checked_against_the_host(self):
         with without_affinity():

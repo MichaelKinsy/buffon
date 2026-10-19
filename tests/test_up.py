@@ -451,7 +451,6 @@ class EndToEnd(unittest.TestCase):
         self.assertTrue(os.path.exists(summary["site"]))
         self.assertTrue(os.path.exists(os.path.join(self.home, "site", "report", "report.md")))
         self.assertTrue(os.path.exists(os.path.join(self.home, "sites", "this-machine.toml")))
-        self.assertIn("settled after", text)            # adaptive stopping ended cells early
         self.assertIn("buffon up: summary", text)
         self.assertIn("up --harness stub-fast,stub-slow --bench quick", summary["command"])
         with open(os.path.join(self.home, "site", "up.json")) as f:
@@ -460,7 +459,13 @@ class EndToEnd(unittest.TestCase):
         with open(os.path.join(summary["run_dirs"][0], "raw.json")) as f:
             raw = json.load(f)
         self.assertTrue(raw["run"]["adaptive"]["enabled"])
-        self.assertLess(trust.realised_rounds(raw), 12)   # stopped early, so it cannot be Verified
+        # Whether a cell is settled before 12 rounds depends on the host's noise: the stubs differ in a sleep, which neither watched metric (instructions, CPU time) sees, so a quiet
+        # host settles them at once ("no measurable difference") and a noisy VM runs them to the cap. Stopping on clear and unclear answers is tested with synthetic samples
+        # (tests/test_adaptive.py); here the run must say and record exactly what happened, whichever it was.
+        stopped = raw["run"]["adaptive"]["stopped"]
+        self.assertEqual(sum("settled after" in line for line in lines), len(stopped))
+        self.assertEqual(bool(stopped), trust.realised_rounds(raw) < 12)   # a cell stopped early: the run cannot be Verified; none did: every cell took the cap
+        self.assertLessEqual(trust.realised_rounds(raw), 12)
         self.assertEqual(trust.badge(raw)["badge"], summary["trust"]["badge"])
         again, lines2 = self.up()
         self.assertIn("a finished run with these settings exists, reused", "\n".join(lines2))
