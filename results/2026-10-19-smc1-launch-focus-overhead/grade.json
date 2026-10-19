@@ -1,0 +1,804 @@
+{
+ "method": {
+  "version": 1,
+  "sha256": "c585418aa13158fcbc72dbf434744400c46ef512a9eb699898aead4cb3a53701"
+ },
+ "weights": {
+  "families": {
+   "core": 2,
+   "ext10": 2,
+   "streaming": 2,
+   "large-write": 1,
+   "long-session": 1,
+   "scale": 1,
+   "search": 1,
+   "reliability": 2,
+   "devloop": 1
+  },
+  "kinds": {
+   "cpu": 1,
+   "memory": 1,
+   "time": 1
+  }
+ },
+ "profile": "default",
+ "reference": "pi-node",
+ "entries": [
+  {
+   "caveats": [
+    "covers 2 of 9 families, under the floor of 6: a partial grade"
+   ],
+   "entry": "pi-node",
+   "label": "Pi on Node",
+   "relation": "pi-reference",
+   "cost": "npm ci --ignore-scripts; 110.6 MB + node 199 MB; linux-x64",
+   "families": {
+    "core": {
+     "status": "scored",
+     "score": 70.0,
+     "ratio": 1.0,
+     "cells": 2,
+     "ref_cells": 2,
+     "ties": 0,
+     "dropped": 0,
+     "gate": null,
+     "reason": ""
+    },
+    "ext10": {
+     "status": "scored",
+     "score": 70.0,
+     "ratio": 1.0,
+     "cells": 4,
+     "ref_cells": 4,
+     "ties": 0,
+     "dropped": 0,
+     "gate": null,
+     "reason": ""
+    },
+    "streaming": {
+     "status": "not-run",
+     "score": null,
+     "ratio": null,
+     "cells": 0,
+     "ref_cells": 0,
+     "ties": 0,
+     "dropped": 0,
+     "gate": null,
+     "reason": "the reference has no cells in this family in this run"
+    },
+    "large-write": {
+     "status": "not-run",
+     "score": null,
+     "ratio": null,
+     "cells": 0,
+     "ref_cells": 0,
+     "ties": 0,
+     "dropped": 0,
+     "gate": null,
+     "reason": "the method has no workload for this family yet"
+    },
+    "long-session": {
+     "status": "not-run",
+     "score": null,
+     "ratio": null,
+     "cells": 0,
+     "ref_cells": 0,
+     "ties": 0,
+     "dropped": 0,
+     "gate": null,
+     "reason": "the reference has no cells in this family in this run"
+    },
+    "scale": {
+     "status": "not-run",
+     "score": null,
+     "ratio": null,
+     "cells": 0,
+     "ref_cells": 0,
+     "ties": 0,
+     "dropped": 0,
+     "gate": null,
+     "reason": "the method has no workload for this family yet"
+    },
+    "search": {
+     "status": "not-run",
+     "score": null,
+     "ratio": null,
+     "cells": 0,
+     "ref_cells": 0,
+     "ties": 0,
+     "dropped": 0,
+     "gate": null,
+     "reason": "the method has no workload for this family yet"
+    },
+    "reliability": {
+     "status": "not-run",
+     "score": null,
+     "ratio": null,
+     "cells": 0,
+     "ref_cells": 0,
+     "ties": 0,
+     "dropped": 0,
+     "gate": null,
+     "reason": "the reference has no fault results in this run"
+    },
+    "devloop": {
+     "status": "not-run",
+     "score": null,
+     "ratio": null,
+     "cells": 0,
+     "ref_cells": 0,
+     "ties": 0,
+     "dropped": 0,
+     "gate": null,
+     "reason": "the reference has no cells in this family in this run"
+    }
+   },
+   "coverage": "2/9 (7 not run)",
+   "covered": 2,
+   "overall_exact": 70.0,
+   "overall": 70,
+   "letter": "C-",
+   "no_score_reason": null,
+   "faithfulness": 100.0,
+   "ci": [
+    70.0,
+    70.0
+   ],
+   "table": "pi-faithful",
+   "rank": 1,
+   "rank_range": [
+    1,
+    1
+   ],
+   "profiles": {
+    "default": {
+     "score": 70,
+     "rank": 1
+    },
+    "equal": {
+     "score": 70,
+     "rank": 1
+    },
+    "cpu-heavy": {
+     "score": 70,
+     "rank": 1
+    },
+    "memory-heavy": {
+     "score": 70,
+     "rank": 1
+    },
+    "extension-heavy": {
+     "score": 70,
+     "rank": 1
+    }
+   }
+  },
+  {
+   "caveats": [
+    "covers 2 of 9 families, under the floor of 6: a partial grade"
+   ],
+   "entry": "pi-bun",
+   "label": "Pi on Bun",
+   "relation": "pi-reference",
+   "cost": "release archive; 114.5 MB; linux-x64",
+   "families": {
+    "core": {
+     "status": "scored",
+     "score": 66.47605435459953,
+     "ratio": 1.276677881378677,
+     "cells": 2,
+     "ref_cells": 2,
+     "ties": 0,
+     "dropped": 0,
+     "gate": null,
+     "reason": ""
+    },
+    "ext10": {
+     "status": "scored",
+     "score": 68.03792658456436,
+     "ratio": 1.1456825415882375,
+     "cells": 4,
+     "ref_cells": 4,
+     "ties": 0,
+     "dropped": 0,
+     "gate": null,
+     "reason": ""
+    },
+    "streaming": {
+     "status": "not-run",
+     "score": null,
+     "ratio": null,
+     "cells": 0,
+     "ref_cells": 0,
+     "ties": 0,
+     "dropped": 0,
+     "gate": null,
+     "reason": "the reference has no cells in this family in this run"
+    },
+    "large-write": {
+     "status": "not-run",
+     "score": null,
+     "ratio": null,
+     "cells": 0,
+     "ref_cells": 0,
+     "ties": 0,
+     "dropped": 0,
+     "gate": null,
+     "reason": "the method has no workload for this family yet"
+    },
+    "long-session": {
+     "status": "not-run",
+     "score": null,
+     "ratio": null,
+     "cells": 0,
+     "ref_cells": 0,
+     "ties": 0,
+     "dropped": 0,
+     "gate": null,
+     "reason": "the reference has no cells in this family in this run"
+    },
+    "scale": {
+     "status": "not-run",
+     "score": null,
+     "ratio": null,
+     "cells": 0,
+     "ref_cells": 0,
+     "ties": 0,
+     "dropped": 0,
+     "gate": null,
+     "reason": "the method has no workload for this family yet"
+    },
+    "search": {
+     "status": "not-run",
+     "score": null,
+     "ratio": null,
+     "cells": 0,
+     "ref_cells": 0,
+     "ties": 0,
+     "dropped": 0,
+     "gate": null,
+     "reason": "the method has no workload for this family yet"
+    },
+    "reliability": {
+     "status": "not-run",
+     "score": null,
+     "ratio": null,
+     "cells": 0,
+     "ref_cells": 0,
+     "ties": 0,
+     "dropped": 0,
+     "gate": null,
+     "reason": "the reference has no fault results in this run"
+    },
+    "devloop": {
+     "status": "not-run",
+     "score": null,
+     "ratio": null,
+     "cells": 0,
+     "ref_cells": 0,
+     "ties": 0,
+     "dropped": 0,
+     "gate": null,
+     "reason": "the reference has no cells in this family in this run"
+    }
+   },
+   "coverage": "2/9 (7 not run)",
+   "covered": 2,
+   "overall_exact": 67.25699046958195,
+   "overall": 67,
+   "letter": "D+",
+   "no_score_reason": null,
+   "faithfulness": null,
+   "ci": [
+    67.23268479741054,
+    67.29638660690026
+   ],
+   "table": "faithfulness-unmeasured",
+   "rank": 3,
+   "rank_range": [
+    3,
+    3
+   ],
+   "profiles": {
+    "default": {
+     "score": 67,
+     "rank": 3
+    },
+    "equal": {
+     "score": 67,
+     "rank": 3
+    },
+    "cpu-heavy": {
+     "score": 66,
+     "rank": 3
+    },
+    "memory-heavy": {
+     "score": 68,
+     "rank": 3
+    },
+    "extension-heavy": {
+     "score": 68,
+     "rank": 3
+    }
+   }
+  },
+  {
+   "caveats": [
+    "covers 2 of 9 families, under the floor of 6: a partial grade"
+   ],
+   "entry": "pibolt",
+   "label": "Pi-Bolt",
+   "relation": "pi-fork",
+   "cost": "release archive; 267.5 MB; linux-x64",
+   "families": {
+    "core": {
+     "status": "scored",
+     "score": 91.3168597147924,
+     "ratio": 0.22819103661333978,
+     "cells": 2,
+     "ref_cells": 2,
+     "ties": 0,
+     "dropped": 0,
+     "gate": null,
+     "reason": ""
+    },
+    "ext10": {
+     "status": "scored",
+     "score": 86.137673107888,
+     "ratio": 0.3267440090690822,
+     "cells": 4,
+     "ref_cells": 4,
+     "ties": 0,
+     "dropped": 0,
+     "gate": null,
+     "reason": ""
+    },
+    "streaming": {
+     "status": "not-run",
+     "score": null,
+     "ratio": null,
+     "cells": 0,
+     "ref_cells": 0,
+     "ties": 0,
+     "dropped": 0,
+     "gate": null,
+     "reason": "the reference has no cells in this family in this run"
+    },
+    "large-write": {
+     "status": "not-run",
+     "score": null,
+     "ratio": null,
+     "cells": 0,
+     "ref_cells": 0,
+     "ties": 0,
+     "dropped": 0,
+     "gate": null,
+     "reason": "the method has no workload for this family yet"
+    },
+    "long-session": {
+     "status": "not-run",
+     "score": null,
+     "ratio": null,
+     "cells": 0,
+     "ref_cells": 0,
+     "ties": 0,
+     "dropped": 0,
+     "gate": null,
+     "reason": "the reference has no cells in this family in this run"
+    },
+    "scale": {
+     "status": "not-run",
+     "score": null,
+     "ratio": null,
+     "cells": 0,
+     "ref_cells": 0,
+     "ties": 0,
+     "dropped": 0,
+     "gate": null,
+     "reason": "the method has no workload for this family yet"
+    },
+    "search": {
+     "status": "not-run",
+     "score": null,
+     "ratio": null,
+     "cells": 0,
+     "ref_cells": 0,
+     "ties": 0,
+     "dropped": 0,
+     "gate": null,
+     "reason": "the method has no workload for this family yet"
+    },
+    "reliability": {
+     "status": "not-run",
+     "score": null,
+     "ratio": null,
+     "cells": 0,
+     "ref_cells": 0,
+     "ties": 0,
+     "dropped": 0,
+     "gate": null,
+     "reason": "the reference has no fault results in this run"
+    },
+    "devloop": {
+     "status": "not-run",
+     "score": null,
+     "ratio": null,
+     "cells": 0,
+     "ref_cells": 0,
+     "ties": 0,
+     "dropped": 0,
+     "gate": null,
+     "reason": "the reference has no cells in this family in this run"
+    }
+   },
+   "coverage": "2/9 (7 not run)",
+   "covered": 2,
+   "overall_exact": 88.7272664113402,
+   "overall": 89,
+   "letter": "B+",
+   "no_score_reason": null,
+   "faithfulness": null,
+   "ci": [
+    88.71090376398926,
+    88.74057121845607
+   ],
+   "table": "faithfulness-unmeasured",
+   "rank": 1,
+   "rank_range": [
+    1,
+    1
+   ],
+   "profiles": {
+    "default": {
+     "score": 89,
+     "rank": 1
+    },
+    "equal": {
+     "score": 89,
+     "rank": 1
+    },
+    "cpu-heavy": {
+     "score": 96,
+     "rank": 1
+    },
+    "memory-heavy": {
+     "score": 82,
+     "rank": 1
+    },
+    "extension-heavy": {
+     "score": 87,
+     "rank": 1
+    }
+   }
+  },
+  {
+   "caveats": [
+    "covers 2 of 9 families, under the floor of 6: a partial grade"
+   ],
+   "entry": "pig-0.4.1",
+   "label": "PiG 0.4.1",
+   "relation": "pi-port",
+   "cost": "release archive; 63.8 MB; linux-x64",
+   "families": {
+    "core": {
+     "status": "scored",
+     "score": 85.21520312682232,
+     "ratio": 0.3483186647511123,
+     "cells": 2,
+     "ref_cells": 2,
+     "ties": 0,
+     "dropped": 0,
+     "gate": null,
+     "reason": ""
+    },
+    "ext10": {
+     "status": "scored",
+     "score": 47.11233529775683,
+     "ratio": 4.886381381649157,
+     "cells": 4,
+     "ref_cells": 4,
+     "ties": 0,
+     "dropped": 0,
+     "gate": null,
+     "reason": ""
+    },
+    "streaming": {
+     "status": "not-run",
+     "score": null,
+     "ratio": null,
+     "cells": 0,
+     "ref_cells": 0,
+     "ties": 0,
+     "dropped": 0,
+     "gate": null,
+     "reason": "the reference has no cells in this family in this run"
+    },
+    "large-write": {
+     "status": "not-run",
+     "score": null,
+     "ratio": null,
+     "cells": 0,
+     "ref_cells": 0,
+     "ties": 0,
+     "dropped": 0,
+     "gate": null,
+     "reason": "the method has no workload for this family yet"
+    },
+    "long-session": {
+     "status": "not-run",
+     "score": null,
+     "ratio": null,
+     "cells": 0,
+     "ref_cells": 0,
+     "ties": 0,
+     "dropped": 0,
+     "gate": null,
+     "reason": "the reference has no cells in this family in this run"
+    },
+    "scale": {
+     "status": "not-run",
+     "score": null,
+     "ratio": null,
+     "cells": 0,
+     "ref_cells": 0,
+     "ties": 0,
+     "dropped": 0,
+     "gate": null,
+     "reason": "the method has no workload for this family yet"
+    },
+    "search": {
+     "status": "not-run",
+     "score": null,
+     "ratio": null,
+     "cells": 0,
+     "ref_cells": 0,
+     "ties": 0,
+     "dropped": 0,
+     "gate": null,
+     "reason": "the method has no workload for this family yet"
+    },
+    "reliability": {
+     "status": "not-run",
+     "score": null,
+     "ratio": null,
+     "cells": 0,
+     "ref_cells": 0,
+     "ties": 0,
+     "dropped": 0,
+     "gate": null,
+     "reason": "the reference has no fault results in this run"
+    },
+    "devloop": {
+     "status": "not-run",
+     "score": null,
+     "ratio": null,
+     "cells": 0,
+     "ref_cells": 0,
+     "ties": 0,
+     "dropped": 0,
+     "gate": null,
+     "reason": "the reference has no cells in this family in this run"
+    }
+   },
+   "coverage": "2/9 (7 not run)",
+   "covered": 2,
+   "overall_exact": 66.16376921228957,
+   "overall": 66,
+   "letter": "D",
+   "no_score_reason": null,
+   "faithfulness": null,
+   "ci": [
+    66.08764554240166,
+    66.262296700693
+   ],
+   "table": "faithfulness-unmeasured",
+   "rank": 4,
+   "rank_range": [
+    4,
+    4
+   ],
+   "profiles": {
+    "default": {
+     "score": 66,
+     "rank": 4
+    },
+    "equal": {
+     "score": 66,
+     "rank": 4
+    },
+    "cpu-heavy": {
+     "score": 66,
+     "rank": 4
+    },
+    "memory-heavy": {
+     "score": 66,
+     "rank": 4
+    },
+    "extension-heavy": {
+     "score": 57,
+     "rank": 4
+    }
+   }
+  },
+  {
+   "caveats": [
+    "covers 2 of 9 families, under the floor of 6: a partial grade"
+   ],
+   "entry": "pig-tip",
+   "label": "PiG 0.5.0",
+   "relation": "pi-port",
+   "cost": "source build; 70.2 MB; linux-x64",
+   "families": {
+    "core": {
+     "status": "scored",
+     "score": 91.50995033166402,
+     "ratio": 0.22515727012009795,
+     "cells": 2,
+     "ref_cells": 2,
+     "ties": 0,
+     "dropped": 0,
+     "gate": null,
+     "reason": ""
+    },
+    "ext10": {
+     "status": "scored",
+     "score": 61.34068633191461,
+     "ratio": 1.8225158568415538,
+     "cells": 4,
+     "ref_cells": 4,
+     "ties": 0,
+     "dropped": 0,
+     "gate": null,
+     "reason": ""
+    },
+    "streaming": {
+     "status": "not-run",
+     "score": null,
+     "ratio": null,
+     "cells": 0,
+     "ref_cells": 0,
+     "ties": 0,
+     "dropped": 0,
+     "gate": null,
+     "reason": "the reference has no cells in this family in this run"
+    },
+    "large-write": {
+     "status": "not-run",
+     "score": null,
+     "ratio": null,
+     "cells": 0,
+     "ref_cells": 0,
+     "ties": 0,
+     "dropped": 0,
+     "gate": null,
+     "reason": "the method has no workload for this family yet"
+    },
+    "long-session": {
+     "status": "not-run",
+     "score": null,
+     "ratio": null,
+     "cells": 0,
+     "ref_cells": 0,
+     "ties": 0,
+     "dropped": 0,
+     "gate": null,
+     "reason": "the reference has no cells in this family in this run"
+    },
+    "scale": {
+     "status": "not-run",
+     "score": null,
+     "ratio": null,
+     "cells": 0,
+     "ref_cells": 0,
+     "ties": 0,
+     "dropped": 0,
+     "gate": null,
+     "reason": "the method has no workload for this family yet"
+    },
+    "search": {
+     "status": "not-run",
+     "score": null,
+     "ratio": null,
+     "cells": 0,
+     "ref_cells": 0,
+     "ties": 0,
+     "dropped": 0,
+     "gate": null,
+     "reason": "the method has no workload for this family yet"
+    },
+    "reliability": {
+     "status": "not-run",
+     "score": null,
+     "ratio": null,
+     "cells": 0,
+     "ref_cells": 0,
+     "ties": 0,
+     "dropped": 0,
+     "gate": null,
+     "reason": "the reference has no fault results in this run"
+    },
+    "devloop": {
+     "status": "not-run",
+     "score": null,
+     "ratio": null,
+     "cells": 0,
+     "ref_cells": 0,
+     "ties": 0,
+     "dropped": 0,
+     "gate": null,
+     "reason": "the reference has no cells in this family in this run"
+    }
+   },
+   "coverage": "2/9 (7 not run)",
+   "covered": 2,
+   "overall_exact": 76.42531833178931,
+   "overall": 76,
+   "letter": "C",
+   "no_score_reason": null,
+   "faithfulness": null,
+   "ci": [
+    76.24597934882497,
+    76.66608484800854
+   ],
+   "table": "faithfulness-unmeasured",
+   "rank": 2,
+   "rank_range": [
+    2,
+    2
+   ],
+   "profiles": {
+    "default": {
+     "score": 76,
+     "rank": 2
+    },
+    "equal": {
+     "score": 76,
+     "rank": 2
+    },
+    "cpu-heavy": {
+     "score": 79,
+     "rank": 2
+    },
+    "memory-heavy": {
+     "score": 74,
+     "rank": 2
+    },
+    "extension-heavy": {
+     "score": 69,
+     "rank": 2
+    }
+   }
+  }
+ ],
+ "provisional": true,
+ "reasons": [
+  "run 1: adaptive stopping: 6 of 6 cells stopped with fewer than 12 rounds (8-8) because their answer was clear; the 12-round minimum applies to the Verified badge",
+  "run 1: 1 samples waited for the host to quiet down (longest 2 s) and 0 gave up waiting"
+ ],
+ "notes": 4,
+ "seed": 20261011,
+ "resamples": 1000,
+ "trust": {
+  "badge": "Dedicated",
+  "host_class": "A",
+  "reasons": [
+   "1 sample(s) waited for the host to quiet down (longest 2 s)",
+   "adaptive stopping: 6 of 6 cells stopped with fewer than 12 rounds (8-8) because their answer was clear; the 12-round minimum applies to the Verified badge",
+   "1 samples waited for the host to quiet down (longest 2 s) and 0 gave up waiting",
+   "the run is not labelled quiet dedicated hardware",
+   "8 measured rounds in the thinnest cell (the minimum for a headline is 12)",
+   "uncontained: the arms were not run in the container envelope",
+   "not yet reproduced (buffon reproduce / compare)"
+  ],
+  "headline": "instructions",
+  "headline_why": "hardware instruction counters",
+  "strict_problems": [
+   "the run is not labelled quiet dedicated hardware",
+   "8 measured rounds in the thinnest cell (the minimum for a headline is 12)",
+   "uncontained: the arms were not run in the container envelope"
+  ],
+  "rounds": 8
+ },
+ "missing": [],
+ "strict": false
+}

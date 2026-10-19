@@ -1,0 +1,2765 @@
+{
+ "counts": {
+  "10": {
+   "arms": {
+    "pi-bun": {
+     "census": {
+      "executables": [],
+      "extension_processes": 0
+     },
+     "digest": "d74e3ef90dce1df9177957d329d51e6785c97961762a652fd195b0bd2447fd0d",
+     "extensions": {
+      "count": 10,
+      "template_sha256": "6006cfb72e053a82557bc05689042b4c4efcb04cd43765ffb5446041a33d002c"
+     }
+    },
+    "pi-node": {
+     "census": {
+      "executables": [],
+      "extension_processes": 0
+     },
+     "digest": "d74e3ef90dce1df9177957d329d51e6785c97961762a652fd195b0bd2447fd0d",
+     "extensions": {
+      "count": 10,
+      "template_sha256": "6006cfb72e053a82557bc05689042b4c4efcb04cd43765ffb5446041a33d002c"
+     }
+    },
+    "pibolt": {
+     "census": {
+      "executables": [],
+      "extension_processes": 0
+     },
+     "digest": "d74e3ef90dce1df9177957d329d51e6785c97961762a652fd195b0bd2447fd0d",
+     "extensions": {
+      "count": 10,
+      "template_sha256": "6006cfb72e053a82557bc05689042b4c4efcb04cd43765ffb5446041a33d002c"
+     }
+    },
+    "pig-0.4.1": {
+     "census": {
+      "executables": [
+       "node"
+      ],
+      "extension_processes": 1
+     },
+     "digest": "d74e3ef90dce1df9177957d329d51e6785c97961762a652fd195b0bd2447fd0d",
+     "extensions": {
+      "count": 10,
+      "template_sha256": "6006cfb72e053a82557bc05689042b4c4efcb04cd43765ffb5446041a33d002c"
+     }
+    },
+    "pig-tip": {
+     "census": {
+      "executables": [
+       "node"
+      ],
+      "extension_processes": 1
+     },
+     "digest": "d74e3ef90dce1df9177957d329d51e6785c97961762a652fd195b0bd2447fd0d",
+     "extensions": {
+      "count": 10,
+      "template_sha256": "6006cfb72e053a82557bc05689042b4c4efcb04cd43765ffb5446041a33d002c"
+     }
+    }
+   },
+   "differences": {},
+   "oracle": "pi-node"
+  },
+  "5": {
+   "arms": {
+    "pi-bun": {
+     "census": {
+      "executables": [],
+      "extension_processes": 0
+     },
+     "digest": "76eb66f40b2e54041e4687fd6a9ffb03105be42598395d1e851f5fa686cb987b",
+     "extensions": {
+      "count": 5,
+      "template_sha256": "6006cfb72e053a82557bc05689042b4c4efcb04cd43765ffb5446041a33d002c"
+     }
+    },
+    "pi-node": {
+     "census": {
+      "executables": [],
+      "extension_processes": 0
+     },
+     "digest": "76eb66f40b2e54041e4687fd6a9ffb03105be42598395d1e851f5fa686cb987b",
+     "extensions": {
+      "count": 5,
+      "template_sha256": "6006cfb72e053a82557bc05689042b4c4efcb04cd43765ffb5446041a33d002c"
+     }
+    },
+    "pibolt": {
+     "census": {
+      "executables": [],
+      "extension_processes": 0
+     },
+     "digest": "76eb66f40b2e54041e4687fd6a9ffb03105be42598395d1e851f5fa686cb987b",
+     "extensions": {
+      "count": 5,
+      "template_sha256": "6006cfb72e053a82557bc05689042b4c4efcb04cd43765ffb5446041a33d002c"
+     }
+    },
+    "pig-0.4.1": {
+     "census": {
+      "executables": [
+       "node"
+      ],
+      "extension_processes": 1
+     },
+     "digest": "76eb66f40b2e54041e4687fd6a9ffb03105be42598395d1e851f5fa686cb987b",
+     "extensions": {
+      "count": 5,
+      "template_sha256": "6006cfb72e053a82557bc05689042b4c4efcb04cd43765ffb5446041a33d002c"
+     }
+    },
+    "pig-tip": {
+     "census": {
+      "executables": [
+       "node"
+      ],
+      "extension_processes": 1
+     },
+     "digest": "76eb66f40b2e54041e4687fd6a9ffb03105be42598395d1e851f5fa686cb987b",
+     "extensions": {
+      "count": 5,
+      "template_sha256": "6006cfb72e053a82557bc05689042b4c4efcb04cd43765ffb5446041a33d002c"
+     }
+    }
+   },
+   "differences": {},
+   "oracle": "pi-node"
+  }
+ },
+ "passed": true,
+ "records": {
+  "10": {
+   "pi-bun": {
+    "carried": [
+     "bench 01 ok",
+     "bench 02 ok",
+     "bench 03 ok",
+     "bench 04 ok",
+     "bench 05 ok",
+     "bench 06 ok",
+     "bench 07 ok",
+     "bench 08 ok",
+     "bench 09 ok",
+     "bench 10 ok"
+    ],
+    "census": {
+     "executables": [],
+     "extension_processes": 0
+    },
+    "commands": [
+     [
+      "bench-01",
+      "Bench command 01"
+     ],
+     [
+      "bench-02",
+      "Bench command 02"
+     ],
+     [
+      "bench-03",
+      "Bench command 03"
+     ],
+     [
+      "bench-04",
+      "Bench command 04"
+     ],
+     [
+      "bench-05",
+      "Bench command 05"
+     ],
+     [
+      "bench-06",
+      "Bench command 06"
+     ],
+     [
+      "bench-07",
+      "Bench command 07"
+     ],
+     [
+      "bench-08",
+      "Bench command 08"
+     ],
+     [
+      "bench-09",
+      "Bench command 09"
+     ],
+     [
+      "bench-10",
+      "Bench command 10"
+     ]
+    ],
+    "declared": {
+     "bench_tool_01": {
+      "description": "Return a fixed string. Used by the overhead bench only.",
+      "parameters": {
+       "additionalProperties": false,
+       "properties": {
+        "value": {
+         "type": "string"
+        }
+       },
+       "type": "object"
+      }
+     },
+     "bench_tool_02": {
+      "description": "Return a fixed string. Used by the overhead bench only.",
+      "parameters": {
+       "additionalProperties": false,
+       "properties": {
+        "value": {
+         "type": "string"
+        }
+       },
+       "type": "object"
+      }
+     },
+     "bench_tool_03": {
+      "description": "Return a fixed string. Used by the overhead bench only.",
+      "parameters": {
+       "additionalProperties": false,
+       "properties": {
+        "value": {
+         "type": "string"
+        }
+       },
+       "type": "object"
+      }
+     },
+     "bench_tool_04": {
+      "description": "Return a fixed string. Used by the overhead bench only.",
+      "parameters": {
+       "additionalProperties": false,
+       "properties": {
+        "value": {
+         "type": "string"
+        }
+       },
+       "type": "object"
+      }
+     },
+     "bench_tool_05": {
+      "description": "Return a fixed string. Used by the overhead bench only.",
+      "parameters": {
+       "additionalProperties": false,
+       "properties": {
+        "value": {
+         "type": "string"
+        }
+       },
+       "type": "object"
+      }
+     },
+     "bench_tool_06": {
+      "description": "Return a fixed string. Used by the overhead bench only.",
+      "parameters": {
+       "additionalProperties": false,
+       "properties": {
+        "value": {
+         "type": "string"
+        }
+       },
+       "type": "object"
+      }
+     },
+     "bench_tool_07": {
+      "description": "Return a fixed string. Used by the overhead bench only.",
+      "parameters": {
+       "additionalProperties": false,
+       "properties": {
+        "value": {
+         "type": "string"
+        }
+       },
+       "type": "object"
+      }
+     },
+     "bench_tool_08": {
+      "description": "Return a fixed string. Used by the overhead bench only.",
+      "parameters": {
+       "additionalProperties": false,
+       "properties": {
+        "value": {
+         "type": "string"
+        }
+       },
+       "type": "object"
+      }
+     },
+     "bench_tool_09": {
+      "description": "Return a fixed string. Used by the overhead bench only.",
+      "parameters": {
+       "additionalProperties": false,
+       "properties": {
+        "value": {
+         "type": "string"
+        }
+       },
+       "type": "object"
+      }
+     },
+     "bench_tool_10": {
+      "description": "Return a fixed string. Used by the overhead bench only.",
+      "parameters": {
+       "additionalProperties": false,
+       "properties": {
+        "value": {
+         "type": "string"
+        }
+       },
+       "type": "object"
+      }
+     }
+    },
+    "results": [
+     {
+      "args": null,
+      "isError": false,
+      "result": {
+       "content": [
+        {
+         "text": "bench 01 ok",
+         "type": "text"
+        }
+       ],
+       "details": {
+        "events": 3
+       }
+      },
+      "toolName": "bench_tool_01"
+     },
+     {
+      "args": null,
+      "isError": false,
+      "result": {
+       "content": [
+        {
+         "text": "bench 02 ok",
+         "type": "text"
+        }
+       ],
+       "details": {
+        "events": 5
+       }
+      },
+      "toolName": "bench_tool_02"
+     },
+     {
+      "args": null,
+      "isError": false,
+      "result": {
+       "content": [
+        {
+         "text": "bench 03 ok",
+         "type": "text"
+        }
+       ],
+       "details": {
+        "events": 7
+       }
+      },
+      "toolName": "bench_tool_03"
+     },
+     {
+      "args": null,
+      "isError": false,
+      "result": {
+       "content": [
+        {
+         "text": "bench 04 ok",
+         "type": "text"
+        }
+       ],
+       "details": {
+        "events": 9
+       }
+      },
+      "toolName": "bench_tool_04"
+     },
+     {
+      "args": null,
+      "isError": false,
+      "result": {
+       "content": [
+        {
+         "text": "bench 05 ok",
+         "type": "text"
+        }
+       ],
+       "details": {
+        "events": 11
+       }
+      },
+      "toolName": "bench_tool_05"
+     },
+     {
+      "args": null,
+      "isError": false,
+      "result": {
+       "content": [
+        {
+         "text": "bench 06 ok",
+         "type": "text"
+        }
+       ],
+       "details": {
+        "events": 13
+       }
+      },
+      "toolName": "bench_tool_06"
+     },
+     {
+      "args": null,
+      "isError": false,
+      "result": {
+       "content": [
+        {
+         "text": "bench 07 ok",
+         "type": "text"
+        }
+       ],
+       "details": {
+        "events": 15
+       }
+      },
+      "toolName": "bench_tool_07"
+     },
+     {
+      "args": null,
+      "isError": false,
+      "result": {
+       "content": [
+        {
+         "text": "bench 08 ok",
+         "type": "text"
+        }
+       ],
+       "details": {
+        "events": 17
+       }
+      },
+      "toolName": "bench_tool_08"
+     },
+     {
+      "args": null,
+      "isError": false,
+      "result": {
+       "content": [
+        {
+         "text": "bench 09 ok",
+         "type": "text"
+        }
+       ],
+       "details": {
+        "events": 19
+       }
+      },
+      "toolName": "bench_tool_09"
+     },
+     {
+      "args": null,
+      "isError": false,
+      "result": {
+       "content": [
+        {
+         "text": "bench 10 ok",
+         "type": "text"
+        }
+       ],
+       "details": {
+        "events": 21
+       }
+      },
+      "toolName": "bench_tool_10"
+     }
+    ]
+   },
+   "pi-node": {
+    "carried": [
+     "bench 01 ok",
+     "bench 02 ok",
+     "bench 03 ok",
+     "bench 04 ok",
+     "bench 05 ok",
+     "bench 06 ok",
+     "bench 07 ok",
+     "bench 08 ok",
+     "bench 09 ok",
+     "bench 10 ok"
+    ],
+    "census": {
+     "executables": [],
+     "extension_processes": 0
+    },
+    "commands": [
+     [
+      "bench-01",
+      "Bench command 01"
+     ],
+     [
+      "bench-02",
+      "Bench command 02"
+     ],
+     [
+      "bench-03",
+      "Bench command 03"
+     ],
+     [
+      "bench-04",
+      "Bench command 04"
+     ],
+     [
+      "bench-05",
+      "Bench command 05"
+     ],
+     [
+      "bench-06",
+      "Bench command 06"
+     ],
+     [
+      "bench-07",
+      "Bench command 07"
+     ],
+     [
+      "bench-08",
+      "Bench command 08"
+     ],
+     [
+      "bench-09",
+      "Bench command 09"
+     ],
+     [
+      "bench-10",
+      "Bench command 10"
+     ]
+    ],
+    "declared": {
+     "bench_tool_01": {
+      "description": "Return a fixed string. Used by the overhead bench only.",
+      "parameters": {
+       "additionalProperties": false,
+       "properties": {
+        "value": {
+         "type": "string"
+        }
+       },
+       "type": "object"
+      }
+     },
+     "bench_tool_02": {
+      "description": "Return a fixed string. Used by the overhead bench only.",
+      "parameters": {
+       "additionalProperties": false,
+       "properties": {
+        "value": {
+         "type": "string"
+        }
+       },
+       "type": "object"
+      }
+     },
+     "bench_tool_03": {
+      "description": "Return a fixed string. Used by the overhead bench only.",
+      "parameters": {
+       "additionalProperties": false,
+       "properties": {
+        "value": {
+         "type": "string"
+        }
+       },
+       "type": "object"
+      }
+     },
+     "bench_tool_04": {
+      "description": "Return a fixed string. Used by the overhead bench only.",
+      "parameters": {
+       "additionalProperties": false,
+       "properties": {
+        "value": {
+         "type": "string"
+        }
+       },
+       "type": "object"
+      }
+     },
+     "bench_tool_05": {
+      "description": "Return a fixed string. Used by the overhead bench only.",
+      "parameters": {
+       "additionalProperties": false,
+       "properties": {
+        "value": {
+         "type": "string"
+        }
+       },
+       "type": "object"
+      }
+     },
+     "bench_tool_06": {
+      "description": "Return a fixed string. Used by the overhead bench only.",
+      "parameters": {
+       "additionalProperties": false,
+       "properties": {
+        "value": {
+         "type": "string"
+        }
+       },
+       "type": "object"
+      }
+     },
+     "bench_tool_07": {
+      "description": "Return a fixed string. Used by the overhead bench only.",
+      "parameters": {
+       "additionalProperties": false,
+       "properties": {
+        "value": {
+         "type": "string"
+        }
+       },
+       "type": "object"
+      }
+     },
+     "bench_tool_08": {
+      "description": "Return a fixed string. Used by the overhead bench only.",
+      "parameters": {
+       "additionalProperties": false,
+       "properties": {
+        "value": {
+         "type": "string"
+        }
+       },
+       "type": "object"
+      }
+     },
+     "bench_tool_09": {
+      "description": "Return a fixed string. Used by the overhead bench only.",
+      "parameters": {
+       "additionalProperties": false,
+       "properties": {
+        "value": {
+         "type": "string"
+        }
+       },
+       "type": "object"
+      }
+     },
+     "bench_tool_10": {
+      "description": "Return a fixed string. Used by the overhead bench only.",
+      "parameters": {
+       "additionalProperties": false,
+       "properties": {
+        "value": {
+         "type": "string"
+        }
+       },
+       "type": "object"
+      }
+     }
+    },
+    "results": [
+     {
+      "args": null,
+      "isError": false,
+      "result": {
+       "content": [
+        {
+         "text": "bench 01 ok",
+         "type": "text"
+        }
+       ],
+       "details": {
+        "events": 3
+       }
+      },
+      "toolName": "bench_tool_01"
+     },
+     {
+      "args": null,
+      "isError": false,
+      "result": {
+       "content": [
+        {
+         "text": "bench 02 ok",
+         "type": "text"
+        }
+       ],
+       "details": {
+        "events": 5
+       }
+      },
+      "toolName": "bench_tool_02"
+     },
+     {
+      "args": null,
+      "isError": false,
+      "result": {
+       "content": [
+        {
+         "text": "bench 03 ok",
+         "type": "text"
+        }
+       ],
+       "details": {
+        "events": 7
+       }
+      },
+      "toolName": "bench_tool_03"
+     },
+     {
+      "args": null,
+      "isError": false,
+      "result": {
+       "content": [
+        {
+         "text": "bench 04 ok",
+         "type": "text"
+        }
+       ],
+       "details": {
+        "events": 9
+       }
+      },
+      "toolName": "bench_tool_04"
+     },
+     {
+      "args": null,
+      "isError": false,
+      "result": {
+       "content": [
+        {
+         "text": "bench 05 ok",
+         "type": "text"
+        }
+       ],
+       "details": {
+        "events": 11
+       }
+      },
+      "toolName": "bench_tool_05"
+     },
+     {
+      "args": null,
+      "isError": false,
+      "result": {
+       "content": [
+        {
+         "text": "bench 06 ok",
+         "type": "text"
+        }
+       ],
+       "details": {
+        "events": 13
+       }
+      },
+      "toolName": "bench_tool_06"
+     },
+     {
+      "args": null,
+      "isError": false,
+      "result": {
+       "content": [
+        {
+         "text": "bench 07 ok",
+         "type": "text"
+        }
+       ],
+       "details": {
+        "events": 15
+       }
+      },
+      "toolName": "bench_tool_07"
+     },
+     {
+      "args": null,
+      "isError": false,
+      "result": {
+       "content": [
+        {
+         "text": "bench 08 ok",
+         "type": "text"
+        }
+       ],
+       "details": {
+        "events": 17
+       }
+      },
+      "toolName": "bench_tool_08"
+     },
+     {
+      "args": null,
+      "isError": false,
+      "result": {
+       "content": [
+        {
+         "text": "bench 09 ok",
+         "type": "text"
+        }
+       ],
+       "details": {
+        "events": 19
+       }
+      },
+      "toolName": "bench_tool_09"
+     },
+     {
+      "args": null,
+      "isError": false,
+      "result": {
+       "content": [
+        {
+         "text": "bench 10 ok",
+         "type": "text"
+        }
+       ],
+       "details": {
+        "events": 21
+       }
+      },
+      "toolName": "bench_tool_10"
+     }
+    ]
+   },
+   "pibolt": {
+    "carried": [
+     "bench 01 ok",
+     "bench 02 ok",
+     "bench 03 ok",
+     "bench 04 ok",
+     "bench 05 ok",
+     "bench 06 ok",
+     "bench 07 ok",
+     "bench 08 ok",
+     "bench 09 ok",
+     "bench 10 ok"
+    ],
+    "census": {
+     "executables": [],
+     "extension_processes": 0
+    },
+    "commands": [
+     [
+      "bench-01",
+      "Bench command 01"
+     ],
+     [
+      "bench-02",
+      "Bench command 02"
+     ],
+     [
+      "bench-03",
+      "Bench command 03"
+     ],
+     [
+      "bench-04",
+      "Bench command 04"
+     ],
+     [
+      "bench-05",
+      "Bench command 05"
+     ],
+     [
+      "bench-06",
+      "Bench command 06"
+     ],
+     [
+      "bench-07",
+      "Bench command 07"
+     ],
+     [
+      "bench-08",
+      "Bench command 08"
+     ],
+     [
+      "bench-09",
+      "Bench command 09"
+     ],
+     [
+      "bench-10",
+      "Bench command 10"
+     ]
+    ],
+    "declared": {
+     "bench_tool_01": {
+      "description": "Return a fixed string. Used by the overhead bench only.",
+      "parameters": {
+       "additionalProperties": false,
+       "properties": {
+        "value": {
+         "type": "string"
+        }
+       },
+       "type": "object"
+      }
+     },
+     "bench_tool_02": {
+      "description": "Return a fixed string. Used by the overhead bench only.",
+      "parameters": {
+       "additionalProperties": false,
+       "properties": {
+        "value": {
+         "type": "string"
+        }
+       },
+       "type": "object"
+      }
+     },
+     "bench_tool_03": {
+      "description": "Return a fixed string. Used by the overhead bench only.",
+      "parameters": {
+       "additionalProperties": false,
+       "properties": {
+        "value": {
+         "type": "string"
+        }
+       },
+       "type": "object"
+      }
+     },
+     "bench_tool_04": {
+      "description": "Return a fixed string. Used by the overhead bench only.",
+      "parameters": {
+       "additionalProperties": false,
+       "properties": {
+        "value": {
+         "type": "string"
+        }
+       },
+       "type": "object"
+      }
+     },
+     "bench_tool_05": {
+      "description": "Return a fixed string. Used by the overhead bench only.",
+      "parameters": {
+       "additionalProperties": false,
+       "properties": {
+        "value": {
+         "type": "string"
+        }
+       },
+       "type": "object"
+      }
+     },
+     "bench_tool_06": {
+      "description": "Return a fixed string. Used by the overhead bench only.",
+      "parameters": {
+       "additionalProperties": false,
+       "properties": {
+        "value": {
+         "type": "string"
+        }
+       },
+       "type": "object"
+      }
+     },
+     "bench_tool_07": {
+      "description": "Return a fixed string. Used by the overhead bench only.",
+      "parameters": {
+       "additionalProperties": false,
+       "properties": {
+        "value": {
+         "type": "string"
+        }
+       },
+       "type": "object"
+      }
+     },
+     "bench_tool_08": {
+      "description": "Return a fixed string. Used by the overhead bench only.",
+      "parameters": {
+       "additionalProperties": false,
+       "properties": {
+        "value": {
+         "type": "string"
+        }
+       },
+       "type": "object"
+      }
+     },
+     "bench_tool_09": {
+      "description": "Return a fixed string. Used by the overhead bench only.",
+      "parameters": {
+       "additionalProperties": false,
+       "properties": {
+        "value": {
+         "type": "string"
+        }
+       },
+       "type": "object"
+      }
+     },
+     "bench_tool_10": {
+      "description": "Return a fixed string. Used by the overhead bench only.",
+      "parameters": {
+       "additionalProperties": false,
+       "properties": {
+        "value": {
+         "type": "string"
+        }
+       },
+       "type": "object"
+      }
+     }
+    },
+    "results": [
+     {
+      "args": null,
+      "isError": false,
+      "result": {
+       "content": [
+        {
+         "text": "bench 01 ok",
+         "type": "text"
+        }
+       ],
+       "details": {
+        "events": 3
+       }
+      },
+      "toolName": "bench_tool_01"
+     },
+     {
+      "args": null,
+      "isError": false,
+      "result": {
+       "content": [
+        {
+         "text": "bench 02 ok",
+         "type": "text"
+        }
+       ],
+       "details": {
+        "events": 5
+       }
+      },
+      "toolName": "bench_tool_02"
+     },
+     {
+      "args": null,
+      "isError": false,
+      "result": {
+       "content": [
+        {
+         "text": "bench 03 ok",
+         "type": "text"
+        }
+       ],
+       "details": {
+        "events": 7
+       }
+      },
+      "toolName": "bench_tool_03"
+     },
+     {
+      "args": null,
+      "isError": false,
+      "result": {
+       "content": [
+        {
+         "text": "bench 04 ok",
+         "type": "text"
+        }
+       ],
+       "details": {
+        "events": 9
+       }
+      },
+      "toolName": "bench_tool_04"
+     },
+     {
+      "args": null,
+      "isError": false,
+      "result": {
+       "content": [
+        {
+         "text": "bench 05 ok",
+         "type": "text"
+        }
+       ],
+       "details": {
+        "events": 11
+       }
+      },
+      "toolName": "bench_tool_05"
+     },
+     {
+      "args": null,
+      "isError": false,
+      "result": {
+       "content": [
+        {
+         "text": "bench 06 ok",
+         "type": "text"
+        }
+       ],
+       "details": {
+        "events": 13
+       }
+      },
+      "toolName": "bench_tool_06"
+     },
+     {
+      "args": null,
+      "isError": false,
+      "result": {
+       "content": [
+        {
+         "text": "bench 07 ok",
+         "type": "text"
+        }
+       ],
+       "details": {
+        "events": 15
+       }
+      },
+      "toolName": "bench_tool_07"
+     },
+     {
+      "args": null,
+      "isError": false,
+      "result": {
+       "content": [
+        {
+         "text": "bench 08 ok",
+         "type": "text"
+        }
+       ],
+       "details": {
+        "events": 17
+       }
+      },
+      "toolName": "bench_tool_08"
+     },
+     {
+      "args": null,
+      "isError": false,
+      "result": {
+       "content": [
+        {
+         "text": "bench 09 ok",
+         "type": "text"
+        }
+       ],
+       "details": {
+        "events": 19
+       }
+      },
+      "toolName": "bench_tool_09"
+     },
+     {
+      "args": null,
+      "isError": false,
+      "result": {
+       "content": [
+        {
+         "text": "bench 10 ok",
+         "type": "text"
+        }
+       ],
+       "details": {
+        "events": 21
+       }
+      },
+      "toolName": "bench_tool_10"
+     }
+    ]
+   },
+   "pig-0.4.1": {
+    "carried": [
+     "bench 01 ok",
+     "bench 02 ok",
+     "bench 03 ok",
+     "bench 04 ok",
+     "bench 05 ok",
+     "bench 06 ok",
+     "bench 07 ok",
+     "bench 08 ok",
+     "bench 09 ok",
+     "bench 10 ok"
+    ],
+    "census": {
+     "executables": [
+      "node"
+     ],
+     "extension_processes": 1
+    },
+    "commands": [
+     [
+      "bench-01",
+      "Bench command 01"
+     ],
+     [
+      "bench-02",
+      "Bench command 02"
+     ],
+     [
+      "bench-03",
+      "Bench command 03"
+     ],
+     [
+      "bench-04",
+      "Bench command 04"
+     ],
+     [
+      "bench-05",
+      "Bench command 05"
+     ],
+     [
+      "bench-06",
+      "Bench command 06"
+     ],
+     [
+      "bench-07",
+      "Bench command 07"
+     ],
+     [
+      "bench-08",
+      "Bench command 08"
+     ],
+     [
+      "bench-09",
+      "Bench command 09"
+     ],
+     [
+      "bench-10",
+      "Bench command 10"
+     ]
+    ],
+    "declared": {
+     "bench_tool_01": {
+      "description": "Return a fixed string. Used by the overhead bench only.",
+      "parameters": {
+       "additionalProperties": false,
+       "properties": {
+        "value": {
+         "type": "string"
+        }
+       },
+       "type": "object"
+      }
+     },
+     "bench_tool_02": {
+      "description": "Return a fixed string. Used by the overhead bench only.",
+      "parameters": {
+       "additionalProperties": false,
+       "properties": {
+        "value": {
+         "type": "string"
+        }
+       },
+       "type": "object"
+      }
+     },
+     "bench_tool_03": {
+      "description": "Return a fixed string. Used by the overhead bench only.",
+      "parameters": {
+       "additionalProperties": false,
+       "properties": {
+        "value": {
+         "type": "string"
+        }
+       },
+       "type": "object"
+      }
+     },
+     "bench_tool_04": {
+      "description": "Return a fixed string. Used by the overhead bench only.",
+      "parameters": {
+       "additionalProperties": false,
+       "properties": {
+        "value": {
+         "type": "string"
+        }
+       },
+       "type": "object"
+      }
+     },
+     "bench_tool_05": {
+      "description": "Return a fixed string. Used by the overhead bench only.",
+      "parameters": {
+       "additionalProperties": false,
+       "properties": {
+        "value": {
+         "type": "string"
+        }
+       },
+       "type": "object"
+      }
+     },
+     "bench_tool_06": {
+      "description": "Return a fixed string. Used by the overhead bench only.",
+      "parameters": {
+       "additionalProperties": false,
+       "properties": {
+        "value": {
+         "type": "string"
+        }
+       },
+       "type": "object"
+      }
+     },
+     "bench_tool_07": {
+      "description": "Return a fixed string. Used by the overhead bench only.",
+      "parameters": {
+       "additionalProperties": false,
+       "properties": {
+        "value": {
+         "type": "string"
+        }
+       },
+       "type": "object"
+      }
+     },
+     "bench_tool_08": {
+      "description": "Return a fixed string. Used by the overhead bench only.",
+      "parameters": {
+       "additionalProperties": false,
+       "properties": {
+        "value": {
+         "type": "string"
+        }
+       },
+       "type": "object"
+      }
+     },
+     "bench_tool_09": {
+      "description": "Return a fixed string. Used by the overhead bench only.",
+      "parameters": {
+       "additionalProperties": false,
+       "properties": {
+        "value": {
+         "type": "string"
+        }
+       },
+       "type": "object"
+      }
+     },
+     "bench_tool_10": {
+      "description": "Return a fixed string. Used by the overhead bench only.",
+      "parameters": {
+       "additionalProperties": false,
+       "properties": {
+        "value": {
+         "type": "string"
+        }
+       },
+       "type": "object"
+      }
+     }
+    },
+    "results": [
+     {
+      "args": null,
+      "isError": false,
+      "result": {
+       "content": [
+        {
+         "text": "bench 01 ok",
+         "type": "text"
+        }
+       ],
+       "details": {
+        "events": 3
+       }
+      },
+      "toolName": "bench_tool_01"
+     },
+     {
+      "args": null,
+      "isError": false,
+      "result": {
+       "content": [
+        {
+         "text": "bench 02 ok",
+         "type": "text"
+        }
+       ],
+       "details": {
+        "events": 5
+       }
+      },
+      "toolName": "bench_tool_02"
+     },
+     {
+      "args": null,
+      "isError": false,
+      "result": {
+       "content": [
+        {
+         "text": "bench 03 ok",
+         "type": "text"
+        }
+       ],
+       "details": {
+        "events": 7
+       }
+      },
+      "toolName": "bench_tool_03"
+     },
+     {
+      "args": null,
+      "isError": false,
+      "result": {
+       "content": [
+        {
+         "text": "bench 04 ok",
+         "type": "text"
+        }
+       ],
+       "details": {
+        "events": 9
+       }
+      },
+      "toolName": "bench_tool_04"
+     },
+     {
+      "args": null,
+      "isError": false,
+      "result": {
+       "content": [
+        {
+         "text": "bench 05 ok",
+         "type": "text"
+        }
+       ],
+       "details": {
+        "events": 11
+       }
+      },
+      "toolName": "bench_tool_05"
+     },
+     {
+      "args": null,
+      "isError": false,
+      "result": {
+       "content": [
+        {
+         "text": "bench 06 ok",
+         "type": "text"
+        }
+       ],
+       "details": {
+        "events": 13
+       }
+      },
+      "toolName": "bench_tool_06"
+     },
+     {
+      "args": null,
+      "isError": false,
+      "result": {
+       "content": [
+        {
+         "text": "bench 07 ok",
+         "type": "text"
+        }
+       ],
+       "details": {
+        "events": 15
+       }
+      },
+      "toolName": "bench_tool_07"
+     },
+     {
+      "args": null,
+      "isError": false,
+      "result": {
+       "content": [
+        {
+         "text": "bench 08 ok",
+         "type": "text"
+        }
+       ],
+       "details": {
+        "events": 17
+       }
+      },
+      "toolName": "bench_tool_08"
+     },
+     {
+      "args": null,
+      "isError": false,
+      "result": {
+       "content": [
+        {
+         "text": "bench 09 ok",
+         "type": "text"
+        }
+       ],
+       "details": {
+        "events": 19
+       }
+      },
+      "toolName": "bench_tool_09"
+     },
+     {
+      "args": null,
+      "isError": false,
+      "result": {
+       "content": [
+        {
+         "text": "bench 10 ok",
+         "type": "text"
+        }
+       ],
+       "details": {
+        "events": 21
+       }
+      },
+      "toolName": "bench_tool_10"
+     }
+    ]
+   },
+   "pig-tip": {
+    "carried": [
+     "bench 01 ok",
+     "bench 02 ok",
+     "bench 03 ok",
+     "bench 04 ok",
+     "bench 05 ok",
+     "bench 06 ok",
+     "bench 07 ok",
+     "bench 08 ok",
+     "bench 09 ok",
+     "bench 10 ok"
+    ],
+    "census": {
+     "executables": [
+      "node"
+     ],
+     "extension_processes": 1
+    },
+    "commands": [
+     [
+      "bench-01",
+      "Bench command 01"
+     ],
+     [
+      "bench-02",
+      "Bench command 02"
+     ],
+     [
+      "bench-03",
+      "Bench command 03"
+     ],
+     [
+      "bench-04",
+      "Bench command 04"
+     ],
+     [
+      "bench-05",
+      "Bench command 05"
+     ],
+     [
+      "bench-06",
+      "Bench command 06"
+     ],
+     [
+      "bench-07",
+      "Bench command 07"
+     ],
+     [
+      "bench-08",
+      "Bench command 08"
+     ],
+     [
+      "bench-09",
+      "Bench command 09"
+     ],
+     [
+      "bench-10",
+      "Bench command 10"
+     ]
+    ],
+    "declared": {
+     "bench_tool_01": {
+      "description": "Return a fixed string. Used by the overhead bench only.",
+      "parameters": {
+       "additionalProperties": false,
+       "properties": {
+        "value": {
+         "type": "string"
+        }
+       },
+       "type": "object"
+      }
+     },
+     "bench_tool_02": {
+      "description": "Return a fixed string. Used by the overhead bench only.",
+      "parameters": {
+       "additionalProperties": false,
+       "properties": {
+        "value": {
+         "type": "string"
+        }
+       },
+       "type": "object"
+      }
+     },
+     "bench_tool_03": {
+      "description": "Return a fixed string. Used by the overhead bench only.",
+      "parameters": {
+       "additionalProperties": false,
+       "properties": {
+        "value": {
+         "type": "string"
+        }
+       },
+       "type": "object"
+      }
+     },
+     "bench_tool_04": {
+      "description": "Return a fixed string. Used by the overhead bench only.",
+      "parameters": {
+       "additionalProperties": false,
+       "properties": {
+        "value": {
+         "type": "string"
+        }
+       },
+       "type": "object"
+      }
+     },
+     "bench_tool_05": {
+      "description": "Return a fixed string. Used by the overhead bench only.",
+      "parameters": {
+       "additionalProperties": false,
+       "properties": {
+        "value": {
+         "type": "string"
+        }
+       },
+       "type": "object"
+      }
+     },
+     "bench_tool_06": {
+      "description": "Return a fixed string. Used by the overhead bench only.",
+      "parameters": {
+       "additionalProperties": false,
+       "properties": {
+        "value": {
+         "type": "string"
+        }
+       },
+       "type": "object"
+      }
+     },
+     "bench_tool_07": {
+      "description": "Return a fixed string. Used by the overhead bench only.",
+      "parameters": {
+       "additionalProperties": false,
+       "properties": {
+        "value": {
+         "type": "string"
+        }
+       },
+       "type": "object"
+      }
+     },
+     "bench_tool_08": {
+      "description": "Return a fixed string. Used by the overhead bench only.",
+      "parameters": {
+       "additionalProperties": false,
+       "properties": {
+        "value": {
+         "type": "string"
+        }
+       },
+       "type": "object"
+      }
+     },
+     "bench_tool_09": {
+      "description": "Return a fixed string. Used by the overhead bench only.",
+      "parameters": {
+       "additionalProperties": false,
+       "properties": {
+        "value": {
+         "type": "string"
+        }
+       },
+       "type": "object"
+      }
+     },
+     "bench_tool_10": {
+      "description": "Return a fixed string. Used by the overhead bench only.",
+      "parameters": {
+       "additionalProperties": false,
+       "properties": {
+        "value": {
+         "type": "string"
+        }
+       },
+       "type": "object"
+      }
+     }
+    },
+    "results": [
+     {
+      "args": null,
+      "isError": false,
+      "result": {
+       "content": [
+        {
+         "text": "bench 01 ok",
+         "type": "text"
+        }
+       ],
+       "details": {
+        "events": 3
+       }
+      },
+      "toolName": "bench_tool_01"
+     },
+     {
+      "args": null,
+      "isError": false,
+      "result": {
+       "content": [
+        {
+         "text": "bench 02 ok",
+         "type": "text"
+        }
+       ],
+       "details": {
+        "events": 5
+       }
+      },
+      "toolName": "bench_tool_02"
+     },
+     {
+      "args": null,
+      "isError": false,
+      "result": {
+       "content": [
+        {
+         "text": "bench 03 ok",
+         "type": "text"
+        }
+       ],
+       "details": {
+        "events": 7
+       }
+      },
+      "toolName": "bench_tool_03"
+     },
+     {
+      "args": null,
+      "isError": false,
+      "result": {
+       "content": [
+        {
+         "text": "bench 04 ok",
+         "type": "text"
+        }
+       ],
+       "details": {
+        "events": 9
+       }
+      },
+      "toolName": "bench_tool_04"
+     },
+     {
+      "args": null,
+      "isError": false,
+      "result": {
+       "content": [
+        {
+         "text": "bench 05 ok",
+         "type": "text"
+        }
+       ],
+       "details": {
+        "events": 11
+       }
+      },
+      "toolName": "bench_tool_05"
+     },
+     {
+      "args": null,
+      "isError": false,
+      "result": {
+       "content": [
+        {
+         "text": "bench 06 ok",
+         "type": "text"
+        }
+       ],
+       "details": {
+        "events": 13
+       }
+      },
+      "toolName": "bench_tool_06"
+     },
+     {
+      "args": null,
+      "isError": false,
+      "result": {
+       "content": [
+        {
+         "text": "bench 07 ok",
+         "type": "text"
+        }
+       ],
+       "details": {
+        "events": 15
+       }
+      },
+      "toolName": "bench_tool_07"
+     },
+     {
+      "args": null,
+      "isError": false,
+      "result": {
+       "content": [
+        {
+         "text": "bench 08 ok",
+         "type": "text"
+        }
+       ],
+       "details": {
+        "events": 17
+       }
+      },
+      "toolName": "bench_tool_08"
+     },
+     {
+      "args": null,
+      "isError": false,
+      "result": {
+       "content": [
+        {
+         "text": "bench 09 ok",
+         "type": "text"
+        }
+       ],
+       "details": {
+        "events": 19
+       }
+      },
+      "toolName": "bench_tool_09"
+     },
+     {
+      "args": null,
+      "isError": false,
+      "result": {
+       "content": [
+        {
+         "text": "bench 10 ok",
+         "type": "text"
+        }
+       ],
+       "details": {
+        "events": 21
+       }
+      },
+      "toolName": "bench_tool_10"
+     }
+    ]
+   }
+  },
+  "5": {
+   "pi-bun": {
+    "carried": [
+     "bench 01 ok",
+     "bench 02 ok",
+     "bench 03 ok",
+     "bench 04 ok",
+     "bench 05 ok"
+    ],
+    "census": {
+     "executables": [],
+     "extension_processes": 0
+    },
+    "commands": [
+     [
+      "bench-01",
+      "Bench command 01"
+     ],
+     [
+      "bench-02",
+      "Bench command 02"
+     ],
+     [
+      "bench-03",
+      "Bench command 03"
+     ],
+     [
+      "bench-04",
+      "Bench command 04"
+     ],
+     [
+      "bench-05",
+      "Bench command 05"
+     ]
+    ],
+    "declared": {
+     "bench_tool_01": {
+      "description": "Return a fixed string. Used by the overhead bench only.",
+      "parameters": {
+       "additionalProperties": false,
+       "properties": {
+        "value": {
+         "type": "string"
+        }
+       },
+       "type": "object"
+      }
+     },
+     "bench_tool_02": {
+      "description": "Return a fixed string. Used by the overhead bench only.",
+      "parameters": {
+       "additionalProperties": false,
+       "properties": {
+        "value": {
+         "type": "string"
+        }
+       },
+       "type": "object"
+      }
+     },
+     "bench_tool_03": {
+      "description": "Return a fixed string. Used by the overhead bench only.",
+      "parameters": {
+       "additionalProperties": false,
+       "properties": {
+        "value": {
+         "type": "string"
+        }
+       },
+       "type": "object"
+      }
+     },
+     "bench_tool_04": {
+      "description": "Return a fixed string. Used by the overhead bench only.",
+      "parameters": {
+       "additionalProperties": false,
+       "properties": {
+        "value": {
+         "type": "string"
+        }
+       },
+       "type": "object"
+      }
+     },
+     "bench_tool_05": {
+      "description": "Return a fixed string. Used by the overhead bench only.",
+      "parameters": {
+       "additionalProperties": false,
+       "properties": {
+        "value": {
+         "type": "string"
+        }
+       },
+       "type": "object"
+      }
+     }
+    },
+    "results": [
+     {
+      "args": null,
+      "isError": false,
+      "result": {
+       "content": [
+        {
+         "text": "bench 01 ok",
+         "type": "text"
+        }
+       ],
+       "details": {
+        "events": 3
+       }
+      },
+      "toolName": "bench_tool_01"
+     },
+     {
+      "args": null,
+      "isError": false,
+      "result": {
+       "content": [
+        {
+         "text": "bench 02 ok",
+         "type": "text"
+        }
+       ],
+       "details": {
+        "events": 5
+       }
+      },
+      "toolName": "bench_tool_02"
+     },
+     {
+      "args": null,
+      "isError": false,
+      "result": {
+       "content": [
+        {
+         "text": "bench 03 ok",
+         "type": "text"
+        }
+       ],
+       "details": {
+        "events": 7
+       }
+      },
+      "toolName": "bench_tool_03"
+     },
+     {
+      "args": null,
+      "isError": false,
+      "result": {
+       "content": [
+        {
+         "text": "bench 04 ok",
+         "type": "text"
+        }
+       ],
+       "details": {
+        "events": 9
+       }
+      },
+      "toolName": "bench_tool_04"
+     },
+     {
+      "args": null,
+      "isError": false,
+      "result": {
+       "content": [
+        {
+         "text": "bench 05 ok",
+         "type": "text"
+        }
+       ],
+       "details": {
+        "events": 11
+       }
+      },
+      "toolName": "bench_tool_05"
+     }
+    ]
+   },
+   "pi-node": {
+    "carried": [
+     "bench 01 ok",
+     "bench 02 ok",
+     "bench 03 ok",
+     "bench 04 ok",
+     "bench 05 ok"
+    ],
+    "census": {
+     "executables": [],
+     "extension_processes": 0
+    },
+    "commands": [
+     [
+      "bench-01",
+      "Bench command 01"
+     ],
+     [
+      "bench-02",
+      "Bench command 02"
+     ],
+     [
+      "bench-03",
+      "Bench command 03"
+     ],
+     [
+      "bench-04",
+      "Bench command 04"
+     ],
+     [
+      "bench-05",
+      "Bench command 05"
+     ]
+    ],
+    "declared": {
+     "bench_tool_01": {
+      "description": "Return a fixed string. Used by the overhead bench only.",
+      "parameters": {
+       "additionalProperties": false,
+       "properties": {
+        "value": {
+         "type": "string"
+        }
+       },
+       "type": "object"
+      }
+     },
+     "bench_tool_02": {
+      "description": "Return a fixed string. Used by the overhead bench only.",
+      "parameters": {
+       "additionalProperties": false,
+       "properties": {
+        "value": {
+         "type": "string"
+        }
+       },
+       "type": "object"
+      }
+     },
+     "bench_tool_03": {
+      "description": "Return a fixed string. Used by the overhead bench only.",
+      "parameters": {
+       "additionalProperties": false,
+       "properties": {
+        "value": {
+         "type": "string"
+        }
+       },
+       "type": "object"
+      }
+     },
+     "bench_tool_04": {
+      "description": "Return a fixed string. Used by the overhead bench only.",
+      "parameters": {
+       "additionalProperties": false,
+       "properties": {
+        "value": {
+         "type": "string"
+        }
+       },
+       "type": "object"
+      }
+     },
+     "bench_tool_05": {
+      "description": "Return a fixed string. Used by the overhead bench only.",
+      "parameters": {
+       "additionalProperties": false,
+       "properties": {
+        "value": {
+         "type": "string"
+        }
+       },
+       "type": "object"
+      }
+     }
+    },
+    "results": [
+     {
+      "args": null,
+      "isError": false,
+      "result": {
+       "content": [
+        {
+         "text": "bench 01 ok",
+         "type": "text"
+        }
+       ],
+       "details": {
+        "events": 3
+       }
+      },
+      "toolName": "bench_tool_01"
+     },
+     {
+      "args": null,
+      "isError": false,
+      "result": {
+       "content": [
+        {
+         "text": "bench 02 ok",
+         "type": "text"
+        }
+       ],
+       "details": {
+        "events": 5
+       }
+      },
+      "toolName": "bench_tool_02"
+     },
+     {
+      "args": null,
+      "isError": false,
+      "result": {
+       "content": [
+        {
+         "text": "bench 03 ok",
+         "type": "text"
+        }
+       ],
+       "details": {
+        "events": 7
+       }
+      },
+      "toolName": "bench_tool_03"
+     },
+     {
+      "args": null,
+      "isError": false,
+      "result": {
+       "content": [
+        {
+         "text": "bench 04 ok",
+         "type": "text"
+        }
+       ],
+       "details": {
+        "events": 9
+       }
+      },
+      "toolName": "bench_tool_04"
+     },
+     {
+      "args": null,
+      "isError": false,
+      "result": {
+       "content": [
+        {
+         "text": "bench 05 ok",
+         "type": "text"
+        }
+       ],
+       "details": {
+        "events": 11
+       }
+      },
+      "toolName": "bench_tool_05"
+     }
+    ]
+   },
+   "pibolt": {
+    "carried": [
+     "bench 01 ok",
+     "bench 02 ok",
+     "bench 03 ok",
+     "bench 04 ok",
+     "bench 05 ok"
+    ],
+    "census": {
+     "executables": [],
+     "extension_processes": 0
+    },
+    "commands": [
+     [
+      "bench-01",
+      "Bench command 01"
+     ],
+     [
+      "bench-02",
+      "Bench command 02"
+     ],
+     [
+      "bench-03",
+      "Bench command 03"
+     ],
+     [
+      "bench-04",
+      "Bench command 04"
+     ],
+     [
+      "bench-05",
+      "Bench command 05"
+     ]
+    ],
+    "declared": {
+     "bench_tool_01": {
+      "description": "Return a fixed string. Used by the overhead bench only.",
+      "parameters": {
+       "additionalProperties": false,
+       "properties": {
+        "value": {
+         "type": "string"
+        }
+       },
+       "type": "object"
+      }
+     },
+     "bench_tool_02": {
+      "description": "Return a fixed string. Used by the overhead bench only.",
+      "parameters": {
+       "additionalProperties": false,
+       "properties": {
+        "value": {
+         "type": "string"
+        }
+       },
+       "type": "object"
+      }
+     },
+     "bench_tool_03": {
+      "description": "Return a fixed string. Used by the overhead bench only.",
+      "parameters": {
+       "additionalProperties": false,
+       "properties": {
+        "value": {
+         "type": "string"
+        }
+       },
+       "type": "object"
+      }
+     },
+     "bench_tool_04": {
+      "description": "Return a fixed string. Used by the overhead bench only.",
+      "parameters": {
+       "additionalProperties": false,
+       "properties": {
+        "value": {
+         "type": "string"
+        }
+       },
+       "type": "object"
+      }
+     },
+     "bench_tool_05": {
+      "description": "Return a fixed string. Used by the overhead bench only.",
+      "parameters": {
+       "additionalProperties": false,
+       "properties": {
+        "value": {
+         "type": "string"
+        }
+       },
+       "type": "object"
+      }
+     }
+    },
+    "results": [
+     {
+      "args": null,
+      "isError": false,
+      "result": {
+       "content": [
+        {
+         "text": "bench 01 ok",
+         "type": "text"
+        }
+       ],
+       "details": {
+        "events": 3
+       }
+      },
+      "toolName": "bench_tool_01"
+     },
+     {
+      "args": null,
+      "isError": false,
+      "result": {
+       "content": [
+        {
+         "text": "bench 02 ok",
+         "type": "text"
+        }
+       ],
+       "details": {
+        "events": 5
+       }
+      },
+      "toolName": "bench_tool_02"
+     },
+     {
+      "args": null,
+      "isError": false,
+      "result": {
+       "content": [
+        {
+         "text": "bench 03 ok",
+         "type": "text"
+        }
+       ],
+       "details": {
+        "events": 7
+       }
+      },
+      "toolName": "bench_tool_03"
+     },
+     {
+      "args": null,
+      "isError": false,
+      "result": {
+       "content": [
+        {
+         "text": "bench 04 ok",
+         "type": "text"
+        }
+       ],
+       "details": {
+        "events": 9
+       }
+      },
+      "toolName": "bench_tool_04"
+     },
+     {
+      "args": null,
+      "isError": false,
+      "result": {
+       "content": [
+        {
+         "text": "bench 05 ok",
+         "type": "text"
+        }
+       ],
+       "details": {
+        "events": 11
+       }
+      },
+      "toolName": "bench_tool_05"
+     }
+    ]
+   },
+   "pig-0.4.1": {
+    "carried": [
+     "bench 01 ok",
+     "bench 02 ok",
+     "bench 03 ok",
+     "bench 04 ok",
+     "bench 05 ok"
+    ],
+    "census": {
+     "executables": [
+      "node"
+     ],
+     "extension_processes": 1
+    },
+    "commands": [
+     [
+      "bench-01",
+      "Bench command 01"
+     ],
+     [
+      "bench-02",
+      "Bench command 02"
+     ],
+     [
+      "bench-03",
+      "Bench command 03"
+     ],
+     [
+      "bench-04",
+      "Bench command 04"
+     ],
+     [
+      "bench-05",
+      "Bench command 05"
+     ]
+    ],
+    "declared": {
+     "bench_tool_01": {
+      "description": "Return a fixed string. Used by the overhead bench only.",
+      "parameters": {
+       "additionalProperties": false,
+       "properties": {
+        "value": {
+         "type": "string"
+        }
+       },
+       "type": "object"
+      }
+     },
+     "bench_tool_02": {
+      "description": "Return a fixed string. Used by the overhead bench only.",
+      "parameters": {
+       "additionalProperties": false,
+       "properties": {
+        "value": {
+         "type": "string"
+        }
+       },
+       "type": "object"
+      }
+     },
+     "bench_tool_03": {
+      "description": "Return a fixed string. Used by the overhead bench only.",
+      "parameters": {
+       "additionalProperties": false,
+       "properties": {
+        "value": {
+         "type": "string"
+        }
+       },
+       "type": "object"
+      }
+     },
+     "bench_tool_04": {
+      "description": "Return a fixed string. Used by the overhead bench only.",
+      "parameters": {
+       "additionalProperties": false,
+       "properties": {
+        "value": {
+         "type": "string"
+        }
+       },
+       "type": "object"
+      }
+     },
+     "bench_tool_05": {
+      "description": "Return a fixed string. Used by the overhead bench only.",
+      "parameters": {
+       "additionalProperties": false,
+       "properties": {
+        "value": {
+         "type": "string"
+        }
+       },
+       "type": "object"
+      }
+     }
+    },
+    "results": [
+     {
+      "args": null,
+      "isError": false,
+      "result": {
+       "content": [
+        {
+         "text": "bench 01 ok",
+         "type": "text"
+        }
+       ],
+       "details": {
+        "events": 3
+       }
+      },
+      "toolName": "bench_tool_01"
+     },
+     {
+      "args": null,
+      "isError": false,
+      "result": {
+       "content": [
+        {
+         "text": "bench 02 ok",
+         "type": "text"
+        }
+       ],
+       "details": {
+        "events": 5
+       }
+      },
+      "toolName": "bench_tool_02"
+     },
+     {
+      "args": null,
+      "isError": false,
+      "result": {
+       "content": [
+        {
+         "text": "bench 03 ok",
+         "type": "text"
+        }
+       ],
+       "details": {
+        "events": 7
+       }
+      },
+      "toolName": "bench_tool_03"
+     },
+     {
+      "args": null,
+      "isError": false,
+      "result": {
+       "content": [
+        {
+         "text": "bench 04 ok",
+         "type": "text"
+        }
+       ],
+       "details": {
+        "events": 9
+       }
+      },
+      "toolName": "bench_tool_04"
+     },
+     {
+      "args": null,
+      "isError": false,
+      "result": {
+       "content": [
+        {
+         "text": "bench 05 ok",
+         "type": "text"
+        }
+       ],
+       "details": {
+        "events": 11
+       }
+      },
+      "toolName": "bench_tool_05"
+     }
+    ]
+   },
+   "pig-tip": {
+    "carried": [
+     "bench 01 ok",
+     "bench 02 ok",
+     "bench 03 ok",
+     "bench 04 ok",
+     "bench 05 ok"
+    ],
+    "census": {
+     "executables": [
+      "node"
+     ],
+     "extension_processes": 1
+    },
+    "commands": [
+     [
+      "bench-01",
+      "Bench command 01"
+     ],
+     [
+      "bench-02",
+      "Bench command 02"
+     ],
+     [
+      "bench-03",
+      "Bench command 03"
+     ],
+     [
+      "bench-04",
+      "Bench command 04"
+     ],
+     [
+      "bench-05",
+      "Bench command 05"
+     ]
+    ],
+    "declared": {
+     "bench_tool_01": {
+      "description": "Return a fixed string. Used by the overhead bench only.",
+      "parameters": {
+       "additionalProperties": false,
+       "properties": {
+        "value": {
+         "type": "string"
+        }
+       },
+       "type": "object"
+      }
+     },
+     "bench_tool_02": {
+      "description": "Return a fixed string. Used by the overhead bench only.",
+      "parameters": {
+       "additionalProperties": false,
+       "properties": {
+        "value": {
+         "type": "string"
+        }
+       },
+       "type": "object"
+      }
+     },
+     "bench_tool_03": {
+      "description": "Return a fixed string. Used by the overhead bench only.",
+      "parameters": {
+       "additionalProperties": false,
+       "properties": {
+        "value": {
+         "type": "string"
+        }
+       },
+       "type": "object"
+      }
+     },
+     "bench_tool_04": {
+      "description": "Return a fixed string. Used by the overhead bench only.",
+      "parameters": {
+       "additionalProperties": false,
+       "properties": {
+        "value": {
+         "type": "string"
+        }
+       },
+       "type": "object"
+      }
+     },
+     "bench_tool_05": {
+      "description": "Return a fixed string. Used by the overhead bench only.",
+      "parameters": {
+       "additionalProperties": false,
+       "properties": {
+        "value": {
+         "type": "string"
+        }
+       },
+       "type": "object"
+      }
+     }
+    },
+    "results": [
+     {
+      "args": null,
+      "isError": false,
+      "result": {
+       "content": [
+        {
+         "text": "bench 01 ok",
+         "type": "text"
+        }
+       ],
+       "details": {
+        "events": 3
+       }
+      },
+      "toolName": "bench_tool_01"
+     },
+     {
+      "args": null,
+      "isError": false,
+      "result": {
+       "content": [
+        {
+         "text": "bench 02 ok",
+         "type": "text"
+        }
+       ],
+       "details": {
+        "events": 5
+       }
+      },
+      "toolName": "bench_tool_02"
+     },
+     {
+      "args": null,
+      "isError": false,
+      "result": {
+       "content": [
+        {
+         "text": "bench 03 ok",
+         "type": "text"
+        }
+       ],
+       "details": {
+        "events": 7
+       }
+      },
+      "toolName": "bench_tool_03"
+     },
+     {
+      "args": null,
+      "isError": false,
+      "result": {
+       "content": [
+        {
+         "text": "bench 04 ok",
+         "type": "text"
+        }
+       ],
+       "details": {
+        "events": 9
+       }
+      },
+      "toolName": "bench_tool_04"
+     },
+     {
+      "args": null,
+      "isError": false,
+      "result": {
+       "content": [
+        {
+         "text": "bench 05 ok",
+         "type": "text"
+        }
+       ],
+       "details": {
+        "events": 11
+       }
+      },
+      "toolName": "bench_tool_05"
+     }
+    ]
+   }
+  }
+ },
+ "template_sha256": "6006cfb72e053a82557bc05689042b4c4efcb04cd43765ffb5446041a33d002c"
+}

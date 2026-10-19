@@ -1,0 +1,979 @@
+{
+ "method": {
+  "version": 1,
+  "sha256": "c585418aa13158fcbc72dbf434744400c46ef512a9eb699898aead4cb3a53701"
+ },
+ "weights": {
+  "families": {
+   "core": 2,
+   "ext10": 2,
+   "streaming": 2,
+   "large-write": 1,
+   "long-session": 1,
+   "scale": 1,
+   "search": 1,
+   "reliability": 2,
+   "devloop": 1
+  },
+  "kinds": {
+   "cpu": 1,
+   "memory": 1,
+   "time": 1
+  }
+ },
+ "profile": "default",
+ "reference": "pi-node",
+ "entries": [
+  {
+   "caveats": [
+    "covers 1 of 9 families, under the floor of 6: a partial grade"
+   ],
+   "entry": "pi-node",
+   "label": "Pi on Node",
+   "relation": "pi-reference",
+   "cost": "npm ci --ignore-scripts; 110.6 MB + node 199 MB; linux-x64",
+   "families": {
+    "core": {
+     "status": "not-run",
+     "score": null,
+     "ratio": null,
+     "cells": 0,
+     "ref_cells": 0,
+     "ties": 0,
+     "dropped": 0,
+     "gate": null,
+     "reason": "the reference has no cells in this family in this run"
+    },
+    "ext10": {
+     "status": "not-run",
+     "score": null,
+     "ratio": null,
+     "cells": 0,
+     "ref_cells": 0,
+     "ties": 0,
+     "dropped": 0,
+     "gate": null,
+     "reason": "the reference has no cells in this family in this run"
+    },
+    "streaming": {
+     "status": "scored",
+     "score": 70.0,
+     "ratio": 1.0,
+     "cells": 12,
+     "ref_cells": 12,
+     "ties": 0,
+     "dropped": 0,
+     "gate": null,
+     "reason": ""
+    },
+    "large-write": {
+     "status": "not-run",
+     "score": null,
+     "ratio": null,
+     "cells": 0,
+     "ref_cells": 0,
+     "ties": 0,
+     "dropped": 0,
+     "gate": null,
+     "reason": "the method has no workload for this family yet"
+    },
+    "long-session": {
+     "status": "not-run",
+     "score": null,
+     "ratio": null,
+     "cells": 0,
+     "ref_cells": 0,
+     "ties": 0,
+     "dropped": 0,
+     "gate": null,
+     "reason": "the reference has no cells in this family in this run"
+    },
+    "scale": {
+     "status": "not-run",
+     "score": null,
+     "ratio": null,
+     "cells": 0,
+     "ref_cells": 0,
+     "ties": 0,
+     "dropped": 0,
+     "gate": null,
+     "reason": "the method has no workload for this family yet"
+    },
+    "search": {
+     "status": "not-run",
+     "score": null,
+     "ratio": null,
+     "cells": 0,
+     "ref_cells": 0,
+     "ties": 0,
+     "dropped": 0,
+     "gate": null,
+     "reason": "the method has no workload for this family yet"
+    },
+    "reliability": {
+     "status": "not-run",
+     "score": null,
+     "ratio": null,
+     "cells": 0,
+     "ref_cells": 0,
+     "ties": 0,
+     "dropped": 0,
+     "gate": null,
+     "reason": "the reference has no fault results in this run"
+    },
+    "devloop": {
+     "status": "not-run",
+     "score": null,
+     "ratio": null,
+     "cells": 0,
+     "ref_cells": 0,
+     "ties": 0,
+     "dropped": 0,
+     "gate": null,
+     "reason": "the reference has no cells in this family in this run"
+    }
+   },
+   "coverage": "1/9 (8 not run)",
+   "covered": 1,
+   "overall_exact": 70.0,
+   "overall": 70,
+   "letter": "C-",
+   "no_score_reason": null,
+   "faithfulness": 100.0,
+   "ci": [
+    70.0,
+    70.0
+   ],
+   "table": "pi-faithful",
+   "rank": 1,
+   "rank_range": [
+    1,
+    1
+   ],
+   "profiles": {
+    "default": {
+     "score": 70,
+     "rank": 1
+    },
+    "equal": {
+     "score": 70,
+     "rank": 1
+    },
+    "cpu-heavy": {
+     "score": 70,
+     "rank": 1
+    },
+    "memory-heavy": {
+     "score": 70,
+     "rank": 1
+    },
+    "extension-heavy": {
+     "score": 70,
+     "rank": 1
+    }
+   }
+  },
+  {
+   "caveats": [],
+   "entry": "claude-code",
+   "label": "Claude Code",
+   "relation": "reference",
+   "cost": "npm ci --ignore-scripts; 257.3 MB + node 199 MB; linux-x64",
+   "families": {
+    "core": {
+     "status": "not-run",
+     "score": null,
+     "ratio": null,
+     "cells": 0,
+     "ref_cells": 0,
+     "ties": 0,
+     "dropped": 0,
+     "gate": null,
+     "reason": "the reference has no cells in this family in this run"
+    },
+    "ext10": {
+     "status": "not-run",
+     "score": null,
+     "ratio": null,
+     "cells": 0,
+     "ref_cells": 0,
+     "ties": 0,
+     "dropped": 0,
+     "gate": null,
+     "reason": "the reference has no cells in this family in this run"
+    },
+    "streaming": {
+     "status": "NA-unmeasurable",
+     "score": null,
+     "ratio": 1.3225128165223854,
+     "cells": 4,
+     "ref_cells": 12,
+     "ties": 1,
+     "dropped": 0,
+     "gate": null,
+     "reason": "only 4 of the reference's 12 cells have a ratio: claims the capabilities but Buffon could not drive it: it does not speak openai-completions; it does not speak openai-responses"
+    },
+    "large-write": {
+     "status": "not-run",
+     "score": null,
+     "ratio": null,
+     "cells": 0,
+     "ref_cells": 0,
+     "ties": 0,
+     "dropped": 0,
+     "gate": null,
+     "reason": "the method has no workload for this family yet"
+    },
+    "long-session": {
+     "status": "not-run",
+     "score": null,
+     "ratio": null,
+     "cells": 0,
+     "ref_cells": 0,
+     "ties": 0,
+     "dropped": 0,
+     "gate": null,
+     "reason": "the reference has no cells in this family in this run"
+    },
+    "scale": {
+     "status": "not-run",
+     "score": null,
+     "ratio": null,
+     "cells": 0,
+     "ref_cells": 0,
+     "ties": 0,
+     "dropped": 0,
+     "gate": null,
+     "reason": "the method has no workload for this family yet"
+    },
+    "search": {
+     "status": "not-run",
+     "score": null,
+     "ratio": null,
+     "cells": 0,
+     "ref_cells": 0,
+     "ties": 0,
+     "dropped": 0,
+     "gate": null,
+     "reason": "the method has no workload for this family yet"
+    },
+    "reliability": {
+     "status": "not-run",
+     "score": null,
+     "ratio": null,
+     "cells": 0,
+     "ref_cells": 0,
+     "ties": 0,
+     "dropped": 0,
+     "gate": null,
+     "reason": "the reference has no fault results in this run"
+    },
+    "devloop": {
+     "status": "not-run",
+     "score": null,
+     "ratio": null,
+     "cells": 0,
+     "ref_cells": 0,
+     "ties": 0,
+     "dropped": 0,
+     "gate": null,
+     "reason": "the reference has no cells in this family in this run"
+    }
+   },
+   "coverage": "0/9 (1 not yet measurable, 8 not run)",
+   "covered": 0,
+   "overall_exact": null,
+   "overall": null,
+   "letter": null,
+   "no_score_reason": "no family has a score yet: core (the reference has no cells in this family in this run); ext10 (the reference has no cells in this family in this run); streaming (only 4 of the reference's 12 cells have a ratio: claims the capabilities but Buffon could not drive it: it does not speak openai-completions; it does not speak open",
+   "faithfulness": null,
+   "ci": null,
+   "table": "no-score",
+   "profiles": {},
+   "rank": null,
+   "rank_range": null
+  },
+  {
+   "caveats": [],
+   "entry": "codex",
+   "label": "Codex CLI",
+   "relation": "reference",
+   "cost": "npm ci --ignore-scripts; 452.5 MB + node 199 MB; linux-x64",
+   "families": {
+    "core": {
+     "status": "not-run",
+     "score": null,
+     "ratio": null,
+     "cells": 0,
+     "ref_cells": 0,
+     "ties": 0,
+     "dropped": 0,
+     "gate": null,
+     "reason": "the reference has no cells in this family in this run"
+    },
+    "ext10": {
+     "status": "not-run",
+     "score": null,
+     "ratio": null,
+     "cells": 0,
+     "ref_cells": 0,
+     "ties": 0,
+     "dropped": 0,
+     "gate": null,
+     "reason": "the reference has no cells in this family in this run"
+    },
+    "streaming": {
+     "status": "NA-unmeasurable",
+     "score": null,
+     "ratio": 0.3992503468633213,
+     "cells": 4,
+     "ref_cells": 12,
+     "ties": 0,
+     "dropped": 0,
+     "gate": null,
+     "reason": "only 4 of the reference's 12 cells have a ratio: claims the capabilities but Buffon could not drive it: it does not speak anthropic-messages; it does not speak openai-completions"
+    },
+    "large-write": {
+     "status": "not-run",
+     "score": null,
+     "ratio": null,
+     "cells": 0,
+     "ref_cells": 0,
+     "ties": 0,
+     "dropped": 0,
+     "gate": null,
+     "reason": "the method has no workload for this family yet"
+    },
+    "long-session": {
+     "status": "not-run",
+     "score": null,
+     "ratio": null,
+     "cells": 0,
+     "ref_cells": 0,
+     "ties": 0,
+     "dropped": 0,
+     "gate": null,
+     "reason": "the reference has no cells in this family in this run"
+    },
+    "scale": {
+     "status": "not-run",
+     "score": null,
+     "ratio": null,
+     "cells": 0,
+     "ref_cells": 0,
+     "ties": 0,
+     "dropped": 0,
+     "gate": null,
+     "reason": "the method has no workload for this family yet"
+    },
+    "search": {
+     "status": "not-run",
+     "score": null,
+     "ratio": null,
+     "cells": 0,
+     "ref_cells": 0,
+     "ties": 0,
+     "dropped": 0,
+     "gate": null,
+     "reason": "the method has no workload for this family yet"
+    },
+    "reliability": {
+     "status": "not-run",
+     "score": null,
+     "ratio": null,
+     "cells": 0,
+     "ref_cells": 0,
+     "ties": 0,
+     "dropped": 0,
+     "gate": null,
+     "reason": "the reference has no fault results in this run"
+    },
+    "devloop": {
+     "status": "not-run",
+     "score": null,
+     "ratio": null,
+     "cells": 0,
+     "ref_cells": 0,
+     "ties": 0,
+     "dropped": 0,
+     "gate": null,
+     "reason": "the reference has no cells in this family in this run"
+    }
+   },
+   "coverage": "0/9 (1 not yet measurable, 8 not run)",
+   "covered": 0,
+   "overall_exact": null,
+   "overall": null,
+   "letter": null,
+   "no_score_reason": "no family has a score yet: core (the reference has no cells in this family in this run); ext10 (the reference has no cells in this family in this run); streaming (only 4 of the reference's 12 cells have a ratio: claims the capabilities but Buffon could not drive it: it does not speak anthropic-messages; it does not speak open",
+   "faithfulness": null,
+   "ci": null,
+   "table": "no-score",
+   "profiles": {},
+   "rank": null,
+   "rank_range": null
+  },
+  {
+   "caveats": [
+    "covers 1 of 9 families, under the floor of 6: a partial grade"
+   ],
+   "entry": "copilot",
+   "label": "GitHub Copilot CLI",
+   "relation": "reference",
+   "cost": "npm ci --ignore-scripts; 183.8 MB + node 199 MB; linux-x64",
+   "families": {
+    "core": {
+     "status": "not-run",
+     "score": null,
+     "ratio": null,
+     "cells": 0,
+     "ref_cells": 0,
+     "ties": 0,
+     "dropped": 0,
+     "gate": null,
+     "reason": "the reference has no cells in this family in this run"
+    },
+    "ext10": {
+     "status": "not-run",
+     "score": null,
+     "ratio": null,
+     "cells": 0,
+     "ref_cells": 0,
+     "ties": 0,
+     "dropped": 0,
+     "gate": null,
+     "reason": "the reference has no cells in this family in this run"
+    },
+    "streaming": {
+     "status": "scored",
+     "score": 50.7445486325106,
+     "ratio": 3.7988036285842743,
+     "cells": 12,
+     "ref_cells": 12,
+     "ties": 0,
+     "dropped": 0,
+     "gate": null,
+     "reason": ""
+    },
+    "large-write": {
+     "status": "not-run",
+     "score": null,
+     "ratio": null,
+     "cells": 0,
+     "ref_cells": 0,
+     "ties": 0,
+     "dropped": 0,
+     "gate": null,
+     "reason": "the method has no workload for this family yet"
+    },
+    "long-session": {
+     "status": "not-run",
+     "score": null,
+     "ratio": null,
+     "cells": 0,
+     "ref_cells": 0,
+     "ties": 0,
+     "dropped": 0,
+     "gate": null,
+     "reason": "the reference has no cells in this family in this run"
+    },
+    "scale": {
+     "status": "not-run",
+     "score": null,
+     "ratio": null,
+     "cells": 0,
+     "ref_cells": 0,
+     "ties": 0,
+     "dropped": 0,
+     "gate": null,
+     "reason": "the method has no workload for this family yet"
+    },
+    "search": {
+     "status": "not-run",
+     "score": null,
+     "ratio": null,
+     "cells": 0,
+     "ref_cells": 0,
+     "ties": 0,
+     "dropped": 0,
+     "gate": null,
+     "reason": "the method has no workload for this family yet"
+    },
+    "reliability": {
+     "status": "not-run",
+     "score": null,
+     "ratio": null,
+     "cells": 0,
+     "ref_cells": 0,
+     "ties": 0,
+     "dropped": 0,
+     "gate": null,
+     "reason": "the reference has no fault results in this run"
+    },
+    "devloop": {
+     "status": "not-run",
+     "score": null,
+     "ratio": null,
+     "cells": 0,
+     "ref_cells": 0,
+     "ties": 0,
+     "dropped": 0,
+     "gate": null,
+     "reason": "the reference has no cells in this family in this run"
+    }
+   },
+   "coverage": "1/9 (8 not run)",
+   "covered": 1,
+   "overall_exact": 50.7445486325106,
+   "overall": 51,
+   "letter": "F",
+   "no_score_reason": null,
+   "faithfulness": null,
+   "ci": [
+    50.47071913769628,
+    50.928564501885305
+   ],
+   "table": "faithfulness-unmeasured",
+   "rank": 2,
+   "rank_range": [
+    2,
+    2
+   ],
+   "profiles": {
+    "default": {
+     "score": 51,
+     "rank": 2
+    },
+    "equal": {
+     "score": 51,
+     "rank": 2
+    },
+    "cpu-heavy": {
+     "score": 52,
+     "rank": 2
+    },
+    "memory-heavy": {
+     "score": 51,
+     "rank": 2
+    },
+    "extension-heavy": {
+     "score": 51,
+     "rank": 2
+    }
+   }
+  },
+  {
+   "caveats": [],
+   "entry": "octet",
+   "label": "Octet",
+   "relation": "reference",
+   "cost": "release archive; 96.3 MB; linux-x64",
+   "families": {
+    "core": {
+     "status": "not-run",
+     "score": null,
+     "ratio": null,
+     "cells": 0,
+     "ref_cells": 0,
+     "ties": 0,
+     "dropped": 0,
+     "gate": null,
+     "reason": "the reference has no cells in this family in this run"
+    },
+    "ext10": {
+     "status": "not-run",
+     "score": null,
+     "ratio": null,
+     "cells": 0,
+     "ref_cells": 0,
+     "ties": 0,
+     "dropped": 0,
+     "gate": null,
+     "reason": "the reference has no cells in this family in this run"
+    },
+    "streaming": {
+     "status": "NA-unmeasurable",
+     "score": null,
+     "ratio": 0.20890574843787982,
+     "cells": 4,
+     "ref_cells": 12,
+     "ties": 0,
+     "dropped": 0,
+     "gate": null,
+     "reason": "only 4 of the reference's 12 cells have a ratio: claims the capabilities but Buffon could not drive it: it does not speak anthropic-messages; it does not speak openai-responses"
+    },
+    "large-write": {
+     "status": "not-run",
+     "score": null,
+     "ratio": null,
+     "cells": 0,
+     "ref_cells": 0,
+     "ties": 0,
+     "dropped": 0,
+     "gate": null,
+     "reason": "the method has no workload for this family yet"
+    },
+    "long-session": {
+     "status": "not-run",
+     "score": null,
+     "ratio": null,
+     "cells": 0,
+     "ref_cells": 0,
+     "ties": 0,
+     "dropped": 0,
+     "gate": null,
+     "reason": "the reference has no cells in this family in this run"
+    },
+    "scale": {
+     "status": "not-run",
+     "score": null,
+     "ratio": null,
+     "cells": 0,
+     "ref_cells": 0,
+     "ties": 0,
+     "dropped": 0,
+     "gate": null,
+     "reason": "the method has no workload for this family yet"
+    },
+    "search": {
+     "status": "not-run",
+     "score": null,
+     "ratio": null,
+     "cells": 0,
+     "ref_cells": 0,
+     "ties": 0,
+     "dropped": 0,
+     "gate": null,
+     "reason": "the method has no workload for this family yet"
+    },
+    "reliability": {
+     "status": "not-run",
+     "score": null,
+     "ratio": null,
+     "cells": 0,
+     "ref_cells": 0,
+     "ties": 0,
+     "dropped": 0,
+     "gate": null,
+     "reason": "the reference has no fault results in this run"
+    },
+    "devloop": {
+     "status": "not-run",
+     "score": null,
+     "ratio": null,
+     "cells": 0,
+     "ref_cells": 0,
+     "ties": 0,
+     "dropped": 0,
+     "gate": null,
+     "reason": "the reference has no cells in this family in this run"
+    }
+   },
+   "coverage": "0/9 (1 not yet measurable, 8 not run)",
+   "covered": 0,
+   "overall_exact": null,
+   "overall": null,
+   "letter": null,
+   "no_score_reason": "no family has a score yet: core (the reference has no cells in this family in this run); ext10 (the reference has no cells in this family in this run); streaming (only 4 of the reference's 12 cells have a ratio: claims the capabilities but Buffon could not drive it: it does not speak anthropic-messages; it does not speak open",
+   "faithfulness": null,
+   "ci": null,
+   "table": "no-score",
+   "profiles": {},
+   "rank": null,
+   "rank_range": null
+  },
+  {
+   "caveats": [],
+   "entry": "opencode-v2",
+   "label": "OpenCode 2",
+   "relation": "reference",
+   "cost": "npm ci --ignore-scripts; 845.0 MB + node 199 MB; linux-x64",
+   "families": {
+    "core": {
+     "status": "not-run",
+     "score": null,
+     "ratio": null,
+     "cells": 0,
+     "ref_cells": 0,
+     "ties": 0,
+     "dropped": 0,
+     "gate": null,
+     "reason": "the reference has no cells in this family in this run"
+    },
+    "ext10": {
+     "status": "not-run",
+     "score": null,
+     "ratio": null,
+     "cells": 0,
+     "ref_cells": 0,
+     "ties": 0,
+     "dropped": 0,
+     "gate": null,
+     "reason": "the reference has no cells in this family in this run"
+    },
+    "streaming": {
+     "status": "NA-unmeasurable",
+     "score": null,
+     "ratio": 3.054899649716275,
+     "cells": 4,
+     "ref_cells": 12,
+     "ties": 0,
+     "dropped": 0,
+     "gate": null,
+     "reason": "only 4 of the reference's 12 cells have a ratio: claims the capabilities but Buffon could not drive it: it does not speak anthropic-messages; it does not speak openai-responses"
+    },
+    "large-write": {
+     "status": "not-run",
+     "score": null,
+     "ratio": null,
+     "cells": 0,
+     "ref_cells": 0,
+     "ties": 0,
+     "dropped": 0,
+     "gate": null,
+     "reason": "the method has no workload for this family yet"
+    },
+    "long-session": {
+     "status": "not-run",
+     "score": null,
+     "ratio": null,
+     "cells": 0,
+     "ref_cells": 0,
+     "ties": 0,
+     "dropped": 0,
+     "gate": null,
+     "reason": "the reference has no cells in this family in this run"
+    },
+    "scale": {
+     "status": "not-run",
+     "score": null,
+     "ratio": null,
+     "cells": 0,
+     "ref_cells": 0,
+     "ties": 0,
+     "dropped": 0,
+     "gate": null,
+     "reason": "the method has no workload for this family yet"
+    },
+    "search": {
+     "status": "not-run",
+     "score": null,
+     "ratio": null,
+     "cells": 0,
+     "ref_cells": 0,
+     "ties": 0,
+     "dropped": 0,
+     "gate": null,
+     "reason": "the method has no workload for this family yet"
+    },
+    "reliability": {
+     "status": "not-run",
+     "score": null,
+     "ratio": null,
+     "cells": 0,
+     "ref_cells": 0,
+     "ties": 0,
+     "dropped": 0,
+     "gate": null,
+     "reason": "the reference has no fault results in this run"
+    },
+    "devloop": {
+     "status": "not-run",
+     "score": null,
+     "ratio": null,
+     "cells": 0,
+     "ref_cells": 0,
+     "ties": 0,
+     "dropped": 0,
+     "gate": null,
+     "reason": "the reference has no cells in this family in this run"
+    }
+   },
+   "coverage": "0/9 (1 not yet measurable, 8 not run)",
+   "covered": 0,
+   "overall_exact": null,
+   "overall": null,
+   "letter": null,
+   "no_score_reason": "no family has a score yet: core (the reference has no cells in this family in this run); ext10 (the reference has no cells in this family in this run); streaming (only 4 of the reference's 12 cells have a ratio: claims the capabilities but Buffon could not drive it: it does not speak anthropic-messages; it does not speak open",
+   "faithfulness": null,
+   "ci": null,
+   "table": "no-score",
+   "profiles": {},
+   "rank": null,
+   "rank_range": null
+  },
+  {
+   "caveats": [
+    "covers 1 of 9 families, under the floor of 6: a partial grade"
+   ],
+   "entry": "rpi",
+   "label": "rpi (Rust port of Pi)",
+   "relation": "pi-port",
+   "cost": "release archive; 28.6 MB; linux-x64",
+   "families": {
+    "core": {
+     "status": "not-run",
+     "score": null,
+     "ratio": null,
+     "cells": 0,
+     "ref_cells": 0,
+     "ties": 0,
+     "dropped": 0,
+     "gate": null,
+     "reason": "the reference has no cells in this family in this run"
+    },
+    "ext10": {
+     "status": "not-run",
+     "score": null,
+     "ratio": null,
+     "cells": 0,
+     "ref_cells": 0,
+     "ties": 0,
+     "dropped": 0,
+     "gate": null,
+     "reason": "the reference has no cells in this family in this run"
+    },
+    "streaming": {
+     "status": "scored",
+     "score": 96.80637185315413,
+     "ratio": 0.15597241612079812,
+     "cells": 12,
+     "ref_cells": 12,
+     "ties": 0,
+     "dropped": 0,
+     "gate": null,
+     "reason": ""
+    },
+    "large-write": {
+     "status": "not-run",
+     "score": null,
+     "ratio": null,
+     "cells": 0,
+     "ref_cells": 0,
+     "ties": 0,
+     "dropped": 0,
+     "gate": null,
+     "reason": "the method has no workload for this family yet"
+    },
+    "long-session": {
+     "status": "not-run",
+     "score": null,
+     "ratio": null,
+     "cells": 0,
+     "ref_cells": 0,
+     "ties": 0,
+     "dropped": 0,
+     "gate": null,
+     "reason": "the reference has no cells in this family in this run"
+    },
+    "scale": {
+     "status": "not-run",
+     "score": null,
+     "ratio": null,
+     "cells": 0,
+     "ref_cells": 0,
+     "ties": 0,
+     "dropped": 0,
+     "gate": null,
+     "reason": "the method has no workload for this family yet"
+    },
+    "search": {
+     "status": "not-run",
+     "score": null,
+     "ratio": null,
+     "cells": 0,
+     "ref_cells": 0,
+     "ties": 0,
+     "dropped": 0,
+     "gate": null,
+     "reason": "the method has no workload for this family yet"
+    },
+    "reliability": {
+     "status": "not-run",
+     "score": null,
+     "ratio": null,
+     "cells": 0,
+     "ref_cells": 0,
+     "ties": 0,
+     "dropped": 0,
+     "gate": null,
+     "reason": "the reference has no fault results in this run"
+    },
+    "devloop": {
+     "status": "not-run",
+     "score": null,
+     "ratio": null,
+     "cells": 0,
+     "ref_cells": 0,
+     "ties": 0,
+     "dropped": 0,
+     "gate": null,
+     "reason": "the reference has no cells in this family in this run"
+    }
+   },
+   "coverage": "1/9 (8 not run)",
+   "covered": 1,
+   "overall_exact": 96.80637185315413,
+   "overall": 97,
+   "letter": "A",
+   "no_score_reason": null,
+   "faithfulness": null,
+   "ci": [
+    96.76278762287872,
+    97.06510677449977
+   ],
+   "table": "faithfulness-unmeasured",
+   "rank": 1,
+   "rank_range": [
+    1,
+    1
+   ],
+   "profiles": {
+    "default": {
+     "score": 97,
+     "rank": 1
+    },
+    "equal": {
+     "score": 97,
+     "rank": 1
+    },
+    "cpu-heavy": {
+     "score": 99,
+     "rank": 1
+    },
+    "memory-heavy": {
+     "score": 97,
+     "rank": 1
+    },
+    "extension-heavy": {
+     "score": 97,
+     "rank": 1
+    }
+   }
+  }
+ ],
+ "provisional": false,
+ "reasons": [],
+ "notes": 4,
+ "seed": 20261011,
+ "resamples": 1000,
+ "trust": {
+  "badge": "Dedicated",
+  "host_class": "A",
+  "reasons": [
+   "adaptive stopping: 6 of 6 cells stopped with fewer than 12 rounds (7-8) because their answer was clear; the 12-round minimum applies to the Verified badge",
+   "7 measured rounds in the thinnest cell (the minimum for a headline is 12)",
+   "uncontained: the arms were not run in the container envelope",
+   "not yet reproduced (buffon reproduce / compare)"
+  ],
+  "headline": "instructions",
+  "headline_why": "hardware instruction counters",
+  "strict_problems": [
+   "7 measured rounds in the thinnest cell (the minimum for a headline is 12)",
+   "uncontained: the arms were not run in the container envelope"
+  ],
+  "rounds": 7
+ },
+ "missing": [],
+ "strict": false
+}

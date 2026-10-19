@@ -13,11 +13,11 @@ previous = "pig-0.4.1"
 
 [source]
 repo_env = "BUFFON_SOURCE_REPO_PIG_TIP"
-commit = "a136850c38f4097e1cd965ab989efb58960709f9"
-tree = "593786aecf8c8606fdfb1cddd63aab544a032048"
+commit = "26eaad58e3ec09e25adf74000f79bcd83123aa8c"
+tree = "8b867e1919867ebfc99e50c7a630f27f0ce9be30"
 toolchain = "go"
 package = "./cmd/pig"
-build = ["go", "build", "-buildvcs=false", "-trimpath", "-ldflags", "-s -w -X github.com/MichaelKinsy/PiG/coding/cli.Build=a136850c38f4097e1cd965ab989efb58960709f9 -X github.com/MichaelKinsy/PiG/internal/codingagent.DefaultUpdateURL=https://github.com/MichaelKinsy/PiG/releases/latest/download/update.json -X github.com/MichaelKinsy/PiG/internal/codingagent.DefaultUpdateTrustRoot=LS0tLS1CRUdJTiBQVUJMSUMgS0VZLS0tLS0KTUNvd0JRWURLMlZ3QXlFQVFBdUtJTHRmc0FpbWdabnRpZ2UydzRGRy9QeDFQeU5HampHYXlEalREM0k9Ci0tLS0tRU5EIFBVQkxJQyBLRVktLS0tLQo= -X github.com/MichaelKinsy/PiG/coding/pigletbuild.releaseSourceVersion=v0.5.0", "-o", "{out}", "{package}"]
+build = ["go", "build", "-buildvcs=false", "-trimpath", "-ldflags", "-s -w -X github.com/MichaelKinsy/PiG/coding/cli.Build=26eaad58e3ec09e25adf74000f79bcd83123aa8c -X github.com/MichaelKinsy/PiG/internal/codingagent.DefaultUpdateURL=https://github.com/MichaelKinsy/PiG/releases/latest/download/update.json -X github.com/MichaelKinsy/PiG/internal/codingagent.DefaultUpdateTrustRoot=LS0tLS1CRUdJTiBQVUJMSUMgS0VZLS0tLS0KTUNvd0JRWURLMlZ3QXlFQVFBdUtJTHRmc0FpbWdabnRpZ2UydzRGRy9QeDFQeU5HampHYXlEalREM0k9Ci0tLS0tRU5EIFBVQkxJQyBLRVktLS0tLQo= -X github.com/MichaelKinsy/PiG/coding/pigletbuild.releaseSourceVersion=v0.5.0", "-o", "{out}", "{package}"]
 env = { CGO_ENABLED = "0", GOFLAGS = "", GOTOOLCHAIN = "local" }
 
 [runtime]                          # the Node sidecar for TypeScript extensions (pi_extensions = "sidecar") needs Node 22.13 or later on PATH

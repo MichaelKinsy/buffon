@@ -254,7 +254,7 @@ def wrong_file(path, want):
 
 def one_write(ctx, arm):
     """One process per file size. The scripted model answers with one `write` call whose arguments (the file body inside a JSON object) stream in fixed chunks, then text.
-    A sample fails unless the file in the project directory holds exactly the expected bytes. Metrics are prefixed with the size label (`kb50_`, `kb200_`)."""
+    A sample fails unless the file in the project directory holds exactly the expected bytes (the body, or what the harness's patch tool makes of it: one ends every file with a newline). Metrics are prefixed with the size label (`kb50_`, `kb200_`)."""
     if arm.cannot_run.get("print-write"):
         raise Skip(arm.cannot_run["print-write"])
     skip_unless(ctx, arm, "print")
@@ -264,18 +264,19 @@ def one_write(ctx, arm):
     for label, kb in write_sizes(ctx):
         content = source(kb * 1024)
         h = ctx.harness(arm, f"print-write-{label}")
+        os.makedirs(os.path.join(h.cwd, os.path.dirname(WRITE_FILE)), exist_ok=True)   # the project has its `big` directory: a write tool may need the parent to exist (Copilot's `create`: "Parent directories must exist")
         policy = write_policy(h.cwd, WRITE_FILE.replace(os.sep, "/"), content, chunk)
         srv.reset(policy=policy)
         meter = cgroup.new_meter()
         srv.on_request = cpu_hook(meter)
         try:
-            res = procio.Batch(h.print_argv(PROMPT_WRITE), h.env, h.cwd, meter, max(ctx.opts.timeout, 900)).run()   # PiG 0.4.1 needs about 70 s for 200 KB
+            res = procio.Batch(h.print_write_argv(PROMPT_WRITE), h.env, h.cwd, meter, max(ctx.opts.timeout, 900)).run()   # PiG 0.4.1 needs about 70 s for 200 KB
         finally:
             meter.close()
             srv.on_request = None
         if policy.missing:
             raise Skip(f"its tools cannot take the call: the first request declared no write tool (it declared {', '.join(policy.missing[0]) or 'none'})")
-        bad = check_print(res, srv, 2, arm) or wrong_file(os.path.join(h.cwd, WRITE_FILE), content.encode())
+        bad = check_print(res, srv, 2, arm) or wrong_file(os.path.join(h.cwd, WRITE_FILE), policy.expected.encode())
         if bad:
             return {"failure": f"{label}: {bad}"}
         reqs = ctx.main_requests(arm)

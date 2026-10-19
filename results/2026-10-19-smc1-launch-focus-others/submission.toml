@@ -1,0 +1,6 @@
+operator = "Michael Kinsy"
+hardware = "smc1: Intel Xeon Platinum 8462Y+, 2 sockets. Socket 1 only: harness CPUs 48-51 with SMT siblings 112-115, runner and mock 52 with 116, governor performance at a fixed 2.8 GHz, turbo off, C1E and C6 off on those cores; the rest of socket 1 idle; socket 0 runs unrelated development work. Shell access: the owner's team."
+independent = false         # Buffon's authors also build PiG, one of the arms (README, Limitations)
+organisation = ""
+reproduces = ""
+notes = "PiG 0.5.0 release candidate 26eaad58e3 (pig-tip). Launch rerun of 2026-10-19 (campaigns/launch-rerun.toml; focus-others added on the owner's request the same day)."

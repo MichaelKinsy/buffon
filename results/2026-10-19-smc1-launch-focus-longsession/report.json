@@ -1,0 +1,4001 @@
+{
+ "trust": {
+  "badge": "Dedicated",
+  "host_class": "A",
+  "reasons": [
+   "3 sample(s) waited for the host to quiet down (longest 2 s)",
+   "adaptive stopping: 2 of 2 cells stopped with fewer than 12 rounds (8-8) because their answer was clear; the 12-round minimum applies to the Verified badge",
+   "3 samples waited for the host to quiet down (longest 2 s) and 0 gave up waiting",
+   "the run is not labelled quiet dedicated hardware",
+   "8 measured rounds in the thinnest cell (the minimum for a headline is 12)",
+   "uncontained: the arms were not run in the container envelope",
+   "not yet reproduced (buffon reproduce / compare)"
+  ],
+  "headline": "instructions",
+  "headline_why": "hardware instruction counters",
+  "strict_problems": [
+   "the run is not labelled quiet dedicated hardware",
+   "8 measured rounds in the thinnest cell (the minimum for a headline is 12)",
+   "uncontained: the arms were not run in the container envelope"
+  ],
+  "rounds": 8
+ },
+ "provisional": true,
+ "reasons": [
+  "run 1: adaptive stopping: 2 of 2 cells stopped with fewer than 12 rounds (8-8) because their answer was clear; the 12-round minimum applies to the Verified badge",
+  "run 1: 3 samples waited for the host to quiet down (longest 2 s) and 0 gave up waiting"
+ ],
+ "reference": "pi-node",
+ "arms": [
+  "pi-bun",
+  "pi-node",
+  "pibolt",
+  "pig-0.4.1",
+  "pig-tip"
+ ],
+ "health": {
+  "notes": 4,
+  "summary": "4 notes: aa_significant_fraction 6.7%, aa_floor_max 36.7%, outlier_fraction 2.3%, hardware",
+  "checks": [
+   {
+    "id": "aa_significant_fraction",
+    "title": "A/A pairs with a significant gap (paired p < 0.05, before Holm) that is also larger than 1%",
+    "kind": "threshold",
+    "unit": "fraction",
+    "value": 0.06666666666666667,
+    "usual": 0.05,
+    "status": "note",
+    "meaning": "Share of harness and copy pairs that differ by more than 1% and also pass a significance test. A gap under 1% on a steady counter is not counted. About 5% can happen by chance.",
+    "detail": "longsession/resume-n chat turn_cpu_ms pig-tip: 4.9%; longsession/resume-n-varied chat turn_cpu_ms pibolt: 3.2%; longsession/resume-n chat ready_ms pibolt: 2.3%"
+   },
+   {
+    "id": "aa_floor_max",
+    "title": "A/A noise floor, worst scored cell",
+    "kind": "threshold",
+    "unit": "fraction",
+    "value": 0.3667794547424486,
+    "usual": 0.15,
+    "status": "note",
+    "meaning": "The same floor in the noisiest cell. Comparisons in that cell resolve only larger differences.",
+    "detail": "longsession/resume-n chat ready_ms: 36.7%; longsession/resume-n-varied chat turn_cpu_ms: 18.3%; longsession/resume-n chat turn_cpu_ms: 17.4%"
+   },
+   {
+    "id": "outlier_fraction",
+    "title": "Measured values flagged by the MAD rule",
+    "kind": "threshold",
+    "unit": "fraction",
+    "value": 0.0234375,
+    "usual": 0.02,
+    "status": "note",
+    "meaning": "Share of measured values far from the median of their cell. Outliers are counted and never removed.",
+    "detail": "longsession/resume-n chat instructions pi-bun: 3; longsession/resume-n chat instructions pi-bun-b: 3; longsession/resume-n chat ready_ms pig-tip: 3"
+   },
+   {
+    "id": "hardware",
+    "title": "Quiet dedicated hardware by the runner's own detection",
+    "kind": "pass",
+    "unit": null,
+    "value": false,
+    "usual": null,
+    "status": "note",
+    "meaning": "On shared hardware other work can disturb the numbers.",
+    "detail": "run 1 not on quiet dedicated hardware: adaptive stopping: 2 of 2 cells stopped with fewer than 12 rounds (8-8) because their answer was clear; the 12-round minimum applies to the Verified badge; 3 samples waited for the host to quiet down (longest 2 s) and 0 gave up waiting"
+   },
+   {
+    "id": "calibration_cv",
+    "title": "Calibration: CV of the reference's CPU time between identical runs",
+    "kind": "threshold",
+    "unit": "fraction",
+    "value": 0.01741467587870728,
+    "usual": 0.02,
+    "status": "ok",
+    "meaning": "How much the reference's CPU time varied between identical calibration runs. Lower means a quieter host.",
+    "detail": ""
+   },
+   {
+    "id": "aa_cv_cpu",
+    "title": "A/A CV of CPU metrics, median over arms and cells",
+    "kind": "threshold",
+    "unit": "fraction",
+    "value": 0.017223595906682605,
+    "usual": 0.02,
+    "status": "ok",
+    "meaning": "How much CPU time varies from round to round for one harness. Lower means a quieter host.",
+    "detail": ""
+   },
+   {
+    "id": "aa_gap_median",
+    "title": "A/A gap between a harness and its own copy, median over cells",
+    "kind": "threshold",
+    "unit": "fraction",
+    "value": 0.0019451713859443553,
+    "usual": 0.01,
+    "status": "ok",
+    "meaning": "The usual gap between a harness and its identical copy. A real difference between two harnesses should be larger than this.",
+    "detail": ""
+   },
+   {
+    "id": "aa_gap_max",
+    "title": "A/A gap between a harness and its own copy, largest cell",
+    "kind": "threshold",
+    "unit": "fraction",
+    "value": 0.049140231248146815,
+    "usual": 0.05,
+    "status": "ok",
+    "meaning": "The largest gap between a harness and its identical copy, and the cell where it happened.",
+    "detail": ""
+   },
+   {
+    "id": "aa_floor_median",
+    "title": "A/A noise floor, median over scored cells",
+    "kind": "threshold",
+    "unit": "fraction",
+    "value": 0.013365242110388604,
+    "usual": 0.03,
+    "status": "ok",
+    "meaning": "The smallest difference the identical copies cannot tell from noise, in the usual cell. Smaller differences than this are not resolved.",
+    "detail": ""
+   },
+   {
+    "id": "flagged_fraction",
+    "title": "Measured samples with at least one host flag",
+    "kind": "threshold",
+    "unit": "fraction",
+    "value": 0.0,
+    "usual": 0.05,
+    "status": "ok",
+    "meaning": "Share of samples where the host showed a disturbance: throttling, foreign CPU, steal, a clock change, swap or a memory event.",
+    "detail": ""
+   },
+   {
+    "id": "throttled_samples",
+    "title": "Measured samples with CFS throttling (arm cgroup, every ancestor, session)",
+    "kind": "threshold",
+    "unit": "count",
+    "value": 0,
+    "usual": 0,
+    "status": "ok",
+    "meaning": "Samples where the kernel held the process back for a CPU quota. Their time then describes the quota, not the harness.",
+    "detail": ""
+   },
+   {
+    "id": "steal_share",
+    "title": "Steal: share of the pinned CPUs' capacity taken by a hypervisor",
+    "kind": "threshold",
+    "unit": "fraction",
+    "value": 0.0,
+    "usual": 0.001,
+    "status": "ok",
+    "meaning": "Share of the pinned CPUs' time that a hypervisor took away. It only matters on virtual machines.",
+    "detail": ""
+   },
+   {
+    "id": "foreign_cpu_p95",
+    "title": "Foreign CPU on the pinned CPUs during a sample, p95 over samples, as a share of the sample's CPU time",
+    "kind": "threshold",
+    "unit": "fraction",
+    "value": 0.0,
+    "usual": 0.01,
+    "status": "ok",
+    "meaning": "CPU time that other processes used on the pinned cores during a sample, as a share of the sample's own CPU time (95th percentile).",
+    "detail": ""
+   },
+   {
+    "id": "gate_slow_fraction",
+    "title": "Samples that waited more than 1 s for the host to quiet down",
+    "kind": "threshold",
+    "unit": "fraction",
+    "value": 0.0,
+    "usual": 0.01,
+    "status": "ok",
+    "meaning": "Share of samples that had to wait for the quiet-host gate. A busy host makes the gate wait.",
+    "detail": ""
+   },
+   {
+    "id": "gate_gave_up",
+    "title": "Samples for which the host never quieted down",
+    "kind": "threshold",
+    "unit": "count",
+    "value": 0,
+    "usual": 0,
+    "status": "ok",
+    "meaning": "Samples that did not start because the host stayed busy. They are not in the numbers.",
+    "detail": ""
+   },
+   {
+    "id": "clock_deviation",
+    "title": "Effective clock: largest deviation of a sample's mean MHz from the run median",
+    "kind": "threshold",
+    "unit": "fraction",
+    "value": 0.0006428571428571672,
+    "usual": 0.02,
+    "status": "ok",
+    "meaning": "How far a sample's mean CPU clock moved from the run median. A moving clock changes CPU time for the same work.",
+    "detail": ""
+   },
+   {
+    "id": "infra_failed_fraction",
+    "title": "Infrastructure failures (envelope OOM, no process started, runner fault) over measured samples",
+    "kind": "threshold",
+    "unit": "fraction",
+    "value": 0.0,
+    "usual": 0.0,
+    "status": "ok",
+    "meaning": "Share of samples that failed because of the host or the runner. They are never charged to a harness.",
+    "detail": ""
+   },
+   {
+    "id": "arm_failed_fraction",
+    "title": "Arm failures over measured samples (a swarm ladder's designed stops are results and not counted)",
+    "kind": "threshold",
+    "unit": "fraction",
+    "value": 0.0,
+    "usual": 0.02,
+    "status": "ok",
+    "meaning": "Share of samples where the harness itself failed. A scale sample that stopped because the kernel's limit was reached (stop_cause oom, pids or timeout) is a result and is in neither the failures nor the samples counted; a scale error stop is a failure.",
+    "detail": ""
+   },
+   {
+    "id": "drift",
+    "title": "Drift: median absolute change over the run of an arm's value, over cells",
+    "kind": "threshold",
+    "unit": "fraction",
+    "value": 0.0024983555383906574,
+    "usual": 0.02,
+    "status": "ok",
+    "meaning": "How much a harness's value moved from the start of the run to the end. Drift means the host changed during the run.",
+    "detail": ""
+   },
+   {
+    "id": "reference_changepoint",
+    "title": "No change point in the reference arm's per-round series",
+    "kind": "pass",
+    "unit": null,
+    "value": true,
+    "usual": null,
+    "status": "ok",
+    "meaning": "The host's speed did not shift during the run. A shift moves every comparison the same way.",
+    "detail": "no change point in 8 rounds"
+   },
+   {
+    "id": "rounds",
+    "title": "At least 12 measured rounds",
+    "kind": "pass",
+    "unit": null,
+    "value": true,
+    "usual": null,
+    "status": "ok",
+    "meaning": "With fewer rounds the intervals are wide.",
+    "detail": "12 measured rounds"
+   },
+   {
+    "id": "aa_copies",
+    "title": "Every arm has an A/A copy",
+    "kind": "pass",
+    "unit": null,
+    "value": true,
+    "usual": null,
+    "status": "ok",
+    "meaning": "Without a copy there is no noise floor for that harness.",
+    "detail": "every arm has its copy"
+   },
+   {
+    "id": "egress",
+    "title": "No harness connected outside the loopback",
+    "kind": "pass",
+    "unit": null,
+    "value": true,
+    "usual": null,
+    "status": "ok",
+    "meaning": "A harness that talks to the network is not measured alone.",
+    "detail": "no connection outside the loopback"
+   },
+   {
+    "id": "integrity",
+    "title": "Every executable and install tree unchanged during the run",
+    "kind": "pass",
+    "unit": null,
+    "value": true,
+    "usual": null,
+    "status": "ok",
+    "meaning": "A changed executable means the arm is not what the lock names.",
+    "detail": "every executable and install tree unchanged"
+   },
+   {
+    "id": "calibration_ran",
+    "title": "Calibration ran and the reference stayed within its 5% limit",
+    "kind": "pass",
+    "unit": null,
+    "value": true,
+    "usual": null,
+    "status": "ok",
+    "meaning": "Calibration shows the host's noise before the run. Above 5% the run is labelled Noisy.",
+    "detail": "calibration passed in every run"
+   },
+   {
+    "id": "telemetry",
+    "title": "Telemetry recorded for every measured sample",
+    "kind": "pass",
+    "unit": null,
+    "value": true,
+    "usual": null,
+    "status": "ok",
+    "meaning": "Telemetry is how the other checks see the host.",
+    "detail": "every ok sample has telemetry"
+   },
+   {
+    "id": "cpu_quota",
+    "title": "No CPU quota (cpu.max) on the arm cgroup or any ancestor",
+    "kind": "pass",
+    "unit": null,
+    "value": true,
+    "usual": null,
+    "status": "ok",
+    "meaning": "A quota can throttle a sample.",
+    "detail": "no ancestor of the arm cgroup has a CPU quota"
+   },
+   {
+    "id": "clock_policy",
+    "title": "The pinned CPUs have a fixed clock policy",
+    "kind": "pass",
+    "unit": null,
+    "value": true,
+    "usual": null,
+    "status": "ok",
+    "meaning": "A clock that scales with load changes CPU time for the same work.",
+    "detail": "the pinned CPUs have a fixed clock policy (or the machine does not say)"
+   }
+  ],
+  "thresholds_sha256": "bb1caaa044ec28a8b258fb9a98912a3cc5948a3e74bc9d2caec584214f080737"
+ },
+ "noise": {
+  "by_metric": [
+   {
+    "metric": "cpu_ms",
+    "cells": 2,
+    "aa_gap_median": 0.005475692304127866,
+    "aa_gap_max": 0.02077238150965477,
+    "aa_floor_median": 0.032411658022678175,
+    "aa_floor_max": 0.05118467637001857,
+    "cv_median": 0.017223595906682605,
+    "cv_max": 0.03595196267876045,
+    "outliers": 7,
+    "values": 160,
+    "drift_median": 0.005991555376541053,
+    "drift_max": 0.04990240122236065
+   },
+   {
+    "metric": "cycles",
+    "cells": 2,
+    "aa_gap_median": 0.004141109688372058,
+    "aa_gap_max": 0.018490277882085238,
+    "aa_floor_median": 0.02122105041220889,
+    "aa_floor_max": 0.04844202063765565,
+    "cv_median": 0.01397781385055356,
+    "cv_max": 0.026408055127449176,
+    "outliers": 5,
+    "values": 160,
+    "drift_median": 0.007555013291359699,
+    "drift_max": 0.04375794863884669
+   },
+   {
+    "metric": "instructions",
+    "cells": 2,
+    "aa_gap_median": 0.001102902710323539,
+    "aa_gap_max": 0.020017541691141005,
+    "aa_floor_median": 0.008362168534598405,
+    "aa_floor_max": 0.03486272989468264,
+    "cv_median": 0.0034248123336840016,
+    "cv_max": 0.018907661094778785,
+    "outliers": 10,
+    "values": 160,
+    "drift_median": 0.002927159561492896,
+    "drift_max": 0.011711919972153621
+   },
+   {
+    "metric": "peak_mem_mib",
+    "cells": 2,
+    "aa_gap_median": 0.004163812672032474,
+    "aa_gap_max": 0.018554875466759047,
+    "aa_floor_median": 0.021604748912740834,
+    "aa_floor_max": 0.038315629742033286,
+    "cv_median": 0.011598223332238759,
+    "cv_max": 0.02812016995311137,
+    "outliers": 1,
+    "values": 160,
+    "drift_median": 0.012207286693859079,
+    "drift_max": 0.030286557427972354
+   },
+   {
+    "metric": "peak_rss_mib",
+    "cells": 2,
+    "aa_gap_median": 0.0022216147326685753,
+    "aa_gap_max": 0.0109271793199055,
+    "aa_floor_median": 0.010255009115070317,
+    "aa_floor_max": 0.015800370491446003,
+    "cv_median": 0.0060052623205179255,
+    "cv_max": 0.01381775413975754,
+    "outliers": 5,
+    "values": 160,
+    "drift_median": 0.002663993333566725,
+    "drift_max": 0.013763556031597268
+   },
+   {
+    "metric": "ready_cpu_ms",
+    "cells": 2,
+    "aa_gap_median": 0.006923774278942529,
+    "aa_gap_max": 0.022955451289036755,
+    "aa_floor_median": 0.02183645325104345,
+    "aa_floor_max": 0.04295967367170965,
+    "cv_median": 0.00949851966492787,
+    "cv_max": 0.025553964920195314,
+    "outliers": 4,
+    "values": 160,
+    "drift_median": 0.004403361258717641,
+    "drift_max": 0.028177056143514817
+   },
+   {
+    "metric": "ready_ms",
+    "cells": 2,
+    "aa_gap_median": 0.00291856534721191,
+    "aa_gap_max": 0.02296833079003524,
+    "aa_floor_median": 0.015657089309696007,
+    "aa_floor_max": 0.3667794547424486,
+    "cv_median": 0.009286430342307866,
+    "cv_max": 0.14018660119845217,
+    "outliers": 11,
+    "values": 160,
+    "drift_median": 0.005790368844271505,
+    "drift_max": 0.011696056710067588
+   },
+   {
+    "metric": "ready_pss_mib",
+    "cells": 2,
+    "aa_gap_median": 0.0013888007787844492,
+    "aa_gap_max": 0.011992274528557223,
+    "aa_floor_median": 0.012041284615122883,
+    "aa_floor_max": 0.021804011996584886,
+    "cv_median": 0.007224673038485004,
+    "cv_max": 0.016193793151658226,
+    "outliers": 5,
+    "values": 160,
+    "drift_median": 0.0014828960816427265,
+    "drift_max": 0.01333793006298261
+   },
+   {
+    "metric": "ready_rss_mib",
+    "cells": 2,
+    "aa_gap_median": 0.0015481566518052992,
+    "aa_gap_max": 0.014065927962453761,
+    "aa_floor_median": 0.009804517207163466,
+    "aa_floor_max": 0.018043315076871735,
+    "cv_median": 0.007415709507946653,
+    "cv_max": 0.01036393325797258,
+    "outliers": 3,
+    "values": 160,
+    "drift_median": 0.0017607608206542543,
+    "drift_max": 0.008747813046738315
+   },
+   {
+    "metric": "request_bytes",
+    "cells": 2,
+    "aa_gap_median": 0.0,
+    "aa_gap_max": 0.0,
+    "aa_floor_median": 0.0,
+    "aa_floor_max": 0.0,
+    "cv_median": 0.0,
+    "cv_max": 0.0,
+    "outliers": 0,
+    "values": 160,
+    "drift_median": 0.0,
+    "drift_max": 0.0
+   },
+   {
+    "metric": "request_bytes_per_turn",
+    "cells": 2,
+    "aa_gap_median": 0.0,
+    "aa_gap_max": 0.0,
+    "aa_floor_median": 0.0,
+    "aa_floor_max": 0.0,
+    "cv_median": 0.0,
+    "cv_max": 0.0,
+    "outliers": 0,
+    "values": 160,
+    "drift_median": 0.0,
+    "drift_max": 0.0
+   },
+   {
+    "metric": "requests",
+    "cells": 2,
+    "aa_gap_median": 0.0,
+    "aa_gap_max": 0.0,
+    "aa_floor_median": 0.0,
+    "aa_floor_max": 0.0,
+    "cv_median": 0.0,
+    "cv_max": 0.0,
+    "outliers": 0,
+    "values": 160,
+    "drift_median": 0.0,
+    "drift_max": 0.0
+   },
+   {
+    "metric": "session_growth_bytes",
+    "cells": 2,
+    "aa_gap_median": 0.0,
+    "aa_gap_max": 0.0,
+    "aa_floor_median": 0.0,
+    "aa_floor_max": 0.0,
+    "cv_median": 0.0,
+    "cv_max": 3.9126660000085635e-05,
+    "outliers": 1,
+    "values": 160,
+    "drift_median": 0.0,
+    "drift_max": 0.0
+   },
+   {
+    "metric": "side_requests",
+    "cells": 2,
+    "aa_gap_median": NaN,
+    "aa_gap_max": NaN,
+    "aa_floor_median": NaN,
+    "aa_floor_max": NaN,
+    "cv_median": NaN,
+    "cv_max": NaN,
+    "outliers": 0,
+    "values": 160,
+    "drift_median": NaN,
+    "drift_max": NaN
+   },
+   {
+    "metric": "turn_cpu_ms",
+    "cells": 2,
+    "aa_gap_median": 0.00698745547912899,
+    "aa_gap_max": 0.049140231248146815,
+    "aa_floor_median": 0.04088854008235784,
+    "aa_floor_max": 0.1827477804262972,
+    "cv_median": 0.03206648363989627,
+    "cv_max": 0.09593584417055592,
+    "outliers": 4,
+    "values": 160,
+    "drift_median": 0.01335451439272585,
+    "drift_max": 0.050901879308720074
+   },
+   {
+    "metric": "turn_wall_ms",
+    "cells": 2,
+    "aa_gap_median": 0.008501572786225209,
+    "aa_gap_max": 0.021128489663624128,
+    "aa_floor_median": 0.029713411873156792,
+    "aa_floor_max": 0.04125714540329528,
+    "cv_median": 0.022548464024652205,
+    "cv_max": 0.279760727966806,
+    "outliers": 4,
+    "values": 160,
+    "drift_median": 0.027995133368953214,
+    "drift_max": 0.05439672609388478
+   }
+  ],
+  "runs": [
+   {
+    "index": 1,
+    "rounds": 12,
+    "warmup_rounds": 1,
+    "hardware": "provisional",
+    "samples": {
+     "measured": 160,
+     "ok": 160,
+     "failed": 0,
+     "warmup": 20,
+     "with_telemetry": 160,
+     "infra_failed": 0,
+     "arm_failed": 0,
+     "stopped": 0
+    },
+    "failed": [],
+    "flag_counts": {
+     "throttled": 0,
+     "foreign_busy": 0,
+     "steal": 0,
+     "clock_moved": 0,
+     "gate_waited": 0,
+     "swap": 0,
+     "thermal": 0,
+     "memory_events": 0
+    },
+    "flagged_samples": 0,
+    "flagged_rounds": [],
+    "flagged": [],
+    "throttled_samples": 0,
+    "throttled_us_total": 0,
+    "throttle_events": [],
+    "facts_throttled_us": 0,
+    "gate": {
+     "passed": 160,
+     "waited": 0,
+     "gave_up": 0,
+     "disabled": 0,
+     "waited_ms_total": 0,
+     "waited_ms_max": 0,
+     "slow": 0
+    },
+    "sources": [
+     "cgroup_throttle",
+     "cpufreq",
+     "loadavg",
+     "meminfo",
+     "pressure",
+     "proc_stat",
+     "schedstat",
+     "thermal_throttle",
+     "vmstat"
+    ],
+    "steal_share": 0.0,
+    "foreign_p95": 0.0,
+    "clock_deviation": 0.0006428571428571672,
+    "clock_median_mhz": 2800.0,
+    "cpu_quota_limited": [],
+    "fixed_clock": true,
+    "collector_cpu_ms_median": 5.383,
+    "collector_cpu_ms_max": 8.987,
+    "calibration": {
+     "metric": "cpu_ms",
+     "max_cv": 0.01741467587870728,
+     "gate": 0.05,
+     "passed": true,
+     "runs": 12,
+     "arm": "pi-node"
+    },
+    "host": {
+     "load_before": [
+      1.001953125,
+      1.1708984375,
+      1.2275390625
+     ],
+     "load_after": [
+      1.55224609375,
+      1.798828125,
+      1.486328125
+     ],
+     "idle_before": {
+      "48": 0.0,
+      "49": 0.0,
+      "50": 0.0,
+      "51": 0.0,
+      "112": 0.0,
+      "113": 0.0,
+      "114": 0.0,
+      "115": 0.0
+     },
+     "idle_after": {
+      "48": 0.0,
+      "49": 0.0,
+      "50": 0.0,
+      "51": 0.0,
+      "112": 0.0,
+      "113": 0.0166,
+      "114": 0.0,
+      "115": 0.0
+     },
+     "cpumon": {
+      "samples": 131,
+      "pinned_busy_mean": 0.05882074256425395,
+      "pinned_busy_max": 0.15375179609797715,
+      "host_busy_mean": 0.007511967865316689
+     }
+    }
+   }
+  ],
+  "discarded": [
+   [
+    "warm-up round (kept in the raw data, excluded from the statistics by rule)",
+    20,
+    1
+   ]
+  ],
+  "dropped": [],
+  "sensitivity": null
+ },
+ "cells": [
+  {
+   "id": "2026-10-19-smc1-launch-focus-longsession::longsession/resume-n@openai-completions#cpu_ms",
+   "rerun": "python3 -m buffon rerun 2026-10-19-smc1-launch-focus-longsession::longsession/resume-n@openai-completions#cpu_ms",
+   "scenario": "longsession/resume-n",
+   "api": "openai-completions",
+   "metric": "cpu_ms",
+   "kind": "CPU",
+   "unit": "ms of CPU time",
+   "mde": 0.011185583375549564,
+   "aa": {
+    "pi-bun": 0.01934132995777328,
+    "pi-node": 0.020956758925629867,
+    "pibolt": 0.039914997826804334,
+    "pig-0.4.1": 0.03495505751650595,
+    "pig-tip": 0.04991779136838511
+   },
+   "comparisons": {
+    "pi-bun": {
+     "ratio": 1.5583589278707601,
+     "ci": [
+      1.5380483619239367,
+      1.5791719053670628
+     ],
+     "floor": 0.020956758925629867,
+     "p": 0.0078125,
+     "p_holm": 0.03125,
+     "verdict": "loss",
+     "n": 8,
+     "arm_median": 691.0605,
+     "not_compared": null,
+     "equivalence": {
+      "margin": 0.05,
+      "low": 1.540532458915764,
+      "high": 1.5760611009833354,
+      "p": 1.0,
+      "equivalent": false
+     }
+    },
+    "pibolt": {
+     "ratio": 0.11176131007951219,
+     "ci": [
+      0.11031238419796983,
+      0.1134077305127358
+     ],
+     "floor": 0.039914997826804334,
+     "p": 0.0078125,
+     "p_holm": 0.03125,
+     "verdict": "win",
+     "n": 8,
+     "arm_median": 49.561,
+     "not_compared": null,
+     "equivalence": {
+      "margin": 0.05,
+      "low": 0.11076691591275228,
+      "high": 0.11305703427192712,
+      "p": 1.0,
+      "equivalent": false
+     }
+    },
+    "pig-0.4.1": {
+     "ratio": 0.3084412362950836,
+     "ci": [
+      0.3044509521756415,
+      0.31532964445622624
+     ],
+     "floor": 0.03495505751650595,
+     "p": 0.0078125,
+     "p_holm": 0.03125,
+     "verdict": "win",
+     "n": 8,
+     "arm_median": 136.77949999999998,
+     "not_compared": null,
+     "equivalence": {
+      "margin": 0.05,
+      "low": 0.30584855899793384,
+      "high": 0.31439812927047406,
+      "p": 1.0,
+      "equivalent": false
+     }
+    },
+    "pig-tip": {
+     "ratio": 0.1559045583081898,
+     "ci": [
+      0.14869389663046292,
+      0.1570115093243387
+     ],
+     "floor": 0.04991779136838511,
+     "p": 0.0078125,
+     "p_holm": 0.03125,
+     "verdict": "win",
+     "n": 8,
+     "arm_median": 69.1365,
+     "not_compared": null,
+     "equivalence": {
+      "margin": 0.05,
+      "low": 0.14956117207196234,
+      "high": 0.15689091595000418,
+      "p": 1.0,
+      "equivalent": false
+     }
+    }
+   }
+  },
+  {
+   "id": "2026-10-19-smc1-launch-focus-longsession::longsession/resume-n@openai-completions#cycles",
+   "rerun": "python3 -m buffon rerun 2026-10-19-smc1-launch-focus-longsession::longsession/resume-n@openai-completions#cycles",
+   "scenario": "longsession/resume-n",
+   "api": "openai-completions",
+   "metric": "cycles",
+   "kind": "CPU",
+   "unit": "cycles",
+   "mde": 0.011573774722949522,
+   "aa": {
+    "pi-bun": 0.020851760800407872,
+    "pi-node": 0.02102862078342754,
+    "pibolt": 0.041763089840265284,
+    "pig-0.4.1": 0.04730527239421193,
+    "pig-tip": 0.011392719961337672
+   },
+   "comparisons": {
+    "pi-bun": {
+     "ratio": 1.5512658799352492,
+     "ci": [
+      1.5272707113878707,
+      1.5647352666659686
+     ],
+     "floor": 0.02102862078342754,
+     "p": 0.0078125,
+     "p_holm": 0.03125,
+     "verdict": "loss",
+     "n": 8,
+     "arm_median": 1888254893.0,
+     "not_compared": null,
+     "equivalence": {
+      "margin": 0.05,
+      "low": 1.5304926207989042,
+      "high": 1.5634156931678131,
+      "p": 1.0,
+      "equivalent": false
+     }
+    },
+    "pibolt": {
+     "ratio": 0.10570355329659241,
+     "ci": [
+      0.10449380281388039,
+      0.10748427353658142
+     ],
+     "floor": 0.041763089840265284,
+     "p": 0.0078125,
+     "p_holm": 0.03125,
+     "verdict": "win",
+     "n": 8,
+     "arm_median": 128666049.0,
+     "not_compared": null,
+     "equivalence": {
+      "margin": 0.05,
+      "low": 0.10471589816151239,
+      "high": 0.10725964482661464,
+      "p": 1.0,
+      "equivalent": false
+     }
+    },
+    "pig-0.4.1": {
+     "ratio": 0.29471517641638934,
+     "ci": [
+      0.29131707347174407,
+      0.3068762642928683
+     ],
+     "floor": 0.04730527239421193,
+     "p": 0.0078125,
+     "p_holm": 0.03125,
+     "verdict": "win",
+     "n": 8,
+     "arm_median": 358737584.0,
+     "not_compared": null,
+     "equivalence": {
+      "margin": 0.05,
+      "low": 0.2918815792872378,
+      "high": 0.30647584499831687,
+      "p": 1.0,
+      "equivalent": false
+     }
+    },
+    "pig-tip": {
+     "ratio": 0.14302483434931457,
+     "ci": [
+      0.14113725067364913,
+      0.14395153095920488
+     ],
+     "floor": 0.02102862078342754,
+     "p": 0.0078125,
+     "p_holm": 0.03125,
+     "verdict": "win",
+     "n": 8,
+     "arm_median": 174094813.0,
+     "not_compared": null,
+     "equivalence": {
+      "margin": 0.05,
+      "low": 0.14150067409724887,
+      "high": 0.14377776474494627,
+      "p": 1.0,
+      "equivalent": false
+     }
+    }
+   }
+  },
+  {
+   "id": "2026-10-19-smc1-launch-focus-longsession::longsession/resume-n@openai-completions#instructions",
+   "rerun": "python3 -m buffon rerun 2026-10-19-smc1-launch-focus-longsession::longsession/resume-n@openai-completions#instructions",
+   "scenario": "longsession/resume-n",
+   "api": "openai-completions",
+   "metric": "instructions",
+   "kind": "CPU",
+   "unit": "instructions",
+   "mde": 0.0012782207176430388,
+   "aa": {
+    "pi-bun": 0.021736437187905945,
+    "pi-node": 0.002668964840408303,
+    "pibolt": 0.01974188149273594,
+    "pig-0.4.1": 0.034268789800365844,
+    "pig-tip": 0.004052683406249877
+   },
+   "comparisons": {
+    "pi-bun": {
+     "ratio": 1.4976173463731324,
+     "ci": [
+      1.4948386943329977,
+      1.5305615826560255
+     ],
+     "floor": 0.021736437187905945,
+     "p": 0.0078125,
+     "p_holm": 0.03125,
+     "verdict": "loss",
+     "n": 8,
+     "arm_median": 3638041480.0,
+     "not_compared": null,
+     "equivalence": {
+      "margin": 0.05,
+      "low": 1.4953292889138632,
+      "high": 1.5301319128593969,
+      "p": 1.0,
+      "equivalent": false
+     }
+    },
+    "pibolt": {
+     "ratio": 0.08220616724750464,
+     "ci": [
+      0.08204598758606839,
+      0.082585061320392
+     ],
+     "floor": 0.01974188149273594,
+     "p": 0.0078125,
+     "p_holm": 0.03125,
+     "verdict": "win",
+     "n": 8,
+     "arm_median": 199696836.5,
+     "not_compared": null,
+     "equivalence": {
+      "margin": 0.05,
+      "low": 0.0820692063168059,
+      "high": 0.08242330261476899,
+      "p": 1.0,
+      "equivalent": false
+     }
+    },
+    "pig-0.4.1": {
+     "ratio": 0.34115399686669584,
+     "ci": [
+      0.3388174542726018,
+      0.3501606032122393
+     ],
+     "floor": 0.034268789800365844,
+     "p": 0.0078125,
+     "p_holm": 0.03125,
+     "verdict": "win",
+     "n": 8,
+     "arm_median": 828737991.5,
+     "not_compared": null,
+     "equivalence": {
+      "margin": 0.05,
+      "low": 0.33887956688387877,
+      "high": 0.3498940881692507,
+      "p": 1.0,
+      "equivalent": false
+     }
+    },
+    "pig-tip": {
+     "ratio": 0.19472273401826423,
+     "ci": [
+      0.19430261606622615,
+      0.19506351560758972
+     ],
+     "floor": 0.004052683406249877,
+     "p": 0.0078125,
+     "p_holm": 0.03125,
+     "verdict": "win",
+     "n": 8,
+     "arm_median": 473024291.0,
+     "not_compared": null,
+     "equivalence": {
+      "margin": 0.05,
+      "low": 0.19437124902104994,
+      "high": 0.19500020007955907,
+      "p": 1.0,
+      "equivalent": false
+     }
+    }
+   }
+  },
+  {
+   "id": "2026-10-19-smc1-launch-focus-longsession::longsession/resume-n@openai-completions#peak_mem_mib",
+   "rerun": "python3 -m buffon rerun 2026-10-19-smc1-launch-focus-longsession::longsession/resume-n@openai-completions#peak_mem_mib",
+   "scenario": "longsession/resume-n",
+   "api": "openai-completions",
+   "metric": "peak_mem_mib",
+   "kind": "memory",
+   "unit": "MiB",
+   "mde": 0.014954040621598613,
+   "aa": {
+    "pi-bun": 0.020756974009528098,
+    "pi-node": 0.018548293682582255,
+    "pibolt": 0.012317066501900585,
+    "pig-0.4.1": 0.026073969462746656,
+    "pig-tip": 0.03759981341828114
+   },
+   "comparisons": {
+    "pi-bun": {
+     "ratio": 1.500216568969998,
+     "ci": [
+      1.4757055075102412,
+      1.5392572790143546
+     ],
+     "floor": 0.020756974009528098,
+     "p": 0.0078125,
+     "p_holm": 0.03125,
+     "verdict": "loss",
+     "n": 8,
+     "arm_median": 101.47265625,
+     "not_compared": null,
+     "equivalence": {
+      "margin": 0.05,
+      "low": 1.479770763835429,
+      "high": 1.5296121971643903,
+      "p": 1.0,
+      "equivalent": false
+     }
+    },
+    "pibolt": {
+     "ratio": 0.34708786925009383,
+     "ci": [
+      0.34058586888775566,
+      0.35095482068001865
+     ],
+     "floor": 0.018548293682582255,
+     "p": 0.0078125,
+     "p_holm": 0.03125,
+     "verdict": "win",
+     "n": 8,
+     "arm_median": 23.4765625,
+     "not_compared": null,
+     "equivalence": {
+      "margin": 0.05,
+      "low": 0.3419435593991807,
+      "high": 0.3504017233348859,
+      "p": 1.0,
+      "equivalent": false
+     }
+    },
+    "pig-0.4.1": {
+     "ratio": 0.37428893188184,
+     "ci": [
+      0.36549840691852525,
+      0.38152680652680654
+     ],
+     "floor": 0.026073969462746656,
+     "p": 0.0078125,
+     "p_holm": 0.03125,
+     "verdict": "win",
+     "n": 8,
+     "arm_median": 25.31640625,
+     "not_compared": null,
+     "equivalence": {
+      "margin": 0.05,
+      "low": 0.3663802913063268,
+      "high": 0.3808802980903586,
+      "p": 1.0,
+      "equivalent": false
+     }
+    },
+    "pig-tip": {
+     "ratio": 0.31261008922641564,
+     "ci": [
+      0.30432319111564393,
+      0.31995225896599905
+     ],
+     "floor": 0.03759981341828114,
+     "p": 0.0078125,
+     "p_holm": 0.03125,
+     "verdict": "win",
+     "n": 8,
+     "arm_median": 21.14453125,
+     "not_compared": null,
+     "equivalence": {
+      "margin": 0.05,
+      "low": 0.3049897587619481,
+      "high": 0.31931500465983226,
+      "p": 1.0,
+      "equivalent": false
+     }
+    }
+   }
+  },
+  {
+   "id": "2026-10-19-smc1-launch-focus-longsession::longsession/resume-n@openai-completions#peak_rss_mib",
+   "rerun": "python3 -m buffon rerun 2026-10-19-smc1-launch-focus-longsession::longsession/resume-n@openai-completions#peak_rss_mib",
+   "scenario": "longsession/resume-n",
+   "api": "openai-completions",
+   "metric": "peak_rss_mib",
+   "kind": "memory",
+   "unit": "MiB",
+   "mde": 0.006425257729310297,
+   "aa": {
+    "pi-bun": 0.015676844113673104,
+    "pi-node": 0.007373823523447903,
+    "pibolt": 0.0030622825503151896,
+    "pig-0.4.1": 0.010984418575904377,
+    "pig-tip": 0.009420536505825998
+   },
+   "comparisons": {
+    "pi-bun": {
+     "ratio": 1.187086573521345,
+     "ci": [
+      1.1763208860860797,
+      1.2059575845879877
+     ],
+     "floor": 0.015676844113673104,
+     "p": 0.0078125,
+     "p_holm": 0.03125,
+     "verdict": "loss",
+     "n": 8,
+     "arm_median": 143.70703125,
+     "not_compared": null,
+     "equivalence": {
+      "margin": 0.05,
+      "low": 1.1776969425036856,
+      "high": 1.2018327901648866,
+      "p": 1.0,
+      "equivalent": false
+     }
+    },
+    "pibolt": {
+     "ratio": 0.7796457035913652,
+     "ci": [
+      0.7714468425259792,
+      0.783772405641283
+     ],
+     "floor": 0.007373823523447903,
+     "p": 0.0078125,
+     "p_holm": 0.03125,
+     "verdict": "win",
+     "n": 8,
+     "arm_median": 94.3828125,
+     "not_compared": null,
+     "equivalence": {
+      "margin": 0.05,
+      "low": 0.7724442594874914,
+      "high": 0.7836656031871994,
+      "p": 1.0,
+      "equivalent": false
+     }
+    },
+    "pig-0.4.1": {
+     "ratio": 0.4527120776999774,
+     "ci": [
+      0.44773780975219823,
+      0.45643516270033996
+     ],
+     "floor": 0.010984418575904377,
+     "p": 0.0078125,
+     "p_holm": 0.03125,
+     "verdict": "win",
+     "n": 8,
+     "arm_median": 54.8046875,
+     "not_compared": null,
+     "equivalence": {
+      "margin": 0.05,
+      "low": 0.448308977703795,
+      "high": 0.4562897715312748,
+      "p": 1.0,
+      "equivalent": false
+     }
+    },
+    "pig-tip": {
+     "ratio": 0.4623277725791359,
+     "ci": [
+      0.4581294964028777,
+      0.4645297069774972
+     ],
+     "floor": 0.009420536505825998,
+     "p": 0.0078125,
+     "p_holm": 0.03125,
+     "verdict": "win",
+     "n": 8,
+     "arm_median": 55.96875,
+     "not_compared": null,
+     "equivalence": {
+      "margin": 0.05,
+      "low": 0.4586647886422203,
+      "high": 0.46440019426906265,
+      "p": 1.0,
+      "equivalent": false
+     }
+    }
+   }
+  },
+  {
+   "id": "2026-10-19-smc1-launch-focus-longsession::longsession/resume-n@openai-completions#ready_cpu_ms",
+   "rerun": "python3 -m buffon rerun 2026-10-19-smc1-launch-focus-longsession::longsession/resume-n@openai-completions#ready_cpu_ms",
+   "scenario": "longsession/resume-n",
+   "api": "openai-completions",
+   "metric": "ready_cpu_ms",
+   "kind": "CPU",
+   "unit": "ms of CPU time",
+   "mde": 0.015855595006874557,
+   "aa": {
+    "pi-bun": 0.02573762670392113,
+    "pi-node": 0.031673494997004156,
+    "pibolt": 0.04206251148565869,
+    "pig-0.4.1": 0.02332927020902089,
+    "pig-tip": 0.019870644875793073
+   },
+   "comparisons": {
+    "pi-bun": {
+     "ratio": 1.5510351152170365,
+     "ci": [
+      1.5206748527242098,
+      1.5766988427795683
+     ],
+     "floor": 0.031673494997004156,
+     "p": 0.0078125,
+     "p_holm": 0.03125,
+     "verdict": "loss",
+     "n": 8,
+     "arm_median": 584.3455,
+     "not_compared": null,
+     "equivalence": {
+      "margin": 0.05,
+      "low": 1.5264101916724524,
+      "high": 1.572103714576551,
+      "p": 1.0,
+      "equivalent": false
+     }
+    },
+    "pibolt": {
+     "ratio": 0.10522222561384276,
+     "ci": [
+      0.10341902581182348,
+      0.10679003627002381
+     ],
+     "floor": 0.04206251148565869,
+     "p": 0.0078125,
+     "p_holm": 0.03125,
+     "verdict": "win",
+     "n": 8,
+     "arm_median": 39.641999999999996,
+     "not_compared": null,
+     "equivalence": {
+      "margin": 0.05,
+      "low": 0.10373133547489248,
+      "high": 0.10652329257648832,
+      "p": 1.0,
+      "equivalent": false
+     }
+    },
+    "pig-0.4.1": {
+     "ratio": 0.26702774153904957,
+     "ci": [
+      0.26023689421766105,
+      0.26961872503271234
+     ],
+     "floor": 0.031673494997004156,
+     "p": 0.0078125,
+     "p_holm": 0.03125,
+     "verdict": "win",
+     "n": 8,
+     "arm_median": 100.60149999999999,
+     "not_compared": null,
+     "equivalence": {
+      "margin": 0.05,
+      "low": 0.2610464604073395,
+      "high": 0.26927143688687855,
+      "p": 1.0,
+      "equivalent": false
+     }
+    },
+    "pig-tip": {
+     "ratio": 0.1430156431861827,
+     "ci": [
+      0.14031092718350094,
+      0.14421398514554648
+     ],
+     "floor": 0.031673494997004156,
+     "p": 0.0078125,
+     "p_holm": 0.03125,
+     "verdict": "win",
+     "n": 8,
+     "arm_median": 53.8805,
+     "not_compared": null,
+     "equivalence": {
+      "margin": 0.05,
+      "low": 0.14087714868816933,
+      "high": 0.14399679139539656,
+      "p": 1.0,
+      "equivalent": false
+     }
+    }
+   }
+  },
+  {
+   "id": "2026-10-19-smc1-launch-focus-longsession::longsession/resume-n@openai-completions#ready_ms",
+   "rerun": "python3 -m buffon rerun 2026-10-19-smc1-launch-focus-longsession::longsession/resume-n@openai-completions#ready_ms",
+   "scenario": "longsession/resume-n",
+   "api": "openai-completions",
+   "metric": "ready_ms",
+   "kind": "wall",
+   "unit": "ms",
+   "mde": 0.009225867303759454,
+   "aa": {
+    "pi-bun": 0.007152194738611761,
+    "pi-node": 0.010676347088172392,
+    "pibolt": 0.035551761165353954,
+    "pig-0.4.1": 0.017711281326011033,
+    "pig-tip": 0.31245720949724415
+   },
+   "comparisons": {
+    "pi-bun": {
+     "ratio": 1.6951685953478157,
+     "ci": [
+      1.683694735652402,
+      1.7089391239074596
+     ],
+     "floor": 0.010676347088172392,
+     "p": 0.0078125,
+     "p_holm": 0.03125,
+     "verdict": "loss",
+     "n": 8,
+     "arm_median": 454.2844135,
+     "not_compared": null,
+     "equivalence": {
+      "margin": 0.05,
+      "low": 1.685070417547355,
+      "high": 1.7079544571515481,
+      "p": 1.0,
+      "equivalent": false
+     }
+    },
+    "pibolt": {
+     "ratio": 0.13360643474940959,
+     "ci": [
+      0.13217613593436553,
+      0.13502152125574002
+     ],
+     "floor": 0.035551761165353954,
+     "p": 0.0078125,
+     "p_holm": 0.03125,
+     "verdict": "win",
+     "n": 8,
+     "arm_median": 35.8048875,
+     "not_compared": null,
+     "equivalence": {
+      "margin": 0.05,
+      "low": 0.13235665694041682,
+      "high": 0.13494092058345894,
+      "p": 1.0,
+      "equivalent": false
+     }
+    },
+    "pig-0.4.1": {
+     "ratio": 0.261773585376324,
+     "ci": [
+      0.259681969984097,
+      0.2638827008401151
+     ],
+     "floor": 0.017711281326011033,
+     "p": 0.0078125,
+     "p_holm": 0.03125,
+     "verdict": "win",
+     "n": 8,
+     "arm_median": 70.1521135,
+     "not_compared": null,
+     "equivalence": {
+      "margin": 0.05,
+      "low": 0.2598765605887742,
+      "high": 0.2634151157362046,
+      "p": 1.0,
+      "equivalent": false
+     }
+    },
+    "pig-tip": {
+     "ratio": 0.2459309618250365,
+     "ci": [
+      0.17906752850276023,
+      0.2482749761818095
+     ],
+     "floor": 0.31245720949724415,
+     "p": 0.0078125,
+     "p_holm": 0.03125,
+     "verdict": "win",
+     "n": 8,
+     "arm_median": 65.9064845,
+     "not_compared": null,
+     "equivalence": {
+      "margin": 0.05,
+      "low": 0.1934257155965568,
+      "high": 0.24804205018218417,
+      "p": 1.0,
+      "equivalent": false
+     }
+    }
+   }
+  },
+  {
+   "id": "2026-10-19-smc1-launch-focus-longsession::longsession/resume-n@openai-completions#ready_pss_mib",
+   "rerun": "python3 -m buffon rerun 2026-10-19-smc1-launch-focus-longsession::longsession/resume-n@openai-completions#ready_pss_mib",
+   "scenario": "longsession/resume-n",
+   "api": "openai-completions",
+   "metric": "ready_pss_mib",
+   "kind": "memory",
+   "unit": "MiB",
+   "mde": 0.010851372310966742,
+   "aa": {
+    "pi-bun": 0.01782634848113655,
+    "pi-node": 0.011900364796817978,
+    "pibolt": 0.003365328598425656,
+    "pig-0.4.1": 0.01590197087238122,
+    "pig-tip": 0.012038360657286626
+   },
+   "comparisons": {
+    "pi-bun": {
+     "ratio": 1.2256556349163077,
+     "ci": [
+      1.2124273295055708,
+      1.2461528643839113
+     ],
+     "floor": 0.01782634848113655,
+     "p": 0.0078125,
+     "p_holm": 0.03125,
+     "verdict": "loss",
+     "n": 8,
+     "arm_median": 131.71728515625,
+     "not_compared": null,
+     "equivalence": {
+      "margin": 0.05,
+      "low": 1.214537698662683,
+      "high": 1.2440861191860466,
+      "p": 1.0,
+      "equivalent": false
+     }
+    },
+    "pibolt": {
+     "ratio": 0.7753484906311906,
+     "ci": [
+      0.7651643175607651,
+      0.7827504500202049
+     ],
+     "floor": 0.011900364796817978,
+     "p": 0.0078125,
+     "p_holm": 0.03125,
+     "verdict": "win",
+     "n": 8,
+     "arm_median": 83.32421875,
+     "not_compared": null,
+     "equivalence": {
+      "margin": 0.05,
+      "low": 0.7665004769704278,
+      "high": 0.780763467582779,
+      "p": 1.0,
+      "equivalent": false
+     }
+    },
+    "pig-0.4.1": {
+     "ratio": 0.4167802555295058,
+     "ci": [
+      0.4120895952715609,
+      0.4227961256963915
+     ],
+     "floor": 0.01590197087238122,
+     "p": 0.0078125,
+     "p_holm": 0.03125,
+     "verdict": "win",
+     "n": 8,
+     "arm_median": 44.7900390625,
+     "not_compared": null,
+     "equivalence": {
+      "margin": 0.05,
+      "low": 0.41275940891664714,
+      "high": 0.4222466920262818,
+      "p": 1.0,
+      "equivalent": false
+     }
+    },
+    "pig-tip": {
+     "ratio": 0.4479172346109809,
+     "ci": [
+      0.4436274950953041,
+      0.4526652217038316
+     ],
+     "floor": 0.012038360657286626,
+     "p": 0.0078125,
+     "p_holm": 0.03125,
+     "verdict": "win",
+     "n": 8,
+     "arm_median": 48.13623046875,
+     "not_compared": null,
+     "equivalence": {
+      "margin": 0.05,
+      "low": 0.4441471150034238,
+      "high": 0.45159120854988655,
+      "p": 1.0,
+      "equivalent": false
+     }
+    }
+   }
+  },
+  {
+   "id": "2026-10-19-smc1-launch-focus-longsession::longsession/resume-n@openai-completions#ready_rss_mib",
+   "rerun": "python3 -m buffon rerun 2026-10-19-smc1-launch-focus-longsession::longsession/resume-n@openai-completions#ready_rss_mib",
+   "scenario": "longsession/resume-n",
+   "api": "openai-completions",
+   "metric": "ready_rss_mib",
+   "kind": "memory",
+   "unit": "MiB",
+   "mde": 0.01014329525268852,
+   "aa": {
+    "pi-bun": 0.0178824664145659,
+    "pi-node": 0.011332944766761978,
+    "pibolt": 0.00343459011078149,
+    "pig-0.4.1": 0.01517454496970362,
+    "pig-tip": 0.011583291170610823
+   },
+   "comparisons": {
+    "pi-bun": {
+     "ratio": 1.2467842736699963,
+     "ci": [
+      1.2342774843975035,
+      1.2680262199563002
+     ],
+     "floor": 0.0178824664145659,
+     "p": 0.0078125,
+     "p_holm": 0.03125,
+     "verdict": "loss",
+     "n": 8,
+     "arm_median": 140.66015625,
+     "not_compared": null,
+     "equivalence": {
+      "margin": 0.05,
+      "low": 1.2356757870163755,
+      "high": 1.266952893720894,
+      "p": 1.0,
+      "equivalent": false
+     }
+    },
+    "pibolt": {
+     "ratio": 0.7763447189377283,
+     "ci": [
+      0.7663298510018839,
+      0.7833094430654127
+     ],
+     "floor": 0.011332944766761978,
+     "p": 0.0078125,
+     "p_holm": 0.03125,
+     "verdict": "win",
+     "n": 8,
+     "arm_median": 87.5859375,
+     "not_compared": null,
+     "equivalence": {
+      "margin": 0.05,
+      "low": 0.767711405253412,
+      "high": 0.7817241199115121,
+      "p": 1.0,
+      "equivalent": false
+     }
+    },
+    "pig-0.4.1": {
+     "ratio": 0.41384623374824714,
+     "ci": [
+      0.4092313502008308,
+      0.4195772695772696
+     ],
+     "floor": 0.01517454496970362,
+     "p": 0.0078125,
+     "p_holm": 0.03125,
+     "verdict": "win",
+     "n": 8,
+     "arm_median": 46.689453125,
+     "not_compared": null,
+     "equivalence": {
+      "margin": 0.05,
+      "low": 0.40986557849255884,
+      "high": 0.4191614691614692,
+      "p": 1.0,
+      "equivalent": false
+     }
+    },
+    "pig-tip": {
+     "ratio": 0.44351920779737897,
+     "ci": [
+      0.43927028324531925,
+      0.4478201587246093
+     ],
+     "floor": 0.011583291170610823,
+     "p": 0.0078125,
+     "p_holm": 0.03125,
+     "verdict": "win",
+     "n": 8,
+     "arm_median": 50.037109375,
+     "not_compared": null,
+     "equivalence": {
+      "margin": 0.05,
+      "low": 0.43976792886813826,
+      "high": 0.4467940566810082,
+      "p": 1.0,
+      "equivalent": false
+     }
+    }
+   }
+  },
+  {
+   "id": "2026-10-19-smc1-launch-focus-longsession::longsession/resume-n@openai-completions#request_bytes",
+   "rerun": "python3 -m buffon rerun 2026-10-19-smc1-launch-focus-longsession::longsession/resume-n@openai-completions#request_bytes",
+   "scenario": "longsession/resume-n",
+   "api": "openai-completions",
+   "metric": "request_bytes",
+   "kind": "wire",
+   "unit": "bytes",
+   "mde": 0.0,
+   "aa": {
+    "pi-bun": 0.0,
+    "pi-node": 0.0,
+    "pibolt": 0.0,
+    "pig-0.4.1": 0.0,
+    "pig-tip": 0.0
+   },
+   "comparisons": {
+    "pi-bun": {
+     "ratio": 0.999779653174096,
+     "ci": [
+      0.999779653174096,
+      0.999779653174096
+     ],
+     "floor": 0.0,
+     "p": 0.0078125,
+     "p_holm": 0.03125,
+     "verdict": "win",
+     "n": 8,
+     "arm_median": 589849.0,
+     "not_compared": null,
+     "equivalence": null
+    },
+    "pibolt": {
+     "ratio": 1.0032492681942917,
+     "ci": [
+      1.0032492681942917,
+      1.0032492681942917
+     ],
+     "floor": 0.0,
+     "p": 0.0078125,
+     "p_holm": 0.03125,
+     "verdict": "loss",
+     "n": 8,
+     "arm_median": 591896.0,
+     "not_compared": null,
+     "equivalence": null
+    },
+    "pig-0.4.1": {
+     "ratio": 0.9999983050244161,
+     "ci": [
+      0.9999983050244161,
+      0.9999983050244161
+     ],
+     "floor": 0.0,
+     "p": 0.0078125,
+     "p_holm": 0.03125,
+     "verdict": "win",
+     "n": 8,
+     "arm_median": 589978.0,
+     "not_compared": null,
+     "equivalence": null
+    },
+    "pig-tip": {
+     "ratio": 0.9999338959522288,
+     "ci": [
+      0.9999338959522288,
+      0.9999338959522288
+     ],
+     "floor": 0.0,
+     "p": 0.0078125,
+     "p_holm": 0.03125,
+     "verdict": "win",
+     "n": 8,
+     "arm_median": 589940.0,
+     "not_compared": null,
+     "equivalence": null
+    }
+   }
+  },
+  {
+   "id": "2026-10-19-smc1-launch-focus-longsession::longsession/resume-n@openai-completions#request_bytes_per_turn",
+   "rerun": "python3 -m buffon rerun 2026-10-19-smc1-launch-focus-longsession::longsession/resume-n@openai-completions#request_bytes_per_turn",
+   "scenario": "longsession/resume-n",
+   "api": "openai-completions",
+   "metric": "request_bytes_per_turn",
+   "kind": "wire",
+   "unit": "bytes per turn",
+   "mde": 0.0,
+   "aa": {
+    "pi-bun": 0.0,
+    "pi-node": 0.0,
+    "pibolt": 0.0,
+    "pig-0.4.1": 0.0,
+    "pig-tip": 0.0
+   },
+   "comparisons": {
+    "pi-bun": {
+     "ratio": 0.999779653174096,
+     "ci": [
+      0.999779653174096,
+      0.999779653174096
+     ],
+     "floor": 0.0,
+     "p": 0.0078125,
+     "p_holm": 0.03125,
+     "verdict": "win",
+     "n": 8,
+     "arm_median": 589849.0,
+     "not_compared": null,
+     "equivalence": {
+      "margin": 0.0,
+      "low": 0.999779653174096,
+      "high": 0.999779653174096,
+      "p": 1.0,
+      "equivalent": false
+     }
+    },
+    "pibolt": {
+     "ratio": 1.0032492681942917,
+     "ci": [
+      1.0032492681942917,
+      1.0032492681942917
+     ],
+     "floor": 0.0,
+     "p": 0.0078125,
+     "p_holm": 0.03125,
+     "verdict": "loss",
+     "n": 8,
+     "arm_median": 591896.0,
+     "not_compared": null,
+     "equivalence": {
+      "margin": 0.0,
+      "low": 1.0032492681942917,
+      "high": 1.0032492681942917,
+      "p": 1.0,
+      "equivalent": false
+     }
+    },
+    "pig-0.4.1": {
+     "ratio": 0.9999983050244161,
+     "ci": [
+      0.9999983050244161,
+      0.9999983050244161
+     ],
+     "floor": 0.0,
+     "p": 0.0078125,
+     "p_holm": 0.03125,
+     "verdict": "win",
+     "n": 8,
+     "arm_median": 589978.0,
+     "not_compared": null,
+     "equivalence": {
+      "margin": 0.0,
+      "low": 0.9999983050244161,
+      "high": 0.9999983050244161,
+      "p": 1.0,
+      "equivalent": false
+     }
+    },
+    "pig-tip": {
+     "ratio": 0.9999338959522288,
+     "ci": [
+      0.9999338959522288,
+      0.9999338959522288
+     ],
+     "floor": 0.0,
+     "p": 0.0078125,
+     "p_holm": 0.03125,
+     "verdict": "win",
+     "n": 8,
+     "arm_median": 589940.0,
+     "not_compared": null,
+     "equivalence": {
+      "margin": 0.0,
+      "low": 0.9999338959522288,
+      "high": 0.9999338959522288,
+      "p": 1.0,
+      "equivalent": false
+     }
+    }
+   }
+  },
+  {
+   "id": "2026-10-19-smc1-launch-focus-longsession::longsession/resume-n@openai-completions#requests",
+   "rerun": "python3 -m buffon rerun 2026-10-19-smc1-launch-focus-longsession::longsession/resume-n@openai-completions#requests",
+   "scenario": "longsession/resume-n",
+   "api": "openai-completions",
+   "metric": "requests",
+   "kind": "wire",
+   "unit": "count",
+   "mde": 0.0,
+   "aa": {
+    "pi-bun": 0.0,
+    "pi-node": 0.0,
+    "pibolt": 0.0,
+    "pig-0.4.1": 0.0,
+    "pig-tip": 0.0
+   },
+   "comparisons": {
+    "pi-bun": {
+     "ratio": 1.0,
+     "ci": [
+      1.0,
+      1.0
+     ],
+     "floor": 0.0,
+     "p": 1.0,
+     "p_holm": 1.0,
+     "verdict": "no measurable difference",
+     "n": 8,
+     "arm_median": 1.0,
+     "not_compared": null,
+     "equivalence": null
+    },
+    "pibolt": {
+     "ratio": 1.0,
+     "ci": [
+      1.0,
+      1.0
+     ],
+     "floor": 0.0,
+     "p": 1.0,
+     "p_holm": 1.0,
+     "verdict": "no measurable difference",
+     "n": 8,
+     "arm_median": 1.0,
+     "not_compared": null,
+     "equivalence": null
+    },
+    "pig-0.4.1": {
+     "ratio": 1.0,
+     "ci": [
+      1.0,
+      1.0
+     ],
+     "floor": 0.0,
+     "p": 1.0,
+     "p_holm": 1.0,
+     "verdict": "no measurable difference",
+     "n": 8,
+     "arm_median": 1.0,
+     "not_compared": null,
+     "equivalence": null
+    },
+    "pig-tip": {
+     "ratio": 1.0,
+     "ci": [
+      1.0,
+      1.0
+     ],
+     "floor": 0.0,
+     "p": 1.0,
+     "p_holm": 1.0,
+     "verdict": "no measurable difference",
+     "n": 8,
+     "arm_median": 1.0,
+     "not_compared": null,
+     "equivalence": null
+    }
+   }
+  },
+  {
+   "id": "2026-10-19-smc1-launch-focus-longsession::longsession/resume-n@openai-completions#session_growth_bytes",
+   "rerun": "python3 -m buffon rerun 2026-10-19-smc1-launch-focus-longsession::longsession/resume-n@openai-completions#session_growth_bytes",
+   "scenario": "longsession/resume-n",
+   "api": "openai-completions",
+   "metric": "session_growth_bytes",
+   "kind": "size",
+   "unit": "bytes",
+   "mde": 0.0,
+   "aa": {
+    "pi-bun": 0.0,
+    "pi-node": 0.0,
+    "pibolt": 0.0,
+    "pig-0.4.1": 0.0,
+    "pig-tip": 0.0
+   },
+   "comparisons": {
+    "pi-bun": {
+     "ratio": 0.9817268796205887,
+     "ci": [
+      0.9817268796205887,
+      0.9817268796205887
+     ],
+     "floor": 0.0,
+     "p": 0.0078125,
+     "p_holm": 0.03125,
+     "verdict": "win",
+     "n": 8,
+     "arm_median": 7038.0,
+     "not_compared": null,
+     "equivalence": null
+    },
+    "pibolt": {
+     "ratio": 1.2584739852141162,
+     "ci": [
+      1.2584739852141162,
+      1.2584739852141162
+     ],
+     "floor": 0.0,
+     "p": 0.0078125,
+     "p_holm": 0.03125,
+     "verdict": "loss",
+     "n": 8,
+     "arm_median": 9022.0,
+     "not_compared": null,
+     "equivalence": null
+    },
+    "pig-0.4.1": {
+     "ratio": 0.9979076579718231,
+     "ci": [
+      0.9979076579718231,
+      0.9979076579718231
+     ],
+     "floor": 0.0,
+     "p": 0.0078125,
+     "p_holm": 0.03125,
+     "verdict": "win",
+     "n": 8,
+     "arm_median": 7154.0,
+     "not_compared": null,
+     "equivalence": null
+    },
+    "pig-tip": {
+     "ratio": 0.994420421258195,
+     "ci": [
+      0.994420421258195,
+      0.994420421258195
+     ],
+     "floor": 0.0,
+     "p": 0.0078125,
+     "p_holm": 0.03125,
+     "verdict": "win",
+     "n": 8,
+     "arm_median": 7129.0,
+     "not_compared": null,
+     "equivalence": null
+    }
+   }
+  },
+  {
+   "id": "2026-10-19-smc1-launch-focus-longsession::longsession/resume-n@openai-completions#side_requests",
+   "rerun": "python3 -m buffon rerun 2026-10-19-smc1-launch-focus-longsession::longsession/resume-n@openai-completions#side_requests",
+   "scenario": "longsession/resume-n",
+   "api": "openai-completions",
+   "metric": "side_requests",
+   "kind": "wire",
+   "unit": "count",
+   "mde": null,
+   "aa": {
+    "pi-bun": null,
+    "pi-node": null,
+    "pibolt": null,
+    "pig-0.4.1": null,
+    "pig-tip": null
+   },
+   "comparisons": {}
+  },
+  {
+   "id": "2026-10-19-smc1-launch-focus-longsession::longsession/resume-n@openai-completions#turn_cpu_ms",
+   "rerun": "python3 -m buffon rerun 2026-10-19-smc1-launch-focus-longsession::longsession/resume-n@openai-completions#turn_cpu_ms",
+   "scenario": "longsession/resume-n",
+   "api": "openai-completions",
+   "metric": "turn_cpu_ms",
+   "kind": "CPU",
+   "unit": "ms of CPU time",
+   "mde": 0.020478189186958803,
+   "aa": {
+    "pi-bun": 0.02896194169062552,
+    "pi-node": 0.035980789619949556,
+    "pibolt": 0.0364588113176133,
+    "pig-0.4.1": 0.1604546294107052,
+    "pig-tip": 0.09077757028880057
+   },
+   "comparisons": {
+    "pi-bun": {
+     "ratio": 1.454043431981733,
+     "ci": [
+      1.4476378953484168,
+      1.4803672521410949
+     ],
+     "floor": 0.035980789619949556,
+     "p": 0.0078125,
+     "p_holm": 0.03125,
+     "verdict": "loss",
+     "n": 8,
+     "arm_median": 79.9135,
+     "not_compared": null,
+     "equivalence": {
+      "margin": 0.05,
+      "low": 1.4488347794485097,
+      "high": 1.4692045609412636,
+      "p": 1.0,
+      "equivalent": false
+     }
+    },
+    "pibolt": {
+     "ratio": 0.11960625551542506,
+     "ci": [
+      0.11728226671758783,
+      0.12278372041907828
+     ],
+     "floor": 0.0364588113176133,
+     "p": 0.0078125,
+     "p_holm": 0.03125,
+     "verdict": "win",
+     "n": 8,
+     "arm_median": 6.573499999999999,
+     "not_compared": null,
+     "equivalence": {
+      "margin": 0.05,
+      "low": 0.1173245215875667,
+      "high": 0.12234561930226404,
+      "p": 1.0,
+      "equivalent": false
+     }
+    },
+    "pig-0.4.1": {
+     "ratio": 0.5822014392416237,
+     "ci": [
+      0.5227033692380226,
+      0.6356875961608909
+     ],
+     "floor": 0.1604546294107052,
+     "p": 0.0078125,
+     "p_holm": 0.03125,
+     "verdict": "win",
+     "n": 8,
+     "arm_median": 31.997499999999995,
+     "not_compared": null,
+     "equivalence": {
+      "margin": 0.05,
+      "low": 0.5294763390913052,
+      "high": 0.6347672752654201,
+      "p": 1.0,
+      "equivalent": false
+     }
+    },
+    "pig-tip": {
+     "ratio": 0.12274493035780905,
+     "ci": [
+      0.11892812660268141,
+      0.1239017590197913
+     ],
+     "floor": 0.09077757028880057,
+     "p": 0.0078125,
+     "p_holm": 0.03125,
+     "verdict": "win",
+     "n": 8,
+     "arm_median": 6.746000000000002,
+     "not_compared": null,
+     "equivalence": {
+      "margin": 0.05,
+      "low": 0.12020670513476008,
+      "high": 0.12363084462486523,
+      "p": 1.0,
+      "equivalent": false
+     }
+    }
+   }
+  },
+  {
+   "id": "2026-10-19-smc1-launch-focus-longsession::longsession/resume-n@openai-completions#turn_wall_ms",
+   "rerun": "python3 -m buffon rerun 2026-10-19-smc1-launch-focus-longsession::longsession/resume-n@openai-completions#turn_wall_ms",
+   "scenario": "longsession/resume-n",
+   "api": "openai-completions",
+   "metric": "turn_wall_ms",
+   "kind": "wall",
+   "unit": "ms",
+   "mde": 0.018315624781483603,
+   "aa": {
+    "pi-bun": 0.022478189053280664,
+    "pi-node": 0.029588775031630894,
+    "pibolt": 0.023307724164611403,
+    "pig-0.4.1": 0.03934926047864776,
+    "pig-tip": 0.04042877680746601
+   },
+   "comparisons": {
+    "pi-bun": {
+     "ratio": 1.3881830279505962,
+     "ci": [
+      1.3726137200146724,
+      1.411195416937096
+     ],
+     "floor": 0.029588775031630894,
+     "p": 0.0078125,
+     "p_holm": 0.03125,
+     "verdict": "loss",
+     "n": 8,
+     "arm_median": 70.850506,
+     "not_compared": null,
+     "equivalence": {
+      "margin": 0.05,
+      "low": 1.3727570209349806,
+      "high": 1.4043845389158303,
+      "p": 1.0,
+      "equivalent": false
+     }
+    },
+    "pibolt": {
+     "ratio": 0.15564338022759103,
+     "ci": [
+      0.1537612545620884,
+      0.1582560790826006
+     ],
+     "floor": 0.029588775031630894,
+     "p": 0.0078125,
+     "p_holm": 0.03125,
+     "verdict": "win",
+     "n": 8,
+     "arm_median": 7.9437739999999994,
+     "not_compared": null,
+     "equivalence": {
+      "margin": 0.05,
+      "low": 0.15405609445611843,
+      "high": 0.1581321189303649,
+      "p": 1.0,
+      "equivalent": false
+     }
+    },
+    "pig-0.4.1": {
+     "ratio": 0.39124845118772855,
+     "ci": [
+      0.37740775001361504,
+      0.4024844838763512
+     ],
+     "floor": 0.03934926047864776,
+     "p": 0.0078125,
+     "p_holm": 0.03125,
+     "verdict": "win",
+     "n": 8,
+     "arm_median": 19.968657,
+     "not_compared": null,
+     "equivalence": {
+      "margin": 0.05,
+      "low": 0.3804671004662013,
+      "high": 0.40221185833756645,
+      "p": 1.0,
+      "equivalent": false
+     }
+    },
+    "pig-tip": {
+     "ratio": 0.16874393335530768,
+     "ci": [
+      0.16656572070807282,
+      0.1728668323778815
+     ],
+     "floor": 0.04042877680746601,
+     "p": 0.0078125,
+     "p_holm": 0.03125,
+     "verdict": "win",
+     "n": 8,
+     "arm_median": 8.612404,
+     "not_compared": null,
+     "equivalence": {
+      "margin": 0.05,
+      "low": 0.16699891756991675,
+      "high": 0.172165050236878,
+      "p": 1.0,
+      "equivalent": false
+     }
+    }
+   }
+  },
+  {
+   "id": "2026-10-19-smc1-launch-focus-longsession::longsession/resume-n-varied@openai-completions#cpu_ms",
+   "rerun": "python3 -m buffon rerun 2026-10-19-smc1-launch-focus-longsession::longsession/resume-n-varied@openai-completions#cpu_ms",
+   "scenario": "longsession/resume-n-varied",
+   "api": "openai-completions",
+   "metric": "cpu_ms",
+   "kind": "CPU",
+   "unit": "ms of CPU time",
+   "mde": 0.016634505025343964,
+   "aa": {
+    "pi-bun": 0.01937308085028685,
+    "pi-node": 0.01670251084993079,
+    "pibolt": 0.0426316179161398,
+    "pig-0.4.1": 0.028830526940182594,
+    "pig-tip": 0.04592602239115592
+   },
+   "comparisons": {
+    "pi-bun": {
+     "ratio": 1.5694009912973055,
+     "ci": [
+      1.55820816354969,
+      1.6013459110856363
+     ],
+     "floor": 0.01937308085028685,
+     "p": 0.0078125,
+     "p_holm": 0.03125,
+     "verdict": "loss",
+     "n": 8,
+     "arm_median": 693.749,
+     "not_compared": null,
+     "equivalence": {
+      "margin": 0.05,
+      "low": 1.5603762409239141,
+      "high": 1.5960893022959777,
+      "p": 1.0,
+      "equivalent": false
+     }
+    },
+    "pibolt": {
+     "ratio": 0.11314181523684132,
+     "ci": [
+      0.11183179689736879,
+      0.1162150048893557
+     ],
+     "floor": 0.0426316179161398,
+     "p": 0.0078125,
+     "p_holm": 0.03125,
+     "verdict": "win",
+     "n": 8,
+     "arm_median": 50.013999999999996,
+     "not_compared": null,
+     "equivalence": {
+      "margin": 0.05,
+      "low": 0.1119625574049901,
+      "high": 0.1160229722802818,
+      "p": 1.0,
+      "equivalent": false
+     }
+    },
+    "pig-0.4.1": {
+     "ratio": 0.30943429092381575,
+     "ci": [
+      0.3034988662131519,
+      0.3162056501841267
+     ],
+     "floor": 0.028830526940182594,
+     "p": 0.0078125,
+     "p_holm": 0.03125,
+     "verdict": "win",
+     "n": 8,
+     "arm_median": 136.78449999999998,
+     "not_compared": null,
+     "equivalence": {
+      "margin": 0.05,
+      "low": 0.3034988662131519,
+      "high": 0.31583663267888784,
+      "p": 1.0,
+      "equivalent": false
+     }
+    },
+    "pig-tip": {
+     "ratio": 0.15774114517234591,
+     "ci": [
+      0.15551186422355548,
+      0.15879651255962712
+     ],
+     "floor": 0.04592602239115592,
+     "p": 0.0078125,
+     "p_holm": 0.03125,
+     "verdict": "win",
+     "n": 8,
+     "arm_median": 69.729,
+     "not_compared": null,
+     "equivalence": {
+      "margin": 0.05,
+      "low": 0.15566050483757635,
+      "high": 0.15869875111456921,
+      "p": 1.0,
+      "equivalent": false
+     }
+    }
+   }
+  },
+  {
+   "id": "2026-10-19-smc1-launch-focus-longsession::longsession/resume-n-varied@openai-completions#cycles",
+   "rerun": "python3 -m buffon rerun 2026-10-19-smc1-launch-focus-longsession::longsession/resume-n-varied@openai-completions#cycles",
+   "scenario": "longsession/resume-n-varied",
+   "api": "openai-completions",
+   "metric": "cycles",
+   "kind": "CPU",
+   "unit": "cycles",
+   "mde": 0.016778532179000792,
+   "aa": {
+    "pi-bun": 0.020969417501712256,
+    "pi-node": 0.016902697657657735,
+    "pibolt": 0.040816506306107656,
+    "pig-0.4.1": 0.04139358607916147,
+    "pig-tip": 0.007317418060975752
+   },
+   "comparisons": {
+    "pi-bun": {
+     "ratio": 1.5582348709818872,
+     "ci": [
+      1.5483602608523204,
+      1.5940785915715037
+     ],
+     "floor": 0.020969417501712256,
+     "p": 0.0078125,
+     "p_holm": 0.03125,
+     "verdict": "loss",
+     "n": 8,
+     "arm_median": 1893147247.0,
+     "not_compared": null,
+     "equivalence": {
+      "margin": 0.05,
+      "low": 1.550185286984316,
+      "high": 1.58732776091174,
+      "p": 1.0,
+      "equivalent": false
+     }
+    },
+    "pibolt": {
+     "ratio": 0.10659710736912677,
+     "ci": [
+      0.10538597871024005,
+      0.10979491194326822
+     ],
+     "floor": 0.040816506306107656,
+     "p": 0.0078125,
+     "p_holm": 0.03125,
+     "verdict": "win",
+     "n": 8,
+     "arm_median": 129508089.0,
+     "not_compared": null,
+     "equivalence": {
+      "margin": 0.05,
+      "low": 0.10559319841464015,
+      "high": 0.10942811842703976,
+      "p": 1.0,
+      "equivalent": false
+     }
+    },
+    "pig-0.4.1": {
+     "ratio": 0.29823760396100907,
+     "ci": [
+      0.29293288802575346,
+      0.30398098122150125
+     ],
+     "floor": 0.04139358607916147,
+     "p": 0.0078125,
+     "p_holm": 0.03125,
+     "verdict": "win",
+     "n": 8,
+     "arm_median": 362337995.0,
+     "not_compared": null,
+     "equivalence": {
+      "margin": 0.05,
+      "low": 0.29293288802575346,
+      "high": 0.30375582388447164,
+      "p": 1.0,
+      "equivalent": false
+     }
+    },
+    "pig-tip": {
+     "ratio": 0.14406761433708312,
+     "ci": [
+      0.1428638930832349,
+      0.1450006512772555
+     ],
+     "floor": 0.016902697657657735,
+     "p": 0.0078125,
+     "p_holm": 0.03125,
+     "verdict": "win",
+     "n": 8,
+     "arm_median": 175032155.0,
+     "not_compared": null,
+     "equivalence": {
+      "margin": 0.05,
+      "low": 0.1430721216568974,
+      "high": 0.14477823333308634,
+      "p": 1.0,
+      "equivalent": false
+     }
+    }
+   }
+  },
+  {
+   "id": "2026-10-19-smc1-launch-focus-longsession::longsession/resume-n-varied@openai-completions#instructions",
+   "rerun": "python3 -m buffon rerun 2026-10-19-smc1-launch-focus-longsession::longsession/resume-n-varied@openai-completions#instructions",
+   "scenario": "longsession/resume-n-varied",
+   "api": "openai-completions",
+   "metric": "instructions",
+   "kind": "CPU",
+   "unit": "instructions",
+   "mde": 0.0029759676758916976,
+   "aa": {
+    "pi-bun": 0.0024051530350025305,
+    "pi-node": 0.003495490955041661,
+    "pibolt": 0.012583919749798486,
+    "pig-0.4.1": 0.03137003386274527,
+    "pig-tip": 0.0024735017871483226
+   },
+   "comparisons": {
+    "pi-bun": {
+     "ratio": 1.531831017026942,
+     "ci": [
+      1.5281439176035732,
+      1.5339285529309172
+     ],
+     "floor": 0.003495490955041661,
+     "p": 0.0078125,
+     "p_holm": 0.03125,
+     "verdict": "loss",
+     "n": 8,
+     "arm_median": 3713474040.5,
+     "not_compared": null,
+     "equivalence": {
+      "margin": 0.05,
+      "low": 1.5281439176035732,
+      "high": 1.5338684393623265,
+      "p": 1.0,
+      "equivalent": false
+     }
+    },
+    "pibolt": {
+     "ratio": 0.0822237958480744,
+     "ci": [
+      0.08186975385878353,
+      0.08250311037274953
+     ],
+     "floor": 0.012583919749798486,
+     "p": 0.0078125,
+     "p_holm": 0.03125,
+     "verdict": "win",
+     "n": 8,
+     "arm_median": 199327424.5,
+     "not_compared": null,
+     "equivalence": {
+      "margin": 0.05,
+      "low": 0.08193163874918517,
+      "high": 0.08247287261515641,
+      "p": 1.0,
+      "equivalent": false
+     }
+    },
+    "pig-0.4.1": {
+     "ratio": 0.34434953546094255,
+     "ci": [
+      0.33919940118094727,
+      0.350653944450208
+     ],
+     "floor": 0.03137003386274527,
+     "p": 0.0078125,
+     "p_holm": 0.03125,
+     "verdict": "win",
+     "n": 8,
+     "arm_median": 834774232.0,
+     "not_compared": null,
+     "equivalence": {
+      "margin": 0.05,
+      "low": 0.33934793275941993,
+      "high": 0.3504431127435708,
+      "p": 1.0,
+      "equivalent": false
+     }
+    },
+    "pig-tip": {
+     "ratio": 0.19556796100812,
+     "ci": [
+      0.19504582778730173,
+      0.19590586755560296
+     ],
+     "floor": 0.003495490955041661,
+     "p": 0.0078125,
+     "p_holm": 0.03125,
+     "verdict": "win",
+     "n": 8,
+     "arm_median": 474097037.0,
+     "not_compared": null,
+     "equivalence": {
+      "margin": 0.05,
+      "low": 0.19511967719918935,
+      "high": 0.19586308419617252,
+      "p": 1.0,
+      "equivalent": false
+     }
+    }
+   }
+  },
+  {
+   "id": "2026-10-19-smc1-launch-focus-longsession::longsession/resume-n-varied@openai-completions#peak_mem_mib",
+   "rerun": "python3 -m buffon rerun 2026-10-19-smc1-launch-focus-longsession::longsession/resume-n-varied@openai-completions#peak_mem_mib",
+   "scenario": "longsession/resume-n-varied",
+   "api": "openai-completions",
+   "metric": "peak_mem_mib",
+   "kind": "memory",
+   "unit": "MiB",
+   "mde": 0.02232130120517702,
+   "aa": {
+    "pi-bun": 0.02199199313327785,
+    "pi-node": 0.02929236845616448,
+    "pibolt": 0.009537426934038182,
+    "pig-0.4.1": 0.03436333880002711,
+    "pig-tip": 0.008579043217348658
+   },
+   "comparisons": {
+    "pi-bun": {
+     "ratio": 1.524389193534495,
+     "ci": [
+      1.5135221126312441,
+      1.5454312990112513
+     ],
+     "floor": 0.02929236845616448,
+     "p": 0.0078125,
+     "p_holm": 0.03125,
+     "verdict": "loss",
+     "n": 8,
+     "arm_median": 103.703125,
+     "not_compared": null,
+     "equivalence": {
+      "margin": 0.05,
+      "low": 1.517205781142464,
+      "high": 1.5415171780373698,
+      "p": 1.0,
+      "equivalent": false
+     }
+    },
+    "pibolt": {
+     "ratio": 0.3444632654818983,
+     "ci": [
+      0.34087145223002685,
+      0.3507490799501579
+     ],
+     "floor": 0.02929236845616448,
+     "p": 0.0078125,
+     "p_holm": 0.03125,
+     "verdict": "win",
+     "n": 8,
+     "arm_median": 23.43359375,
+     "not_compared": null,
+     "equivalence": {
+      "margin": 0.05,
+      "low": 0.34159621722309785,
+      "high": 0.3494799579291808,
+      "p": 1.0,
+      "equivalent": false
+     }
+    },
+    "pig-0.4.1": {
+     "ratio": 0.36969940570181736,
+     "ci": [
+      0.36090268629360217,
+      0.37885874649204865
+     ],
+     "floor": 0.03436333880002711,
+     "p": 0.0078125,
+     "p_holm": 0.03125,
+     "verdict": "win",
+     "n": 8,
+     "arm_median": 25.150390625,
+     "not_compared": null,
+     "equivalence": {
+      "margin": 0.05,
+      "low": 0.36156538704309404,
+      "high": 0.377791346824843,
+      "p": 1.0,
+      "equivalent": false
+     }
+    },
+    "pig-tip": {
+     "ratio": 0.31354253394964254,
+     "ci": [
+      0.31070353918899557,
+      0.3187868966315546
+     ],
+     "floor": 0.02929236845616448,
+     "p": 0.0078125,
+     "p_holm": 0.03125,
+     "verdict": "win",
+     "n": 8,
+     "arm_median": 21.330078125,
+     "not_compared": null,
+     "equivalence": {
+      "margin": 0.05,
+      "low": 0.31148992062132375,
+      "high": 0.3176901605024424,
+      "p": 1.0,
+      "equivalent": false
+     }
+    }
+   }
+  },
+  {
+   "id": "2026-10-19-smc1-launch-focus-longsession::longsession/resume-n-varied@openai-completions#peak_rss_mib",
+   "rerun": "python3 -m buffon rerun 2026-10-19-smc1-launch-focus-longsession::longsession/resume-n-varied@openai-completions#peak_rss_mib",
+   "scenario": "longsession/resume-n-varied",
+   "api": "openai-completions",
+   "metric": "peak_rss_mib",
+   "kind": "memory",
+   "unit": "MiB",
+   "mde": 0.011242905854774738,
+   "aa": {
+    "pi-bun": 0.01548647687676657,
+    "pi-node": 0.014050845675108739,
+    "pibolt": 0.003929440664996751,
+    "pig-0.4.1": 0.014433976923134487,
+    "pig-tip": 0.0065669699699363645
+   },
+   "comparisons": {
+    "pi-bun": {
+     "ratio": 1.2017892484191217,
+     "ci": [
+      1.1964854687650863,
+      1.2151631139795966
+     ],
+     "floor": 0.01548647687676657,
+     "p": 0.0078125,
+     "p_holm": 0.03125,
+     "verdict": "loss",
+     "n": 8,
+     "arm_median": 145.87890625,
+     "not_compared": null,
+     "equivalence": {
+      "margin": 0.05,
+      "low": 1.1979981333075858,
+      "high": 1.2095574652638341,
+      "p": 1.0,
+      "equivalent": false
+     }
+    },
+    "pibolt": {
+     "ratio": 0.7785322370432348,
+     "ci": [
+      0.7745396805029833,
+      0.7849048639522047
+     ],
+     "floor": 0.014050845675108739,
+     "p": 0.0078125,
+     "p_holm": 0.03125,
+     "verdict": "win",
+     "n": 8,
+     "arm_median": 94.501953125,
+     "not_compared": null,
+     "equivalence": {
+      "margin": 0.05,
+      "low": 0.775210860310065,
+      "high": 0.7835950567563618,
+      "p": 1.0,
+      "equivalent": false
+     }
+    },
+    "pig-0.4.1": {
+     "ratio": 0.45114161128899904,
+     "ci": [
+      0.4470712773465067,
+      0.45769205792583934
+     ],
+     "floor": 0.014433976923134487,
+     "p": 0.0078125,
+     "p_holm": 0.03125,
+     "verdict": "win",
+     "n": 8,
+     "arm_median": 54.76171875,
+     "not_compared": null,
+     "equivalence": {
+      "margin": 0.05,
+      "low": 0.4481728375230905,
+      "high": 0.45767547414491816,
+      "p": 1.0,
+      "equivalent": false
+     }
+    },
+    "pig-tip": {
+     "ratio": 0.462678401905099,
+     "ci": [
+      0.46059216013344456,
+      0.46685038093694275
+     ],
+     "floor": 0.014050845675108739,
+     "p": 0.0078125,
+     "p_holm": 0.03125,
+     "verdict": "win",
+     "n": 8,
+     "arm_median": 56.162109375,
+     "not_compared": null,
+     "equivalence": {
+      "margin": 0.05,
+      "low": 0.46080447214547327,
+      "high": 0.4660398768033717,
+      "p": 1.0,
+      "equivalent": false
+     }
+    }
+   }
+  },
+  {
+   "id": "2026-10-19-smc1-launch-focus-longsession::longsession/resume-n-varied@openai-completions#ready_cpu_ms",
+   "rerun": "python3 -m buffon rerun 2026-10-19-smc1-launch-focus-longsession::longsession/resume-n-varied@openai-completions#ready_cpu_ms",
+   "scenario": "longsession/resume-n-varied",
+   "api": "openai-completions",
+   "metric": "ready_cpu_ms",
+   "kind": "CPU",
+   "unit": "ms of CPU time",
+   "mde": 0.020018833013438472,
+   "aa": {
+    "pi-bun": 0.015676157063546272,
+    "pi-node": 0.019356243783821104,
+    "pibolt": 0.036495719581851785,
+    "pig-0.4.1": 0.013257645828208707,
+    "pig-tip": 0.013928283796847546
+   },
+   "comparisons": {
+    "pi-bun": {
+     "ratio": 1.5796367297106264,
+     "ci": [
+      1.5673624490404163,
+      1.604242847099285
+     ],
+     "floor": 0.019356243783821104,
+     "p": 0.0078125,
+     "p_holm": 0.03125,
+     "verdict": "loss",
+     "n": 8,
+     "arm_median": 589.988,
+     "not_compared": null,
+     "equivalence": {
+      "margin": 0.05,
+      "low": 1.5700022353028837,
+      "high": 1.5992394031002766,
+      "p": 1.0,
+      "equivalent": false
+     }
+    },
+    "pibolt": {
+     "ratio": 0.10674545376657314,
+     "ci": [
+      0.10562140092419395,
+      0.10854255190810021
+     ],
+     "floor": 0.036495719581851785,
+     "p": 0.0078125,
+     "p_holm": 0.03125,
+     "verdict": "win",
+     "n": 8,
+     "arm_median": 39.869,
+     "not_compared": null,
+     "equivalence": {
+      "margin": 0.05,
+      "low": 0.10574978445293623,
+      "high": 0.1084768286442272,
+      "p": 1.0,
+      "equivalent": false
+     }
+    },
+    "pig-0.4.1": {
+     "ratio": 0.26752361471073316,
+     "ci": [
+      0.26558432634588724,
+      0.2686305326079656
+     ],
+     "floor": 0.019356243783821104,
+     "p": 0.0078125,
+     "p_holm": 0.03125,
+     "verdict": "win",
+     "n": 8,
+     "arm_median": 99.919,
+     "not_compared": null,
+     "equivalence": {
+      "margin": 0.05,
+      "low": 0.2657371132923116,
+      "high": 0.26835026681297336,
+      "p": 1.0,
+      "equivalent": false
+     }
+    },
+    "pig-tip": {
+     "ratio": 0.14298145093923362,
+     "ci": [
+      0.14194806992143422,
+      0.14421111292703642
+     ],
+     "floor": 0.019356243783821104,
+     "p": 0.0078125,
+     "p_holm": 0.03125,
+     "verdict": "win",
+     "n": 8,
+     "arm_median": 53.403,
+     "not_compared": null,
+     "equivalence": {
+      "margin": 0.05,
+      "low": 0.14212904805501736,
+      "high": 0.14407229840126845,
+      "p": 1.0,
+      "equivalent": false
+     }
+    }
+   }
+  },
+  {
+   "id": "2026-10-19-smc1-launch-focus-longsession::longsession/resume-n-varied@openai-completions#ready_ms",
+   "rerun": "python3 -m buffon rerun 2026-10-19-smc1-launch-focus-longsession::longsession/resume-n-varied@openai-completions#ready_ms",
+   "scenario": "longsession/resume-n-varied",
+   "api": "openai-completions",
+   "metric": "ready_ms",
+   "kind": "wall",
+   "unit": "ms",
+   "mde": 0.012006516297319691,
+   "aa": {
+    "pi-bun": 0.01246875133606336,
+    "pi-node": 0.013295784166118992,
+    "pibolt": 0.036274232259550766,
+    "pig-0.4.1": 0.0133555388843686,
+    "pig-tip": 0.15087957909680952
+   },
+   "comparisons": {
+    "pi-bun": {
+     "ratio": 1.6930778852657855,
+     "ci": [
+      1.677453155378659,
+      1.7121684221578104
+     ],
+     "floor": 0.013295784166118992,
+     "p": 0.0078125,
+     "p_holm": 0.03125,
+     "verdict": "loss",
+     "n": 8,
+     "arm_median": 453.1647435,
+     "not_compared": null,
+     "equivalence": {
+      "margin": 0.05,
+      "low": 1.6799626878213578,
+      "high": 1.7072051938255746,
+      "p": 1.0,
+      "equivalent": false
+     }
+    },
+    "pibolt": {
+     "ratio": 0.13455743408834142,
+     "ci": [
+      0.1321919654363812,
+      0.1365064747521651
+     ],
+     "floor": 0.036274232259550766,
+     "p": 0.0078125,
+     "p_holm": 0.03125,
+     "verdict": "win",
+     "n": 8,
+     "arm_median": 36.0152865,
+     "not_compared": null,
+     "equivalence": {
+      "margin": 0.05,
+      "low": 0.13270075015307137,
+      "high": 0.13634965702340165,
+      "p": 1.0,
+      "equivalent": false
+     }
+    },
+    "pig-0.4.1": {
+     "ratio": 0.2604791853429081,
+     "ci": [
+      0.2578207479298046,
+      0.26333005895443073
+     ],
+     "floor": 0.0133555388843686,
+     "p": 0.0078125,
+     "p_holm": 0.03125,
+     "verdict": "win",
+     "n": 8,
+     "arm_median": 69.719169,
+     "not_compared": null,
+     "equivalence": {
+      "margin": 0.05,
+      "low": 0.2583626913213416,
+      "high": 0.26320988674507023,
+      "p": 1.0,
+      "equivalent": false
+     }
+    },
+    "pig-tip": {
+     "ratio": 0.24641402153601216,
+     "ci": [
+      0.20875916722394655,
+      0.24821491511108731
+     ],
+     "floor": 0.15087957909680952,
+     "p": 0.0078125,
+     "p_holm": 0.03125,
+     "verdict": "win",
+     "n": 8,
+     "arm_median": 65.95452449999999,
+     "not_compared": null,
+     "equivalence": {
+      "margin": 0.05,
+      "low": 0.2268396711694626,
+      "high": 0.2481553430491677,
+      "p": 1.0,
+      "equivalent": false
+     }
+    }
+   }
+  },
+  {
+   "id": "2026-10-19-smc1-launch-focus-longsession::longsession/resume-n-varied@openai-completions#ready_pss_mib",
+   "rerun": "python3 -m buffon rerun 2026-10-19-smc1-launch-focus-longsession::longsession/resume-n-varied@openai-completions#ready_pss_mib",
+   "scenario": "longsession/resume-n-varied",
+   "api": "openai-completions",
+   "metric": "ready_pss_mib",
+   "kind": "memory",
+   "unit": "MiB",
+   "mde": 0.01599110166883833,
+   "aa": {
+    "pi-bun": 0.02156970430789442,
+    "pi-node": 0.017062207439959173,
+    "pibolt": 0.003517868518450103,
+    "pig-0.4.1": 0.007050097743621115,
+    "pig-tip": 0.008042345858721581
+   },
+   "comparisons": {
+    "pi-bun": {
+     "ratio": 1.2463634212059422,
+     "ci": [
+      1.2391144211606162,
+      1.2674210403396056
+     ],
+     "floor": 0.02156970430789442,
+     "p": 0.0078125,
+     "p_holm": 0.03125,
+     "verdict": "loss",
+     "n": 8,
+     "arm_median": 133.71142578125,
+     "not_compared": null,
+     "equivalence": {
+      "margin": 0.05,
+      "low": 1.23963864623394,
+      "high": 1.2620469417704228,
+      "p": 1.0,
+      "equivalent": false
+     }
+    },
+    "pibolt": {
+     "ratio": 0.7769170550538887,
+     "ci": [
+      0.7702899958875447,
+      0.7861177512990669
+     ],
+     "floor": 0.017062207439959173,
+     "p": 0.0078125,
+     "p_holm": 0.03125,
+     "verdict": "win",
+     "n": 8,
+     "arm_median": 83.3486328125,
+     "not_compared": null,
+     "equivalence": {
+      "margin": 0.05,
+      "low": 0.771415272122524,
+      "high": 0.7849086101850787,
+      "p": 1.0,
+      "equivalent": false
+     }
+    },
+    "pig-0.4.1": {
+     "ratio": 0.41968577046315175,
+     "ci": [
+      0.4154115554910358,
+      0.42458951332293465
+     ],
+     "floor": 0.017062207439959173,
+     "p": 0.0078125,
+     "p_holm": 0.03125,
+     "verdict": "win",
+     "n": 8,
+     "arm_median": 45.0244140625,
+     "not_compared": null,
+     "equivalence": {
+      "margin": 0.05,
+      "low": 0.41602963553365696,
+      "high": 0.423690079319462,
+      "p": 1.0,
+      "equivalent": false
+     }
+    },
+    "pig-tip": {
+     "ratio": 0.45156386542382754,
+     "ci": [
+      0.4480251824192079,
+      0.45777917247362643
+     ],
+     "floor": 0.017062207439959173,
+     "p": 0.0078125,
+     "p_holm": 0.03125,
+     "verdict": "win",
+     "n": 8,
+     "arm_median": 48.4443359375,
+     "not_compared": null,
+     "equivalence": {
+      "margin": 0.05,
+      "low": 0.44856606079811673,
+      "high": 0.45628233130244855,
+      "p": 1.0,
+      "equivalent": false
+     }
+    }
+   }
+  },
+  {
+   "id": "2026-10-19-smc1-launch-focus-longsession::longsession/resume-n-varied@openai-completions#ready_rss_mib",
+   "rerun": "python3 -m buffon rerun 2026-10-19-smc1-launch-focus-longsession::longsession/resume-n-varied@openai-completions#ready_rss_mib",
+   "scenario": "longsession/resume-n-varied",
+   "api": "openai-completions",
+   "metric": "ready_rss_mib",
+   "kind": "memory",
+   "unit": "MiB",
+   "mde": 0.01555071367802151,
+   "aa": {
+    "pi-bun": 0.008178096569139084,
+    "pi-node": 0.015786225060406882,
+    "pibolt": 0.003345603655922254,
+    "pig-0.4.1": 0.006763835230985525,
+    "pig-tip": 0.007739677194215445
+   },
+   "comparisons": {
+    "pi-bun": {
+     "ratio": 1.267467457057182,
+     "ci": [
+      1.2544164743965012,
+      1.2804314329738058
+     ],
+     "floor": 0.015786225060406882,
+     "p": 0.0078125,
+     "p_holm": 0.03125,
+     "verdict": "loss",
+     "n": 8,
+     "arm_median": 142.8203125,
+     "not_compared": null,
+     "equivalence": {
+      "margin": 0.05,
+      "low": 1.2569893216297474,
+      "high": 1.2784878834570668,
+      "p": 1.0,
+      "equivalent": false
+     }
+    },
+    "pibolt": {
+     "ratio": 0.7778759988213475,
+     "ci": [
+      0.7714280794793209,
+      0.7868048746323014
+     ],
+     "floor": 0.015786225060406882,
+     "p": 0.0078125,
+     "p_holm": 0.03125,
+     "verdict": "win",
+     "n": 8,
+     "arm_median": 87.65234375,
+     "not_compared": null,
+     "equivalence": {
+      "margin": 0.05,
+      "low": 0.7724439546816351,
+      "high": 0.7857893262361675,
+      "p": 1.0,
+      "equivalent": false
+     }
+    },
+    "pig-0.4.1": {
+     "ratio": 0.416428336193299,
+     "ci": [
+      0.41236133669696234,
+      0.42110239529345844
+     ],
+     "floor": 0.015786225060406882,
+     "p": 0.0078125,
+     "p_holm": 0.03125,
+     "verdict": "win",
+     "n": 8,
+     "arm_median": 46.923828125,
+     "not_compared": null,
+     "equivalence": {
+      "margin": 0.05,
+      "low": 0.41295497671209247,
+      "high": 0.4203371970495258,
+      "p": 1.0,
+      "equivalent": false
+     }
+    },
+    "pig-tip": {
+     "ratio": 0.4467786386563361,
+     "ci": [
+      0.4435070078170736,
+      0.452616789603091
+     ],
+     "floor": 0.015786225060406882,
+     "p": 0.0078125,
+     "p_holm": 0.03125,
+     "verdict": "win",
+     "n": 8,
+     "arm_median": 50.34375,
+     "not_compared": null,
+     "equivalence": {
+      "margin": 0.05,
+      "low": 0.44399986202614605,
+      "high": 0.45146986942252637,
+      "p": 1.0,
+      "equivalent": false
+     }
+    }
+   }
+  },
+  {
+   "id": "2026-10-19-smc1-launch-focus-longsession::longsession/resume-n-varied@openai-completions#request_bytes",
+   "rerun": "python3 -m buffon rerun 2026-10-19-smc1-launch-focus-longsession::longsession/resume-n-varied@openai-completions#request_bytes",
+   "scenario": "longsession/resume-n-varied",
+   "api": "openai-completions",
+   "metric": "request_bytes",
+   "kind": "wire",
+   "unit": "bytes",
+   "mde": 0.0,
+   "aa": {
+    "pi-bun": 0.0,
+    "pi-node": 0.0,
+    "pibolt": 0.0,
+    "pig-0.4.1": 0.0,
+    "pig-tip": 0.0
+   },
+   "comparisons": {
+    "pi-bun": {
+     "ratio": 0.9997796557884424,
+     "ci": [
+      0.9997796557884424,
+      0.9997796557884424
+     ],
+     "floor": 0.0,
+     "p": 0.0078125,
+     "p_holm": 0.03125,
+     "verdict": "win",
+     "n": 8,
+     "arm_median": 589856.0,
+     "not_compared": null,
+     "equivalence": null
+    },
+    "pibolt": {
+     "ratio": 1.0032492296427373,
+     "ci": [
+      1.0032492296427373,
+      1.0032492296427373
+     ],
+     "floor": 0.0,
+     "p": 0.0078125,
+     "p_holm": 0.03125,
+     "verdict": "loss",
+     "n": 8,
+     "arm_median": 591903.0,
+     "not_compared": null,
+     "equivalence": null
+    },
+    "pig-0.4.1": {
+     "ratio": 1.0000220344211557,
+     "ci": [
+      1.0000220344211557,
+      1.0000220344211557
+     ],
+     "floor": 0.0,
+     "p": 0.0078125,
+     "p_holm": 0.03125,
+     "verdict": "loss",
+     "n": 8,
+     "arm_median": 589999.0,
+     "not_compared": null,
+     "equivalence": null
+    },
+    "pig-tip": {
+     "ratio": 0.999957626113162,
+     "ci": [
+      0.999957626113162,
+      0.999957626113162
+     ],
+     "floor": 0.0,
+     "p": 0.0078125,
+     "p_holm": 0.03125,
+     "verdict": "win",
+     "n": 8,
+     "arm_median": 589961.0,
+     "not_compared": null,
+     "equivalence": null
+    }
+   }
+  },
+  {
+   "id": "2026-10-19-smc1-launch-focus-longsession::longsession/resume-n-varied@openai-completions#request_bytes_per_turn",
+   "rerun": "python3 -m buffon rerun 2026-10-19-smc1-launch-focus-longsession::longsession/resume-n-varied@openai-completions#request_bytes_per_turn",
+   "scenario": "longsession/resume-n-varied",
+   "api": "openai-completions",
+   "metric": "request_bytes_per_turn",
+   "kind": "wire",
+   "unit": "bytes per turn",
+   "mde": 0.0,
+   "aa": {
+    "pi-bun": 0.0,
+    "pi-node": 0.0,
+    "pibolt": 0.0,
+    "pig-0.4.1": 0.0,
+    "pig-tip": 0.0
+   },
+   "comparisons": {
+    "pi-bun": {
+     "ratio": 0.9997796557884424,
+     "ci": [
+      0.9997796557884424,
+      0.9997796557884424
+     ],
+     "floor": 0.0,
+     "p": 0.0078125,
+     "p_holm": 0.03125,
+     "verdict": "win",
+     "n": 8,
+     "arm_median": 589856.0,
+     "not_compared": null,
+     "equivalence": {
+      "margin": 0.0,
+      "low": 0.9997796557884424,
+      "high": 0.9997796557884424,
+      "p": 1.0,
+      "equivalent": false
+     }
+    },
+    "pibolt": {
+     "ratio": 1.0032492296427373,
+     "ci": [
+      1.0032492296427373,
+      1.0032492296427373
+     ],
+     "floor": 0.0,
+     "p": 0.0078125,
+     "p_holm": 0.03125,
+     "verdict": "loss",
+     "n": 8,
+     "arm_median": 591903.0,
+     "not_compared": null,
+     "equivalence": {
+      "margin": 0.0,
+      "low": 1.0032492296427373,
+      "high": 1.0032492296427373,
+      "p": 1.0,
+      "equivalent": false
+     }
+    },
+    "pig-0.4.1": {
+     "ratio": 1.0000220344211557,
+     "ci": [
+      1.0000220344211557,
+      1.0000220344211557
+     ],
+     "floor": 0.0,
+     "p": 0.0078125,
+     "p_holm": 0.03125,
+     "verdict": "loss",
+     "n": 8,
+     "arm_median": 589999.0,
+     "not_compared": null,
+     "equivalence": {
+      "margin": 0.0,
+      "low": 1.0000220344211557,
+      "high": 1.0000220344211557,
+      "p": 1.0,
+      "equivalent": false
+     }
+    },
+    "pig-tip": {
+     "ratio": 0.999957626113162,
+     "ci": [
+      0.999957626113162,
+      0.999957626113162
+     ],
+     "floor": 0.0,
+     "p": 0.0078125,
+     "p_holm": 0.03125,
+     "verdict": "win",
+     "n": 8,
+     "arm_median": 589961.0,
+     "not_compared": null,
+     "equivalence": {
+      "margin": 0.0,
+      "low": 0.999957626113162,
+      "high": 0.999957626113162,
+      "p": 1.0,
+      "equivalent": false
+     }
+    }
+   }
+  },
+  {
+   "id": "2026-10-19-smc1-launch-focus-longsession::longsession/resume-n-varied@openai-completions#requests",
+   "rerun": "python3 -m buffon rerun 2026-10-19-smc1-launch-focus-longsession::longsession/resume-n-varied@openai-completions#requests",
+   "scenario": "longsession/resume-n-varied",
+   "api": "openai-completions",
+   "metric": "requests",
+   "kind": "wire",
+   "unit": "count",
+   "mde": 0.0,
+   "aa": {
+    "pi-bun": 0.0,
+    "pi-node": 0.0,
+    "pibolt": 0.0,
+    "pig-0.4.1": 0.0,
+    "pig-tip": 0.0
+   },
+   "comparisons": {
+    "pi-bun": {
+     "ratio": 1.0,
+     "ci": [
+      1.0,
+      1.0
+     ],
+     "floor": 0.0,
+     "p": 1.0,
+     "p_holm": 1.0,
+     "verdict": "no measurable difference",
+     "n": 8,
+     "arm_median": 1.0,
+     "not_compared": null,
+     "equivalence": null
+    },
+    "pibolt": {
+     "ratio": 1.0,
+     "ci": [
+      1.0,
+      1.0
+     ],
+     "floor": 0.0,
+     "p": 1.0,
+     "p_holm": 1.0,
+     "verdict": "no measurable difference",
+     "n": 8,
+     "arm_median": 1.0,
+     "not_compared": null,
+     "equivalence": null
+    },
+    "pig-0.4.1": {
+     "ratio": 1.0,
+     "ci": [
+      1.0,
+      1.0
+     ],
+     "floor": 0.0,
+     "p": 1.0,
+     "p_holm": 1.0,
+     "verdict": "no measurable difference",
+     "n": 8,
+     "arm_median": 1.0,
+     "not_compared": null,
+     "equivalence": null
+    },
+    "pig-tip": {
+     "ratio": 1.0,
+     "ci": [
+      1.0,
+      1.0
+     ],
+     "floor": 0.0,
+     "p": 1.0,
+     "p_holm": 1.0,
+     "verdict": "no measurable difference",
+     "n": 8,
+     "arm_median": 1.0,
+     "not_compared": null,
+     "equivalence": null
+    }
+   }
+  },
+  {
+   "id": "2026-10-19-smc1-launch-focus-longsession::longsession/resume-n-varied@openai-completions#session_growth_bytes",
+   "rerun": "python3 -m buffon rerun 2026-10-19-smc1-launch-focus-longsession::longsession/resume-n-varied@openai-completions#session_growth_bytes",
+   "scenario": "longsession/resume-n-varied",
+   "api": "openai-completions",
+   "metric": "session_growth_bytes",
+   "kind": "size",
+   "unit": "bytes",
+   "mde": 0.0,
+   "aa": {
+    "pi-bun": 0.0,
+    "pi-node": 0.0,
+    "pibolt": 0.0,
+    "pig-0.4.1": 0.0,
+    "pig-tip": 0.0
+   },
+   "comparisons": {
+    "pi-bun": {
+     "ratio": 0.9817624947793401,
+     "ci": [
+      0.9817624947793401,
+      0.9817624947793401
+     ],
+     "floor": 0.0,
+     "p": 0.0078125,
+     "p_holm": 0.03125,
+     "verdict": "win",
+     "n": 8,
+     "arm_median": 7052.0,
+     "not_compared": null,
+     "equivalence": null
+    },
+    "pibolt": {
+     "ratio": 1.2579702074342196,
+     "ci": [
+      1.2579702074342196,
+      1.2579702074342196
+     ],
+     "floor": 0.0,
+     "p": 0.0078125,
+     "p_holm": 0.03125,
+     "verdict": "loss",
+     "n": 8,
+     "arm_median": 9036.0,
+     "not_compared": null,
+     "equivalence": null
+    },
+    "pig-0.4.1": {
+     "ratio": 0.9998607824028958,
+     "ci": [
+      0.9998607824028958,
+      0.9998607824028958
+     ],
+     "floor": 0.0,
+     "p": 0.0078125,
+     "p_holm": 0.03125,
+     "verdict": "win",
+     "n": 8,
+     "arm_median": 7182.0,
+     "not_compared": null,
+     "equivalence": null
+    },
+    "pig-tip": {
+     "ratio": 0.9963803424752888,
+     "ci": [
+      0.9963803424752888,
+      0.9963803424752888
+     ],
+     "floor": 0.0,
+     "p": 0.0078125,
+     "p_holm": 0.03125,
+     "verdict": "win",
+     "n": 8,
+     "arm_median": 7157.0,
+     "not_compared": null,
+     "equivalence": null
+    }
+   }
+  },
+  {
+   "id": "2026-10-19-smc1-launch-focus-longsession::longsession/resume-n-varied@openai-completions#side_requests",
+   "rerun": "python3 -m buffon rerun 2026-10-19-smc1-launch-focus-longsession::longsession/resume-n-varied@openai-completions#side_requests",
+   "scenario": "longsession/resume-n-varied",
+   "api": "openai-completions",
+   "metric": "side_requests",
+   "kind": "wire",
+   "unit": "count",
+   "mde": null,
+   "aa": {
+    "pi-bun": null,
+    "pi-node": null,
+    "pibolt": null,
+    "pig-0.4.1": null,
+    "pig-tip": null
+   },
+   "comparisons": {}
+  },
+  {
+   "id": "2026-10-19-smc1-launch-focus-longsession::longsession/resume-n-varied@openai-completions#turn_cpu_ms",
+   "rerun": "python3 -m buffon rerun 2026-10-19-smc1-launch-focus-longsession::longsession/resume-n-varied@openai-completions#turn_cpu_ms",
+   "scenario": "longsession/resume-n-varied",
+   "api": "openai-completions",
+   "metric": "turn_cpu_ms",
+   "kind": "CPU",
+   "unit": "ms of CPU time",
+   "mde": 0.025571562337069722,
+   "aa": {
+    "pi-bun": 0.038517999870410755,
+    "pi-node": 0.03669456188248999,
+    "pibolt": 0.05197039557883644,
+    "pig-0.4.1": 0.1678403589061777,
+    "pig-tip": 0.04162900824660486
+   },
+   "comparisons": {
+    "pi-bun": {
+     "ratio": 1.4358576938326784,
+     "ci": [
+      1.396034739889464,
+      1.497893628225381
+     ],
+     "floor": 0.038517999870410755,
+     "p": 0.0078125,
+     "p_holm": 0.03125,
+     "verdict": "loss",
+     "n": 8,
+     "arm_median": 79.67000000000002,
+     "not_compared": null,
+     "equivalence": {
+      "margin": 0.05,
+      "low": 1.397363828499768,
+      "high": 1.487105758916902,
+      "p": 1.0,
+      "equivalent": false
+     }
+    },
+    "pibolt": {
+     "ratio": 0.11794867173701469,
+     "ci": [
+      0.11395834063891717,
+      0.12552876098195875
+     ],
+     "floor": 0.05197039557883644,
+     "p": 0.0078125,
+     "p_holm": 0.03125,
+     "verdict": "win",
+     "n": 8,
+     "arm_median": 6.544499999999999,
+     "not_compared": null,
+     "equivalence": {
+      "margin": 0.05,
+      "low": 0.11423809106061933,
+      "high": 0.12514868615506608,
+      "p": 1.0,
+      "equivalent": false
+     }
+    },
+    "pig-0.4.1": {
+     "ratio": 0.5725227985437769,
+     "ci": [
+      0.511957189227125,
+      0.61932824758668
+     ],
+     "floor": 0.1678403589061777,
+     "p": 0.0078125,
+     "p_holm": 0.03125,
+     "verdict": "win",
+     "n": 8,
+     "arm_median": 31.76700000000001,
+     "not_compared": null,
+     "equivalence": {
+      "margin": 0.05,
+      "low": 0.5165247805129206,
+      "high": 0.619039010810224,
+      "p": 1.0,
+      "equivalent": false
+     }
+    },
+    "pig-tip": {
+     "ratio": 0.12245431279962514,
+     "ci": [
+      0.11863099203983593,
+      0.12531941499483504
+     ],
+     "floor": 0.04162900824660486,
+     "p": 0.0078125,
+     "p_holm": 0.03125,
+     "verdict": "win",
+     "n": 8,
+     "arm_median": 6.794500000000003,
+     "not_compared": null,
+     "equivalence": {
+      "margin": 0.05,
+      "low": 0.11895780331608037,
+      "high": 0.12500451932463208,
+      "p": 1.0,
+      "equivalent": false
+     }
+    }
+   }
+  },
+  {
+   "id": "2026-10-19-smc1-launch-focus-longsession::longsession/resume-n-varied@openai-completions#turn_wall_ms",
+   "rerun": "python3 -m buffon rerun 2026-10-19-smc1-launch-focus-longsession::longsession/resume-n-varied@openai-completions#turn_wall_ms",
+   "scenario": "longsession/resume-n-varied",
+   "api": "openai-completions",
+   "metric": "turn_wall_ms",
+   "kind": "wall",
+   "unit": "ms",
+   "mde": 0.015476246257952216,
+   "aa": {
+    "pi-bun": 0.024642730091270555,
+    "pi-node": 0.01199456370861069,
+    "pibolt": 0.02897217517055478,
+    "pig-0.4.1": 0.039631494653359335,
+    "pig-tip": 0.03110946523769703
+   },
+   "comparisons": {
+    "pi-bun": {
+     "ratio": 1.3739815292997817,
+     "ci": [
+      1.3625400587710546,
+      1.405005493357478
+     ],
+     "floor": 0.024642730091270555,
+     "p": 0.0078125,
+     "p_holm": 0.03125,
+     "verdict": "loss",
+     "n": 8,
+     "arm_median": 71.198928,
+     "not_compared": null,
+     "equivalence": {
+      "margin": 0.05,
+      "low": 1.364877069685406,
+      "high": 1.3967226415359564,
+      "p": 1.0,
+      "equivalent": false
+     }
+    },
+    "pibolt": {
+     "ratio": 0.15311317205654254,
+     "ci": [
+      0.15085097208370551,
+      0.15958208415846833
+     ],
+     "floor": 0.02897217517055478,
+     "p": 0.0078125,
+     "p_holm": 0.03125,
+     "verdict": "win",
+     "n": 8,
+     "arm_median": 7.934236,
+     "not_compared": null,
+     "equivalence": {
+      "margin": 0.05,
+      "low": 0.15115366948463138,
+      "high": 0.15863527776558645,
+      "p": 1.0,
+      "equivalent": false
+     }
+    },
+    "pig-0.4.1": {
+     "ratio": 0.38078672877504044,
+     "ci": [
+      0.37220550913271816,
+      0.3933804048841733
+     ],
+     "floor": 0.039631494653359335,
+     "p": 0.0078125,
+     "p_holm": 0.03125,
+     "verdict": "win",
+     "n": 8,
+     "arm_median": 19.732148000000002,
+     "not_compared": null,
+     "equivalence": {
+      "margin": 0.05,
+      "low": 0.3734764285903074,
+      "high": 0.39118127827713156,
+      "p": 1.0,
+      "equivalent": false
+     }
+    },
+    "pig-tip": {
+     "ratio": 0.17070991423553422,
+     "ci": [
+      0.16717764442091587,
+      0.1757296900252699
+     ],
+     "floor": 0.03110946523769703,
+     "p": 0.0078125,
+     "p_holm": 0.03125,
+     "verdict": "win",
+     "n": 8,
+     "arm_median": 8.846089,
+     "not_compared": null,
+     "equivalence": {
+      "margin": 0.05,
+      "low": 0.16728886099201243,
+      "high": 0.17424635455077692,
+      "p": 1.0,
+      "equivalent": false
+     }
+    }
+   }
+  }
+ ],
+ "grade_inputs": {
+  "method_version": 1,
+  "method_sha256": "c585418aa13158fcbc72dbf434744400c46ef512a9eb699898aead4cb3a53701",
+  "reference": "pi-node",
+  "provisional": true,
+  "reasons": [
+   "run 1: adaptive stopping: 2 of 2 cells stopped with fewer than 12 rounds (8-8) because their answer was clear; the 12-round minimum applies to the Verified badge",
+   "run 1: 3 samples waited for the host to quiet down (longest 2 s) and 0 gave up waiting"
+  ],
+  "notes": 4,
+  "arms": {
+   "pi-node": {
+    "label": "Pi on Node",
+    "cost": "npm ci --ignore-scripts; 110.6 MB + node 199 MB; linux-x64",
+    "relation": "pi-reference",
+    "claims": [
+     "pi-extensions",
+     "pi-sessions",
+     "pi-rpc"
+    ]
+   },
+   "pi-bun": {
+    "label": "Pi on Bun",
+    "cost": "release archive; 114.5 MB; linux-x64",
+    "relation": "pi-reference",
+    "claims": [
+     "pi-extensions",
+     "pi-sessions",
+     "pi-rpc"
+    ]
+   },
+   "pig-tip": {
+    "label": "PiG 0.5.0",
+    "cost": "source build; 70.2 MB; linux-x64",
+    "relation": "pi-port",
+    "claims": [
+     "pi-extensions",
+     "pi-sessions",
+     "pi-rpc"
+    ]
+   },
+   "pig-0.4.1": {
+    "label": "PiG 0.4.1",
+    "cost": "release archive; 63.8 MB; linux-x64",
+    "relation": "pi-port",
+    "claims": [
+     "pi-extensions",
+     "pi-sessions",
+     "pi-rpc"
+    ]
+   },
+   "pibolt": {
+    "label": "Pi-Bolt",
+    "cost": "release archive; 267.5 MB; linux-x64",
+    "relation": "pi-fork",
+    "claims": [
+     "pi-extensions",
+     "pi-sessions",
+     "pi-rpc"
+    ]
+   }
+  },
+  "cells": [
+   {
+    "family": "long-session",
+    "kind": "cpu",
+    "direction": "lower",
+    "scenario": "longsession/resume-n",
+    "api": "openai-completions",
+    "metric": "ready_cpu_ms",
+    "arms": {
+     "pi-bun": {
+      "ratio": 1.5510351152170365,
+      "ci": [
+       1.5206748527242098,
+       1.5766988427795683
+      ],
+      "floor": 0.031673494997004156,
+      "n": 8
+     },
+     "pibolt": {
+      "ratio": 0.10522222561384276,
+      "ci": [
+       0.10341902581182348,
+       0.10679003627002381
+      ],
+      "floor": 0.04206251148565869,
+      "n": 8
+     },
+     "pig-0.4.1": {
+      "ratio": 0.26702774153904957,
+      "ci": [
+       0.26023689421766105,
+       0.26961872503271234
+      ],
+      "floor": 0.031673494997004156,
+      "n": 8
+     },
+     "pig-tip": {
+      "ratio": 0.1430156431861827,
+      "ci": [
+       0.14031092718350094,
+       0.14421398514554648
+      ],
+      "floor": 0.031673494997004156,
+      "n": 8
+     }
+    },
+    "values": {
+     "pi-bun": {
+      "0:1": 577.296,
+      "0:2": 583.418,
+      "0:3": 585.273,
+      "0:4": 591.456,
+      "0:5": 576.763,
+      "0:6": 593.11,
+      "0:7": 577.362,
+      "0:8": 593.441
+     },
+     "pi-node": {
+      "0:1": 375.123,
+      "0:2": 375.241,
+      "0:3": 385.486,
+      "0:4": 378.25,
+      "0:5": 369.46,
+      "0:6": 384.32,
+      "0:7": 380.232,
+      "0:8": 373.913
+     },
+     "pibolt": {
+      "0:1": 39.029,
+      "0:2": 41.23,
+      "0:3": 39.523,
+      "0:4": 39.746,
+      "0:5": 39.722,
+      "0:6": 40.398,
+      "0:7": 39.562,
+      "0:8": 39.298
+     },
+     "pig-0.4.1": {
+      "0:1": 100.511,
+      "0:2": 101.497,
+      "0:3": 100.692,
+      "0:4": 99.603,
+      "0:5": 94.777,
+      "0:6": 102.564,
+      "0:7": 97.782,
+      "0:8": 100.847
+     },
+     "pig-tip": {
+      "0:1": 53.952,
+      "0:2": 54.115,
+      "0:3": 53.323,
+      "0:4": 53.809,
+      "0:5": 53.233,
+      "0:6": 54.317,
+      "0:7": 54.259,
+      "0:8": 53.677
+     }
+    }
+   },
+   {
+    "family": "long-session",
+    "kind": "memory",
+    "direction": "lower",
+    "scenario": "longsession/resume-n",
+    "api": "openai-completions",
+    "metric": "ready_rss_mib",
+    "arms": {
+     "pi-bun": {
+      "ratio": 1.2467842736699963,
+      "ci": [
+       1.2342774843975035,
+       1.2680262199563002
+      ],
+      "floor": 0.0178824664145659,
+      "n": 8
+     },
+     "pibolt": {
+      "ratio": 0.7763447189377283,
+      "ci": [
+       0.7663298510018839,
+       0.7833094430654127
+      ],
+      "floor": 0.011332944766761978,
+      "n": 8
+     },
+     "pig-0.4.1": {
+      "ratio": 0.41384623374824714,
+      "ci": [
+       0.4092313502008308,
+       0.4195772695772696
+      ],
+      "floor": 0.01517454496970362,
+      "n": 8
+     },
+     "pig-tip": {
+      "ratio": 0.44351920779737897,
+      "ci": [
+       0.43927028324531925,
+       0.4478201587246093
+      ],
+      "floor": 0.011583291170610823,
+      "n": 8
+     }
+    },
+    "values": {
+     "pi-bun": {
+      "0:1": 140.6015625,
+      "0:2": 140.51171875,
+      "0:3": 139.7890625,
+      "0:4": 143.640625,
+      "0:5": 140.49609375,
+      "0:6": 142.81640625,
+      "0:7": 140.71875,
+      "0:8": 143.0546875
+     },
+     "pi-node": {
+      "0:1": 114.04296875,
+      "0:2": 111.73046875,
+      "0:3": 112.734375,
+      "0:4": 114.30078125,
+      "0:5": 111.0390625,
+      "0:6": 112.5234375,
+      "0:7": 113.78515625,
+      "0:8": 112.90234375
+     },
+     "pibolt": {
+      "0:1": 87.39453125,
+      "0:2": 87.73828125,
+      "0:3": 87.74609375,
+      "0:4": 87.359375,
+      "0:5": 87.51953125,
+      "0:6": 87.65234375,
+      "0:7": 87.51171875,
+      "0:8": 87.7109375
+     },
+     "pig-0.4.1": {
+      "0:1": 46.78125,
+      "0:2": 46.59765625,
+      "0:3": 47.30078125,
+      "0:4": 46.53515625,
+      "0:5": 46.34375,
+      "0:6": 47.3828125,
+      "0:7": 47.20703125,
+      "0:8": 46.59375
+     },
+     "pig-tip": {
+      "0:1": 50.16015625,
+      "0:2": 50.1875,
+      "0:3": 49.3671875,
+      "0:4": 50.0390625,
+      "0:5": 50.03515625,
+      "0:6": 49.95703125,
+      "0:7": 50.36328125,
+      "0:8": 50.00390625
+     }
+    }
+   }
+  ],
+  "failures": {
+   "pig-tip": {
+    "long-session": [
+     0,
+     8
+    ]
+   },
+   "pig-0.4.1": {
+    "long-session": [
+     0,
+     8
+    ]
+   },
+   "pibolt": {
+    "long-session": [
+     0,
+     8
+    ]
+   },
+   "pi-node": {
+    "long-session": [
+     0,
+     8
+    ]
+   },
+   "pi-bun": {
+    "long-session": [
+     0,
+     8
+    ]
+   }
+  },
+  "skips": {},
+  "reliability": {},
+  "faithfulness": {},
+  "correctness": {},
+  "trust": {
+   "badge": "Dedicated",
+   "host_class": "A",
+   "reasons": [
+    "3 sample(s) waited for the host to quiet down (longest 2 s)",
+    "adaptive stopping: 2 of 2 cells stopped with fewer than 12 rounds (8-8) because their answer was clear; the 12-round minimum applies to the Verified badge",
+    "3 samples waited for the host to quiet down (longest 2 s) and 0 gave up waiting",
+    "the run is not labelled quiet dedicated hardware",
+    "8 measured rounds in the thinnest cell (the minimum for a headline is 12)",
+    "uncontained: the arms were not run in the container envelope",
+    "not yet reproduced (buffon reproduce / compare)"
+   ],
+   "headline": "instructions",
+   "headline_why": "hardware instruction counters",
+   "strict_problems": [
+    "the run is not labelled quiet dedicated hardware",
+    "8 measured rounds in the thinnest cell (the minimum for a headline is 12)",
+    "uncontained: the arms were not run in the container envelope"
+   ],
+   "rounds": 8
+  }
+ },
+ "races": []
+}

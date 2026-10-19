@@ -301,6 +301,62 @@ class LargeWriteStream(unittest.TestCase):
         self.assertIsNone(mock.write_call(req("write", ["path"]), "/a", "x"))
 
 
+class FreeformWrite(unittest.TestCase):
+    """Codex writes through `apply_patch`, a freeform tool: the call's input is a patch in raw text, not JSON arguments."""
+
+    CODEX_TOOLS = [{"type": "function", "name": "exec_command", "parameters": {"type": "object", "properties": {"cmd": {"type": "string"}}}}, {"type": "custom", "name": "apply_patch", "format": {"type": "grammar"}},
+                   {"type": "namespace", "name": "multi_agent_v1", "tools": []}, {"type": "web_search", "external_web_access": True}]
+
+    def request(self, tools=None, items=None):
+        body = {"model": "bench-1", "stream": True, "input": items or [{"role": "user", "content": "hi"}], "tools": self.CODEX_TOOLS if tools is None else tools}
+        return mock.Request(0, "openai-responses", body, b"", 0)
+
+    def test_a_built_in_tool_without_a_name_is_known_by_its_type(self):
+        self.assertEqual(self.request().tools, ["exec_command", "apply_patch", "multi_agent_v1", "web_search"])
+        self.assertEqual(self.request().freeform, {"apply_patch"})
+
+    def test_a_patch_adds_the_file_and_says_what_the_file_will_hold(self):
+        patch, held = mock.server.patch_add_file("big/source.ts", "a\nb")
+        self.assertEqual(patch, "*** Begin Patch\n*** Add File: big/source.ts\n+a\n+b\n*** End Patch")
+        self.assertEqual(held, "a\nb\n")
+        self.assertEqual(mock.server.patch_add_file("f", "a\nb\n"), ("*** Begin Patch\n*** Add File: f\n+a\n+b\n*** End Patch", "a\nb\n"))
+
+    def test_the_write_call_is_a_patch_for_a_freeform_apply_patch_tool_and_is_none_without_one(self):
+        name, text = mock.write_call(self.request(), "/work/big/source.ts", "x", patch_path="big/source.ts")
+        self.assertEqual((name, text), ("apply_patch", "*** Begin Patch\n*** Add File: big/source.ts\n+x\n*** End Patch"))
+        self.assertIsNone(mock.write_call(self.request(self.CODEX_TOOLS[:1] + self.CODEX_TOOLS[2:]), "/work/f", "x"))
+        as_function = [{"type": "function", "name": "apply_patch", "parameters": {"type": "object", "properties": {"input": {"type": "string"}}}}]
+        self.assertIsNone(mock.write_call(self.request(as_function), "/work/f", "x"))
+
+    def test_the_policy_expects_the_bytes_a_patch_makes_of_the_body(self):
+        policy = mock.write_policy("/work", "big/source.ts", "a\nb", 16)
+        self.assertEqual(policy.expected, "a\nb")
+        step = policy(self.request())
+        self.assertEqual(step.tool_calls[0][0], "apply_patch")
+        self.assertEqual(policy.expected, "a\nb\n")
+        self.assertEqual(policy.missing, [])
+
+    def test_the_result_of_a_custom_tool_call_ends_the_round(self):
+        items = [{"role": "user", "content": "hi"}, {"type": "custom_tool_call", "call_id": "c", "name": "apply_patch", "input": "p"}, {"type": "custom_tool_call_output", "call_id": "c", "output": "ok"}]
+        request = self.request(items=items)
+        self.assertEqual(request.roles, ["user", "assistant", "tool"])
+        self.assertEqual(request.rounds(), 1)
+        self.assertEqual(mock.write_policy("/work", "big/source.ts", "a")(request).text, mock.REPLY)
+
+    def test_the_responses_stream_carries_the_patch_as_a_custom_tool_call_in_input_deltas(self):
+        patch = mock.server.patch_add_file("big/source.ts", shapes.source(300))[0]
+        (_, data), = stream("openai-responses", [mock.Step(tool_calls=[("apply_patch", patch)], arg_chunk_chars=16)])
+        events = sse(data)
+        added = [d for n, d in events if n == "response.output_item.added"][0]["item"]
+        self.assertEqual((added["type"], added["name"], added["input"]), ("custom_tool_call", "apply_patch", ""))
+        deltas = [d for n, d in events if n == "response.custom_tool_call_input.delta"]
+        self.assertEqual("".join(d["delta"] for d in deltas), patch)
+        self.assertEqual([len(d["delta"]) for d in deltas[:-1]], [16] * (len(deltas) - 1))
+        self.assertTrue(all(d["item_id"] == added["id"] and d["call_id"] == added["call_id"] for d in deltas))
+        done = [d for n, d in events if n == "response.output_item.done"][0]["item"]
+        self.assertEqual((done["type"], done["input"], done["call_id"]), ("custom_tool_call", patch, added["call_id"]))
+
+
 class RequestLogTest(unittest.TestCase):
     def post(self, srv, body):
         conn = http.client.HTTPConnection("127.0.0.1", srv.port, timeout=10)

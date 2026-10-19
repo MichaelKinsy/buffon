@@ -1,3 +1,230 @@
 {
- "results": []
+ "results": [
+  {
+   "aa_floor_median": 0.017336589912014533,
+   "arms": {
+    "pi-bun": "1.3.0",
+    "pi-node": "1.3.0",
+    "pibolt": "0.9.3",
+    "pig-0.4.1": "0.4.1",
+    "pig-tip": "0.5.0+1.3.0"
+   },
+   "calibration_cv": 0.01549632481795311,
+   "cpu_model": "Intel(R) Xeon(R) Platinum 8462Y+",
+   "finished_utc": "2026-10-19T12:59:51Z",
+   "hardware": "provisional",
+   "headline": false,
+   "id": "2026-10-19-smc1-launch-focus-overhead",
+   "independent": false,
+   "kernel": "6.8.0-137-generic",
+   "lock_sha256": "549a3d2cc424cd316c5ff3072cf5c0c42bb1d6335775fd7289dd560254e35c33",
+   "manifest_sha256": "b90c5324d27c1f034a0d31c6a5bc78f57f4920cb2d9674ceedbd44d142037fb0",
+   "noted_checks": [
+    "aa_gap_max",
+    "aa_floor_max",
+    "outlier_fraction",
+    "hardware"
+   ],
+   "notes": 4,
+   "operator": "Michael Kinsy",
+   "reference": "pi-node",
+   "reproduces": "",
+   "rounds": 12,
+   "runner_commit": "5b3729fca2f0d9b4d2d38eaf32a4ce50498fe618",
+   "site": {
+    "backend": "local",
+    "name": "smc1-socket1"
+   },
+   "tier": "self-reported",
+   "withdrawn": null,
+   "workloads": [
+    "overhead/pty",
+    "overhead/print-ext5",
+    "overhead/rpc-ext5",
+    "overhead/print-ext10",
+    "overhead/rpc-ext10",
+    "overhead/print-write"
+   ]
+  },
+  {
+   "aa_floor_median": 0.034080797539603754,
+   "arms": {
+    "pi-bun": "1.3.0",
+    "pi-node": "1.3.0",
+    "pibolt": "0.9.3",
+    "pig-0.4.1": "0.4.1",
+    "pig-tip": "0.5.0+1.3.0"
+   },
+   "calibration_cv": 0.0185811065454572,
+   "cpu_model": "Intel(R) Xeon(R) Platinum 8462Y+",
+   "finished_utc": "2026-10-19T14:25:57Z",
+   "hardware": "quiet-dedicated",
+   "headline": false,
+   "id": "2026-10-19-smc1-launch-focus-streaming",
+   "independent": false,
+   "kernel": "6.8.0-137-generic",
+   "lock_sha256": "549a3d2cc424cd316c5ff3072cf5c0c42bb1d6335775fd7289dd560254e35c33",
+   "manifest_sha256": "31e8cdba528030feed85e90f5516b1da36aa19d436f33d777361be943ef32505",
+   "noted_checks": [
+    "aa_cv_cpu",
+    "aa_significant_fraction",
+    "aa_gap_max",
+    "aa_floor_median",
+    "aa_floor_max",
+    "outlier_fraction",
+    "foreign_cpu_p95"
+   ],
+   "notes": 7,
+   "operator": "Michael Kinsy",
+   "reference": "pi-node",
+   "reproduces": "",
+   "rounds": 12,
+   "runner_commit": "5b3729fca2f0d9b4d2d38eaf32a4ce50498fe618",
+   "site": {
+    "backend": "local",
+    "name": "smc1-socket1"
+   },
+   "tier": "self-reported",
+   "withdrawn": null,
+   "workloads": [
+    "streaming/tui-prose",
+    "streaming/print-prose"
+   ]
+  },
+  {
+   "aa_floor_median": 0.013715286720525775,
+   "arms": {
+    "pi-bun": "1.3.0",
+    "pi-node": "1.3.0",
+    "pibolt": "0.9.3",
+    "pig-0.4.1": "0.4.1",
+    "pig-tip": "0.5.0+1.3.0"
+   },
+   "calibration_cv": 0.01741467587870728,
+   "cpu_model": "Intel(R) Xeon(R) Platinum 8462Y+",
+   "finished_utc": "2026-10-19T14:28:51Z",
+   "hardware": "provisional",
+   "headline": false,
+   "id": "2026-10-19-smc1-launch-focus-longsession",
+   "independent": false,
+   "kernel": "6.8.0-137-generic",
+   "lock_sha256": "549a3d2cc424cd316c5ff3072cf5c0c42bb1d6335775fd7289dd560254e35c33",
+   "manifest_sha256": "cdee3a3447216785d22de47f0dbd68d0eaf7bcd7ce40d14a882ba411c3a0d213",
+   "noted_checks": [
+    "aa_significant_fraction",
+    "aa_floor_max",
+    "outlier_fraction",
+    "hardware"
+   ],
+   "notes": 4,
+   "operator": "Michael Kinsy",
+   "reference": "pi-node",
+   "reproduces": "",
+   "rounds": 12,
+   "runner_commit": "5b3729fca2f0d9b4d2d38eaf32a4ce50498fe618",
+   "site": {
+    "backend": "local",
+    "name": "smc1-socket1"
+   },
+   "tier": "self-reported",
+   "withdrawn": null,
+   "workloads": [
+    "longsession/resume-n",
+    "longsession/resume-n-varied"
+   ]
+  },
+  {
+   "aa_floor_median": 0.017864124487471787,
+   "arms": {
+    "claude-code": "2.1.296",
+    "codex": "0.162.1",
+    "copilot": "1.0.95",
+    "octet": "0.9.4",
+    "opencode-v2": "2.0.29",
+    "pi-bun": "1.3.0",
+    "pi-node": "1.3.0",
+    "pibolt": "0.9.3",
+    "pig-0.4.1": "0.4.1",
+    "pig-tip": "0.5.0+1.3.0",
+    "rpi": "0.3.19"
+   },
+   "calibration_cv": 0.01611803473865285,
+   "cpu_model": "Intel(R) Xeon(R) Platinum 8462Y+",
+   "finished_utc": "2026-10-19T14:55:35Z",
+   "hardware": "quiet-dedicated",
+   "headline": false,
+   "id": "2026-10-19-smc1-launch-core",
+   "independent": false,
+   "kernel": "6.8.0-137-generic",
+   "lock_sha256": "549a3d2cc424cd316c5ff3072cf5c0c42bb1d6335775fd7289dd560254e35c33",
+   "manifest_sha256": "a95b0e04e9436d1e9287d554841c0605ade5f48bf06db3072dfdc2a933a11654",
+   "noted_checks": [
+    "aa_significant_fraction",
+    "aa_gap_max",
+    "aa_floor_max"
+   ],
+   "notes": 3,
+   "operator": "Michael Kinsy",
+   "reference": "pi-node",
+   "reproduces": "",
+   "rounds": 12,
+   "runner_commit": "5b3729fca2f0d9b4d2d38eaf32a4ce50498fe618",
+   "site": {
+    "backend": "local",
+    "name": "smc1-socket1"
+   },
+   "tier": "self-reported",
+   "withdrawn": null,
+   "workloads": [
+    "overhead/version",
+    "overhead/print",
+    "overhead/print-tools",
+    "overhead/rpc"
+   ]
+  },
+  {
+   "aa_floor_median": 0.018111682070150348,
+   "arms": {
+    "claude-code": "2.1.296",
+    "codex": "0.162.1",
+    "copilot": "1.0.95",
+    "octet": "0.9.4",
+    "opencode-v2": "2.0.29",
+    "pi-node": "1.3.0",
+    "rpi": "0.3.19"
+   },
+   "calibration_cv": 0.013673231305321318,
+   "cpu_model": "Intel(R) Xeon(R) Platinum 8462Y+",
+   "finished_utc": "2026-10-19T17:33:22Z",
+   "hardware": "quiet-dedicated",
+   "headline": false,
+   "id": "2026-10-19-smc1-launch-focus-others",
+   "independent": false,
+   "kernel": "6.8.0-137-generic",
+   "lock_sha256": "2c7b43d74cd7172acf7e967b44b949816327052605f2926b0cd28beba91fc878",
+   "manifest_sha256": "7a13bc3e0cbc025083777ed207e3f7660c8cdea7b7aaa21aed9e8727b1bbc3d5",
+   "noted_checks": [
+    "aa_significant_fraction",
+    "aa_gap_max",
+    "aa_floor_max",
+    "outlier_fraction"
+   ],
+   "notes": 4,
+   "operator": "Michael Kinsy",
+   "reference": "pi-node",
+   "reproduces": "",
+   "rounds": 12,
+   "runner_commit": "c7fa2263480ade54f4ec2e7eec36baa7e6be1395",
+   "site": {
+    "backend": "local",
+    "name": "smc1-socket1"
+   },
+   "tier": "self-reported",
+   "withdrawn": null,
+   "workloads": [
+    "overhead/print-write",
+    "streaming/print-prose"
+   ]
+  }
+ ]
 }

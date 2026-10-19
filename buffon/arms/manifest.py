@@ -19,7 +19,7 @@ RELATIONS = ("pi-reference", "pi-fork", "pi-port", "pi-compatible", "reference")
 APIS = ("openai-completions", "openai-responses", "anthropic-messages")
 CLAIMS = ("pi-extensions", "pi-sessions", "pi-rpc")   # what a manifest's `claims` may list (workloads/grade.toml [claims] holds the same list; a test keeps them equal)
 EXTENSIONS = ("native", "sidecar", "partial", "none")
-MODES = ("version", "print", "print_session", "rpc", "rpc_session", "rpc_resume", "pty")
+MODES = ("version", "print", "print_write", "print_session", "rpc", "rpc_session", "rpc_resume", "pty")
 TOP_KEYS = {"claims", "caveat", "previous", "name", "label", "homepage", "relation", "licence", "licence_url", "restrictions", "version", "held", "operator_terms", "artifact", "npm", "source", "runtime", "endpoint",
             "env", "state", "modes", "capabilities", "renderer", "rpc", "cannot_run", "version_check", "notes", "trust", "derive", "extensions", "prepare", "seed", "piglet", "divergence"}
 # A derived arm names a base arm (`[derive] base`): it runs from a copy of the base's install tree and inherits the base's scalar fields and these tables, key by key.

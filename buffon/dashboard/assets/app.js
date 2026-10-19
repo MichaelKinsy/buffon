@@ -1216,7 +1216,7 @@
     var trust = [where ? "Measured on " + where : "Measured", when ? "on " + when : ""].filter(Boolean).join(" ") + (run.rounds ? ", " + plural(run.rounds, "round") : "") + ".";
     return '<section class="hero"><div class="htext"><h1>Buffon</h1><p class="lead">Benchmarks for coding agents built on Pi\'s use cases.</p>' +
       '<p class="lede">Pi is the foundation many coding agents build on. Buffon runs Pi and those agents through the same scripted tasks, and measures what each one costs your machine.</p>' +
-      '<p class="name">Named for Buffon\'s needle: drop a needle on a floor of parallel boards, and the chance it crosses a line depends on π, so counting many drops estimates π. We drop the same task on every Pi harness, many times, and count.</p>' +
+      '<p class="name">Named for Buffon\'s needle: drop a needle on a floor of parallel boards, and the chance it crosses a line depends on π, so counting many drops estimates π. We drop the same Pi use case on every harness, many times, and count.</p>' +
       '<p class="name">A lens on Pi, not a ranking of agents. · <a href="' + esc(link("method")) + '">How it works</a> · <a href="' + esc(link("about", [], { at: "why-buffon" })) + '">Why "Buffon"</a></p>' +
       '<p class="trust">' + esc(trust) + "</p></div>" + heroArt() + "</section>";
   }
@@ -2180,12 +2180,15 @@
 
   // the mark: a few short needles over parallel lines, some crossing a line (Buffon's needle), in the text colour
   var LOGO = '<svg class="logo" width="26" height="26" viewBox="0 0 32 32" aria-hidden="true"><g fill="none" stroke="currentColor"><g stroke-width="2"><path d="M1 6H31M1 15H31M1 24H31" opacity=".5"/></g><path d="M7 11L12 2M4 20L12 18M20 19L26 29" stroke-width="3.4" stroke-linecap="round"/></g></svg>';
+  // the source repository, linked from the top right of every page
+  var REPO = "https://github.com/MichaelKinsy/buffon";
+  var GITHUB = '<svg width="17" height="17" viewBox="0 0 16 16" aria-hidden="true" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>';
   function frame(I, route, body) {
     var D = I.D, active = ACTIVE[route.view] || route.view;
     var demo = D.meta.demo ? '<div class="demo" role="note"><b>Demo data</b> · ' + esc(D.meta.demo) + ". Not a result of any harness.</div>" : "";
     var nav = NAV.map(function (n) { return '<a href="' + link(n[0]) + '"' + (n[0] === active ? ' aria-current="page"' : "") + ">" + esc(n[1]) + "</a>"; }).join("");
     return demo + '<header class="top"><div class="in"><a class="brand" href="' + link() + '">' + LOGO + "<span>Buffon</span></a>" +
-      '<nav class="main" aria-label="Views">' + nav + '</nav><div class="right"><button class="btn icon" type="button" data-theme-toggle aria-label="Switch light or dark theme" data-tip="Light or dark">◐</button>' +
+      '<nav class="main" aria-label="Views">' + nav + '</nav><div class="right"><a class="btn icon" href="' + REPO + '" aria-label="Source code on GitHub" data-tip="Source code on GitHub">' + GITHUB + '</a><button class="btn icon" type="button" data-theme-toggle aria-label="Switch light or dark theme" data-tip="Light or dark">◐</button>' +
       '<button class="btn icon menu-btn" type="button" data-menu aria-label="Menu" aria-expanded="false">☰</button></div></div><nav class="mobile" hidden>' + nav + "</nav></header>" +
       '<main id="main">' + body + '</main><footer class="site"><div class="in">' +
       "<p>" + docLink(I, "CONTRIBUTING", "Add a harness") + " · " + docLink(I, "SUBMITTING", "Submit a result") + "</p></div></footer>";

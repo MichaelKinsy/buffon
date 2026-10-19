@@ -6,7 +6,7 @@ licence = "Apache-2.0"
 licence_url = "https://github.com/openai/codex/blob/main/LICENSE"
 restrictions = ""
 version = "0.162.1"
-notes = "Unrelated to Pi; a reference point. Needs the OpenAI Responses endpoint. Its TUI contacts a GitHub content address even with remote catalogs off, so no PTY workload runs on it."
+notes = "Unrelated to Pi; a reference point. Needs the OpenAI Responses endpoint. The large-write workload runs it through its `apply_patch` tool (the `print_write` mode loads a model catalog that enables it for the mock model). Its TUI contacts a GitHub content address even with remote catalogs off, so no PTY workload runs on it."
 
 [npm]
 package = "@openai/codex"
@@ -34,6 +34,7 @@ dirs = ["$CODEX_HOME", "$XDG_CONFIG_HOME", "$XDG_DATA_HOME", "$XDG_CACHE_HOME", 
 [modes]
 version = ["--version"]
 print = ["exec", "-m", "{model}", "--skip-git-repo-check", "--sandbox", "danger-full-access", "{prompt}"]
+print_write = ["exec", "-m", "{model}", "-c", "model_catalog_json=\"{home}/.codex/write-catalog.json\"", "--skip-git-repo-check", "--sandbox", "danger-full-access", "{prompt}"]
 
 [cannot_run]
 pty = "tried at 0.162.1: no egress, but its TUI does not echo the PTY workload's first-input probe within 20 s (it shows its own startup screens), so first-input latency is not comparable; not measured in v0"

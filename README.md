@@ -1,10 +1,14 @@
+<p align="center">
+  <img src="docs/assets/buffon-banner.png" alt="Buffon: needles dropped on parallel boards. Drop the same Pi use case on every harness, many times, and count what each one costs.">
+</p>
+
 # Buffon
 
 Benchmarks for coding agents built on Pi's use cases.
 
 Pi is the foundation many coding agents build on. Buffon runs Pi and the agents built on or around it, such as PiG and Pi-Bolt, through the same scripted tasks. Every harness talks to the same scripted model, so a number is the cost of the harness itself: start-up, CPU, memory, sessions, extensions, and how many agents fit on one machine.
 
-The name comes from Buffon's needle, a puzzle the Comte de Buffon published in 1777: drop a needle on a floor of parallel boards, and how often does it cross a line? The answer involves π, so dropping many needles and counting the crossings estimates π. Buffon drops the same task on every Pi harness, many times, and counts. [More on the name](#why-buffon).
+The name comes from Buffon's needle, a puzzle the Comte de Buffon published in 1777: drop a needle on a floor of parallel boards, and how often does it cross a line? The answer involves π, so dropping many needles and counting the crossings estimates π. Buffon drops the same Pi use case on every harness, many times, and counts. [More on the name](#why-buffon).
 
 It measures through Pi's lens: Pi's modes, Pi's extensions, Pi's session format. Agents built another way take part where they can, and show "can't run" where they can't. It is not a ranking of agents.
 
