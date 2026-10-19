@@ -9,6 +9,7 @@ import shutil
 import statistics
 import subprocess
 import sys
+import tempfile
 import time
 import unittest
 from unittest import mock
@@ -227,3 +228,29 @@ class PerfAttach(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+@unittest.skipUnless(sys.platform.startswith("linux"), "cgroup.procs")
+class JoinProbe(unittest.TestCase):
+    """A systemd scope whose cgroup.procs cannot take a process of this runner (a GitHub-hosted runner: the runner's cgroup is under system.slice, the scope under user.slice) is not a meter."""
+
+    def meter_at(self, path):
+        return cgroup.CgroupMeter(path, mode="cgroup-systemd")
+
+    def test_a_cgroup_that_takes_the_process_is_joinable(self):
+        with tempfile.TemporaryDirectory() as d:
+            open(os.path.join(d, "cgroup.procs"), "w").close()   # a plain file takes a pid like the kernel's does
+            self.assertIsNone(cgroup._join_blocked(self.meter_at(d)))
+
+    def test_a_cgroup_that_refuses_the_process_says_why(self):
+        with tempfile.TemporaryDirectory() as d:
+            os.mkdir(os.path.join(d, "cgroup.procs"))   # opening it for writing fails, as the kernel's EACCES does for a scope outside the runner's reach
+            why = cgroup._join_blocked(self.meter_at(d))
+        self.assertIn("cannot be moved into the scope", why)
+
+    def test_a_forced_systemd_meter_names_the_reason_when_the_host_blocks_it(self):
+        own = cgroup._own_cgroup()
+        with mock.patch.dict(cgroup.SYSTEMD_BLOCKED, {own: "REASON"}), mock.patch.object(cgroup, "_try_direct", lambda root: None), \
+                mock.patch.object(cgroup, "CONTAINER", None), mock.patch.object(cgroup.os.path, "exists", lambda p: True), mock.patch.object(cgroup.os.path, "isdir", lambda p: True):
+            with self.assertRaisesRegex(RuntimeError, "cgroup-systemd is not available on this host: REASON"):
+                cgroup.new_meter("cgroup-systemd")
