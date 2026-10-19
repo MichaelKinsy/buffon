@@ -1,15 +1,18 @@
 # SPDX-License-Identifier: Apache-2.0
 # After a results pull request merges, record the CI re-validation: `buffon promote` verifies each run directory that has no promotion.json, writes promotion.json
 # (the ci-revalidated tier), makes the directory read-only and regenerates the index. The bot commit adds files only; results.yml's immutability rule still holds.
+# main takes changes only through a pull request (repository ruleset), so the bot opens one with the promotion records for a maintainer to merge.
 name: results-merge
 on:
   push:
     branches: [main]
     paths: ["results/**"]
+  workflow_dispatch:
 permissions:
   contents: write
   id-token: write      # the manifest attestation below; only this job, which runs on main after a maintainer merged, holds it
   attestations: write
+  pull-requests: write
 concurrency:
   group: results-merge
   cancel-in-progress: false
@@ -37,7 +40,9 @@ jobs:
         uses: actions/attest-build-provenance@v1
         with:
           subject-path: "results/*/MANIFEST.sha256"
-      - name: Commit the promotion records and the index
+      - name: Open a pull request with the promotion records and the index
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
           set -eu
           git config user.name "github-actions[bot]"
@@ -45,4 +50,7 @@ jobs:
           git add results
           if git diff --cached --quiet; then echo "nothing to promote"; exit 0; fi
           git commit -s -m "results: promote merged run directories and regenerate the index"
-          git push origin HEAD:main
+          branch="promote/${{ github.run_id }}"
+          git push origin "HEAD:refs/heads/$branch"
+          gh pr create --base main --head "$branch" --title "results: promote merged run directories" \
+            --body "CI re-validated every run directory without a promotion record (buffon promote, run ${{ github.run_id }}) and attested its sealed manifest. Merge to record the ci-revalidated tier."
