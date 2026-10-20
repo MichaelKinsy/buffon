@@ -3,9 +3,11 @@
 pids classification, the mock's saturation flag, and the run defaults. The search itself is in tests/test_scale_limit.py. A fake container runtime stands in for docker and the relay (tests/fake_swarm.py): no process starts."""
 import os
 import tempfile
+import threading
 import time
 import types
 import unittest
+from unittest import mock
 
 from buffon import race, workloads
 from buffon.envelope import lint
@@ -373,7 +375,17 @@ class Swarm(Env):
         self.assertEqual(scale.classify(2, 0, False, True), "oom")                                       # a kill that landed while the stall was being seen wins
 
     def test_a_container_the_kernel_killed_with_its_cgroup_is_an_oom_from_the_last_reading(self):
-        self.runtime(die_at=3, limit=1024 * MIB, mem_per_agent=400 * MIB)
+        seen, read = threading.Event(), swarmlib.read_cgroup
+
+        def watch(path):   # the monitor's read: the container dies only after a reading whose peak is at its limit, as a real kill follows the counters reaching it
+            got = read(path)
+            if got and (got.get("memory.peak") or 0) >= 1024 * MIB:   # the peak, not memory.current: the fake writes the two files one after the other
+                seen.set()
+            return got
+        patcher = mock.patch.object(swarmlib, "read_cgroup", watch)
+        patcher.start()
+        self.addCleanup(patcher.stop)
+        self.runtime(die_at=3, die_when=seen, limit=1024 * MIB, mem_per_agent=400 * MIB)
         self.policy()
         out = scale.probe(self.ctx(scale_turns=1, swarm_memory_gib=1), self.arm(), 8, "agents")
         self.assertEqual(out["stop_cause"], "oom")
