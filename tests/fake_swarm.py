@@ -69,14 +69,14 @@ class FakeCgroup:
 class FakeRuntime:
     """popen() for a Swarm. Knobs: `mem_per_agent` (bytes added to memory.current per started agent), `oom_at` (the agent index from which the kernel kills agents and counts an OOM kill), `mute`
     (agents that never answer a prompt), `limit` (memory.max in bytes, the peak never passes it), `exit_code` (a print agent's exit status), `pids_block` (forks refused), `cpu_usec` (CPU per started agent),
-    `cpu_per_prompt_usec`, `latency_ns`, `no_ready` (agents that never answer get_state), `dont_start` (the container itself does not come up), `write_files` (what an agent's prompts create), `die_at` (the container is killed, exit 137, with its cgroup, when this many agents have started), `no_reply` (print agents that exit 0 with nothing on their output), `undrained` (print agents that exit 0 whose output the relay had not finished reading), `hang` (print agents that never exit), `kill_at` (the kernel counts one OOM kill when this many agents have started; the agents that
+    `cpu_per_prompt_usec`, `latency_ns`, `no_ready` (agents that never answer get_state), `dont_start` (the container itself does not come up), `write_files` (what an agent's prompts create), `die_at` (the container is killed, exit 137, with its cgroup, when this many agents have started; with `die_when`, a threading.Event, only once it is set), `no_reply` (print agents that exit 0 with nothing on their output), `undrained` (print agents that exit 0 whose output the relay had not finished reading), `hang` (print agents that never exit), `kill_at` (the kernel counts one OOM kill when this many agents have started; the agents that
     follow live on), `thrash_after` (once this many agents have started the container sits at its limit: `memory.events max` rises every 10 ms), `commands` (the bench extension commands an agent lists for get_commands) and `commands_late` (the first asks of each agent list none, as before the extensions are loaded)."""
 
     def __init__(self, cgroup, mem_per_agent=50 * 1048576, oom_at=None, mute=(), limit=None, exit_code=0, pids_block=False, cpu_usec=300_000, cpu_per_prompt_usec=20_000, latency_ns=5_000_000,
-                 no_ready=(), dont_start=False, write_files=None, relay_cpu_ms=10.0, die_at=None, no_reply=(), undrained=(), kill_at=None, thrash_after=None, hang=(), commands=10, commands_late=0):
+                 no_ready=(), dont_start=False, write_files=None, relay_cpu_ms=10.0, die_at=None, die_when=None, no_reply=(), undrained=(), kill_at=None, thrash_after=None, hang=(), commands=10, commands_late=0):
         self.cg = cgroup
         self.k = dict(mem_per_agent=mem_per_agent, oom_at=oom_at, mute=set(mute), limit=limit, exit_code=exit_code, pids_block=pids_block, cpu_usec=cpu_usec, cpu_per_prompt_usec=cpu_per_prompt_usec,
-                      latency_ns=latency_ns, no_ready=set(no_ready), dont_start=dont_start, write_files=write_files, relay_cpu_ms=relay_cpu_ms, die_at=die_at, no_reply=set(no_reply), undrained=set(undrained), kill_at=kill_at, thrash_after=thrash_after, hang=set(hang), commands=commands, commands_late=commands_late)
+                      latency_ns=latency_ns, no_ready=set(no_ready), dont_start=dont_start, write_files=write_files, relay_cpu_ms=relay_cpu_ms, die_at=die_at, die_when=die_when, no_reply=set(no_reply), undrained=set(undrained), kill_at=kill_at, thrash_after=thrash_after, hang=set(hang), commands=commands, commands_late=commands_late)
         self.argvs, self.commands, self.started, self.removed, self.killed = [], [], 0, [], []
         self.thrashing = False
         self.t = 1_000_000_000
@@ -124,7 +124,10 @@ class FakeRuntime:
                 self.started += 1
                 self.start(out, cmd, agents[i])
                 if self.k["die_at"] is not None and self.started >= self.k["die_at"]:
-                    time.sleep(0.2)   # the runner's monitor reads the counters every 50 ms: the last reading is what it has once the cgroup is gone
+                    if self.k["die_when"] is not None:   # die only once the runner's monitor has read the counters at this point: deterministic under load
+                        assert self.k["die_when"].wait(10), "the runner's monitor never read the counters before the container died"
+                    else:
+                        time.sleep(0.2)   # the runner's monitor reads the counters every 50 ms: the last reading is what it has once the cgroup is gone
                     import shutil
                     shutil.rmtree(self.cg.dir, ignore_errors=True)
                     proc.returncode = 137
