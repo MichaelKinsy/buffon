@@ -87,8 +87,9 @@ class RealSuiteFiles(unittest.TestCase):
 
     @unittest.skipUnless(PI_MIRROR, "set BUFFON_PI_MIRROR to Pi's checkout at its pin (the .upstream/current mirror) to verify the recorded Pi digests")
     def test_the_recorded_pi_digests_equal_the_pinned_files(self):
-        for name in ("durable-storage", "durable-storage-memory", "durable-tool-output", "pi-evals-offline"):
-            target = suites.get(name).targets["pi-node"]
+        named = [(s.id, s.targets["pi-node"]) for s in suites.SUITES.values() if "pi-node" in s.targets and s.targets["pi-node"].repo == "pi"]
+        self.assertGreaterEqual(len(named), 11)   # the three storage and tool-output suites, the seven Pi 1.2.0 benchmarks and the evals self test, besides pi-evals
+        for name, target in named:
             guard.verify(PI_MIRROR, target.manifest, name)
 
     @unittest.skipUnless(PI_MIRROR, "set BUFFON_PI_MIRROR to Pi's checkout at its pin to run the one-byte mutation on a real suite file")

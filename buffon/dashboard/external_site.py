@@ -14,7 +14,7 @@ from ..external import KIND_RESULTS, KIND_SUITE, results as extresults, suites a
 NOT_COMPARABLE = "Their method, their numbers: not comparable with Buffon's rows"
 STDOUT_SHOWN = 24000   # characters of a run's stdout embedded in the page; the whole file is one link away
 # The section of the site that shows a suite is the registry's (`Suite.section`), never a guess from its name. The labels are the groups of cards in a section, one for each project.
-GROUP_LABELS = {"durable": {"pi": "Pi's durable suites", "pig": "PiG's storage benchmark", "other": "Other durable suites"},
+GROUP_LABELS = {"durable": {"pi": "Pi's durable suites", "pig": "PiG's storage benchmark", "durable-bench": "durable-bench, run unchanged", "other": "Other durable suites"},
                 "other": {"pi": "Pi's other suites", "pig": "PiG's other suites", "pi-bolt": "Pi-Bolt's suites", "other": "Other projects"}}
 SUITE_FILE, RESULTS_FILE = "external-suite.json", "external.json"
 
@@ -52,10 +52,13 @@ def read_rows(path):
 
 
 def owner_of(key, profiles):
-    """{project, owner, owner_url, repo_url} of a checkout key (pi, pig, pi-bolt) from the profile of the same name; empty strings where the site has no profile."""
+    """{project, owner, owner_url, repo_url} of a checkout key (pi, pig, pi-bolt, durable-bench) from the profile of the same name, else from the registry's repository table (buffon/external/suites.py REPOSITORIES); empty strings for any other key."""
     for p in profiles:
         if p["slug"] == key:
             return {"project": p["project"], "owner": p["maker"], "owner_url": p["maker_url"], "repo_url": (p["links"] or {}).get("repo", "")}
+    repo = extsuites.REPOSITORIES.get(key)   # a project the registry knows and the site has no profile for: its repository and owner as the registry records them
+    if repo:
+        return {"project": key, "owner": repo["owner"], "owner_url": repo["url"], "repo_url": repo["url"]}
     return {"project": key, "owner": "", "owner_url": "", "repo_url": ""}
 
 
