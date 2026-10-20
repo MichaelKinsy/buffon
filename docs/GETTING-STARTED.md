@@ -367,7 +367,7 @@ build.build([run], "/tmp/demo-site", faithfulness=[demo_faithfulness_dir("/tmp/d
 
 ## 5. Publish with GitHub Pages
 
-The live site is served from the `gh-pages` branch: a static build of `buffon dashboard` over the published runs, committed there. `.github/workflows/pages.yml` is the other way to publish, by manual dispatch only: it sets up Python 3.12 and Node 22, runs `python3 tools/pages_site.py site` (every run in `results/index.json` that is not withdrawn, or the DEMO site when there is none), uploads `site/` and deploys it, which replaces whatever Pages served before. It needs Pages' source set to "GitHub Actions".
+The live site is served from the `gh-pages` branch: a static build of `buffon dashboard` over the published runs, committed there. To rebuild and publish it, from a checkout of `main` with Node on `PATH`: `python3 tools/pages_site.py /tmp/buffon-site --publish origin` (add run directories after the site directory to include runs that are not in `results/` yet; the commit uses your own git identity and signing settings, and it replaces the branch). `.github/workflows/pages.yml` is the other way to publish, by manual dispatch only: it sets up Python 3.12 and Node 22, runs `python3 tools/pages_site.py site` (every run in `results/index.json` that is not withdrawn, or the DEMO site when there is none), uploads `site/` and deploys it, which replaces whatever Pages served before. It needs Pages' source set to "GitHub Actions".
 
 To publish a real run, follow [SUBMITTING.md](SUBMITTING.md): `buffon verify --submission`, copy the run directory to `results/<id>/`, `buffon index results`, commit, and open a pull request. CI promotes it after the merge.
 
