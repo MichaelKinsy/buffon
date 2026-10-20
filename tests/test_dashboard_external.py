@@ -151,7 +151,7 @@ class ProjectSuites(unittest.TestCase):
         self.assertIn("By <a", card)
         self.assertIn("Earendil Inc.", card)
         self.assertIn("MIT", card)
-        self.assertRegex(card, r'pinned at <a href="https://github\.com/earendil-works/pi/tree/abe508e1b89912adde45528136c3221eb69acdd7">earendil-works/pi@abe508e1b899</a>')
+        self.assertRegex(card, r'pinned at <a href="https://github\.com/earendil-works/pi/tree/71023aec1546d6d677a65669c5665c0927ce0dd0">earendil-works/pi@71023aec1546</a>')
         self.assertIn("<code>npm run bench:storage:memory</code>", card)
         self.assertIn("Ran 2026-10-17 09:12 UTC on Demo CPU (invented), 64 GiB, 6.8.0-demo", card)
         self.assertIn("41.2 s, exit 0", card)
