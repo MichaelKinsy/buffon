@@ -17,7 +17,7 @@ def run(session, ctx, instances, rounds=None):
     from ..workloads import overhead
     plan = session.plan
     rounds = rounds or plan.calibration_rounds
-    durable = bool(plan.workloads) and all(w.envs for w in plan.workloads)   # a durable run has no print mode: its calibration is the floor-host sample (docs/design/DURABLE.md 4.5)
+    durable = bool(getattr(plan, "workloads", None)) and all(getattr(w, "envs", ()) for w in plan.workloads)   # a durable run has no print mode: its calibration is the floor-host sample (docs/design/DURABLE.md 4.5)
     eligible = [a for a in instances if not a.twin_of and (a.adapter if durable else a.supports_mode("print") and a.supports_api(plan.api))]
     # The reference arm when it is selected; otherwise the first eligible arm, named in the result.
     ref = next((a for a in eligible if a.id == getattr(plan, "reference", None)), eligible[0] if eligible else None)

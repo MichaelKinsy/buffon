@@ -279,7 +279,7 @@ def variants(plan_workloads, apis, envs=(workloads.NATIVE,)):
     environment's name for another, which then lands in a cell of its own (buffon/report/cells.py `variant`)."""
     out = []
     for w in plan_workloads:
-        if w.envs:
+        if getattr(w, "envs", ()):
             out += [(w, None if env == workloads.NATIVE else env) for env in envs if env in w.envs]
             continue
         if w.apis == (None,):
@@ -539,7 +539,7 @@ class Runner:
         if equivalence and not equivalence["passed"]:
             names = "; ".join(f"{arm} with {count} extensions: {d[0]}" for count, c in sorted(equivalence["counts"].items(), key=lambda kv: int(kv[0])) for arm, d in sorted(c["differences"].items()))
             return equivalence, None, f"the arms do not do the same work, so their timings are not comparable ({names}). The records are in equivalence.json"
-        if any(w.envs for w in p.workloads):   # the durable family: its fixtures are built and its equivalence gate passes before anything is timed (buffon/durable/prepare.py)
+        if any(getattr(w, "envs", ()) for w in p.workloads):   # the durable family: its fixtures are built and its equivalence gate passes before anything is timed (buffon/durable/prepare.py)
             from ..durable import prepare
             self.durable, refusal = prepare.run(self, ctx, installed, instances)
             if refusal:
@@ -566,7 +566,7 @@ class Runner:
     # -- measurement ---------------------------------------------------------------------------------------------------------------------------
 
     def one_sample(self, ctx, workload, api, arm, rnd):
-        if workload.envs:
+        if getattr(workload, "envs", ()):
             ctx.opts.env, ctx.opts.api = api or workloads.NATIVE, None   # a durable sample's variant is its environment (variants()); there is no wire API
         else:
             ctx.opts.api = api or arm.apis[0]  # an API-independent workload (--version) runs on the arm's first API
@@ -679,7 +679,7 @@ class Runner:
             self.log(f"buffon: {workload.id}")
             workload.special(self, ctx, instances)
             self.checkpoint(force=True)
-        for workload in [w for w in p.workloads if w.finish]:   # metrics that need several samples (buffon/workloads/durable.py)
+        for workload in [w for w in p.workloads if getattr(w, "finish", None)]:   # metrics that need several samples (buffon/workloads/durable.py)
             workload.finish(self)
 
     def settle(self, live, instances, taken, settled, out):
