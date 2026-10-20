@@ -126,8 +126,11 @@
     D.cells.forEach(function (c) { I.cellBySlug[c.slug] = c; (I.cellOf[c.key] = I.cellOf[c.key] || {})[c.api_short] = c; });
     I.contenders = D.harnesses.filter(function (h) { return !h.is_ref; });
     // the wire APIs of the run, and the one most harnesses speak (the grid starts with it)
-    var count = {};
-    D.cells.forEach(function (c) { if (c.api_short !== "-") { count[c.api_short] = count[c.api_short] || {}; Object.keys(c.stats).forEach(function (a) { count[c.api_short][a] = 1; }); } });
+    var count = {}; I.envs = [];   // a variant that is an environment (a durable workload on Miniflare) is no wire API: it is chosen in the Durable section, and its cell never stands in for another's
+    D.cells.forEach(function (c) {
+      if (c.env_variant) { if (I.envs.indexOf(c.api_short) < 0) I.envs.push(c.api_short); }
+      else if (c.api_short !== "-") { count[c.api_short] = count[c.api_short] || {}; Object.keys(c.stats).forEach(function (a) { count[c.api_short][a] = 1; }); }
+    });
     I.apis = Object.keys(count).sort(function (a, b) {
       var d = Object.keys(count[b]).length - Object.keys(count[a]).length; if (d) return d;
       var x = API_ORDER.indexOf(a), y = API_ORDER.indexOf(b); return (x < 0 ? 99 : x) - (y < 0 ? 99 : y) || a.localeCompare(b);
@@ -470,7 +473,13 @@
   function unitOf(unit) { var u = String(unit || ""); return /^ms\b/.test(u) ? "ms or s" : u === "MiB" ? "MiB or GiB" : unitScale(u, 1).u; }
 
   // ------------------------------------------------------------------ one cell of the grid
-  function metricCell(I, key, api) { var by = I.cellOf[key]; return by ? (by["-"] || by[api] || null) : null; }
+  function metricCell(I, key, api) {
+    var by = I.cellOf[key];
+    if (!by) return null;
+    if (api === "native") return by["-"] || null;                 // the Durable section's environment choice: each environment is its own cell and never stands in for another's
+    if (I.envs.indexOf(api) >= 0) return by[api] || null;
+    return by["-"] || by[api] || null;
+  }
   // the reason a harness has no value, short: the runner's first words ("no Pi-dialect RPC mode"). The full reason is on the harness page.
   var GENERIC_NA = /^it (has no value for this measurement|was not run on this workload) in this run$/;
   function isCant(reason) { return !!reason && !GENERIC_NA.test(reason); }
@@ -481,7 +490,7 @@
   // {value, text parts, tip, href} for one harness in one column, or {na: tip}
   function gridCell(I, st, mt, h) {
     var cell = metricCell(I, mt.key, st.api);
-    if (!cell) { var o1 = otherApi(I, mt.key, h, st.api); return o1 ? { na: otherTip(h, o1), other: o1 } : { na: shortName(h) + ": this metric has no value with the " + apiName(st.api) + "." }; }
+    if (!cell) { var o1 = otherApi(I, mt.key, h, st.api); return o1 ? { na: otherTip(h, o1), other: o1 } : { na: shortName(h) + ": this metric has no value " + (st.api === "native" || I.envs.indexOf(st.api) >= 0 ? "in the " + st.api + " environment." : "with the " + apiName(st.api) + ".") }; }
     var s = cell.stats[h.id];
     if (!s) { var o2 = otherApi(I, mt.key, h, st.api); return o2 ? { na: otherTip(h, o2), other: o2 } : { na: naTip(h, cell.na[h.id]), cant: isCant(cell.na[h.id]), why: cell.na[h.id] }; }
     var href = cellHref(cell, h, I), mid = s.q1 != null ? "\nmiddle half " + span(s.q1, s.q3, cell.unit) : "";
@@ -522,7 +531,7 @@
       what: "A long answer of 6,000 and then 60,000 characters streams into the terminal and to a script; the clock runs from the first byte to the final frame.", head: [/^streaming-tui.*cpu_ms_per_1k/, /^streaming-tui/, /^streaming-/] },
     { id: "sessions", title: "Sessions", kind: "metrics", scen: /^(longsession\/|overhead\/long-session)/, about: "How a long session behaves: resuming one, and one that keeps growing.",
       what: "A saved session of many turns is resumed and given one more prompt, and a session that keeps growing is timed turn by turn.", head: [/^longsession-resume.*ready_ms$/, /^longsession-resume/, /^longsession-/] },
-    { id: "durable", title: "Durable", kind: "durable", ext: "durable", scen: /^durable\//, about: "", what: "Buffon's own durable workloads (open a stored conversation, warm and cold turns, store size, crash and resume) and each project's own durable suites.", head: [/cpu_ms$/, /^durable-/] },
+    { id: "durable", title: "Durable", kind: "durable", ext: "durable", scen: /^durable\//, about: "", what: "Buffon's own durable workloads (open a stored conversation, warm and cold turns, store size, crash and resume) and each project's own durable suites.", head: [/^durable-mixed-3500\.warm_net_ms$/, /warm_net_ms$/, /warm_turn_ms$/, /cpu_ms$/, /^durable-/] },
     { id: "extensions", title: "Extensions", kind: "metrics", scen: /^overhead\/(print|rpc)-ext\d+$/, about: "What loading Pi extensions costs, from none to a hundred.",
       what: "The same prompt with 5, 10, 50 and 100 extensions loaded, in print mode and over RPC, beside the run with none.", head: [/^overhead-print-ext10\.cpu_ms$/, /^overhead-print-ext/] },
     { id: "agent-swarming", title: "Agent swarming", kind: "agents", about: "How many agents fit on one machine.", what: "How many agents run at once inside a fixed memory limit, found by doubling the count and then bisecting, with and without ten extensions loaded." },
@@ -562,18 +571,23 @@
       s.empty = !has;
       if (s.empty && def.hideEmpty) return;   // "Other" is a catch-all, not a place to look for
       if (s.kind === "metrics" && has) s.head = pickKeys(keys, def.head, 1)[0];
-      if (def.kind === "durable") s.about = keys.length ? "Buffon's own durable workloads, and below them each project's own durable suites, run as they are upstream." : "Each project's own durable suites, run as they are upstream. Buffon's own durable workloads are designed, not built yet.";
+      if (def.kind === "durable" && keys.length && D.durable) s.defaults = [D.durable.headline].concat(D.durable.bars).filter(function (k) { return keys.indexOf(k) >= 0; });   // the headline, then the work a turn costs
+      if (def.kind === "durable") s.about = keys.length ? "Buffon's own durable workloads, and below them each project's own durable suites, run as they are upstream." : "No durable run is in the results yet. Each project's own durable suites, run as they are upstream, are listed here when a run has them.";
       I.sections.push(s); I.sec[s.id] = s;
     });
   }
   // the wire APIs a section has values for, when more than one
   function secApis(I, s) {
+    if (s.id === "durable") return durableEnvs(I);
     if (s.kind === "faults") { var f = faultApis(I); return f.length > 1 ? f : []; }
     if (s.kind === "agents" || s.kind === "external") return [];
     var out = I.apis.filter(function (a) { return s.keys.some(function (k) { return I.metric[k].apis.indexOf(a) >= 0; }); });
     return out.length > 1 ? out : [];
   }
-  function secApi(I, st, sec) { var a = sec ? secApis(I, sec) : []; return a.length ? (a.indexOf(st.api) >= 0 ? st.api : a[0]) : st.api; }
+  function secApi(I, st, sec) {
+    if (sec && sec.id === "durable") { var envs = durableEnvs(I), p = st.route && st.route.params.api; return envs.length && envs.indexOf(p) >= 0 ? p : "native"; }
+    var a = sec ? secApis(I, sec) : []; return a.length ? (a.indexOf(st.api) >= 0 ? st.api : a[0]) : st.api;
+  }
   // the state that travels with a link between Results pages
   function keep(route) { var p = {}; ["h", "base", "v", "api"].forEach(function (k) { if (route.params[k] != null && route.params[k] !== "") p[k] = route.params[k]; }); return p; }
   function resultsCrumb(I, key) { var s = I.sec[I.secOf[key]]; return '<a href="' + link() + '">Results</a>' + (s ? ' › <a href="' + esc(link("r", [s.id])) + '">' + esc(s.title) + "</a>" : ""); }
@@ -726,6 +740,7 @@
   // which metrics are the table and which are behind "More metrics": by word, in this order, as many as fit in MAIN_MAX columns. A word that has variants ("200 KB file", "short answer") brings every variant.
   var MAIN_MAX = 6;
   var MAIN_WORDS = ["CPU time per 1,000 tokens", "CPU time until ready", "CPU time", "time until ready", "time", "time per turn", "CPU time per turn", "peak memory", "peak memory, all processes", "memory when ready", "growth of the session file"];
+  MAIN_WORDS = MAIN_WORDS.concat(["warm turn net of the floor", "warm turn", "cold start", "statements per turn", "commits per turn"]);   // the durable family's own
   // a trailing ", variant" is a variant when at least three metrics of the workload end in it and the metric names before it ("CPU time", "time") also come with another variant: the file size of a write, the length of an answer.
   // The group row of the table says it, a column says the rest. ("time, extensions ready" is one metric, not a variant of "time".)
   function variantsOf(mts) {
@@ -763,7 +778,7 @@
     var note = function (list) { return absentNote(I, st.route, list, { base: st.base }); };
     return note(common) + items.map(function (it, i) {
       var inner = it.html + note(it.absent.filter(function (r) { return !common.some(function (c) { return c.h === r.h; }); }));
-      return many ? '<details class="wl"' + (i === 0 ? " open" : "") + "><summary>" + esc(it.title) + "</summary>" + inner + "</details>" : '<section class="wl"><h3 class="wlh">' + esc(it.title) + "</h3>" + inner + "</section>";
+      return many ? '<details class="wl"' + (i === 0 ? " open" : "") + "><summary>" + esc(it.title) + (it.chip || "") + "</summary>" + inner + "</details>" : '<section class="wl"><h3 class="wlh">' + esc(it.title) + (it.chip || "") + "</h3>" + inner + "</section>";
     }).join("");
   }
   // the tables of the metrics `keys`: {html, count: the metrics that have a column}
@@ -792,7 +807,7 @@
         html += '<details class="more"><summary>More metrics (' + more.length + ")</summary>" + blocks + "</details>";
       }
       var absent = st.hs.filter(function (h) { return !live.some(function (mt) { return !cellOf(mt, h).na; }); }).map(function (h) { return absentRow(h, mts.map(function (mt) { return cellOf(mt, h); })); });
-      items.push({ title: titleOf[w], html: html, absent: absent });
+      items.push({ title: titleOf[w], chip: envChip(metricCell(I, mts[0].key, st.api)), html: html, absent: absent });
       count += live.length;
       live.forEach(function (mt) { st.hs.forEach(function (h) { var c = cellOf(mt, h); if (!c.na) (c.prov || []).forEach(function (r) { prov[r.id] = r; }); }); });   // one badge for the card, not one for each value
     });
@@ -849,20 +864,176 @@
     }).join("");
   }
 
+  // ---- the Durable section: the environment of a cell, its line charts over the history length, the crash grid, and the Method block
+  var ENV_TIP = { native: "Native SQLite on this host (Node and Go). Not a Durable Object.", miniflare: "Miniflare: local workerd with Durable Object storage.", cloudflare: "Real Cloudflare Durable Objects." };
+  // a small label with the environment a cell ran in; every environment is its own cell, never merged with another
+  function envChip(cell) { return cell && cell.env ? '<span class="envchip" tabindex="0" data-tip="' + esc(ENV_TIP[cell.env] || "Environment: " + cell.env) + '">' + esc(cell.env) + "</span>" : ""; }
+  // the environments the Durable section has cells for, when more than one ("native" first); the section's selector
+  function durableEnvs(I) {
+    var D = I.D.durable, out = D ? ["native"].concat(D.envs.filter(function (e) { return e !== "native"; })) : [];
+    return out.length > 1 ? out : [];
+  }
+  function durableRuns(I) { var ids = {}; I.D.cells.forEach(function (c) { if (c.family === "durable") ids[c.run] = 1; }); return Object.keys(ids); }
+  function durableProv(I) { return provRuns(I, durableRuns(I)); }
+  function durableNote(I) {
+    var D = I.D.durable;
+    return '<p class="attrib">' + esc(D.attribution) + "</p>" + '<p class="muted">Every durable number on this page was measured on ' + esc(D.envs.join(" and ")) + ", not in a Durable Object unless the cell says so. Statements are counted at the SQLite facade; the pragma statements are listed apart and are part of the total. " +
+      docLink(I, "WHAT-WE-MEASURE", "What each durable metric means") + ".</p>";
+  }
+  // how to fill the section when no durable run is in the results
+  function durableNone(I) {
+    var P = (I.D.plan || {}).durable || {};
+    return '<div class="card"><h3 class="sech2">No durable run is in the results yet</h3><p>Buffon\'s own durable workloads have no samples in the loaded runs. Produce one and load its directory:</p><pre class="cmd">' + esc(P.command || "") +
+      '</pre><p class="muted">The whole native plan is the campaign file <code>' + esc(P.campaign || "") + "</code>: <code>" + esc(P.campaign_command || "") + "</code>. " + docLink(I, "DURABLE", "The plan") + ".</p></div>";
+  }
+  // one line for each harness and series over the x axis of a chart (the history length), logarithmic. rows: {h, sr, line: [{x, v, tip, href}], other}
+  function durableLines(I, st, ch) {
+    var out = [];
+    st.hs.forEach(function (h) {
+      ch.series.forEach(function (sr) {
+        var line = [], other = {};
+        sr.rungs.forEach(function (r) {
+          var mt = I.metric[r.key];
+          if (!mt) return;
+          var c = gridCell(I, st, mt, h);
+          if (!c.na && c.label) other[r.at] = 1; else if (!c.na && ok(c.value)) line.push({ x: r.at, v: c.value, tip: c.tip, href: c.href });
+        });
+        if (line.length) out.push({ h: h, sr: sr, line: line, other: other });
+      });
+    });
+    return out;
+  }
+  function lineName(rows, r) { return shortName(r.h) + (rows.filter(function (q) { return q.h === r.h; }).length > 1 ? ", " + r.sr.name : ""); }
+  function durableChart(I, st, ch, rows, o) {
+    var ratio = st.mode === "ratio", all = [], xs = [];
+    rows.forEach(function (r) { r.line.forEach(function (p) { all.push(p.v); if (xs.indexOf(p.x) < 0) xs.push(p.x); }); });
+    xs.sort(function (a, b) { return a - b; });
+    var lo, hi;
+    if (ratio) { lo = Math.min.apply(null, all.concat([1])) / 1.15; hi = Math.max.apply(null, all.concat([1])) * 1.15; } else { lo = 0; hi = Math.max.apply(null, all) * 1.08 || 1; }
+    var names = rows.map(function (r) { return lineName(rows, r); });
+    var f = plotFrame({ width: o.width, lo: lo, hi: hi, log: ratio, unit: ratio ? "×" : o.unit, xlabel: ch.xlabel, label: o.label, names: names });
+    var W = f.W, L = f.L, R = f.R, H = f.H, a = Math.log(xs[0]), b = Math.log(xs[xs.length - 1]);
+    var X = function (x) { return L + (b === a ? (W - L - R) / 2 : (Math.log(x) - a) / (b - a) * (W - L - R - 6) + 3); }, s = f.svg;
+    xs.forEach(function (x) { s += '<line class="gl" x1="' + X(x).toFixed(1) + '" x2="' + X(x).toFixed(1) + '" y1="' + f.T + '" y2="' + (H - f.B) + '"/><text class="xl" x="' + X(x).toFixed(1) + '" y="' + (H - 18) + '">' + group(x) + "</text>"; });
+    if (ratio) s += '<line class="one" x1="' + L + '" x2="' + (W - R) + '" y1="' + f.Y(1).toFixed(1) + '" y2="' + f.Y(1).toFixed(1) + '"/>';
+    rows.forEach(function (r, i) {
+      s += '<g class="series h-' + esc(r.h.colour) + (r.sr.id === "compat" ? " alt" : "") + '">' + (r.line.length > 1 ? '<polyline points="' + r.line.map(function (p) { return X(p.x).toFixed(1) + "," + f.Y(p.v).toFixed(1); }).join(" ") + '"/>' : "") +
+        r.line.map(function (p) { return '<a href="' + esc(p.href) + '" aria-label="' + esc(names[i] + ", " + group(p.x)) + '"><circle cx="' + X(p.x).toFixed(1) + '" cy="' + f.Y(p.v).toFixed(1) + '" r="4" data-tip="' + esc(p.tip) + '"/></a>'; }).join("") + "</g>";
+    });
+    s += endLabels(rows.map(function (r, i) { var last = r.line[r.line.length - 1]; return { name: names[i], colour: r.h.colour, x: X(last.x), y: f.Y(last.v) }; }), f);
+    return '<div class="svgwrap">' + s + "</svg></div>";
+  }
+  function durableLineCards(ctx, I, st, sec) {
+    var D = I.D.durable, ratio = st.mode === "ratio", cards = "";
+    (D ? D.lines : []).forEach(function (ch) {
+      var rows = durableLines(I, st, ch);
+      if (!rows.length) return;
+      var mt = I.metric[ch.series[0].rungs.filter(function (r) { return I.metric[r.key]; }).map(function (r) { return r.key; })[0]], cell = metricCell(I, mt.key, secApi(I, st, sec)), xs = [];
+      rows.forEach(function (r) { r.line.forEach(function (p) { if (xs.indexOf(p.x) < 0) xs.push(p.x); }); });
+      xs.sort(function (a, b) { return a - b; });
+      var absent = st.hs.filter(function (h) { return !rows.some(function (r) { return r.h === h; }); }).map(function (h) {
+        return absentRow(h, ch.series[0].rungs.filter(function (r) { return I.metric[r.key]; }).map(function (r) { return gridCell(I, st, I.metric[r.key], h); }));
+      });
+      var names = rows.map(function (r) { return lineName(rows, r); });
+      var trs = rows.map(function (r, i) {
+        var by = {}; r.line.forEach(function (p) { by[p.x] = p; });
+        return [td(esc(names[i]))].concat(xs.map(function (x) { return by[x] ? td(ratio ? times(by[x].v) : esc(val(by[x].v, cell ? cell.unit : mt.unit)), by[x].v) : td(r.other[x] ? "different work: not compared" : "–", null); }));
+      });
+      var slope = "";
+      if (ch.slope_keys) {
+        var sk = ch.slope_keys.filter(function (k) { return I.metric[k]; }).pop(), sm = sk && I.metric[sk], sc = sm && metricCell(I, sk, secApi(I, st, sec));
+        var bits = sc ? st.hs.filter(function (h) { return sc.stats[h.id]; }).map(function (h) { return shortName(h) + " " + val(sc.stats[h.id].median, sc.unit); }) : [];
+        if (bits.length) slope = '<p class="muted">Memory per live conversation, the slope of the line: ' + bits.map(esc).join(", ") + ".</p>";
+      }
+      cards += card(ctx, { id: "durable-" + ch.id, title: esc(ch.title), sub: esc((ratio ? "Ratio to " + shortName(st.base) + ", log scale. The dashed line is 1×. " : "Median. Lower is to the bottom. ") + "The x axis is logarithmic." + (ch.series.length > 1 ? " Dashed lines are the compat lane." : "")),
+        tools: envChip(cell) + provBadge(cell ? cellProv(I, cell) : []),
+        chart: durableChart(I, st, ch, rows, { width: chartWidth(ctx, 1), unit: cell ? cell.unit : mt.unit, label: ch.title }) + '<p class="muted">' + esc(ch.note) + "</p>" + slope,
+        table: table(ctx, "durable-" + ch.id, ["Harness"].concat(xs.map(function (x) { return { h: group(x), num: true }; })), trs),
+        foot: absentNote(I, st.route, absent, { base: st.base }) });
+    });
+    return cards || '<p class="empty">' + NO_VALUE + "</p>";
+  }
+  // the crash and resume grid: a row for each order (writer then resumer), a mark for each kill point, and the pass rate of the order with its Wilson interval
+  function orderName(I, o) { var n = function (id) { return I.harn[id] ? shortName(I.harn[id]) : id; }; return n(o.writer) + " then " + n(o.resumer); }
+  function crashCard(ctx, I, st, g) {
+    var orders = g.orders.filter(function (o) { return st.hs.some(function (h) { return h.id === o.writer; }) && st.hs.some(function (h) { return h.id === o.resumer; }); });
+    var absent = st.hs.filter(function (h) { return !g.orders.some(function (o) { return o.resumer === h.id; }); }).map(function (h) { var why = g.na[h.id] || ""; return { h: h, na: true, cant: isCant(why), why: why, tip: shortName(h) + ": " + (noteOf(why) || "it was not run on this workload") }; });
+    if (!orders.length) return "";
+    var pctw = function (x) { return Math.round(x * 1000) / 10 + "%"; };
+    var rows = orders.map(function (o) {
+      var h = I.harn[o.resumer] || I.ref, ci = o.ci ? pctw(o.ci[0]) + " to " + pctw(o.ci[1]) : "n/a";
+      if (o.impossible) return { o: o, h: h, ci: "", html: '<div class="crow h-' + esc(h.colour) + '"><span class="cname">' + esc(orderName(I, o)) + '</span><span class="ccells nopos" data-tip="' + esc(o.impossible) + '">not possible: ' + esc(o.impossible) + '</span><span class="cscore"></span></div>' };
+      var cells = g.ks.filter(function (k) { return o.points[String(k)]; }).map(function (k) {
+        var p = o.points[String(k)];
+        return '<i class="cc ' + (p.ok ? "ok" : "bad") + '" data-tip="' + esc(orderName(I, o) + ", killed after commit " + k + (g.commits_total[String(k)] != null ? " of " + g.commits_total[String(k)] : "") + "\n" + (p.ok ? "Passed." : "Did not pass: " + p.reasons.join("; "))) + '"></i>';
+      }).join("");
+      return { o: o, h: h, ci: ci, html: '<div class="crow h-' + esc(h.colour) + '"><span class="cname">' + esc(orderName(I, o)) + (o.control ? " <small>(the oracle)</small>" : "") + '</span><span class="ccells" role="img" aria-label="' + esc(orderName(I, o) + ": " + o.passed + " of " + o.of + " kill points passed") + '">' + cells +
+        '</span><span class="cscore"><b>' + o.passed + " of " + o.of + "</b><small>95% interval " + esc(ci) + "</small></span></div>" };
+    });
+    var axis = '<div class="crow caxis"><span class="cname"></span><span class="ccells"><small>commit k at which the process is killed: ' + esc(String(g.ks[0])) + " to " + esc(String(g.ks[g.ks.length - 1])) + '</small></span><span class="cscore"></span></div>';
+    var trs = rows.map(function (r) {
+      if (r.o.impossible) return [td(esc(orderName(I, r.o))), td("–", null), td("–", null), td("–", null), td("not possible: " + esc(r.o.impossible)), td("")];
+      var bad = Object.keys(r.o.points).filter(function (k) { return !r.o.points[k].ok; });
+      return [td(esc(orderName(I, r.o))), td(String(r.o.of), r.o.of), td(String(r.o.passed), r.o.passed), td(r.o.of ? pctw(r.o.passed / r.o.of) : "n/a", r.o.of ? r.o.passed / r.o.of : null), td(esc(r.ci)), td(bad.length ? esc("k = " + bad.slice(0, 12).join(", ") + (bad.length > 12 ? " and " + (bad.length - 12) + " more" : "")) : "none")];
+    });
+    return card(ctx, { id: "crash-" + g.id, title: esc(g.title), sub: "Each mark is one kill after a commit, a reopen, a resume and the same request id again. The reference order is the oracle: another order passes a point when its outcome equals the oracle's at the same point.",
+      tools: envChip({ env: "native" }) + provBadge(provRuns(I, [g.run])),
+      chart: '<div class="crashgrid">' + rows.map(function (r) { return r.html; }).join("") + axis + '</div><p class="muted"><i class="cc ok"></i> passed <i class="cc bad"></i> did not pass</p>',
+      table: table(ctx, "crash-" + g.id, ["Order", { h: "Points", num: true }, { h: "Passed", num: true }, { h: "Share", num: true }, "95% interval (Wilson)", "Did not pass at"], trs),
+      foot: absentNote(I, st.route, absent, { quiet: true }) });
+  }
+  function crashBlock(ctx, I, st, sec) {
+    var D = I.D.durable, out = D ? D.crash.map(function (g) { return crashCard(ctx, I, st, g); }).join("") : "";
+    return out ? '<h2 class="sech">Crash and resume</h2>' + out : "";
+  }
+  // the Method page's Durable block: the settings each arm ran with, the gate's records, the fixtures' digests and the floors
+  function durableMethod(ctx, I) {
+    var D = I.D.durable;
+    if (!D) return "";
+    var M = D.method, out = '<h2 class="sech">Durable</h2><p class="muted">' + esc(D.attribution) + "</p>";
+    var set = M.settings.map(function (a) {
+      var h = I.harn[a.arm], versions = Object.keys(a.versions).map(function (k) { return k + " " + a.versions[k]; }).join(", "), settings = Object.keys(a.settings).map(function (k) { return k + " = " + (a.settings[k] === null ? "the runtime's own default" : a.settings[k]); }).join("<br>");
+      return [td(h ? hname(h) : esc(a.arm), a.arm), td(esc(versions), versions), td(settings || "none", settings), td(esc(a.envs.join(", ")), a.envs.join(", "))];
+    });
+    if (set.length) out += card(ctx, { id: "durable-settings", title: "Runtime settings per arm", sub: "What each arm declared and the versions it ran. Nothing else is tuned: no Go or Node variable is set.", body: table(ctx, "durable-settings", ["Harness", "Versions", "Declared settings", "Environment"], set, { tools: false }) });
+    M.gates.forEach(function (g, i) {
+      var scen = g.scenarios.map(function (z) { var arms = Object.keys(z.arms).join(", "); return [td("<code>" + esc(z.label) + "</code>", z.label), td(esc(z.name), z.name), td(esc(arms), arms), td(z.same == null ? "one arm" : z.same ? "same requests and state" : "differs", String(z.same))]; });
+      var cross = g.cross_open.map(function (c) { return [td("<code>" + esc(c.label) + "</code>", c.label), td(esc(c.order), c.order), td(c.ok ? "same transcript" + (c.messages != null ? " (" + c.messages + " messages)" : "") : c.why ? "not possible: " + esc(c.why) : "differs", String(c.ok))]; });
+      var notes = [["Rows identical", g.row_identical], ["Differences", g.differences], ["Flaky", g.flaky]].map(function (n) { return n[0] + ": " + n[1]; }).concat(g.different_work.map(function (d) { return "Different work, " + shortName(I.harn[d.arm] || { name: d.arm }) + " on " + d.label + ": " + d.reason; }),
+        g.capabilities.filter(function (c) { return c.reason; }).map(function (c) { return "Cannot run, " + shortName(I.harn[c.arm] || { name: c.arm }) + ", " + c.capability + ": " + c.reason; }));
+      out += card(ctx, { id: "durable-gate-" + i, title: "Equivalence gate" + (M.gates.length > 1 ? ": run " + esc(g.run) : ""), sub: esc("Nothing was timed until both arms left the same conversation state and sent the same model requests, and each opened the other's store where its runtime can. " + (g.passed ? "The gate passed" : "The gate did not pass") + (g.oracle ? " against " + g.oracle : "") + ". Source: " + g.source + "."),
+        body: (g.failures.length ? '<ul class="plan">' + g.failures.map(function (f) { return "<li>" + esc(f) + "</li>"; }).join("") + "</ul>" : "") +
+          (scen.length ? table(ctx, "durable-gate-" + i, ["Fixture", "Scenario", "Arms", "Result"], scen, { tools: false }) : "") + (cross.length ? table(ctx, "durable-cross-" + i, ["Fixture", "Order (writer then reader)", "Cross-open"], cross, { tools: false }) : "") +
+          '<p class="muted">' + notes.map(esc).join("<br>") + "</p>" });
+    });
+    if (M.fixtures.length) {
+      var digest = function (list) { var d = (list || []).join(" "); return td('<code data-tip="' + esc(d) + '" tabindex="0">' + esc((list || []).map(function (x) { return x.slice(0, 12); }).join(" ")) + "</code>", d); };
+      var fx = M.fixtures.map(function (f) { return [td("<code>" + esc(f.scenario) + "</code>", f.scenario), digest(f.sha256), digest(f.store_sha256), td(esc(f.writer || ""), f.writer || ""), td(esc(f.variant || ""), f.variant || ""), td(f.turns == null ? "" : String(f.turns), f.turns)]; });
+      out += card(ctx, { id: "durable-fixtures", title: "Fixtures", sub: "The sha256 of each fixture's script and of the store built from it (the first 12 digits; hover for all), the arm that built the store and the kind of words. One digest per workload means every arm opened the same fixture.", body: table(ctx, "durable-fixtures", ["Workload", "Script sha256", "Store sha256", "Built by", "Words", { h: "Turns", num: true }], fx, { tools: false }) });
+    }
+    var floors = D.floors.filter(function (k) { return I.metric[k] && I.cellOf[k] && I.cellOf[k]["-"]; });
+    if (floors.length) {
+      var rows2 = []; floors.forEach(function (k) { var mt = I.metric[k], c = I.cellOf[k]["-"]; I.D.harnesses.forEach(function (h) { if (c.stats[h.id]) rows2.push([td(esc(mt.title), mt.title), td(esc(cap(mt.word)), mt.word), td(hname(h), h.name), td(esc(val(c.stats[h.id].median, c.unit)), c.stats[h.id].median)]); }); });
+      out += card(ctx, { id: "durable-floors", title: "Floors", sub: "The adapter with no durable runtime (host floor) and the recorded statements replayed with no runtime (SQL floor). warm_net_ms is the warm turn less the host floor of the same arm and round.", body: table(ctx, "durable-floors", ["Floor", "Measure", "Harness", { h: "Median", num: true }], rows2, { tools: false }) });
+    }
+    return out;
+  }
+
   // ---- a section is the explorer of its metrics: chips to choose them, one small chart for each under one view switch, and the whole table
   var VIEWS_OF_CHART = [["bars", "Bars"], ["dots", "Dots"], ["rounds", "Rounds"]];
-  var LENS_WORDS = { fit: "Capacity", cpu: "CPU", wall: "Time", memory: "Memory", size: "Size", wire: "Wire", other: "Other" };
-  var LENS_ORDER = ["fit", "cpu", "wall", "memory", "size", "wire", "other"];
+  var LENS_WORDS = { fit: "Capacity", cpu: "CPU", wall: "Time", memory: "Memory", size: "Size", count: "Work per turn", wire: "Wire", other: "Other" };
+  var LENS_ORDER = ["fit", "cpu", "wall", "memory", "size", "count", "wire", "other"];
   function lensName(l) { return LENS_WORDS[l] || cap(l); }
   // the metrics a reader chose on a section page: the `m` list of the URL, or the headline metric when there is none (`none` is an empty choice)
+  function defaultKeys(sec) { return sec.defaults && sec.defaults.length ? sec.defaults : sec.head ? [sec.head] : []; }
   function chosenKeys(route, sec) {
     var m = route.params.m;
-    if (!m || !m.length) return sec.head ? [sec.head] : [];
+    if (!m || !m.length) return defaultKeys(sec);
     return sec.keys.filter(function (k) { return m.indexOf(k) >= 0; });
   }
   function keysHref(route, sec, keys) {
     keys = sec.keys.filter(function (k) { return keys.indexOf(k) >= 0; });
-    var dflt = sec.head ? [sec.head] : [], same = keys.length === dflt.length && keys.every(function (k, i) { return k === dflt[i]; });
+    var dflt = sec.keys.filter(function (k) { return defaultKeys(sec).indexOf(k) >= 0; }), same = keys.length === dflt.length && keys.every(function (k, i) { return k === dflt[i]; });
     return withParam(route, "m", same ? "" : keys.length ? keys : ["none"]);
   }
   // the hash that shows or hides one value of a list that filters a page (`s` sections, `k` kinds); the full list is no parameter, an empty one is `none`
@@ -978,24 +1149,27 @@
     var chart = !have.length ? '<p class="empty">' + NO_VALUE + "</p>" : view === "bars" ? barsChart(I, vst, mt, cell, have) : view === "rounds" ? roundsChart(I, mt, cell, width, have) :
       dotPlot(have, { width: width, compact: true, ratio: ratio, unit: cell ? cell.unit : "", base: baseAt(I, st, mt), baseName: shortName(st.base), label: mt.title + ": " + mt.word });
     return card(ctx, { id: "p-" + mt.key, cls: "small", title: esc(mt.title + ": " + cap(mt.word)), sub: esc(sub), chart: chart + absentNote(I, st.route, absent, { base: st.base, quiet: !have.length }),
-      tools: provBadge(cell ? cellProv(I, cell) : []) + '<a class="info" href="' + esc(link("metric", [mt.key], metricParams(I, st))) + '" aria-label="About this metric" data-tip="' + esc(mt.about + "\nClick for the formula and every harness.") + '">i</a>' });
+      tools: envChip(cell) + provBadge(cell ? cellProv(I, cell) : []) + '<a class="info" href="' + esc(link("metric", [mt.key], metricParams(I, st))) + '" aria-label="About this metric" data-tip="' + esc(mt.about + "\nClick for the formula and every harness.") + '">i</a>' });
   }
   // one section page: a sentence, the metric chips, one chart for each chosen metric under one view switch, and the table of every metric of the section
   function sectionBody(ctx, I, route, st, sec) {
     if (sec.kind === "agents") return agentsBody(ctx, I, route, st, sec);
-    var head = '<div class="pagehead"><h1>' + esc(sec.title) + '</h1><p class="lede">' + esc(sec.about) + ' <a class="how" href="' + esc(link("method")) + '">How it works</a></p></div>';
+    var dur = sec.id === "durable" && I.D.durable;
+    var head = '<div class="pagehead"><h1>' + esc(sec.title) + (dur ? " " + provBadge(durableProv(I)) : "") + '</h1><p class="lede">' + esc(sec.about) + ' <a class="how" href="' + esc(link("method")) + '">How it works</a></p>' + (dur ? durableNote(I) : "") + "</div>";
     if (sec.kind === "faults") return head + faultsBody(ctx, I, st, sec);
-    var chosen = chosenKeys(route, sec), view = st.view === "line" && sec.id !== "extensions" ? "bars" : st.view;
-    var views = VIEWS_OF_CHART.concat(sec.id === "extensions" ? [["line", "Line"]] : []);
+    var lined = sec.id === "extensions" || sec.id === "durable", chosen = chosenKeys(route, sec), view = st.view === "line" && !lined ? "bars" : st.view;
+    var views = VIEWS_OF_CHART.concat(lined ? [["line", "Line"]] : []);
     var switcher = '<div class="viewbar"><span class="lbl">View</span>' + seg(views, view, function (v) { return 'data-href="' + esc(withParam(route, "view", v === "bars" ? "" : v)) + '"'; }) + "</div>";
     var charts;
-    if (view === "line") charts = sweepCards(ctx, I, st);
-    else if (!chosen.length) charts = '<p class="empty">Choose a metric above to see it here.</p>';
+    if (view === "line") charts = sec.id === "durable" ? durableLineCards(ctx, I, st, sec) : sweepCards(ctx, I, st);
+    else if (!chosen.length) charts = '<p class="empty">Choose a metric ' + (dur ? "below" : "above") + " to see it here.</p>";
     else {
       var cols = Math.max(1, Math.min(chosen.length, ctx.avail > 700 ? 2 : 1)), w = chartWidth(ctx, cols);
       charts = '<div class="smalls" style="--n:' + cols + '">' + chosen.map(function (k) { return metricCard(ctx, I, st, I.metric[k], view, w); }).join("") + "</div>";
     }
     var tables = workloadTables(I, st, sec.keys, "all-" + sec.id), table = card(ctx, { id: "all-" + sec.id, title: "All metrics in this section (" + tables.count + ")", tools: provBadge(tables.prov) + csvBtn("all-" + sec.id), body: tables.html });
+    var crashGrid = dur && secApi(I, st, sec) === "native" ? crashBlock(ctx, I, st, sec) : "";
+    if (dur) return head + switcher + charts + crashGrid + metricMatrix(I, route, sec, chosen) + table + (sec.ext ? externalBlock(I, sec) : "");   // the Durable section has many workloads: its charts come first and the picker of metrics under them
     return head + metricMatrix(I, route, sec, chosen) + switcher + charts + table + (sec.ext ? externalBlock(I, sec) : "");
   }
   function railOf(I, route, current) {
@@ -1069,7 +1243,7 @@
   }
   function externalBody(ctx, I, route, sec) {
     var head = '<div class="pagehead"><h1>' + esc(sec.title) + '</h1><p class="lede">' + esc(sec.about) + ' <span class="how">' + docLink(I, "EXTERNAL", "How they are run") + "</span></p></div>";
-    return head + externalBlock(I, sec);
+    return head + (sec.id === "durable" ? durableNone(I) : "") + externalBlock(I, sec);
   }
   // a section the loaded runs have no data for: what it will measure, which workloads and harnesses of the launch rerun fill it, and the command. No number is drawn.
   function emptyBody(I, sec) {
@@ -1085,7 +1259,7 @@
       rows = '<ul class="plan">' + ws.map(function (w) { return "<li><b>" + esc(w.title) + "</b> " + esc(w.use) + "</li>"; }).join("") + "</ul>" +
         '<p class="muted">Harnesses in the launch rerun: ' + arms.map(esc).join(", ") + ".</p>";
     }
-    if (sec.id === "durable") note = '<p class="muted">Designed, not built yet: no command fills it today.</p>';
+    if (sec.id === "durable") note = '<h3 class="sech2">To fill it</h3><p>No durable run is in the results yet. Run one, then build the site from its directory:</p><pre class="cmd">' + esc(P.durable.command) + '</pre><p class="muted">The whole native plan is the campaign file <code>' + esc(P.durable.campaign) + "</code>: <code>" + esc(P.durable.campaign_command) + "</code>.</p>";
     else if (ws.length) note = '<h3 class="sech2">To fill it</h3><pre class="cmd">' + esc(P.command) + "</pre>";
     else note = '<p class="muted">' + docLink(I, sec.kind === "external" ? "EXTERNAL" : "WHAT-WE-MEASURE", "How it is measured") + ".</p>";
     return '<div class="pagehead"><h1>' + esc(sec.title) + '</h1><p class="lede">' + esc(sec.about) + '</p></div><p class="empty"><span class="vchip off">Not run yet</span></p><div class="card">' +
@@ -1146,7 +1320,7 @@
       var X = I.D.external[sec.ext];
       return '<a class="card tile" href="' + esc(href) + '"><h2>' + esc(sec.title) + '</h2><p class="tile-m">Project suites: ' + plural(X.runs, "run") + "</p>" + (X.newest ? '<p class="tile-r">newest run ' + esc(X.newest) + "</p>" : "") + "</a>";
     }
-    var title = '<h2>' + esc(sec.title) + "</h2>";
+    var title = "<h2>" + esc(sec.title) + (sec.id === "durable" ? envChip(metricCell(I, sec.head, secApi(I, st, sec))) : "") + "</h2>";
     if (sec.kind === "faults") {
       var list = faultsOf(I, st);
       var fr = list.length ? st.hs.map(function (h) { var c = faultCount(list, h); return c.ran ? { h: h, v: c.passed, text: c.passed + " of " + c.of } : null; }).filter(Boolean) : [];
@@ -1247,7 +1421,7 @@
     var mode = ratio ? seg([["values", "Values"], ["ratio", "Ratio"]], st.mode, function (v) { return 'data-href="' + esc(withParam(route, "v", v === "values" ? "values" : "")) + '"'; }) : "";
     var bases = ratio ? select("base", all.map(function (h) { return [h.is_ref ? "" : h.slug, shortName(h)]; }), st.base.is_ref ? "" : st.base.slug, "Baseline") : "";
     var apis = sec ? secApis(I, sec) : [];
-    var apiSel = apis.length ? select("api", apis.map(function (a) { return [a, apiName(a)]; }), secApi(I, st, sec), "Wire API") : "";
+    var apiSel = apis.length ? select("api", apis.map(function (a) { return [a, sec && sec.id === "durable" ? a : apiName(a)]; }), secApi(I, st, sec), sec && sec.id === "durable" ? "Environment" : "Wire API") : "";
     return '<div class="ctlbar">' + chips + '<div class="ctlrow">' + mode + bases + apiSel + "</div></div>";
   }
 
@@ -1285,11 +1459,12 @@
     if (!mt) return notFound(I);
     var st = stateOf(I, route), base = st.base, D = I.D;
     var apis = I.apis.filter(function (a) { return mt.apis.indexOf(a) >= 0; });   // the order of Compare
-    var api = mt.apis.indexOf("-") >= 0 ? "-" : (apis.indexOf(st.api) >= 0 ? st.api : apis[0]);
-    var cell = I.cellOf[mt.key][api], w = D.workloads[mt.workload] || {};
+    var envs = I.envs.filter(function (e) { return mt.apis.indexOf(e) >= 0; }), opts = envs.length ? (mt.apis.indexOf("-") >= 0 ? ["native"] : []).concat(envs) : apis;   // an environment is chosen like an API, and each is its own cell
+    var api = envs.length ? (opts.indexOf(route.params.api) >= 0 ? route.params.api : opts[0]) : mt.apis.indexOf("-") >= 0 ? "-" : (apis.indexOf(st.api) >= 0 ? st.api : apis[0]);
+    var cell = I.cellOf[mt.key][api === "native" ? "-" : api], w = D.workloads[mt.workload] || {};
     var rows = D.harnesses.filter(function (h) { return cell.stats[h.id]; }).map(function (h) { return { h: h, s: cell.stats[h.id] }; });
     var absent = D.harnesses.filter(function (h) { return !cell.stats[h.id]; });
-    var apiSeg = apis.length > 1 ? seg(apis.map(function (a) { return [a, apiName(a)]; }), api, function (v) { return 'data-href="' + esc(withParam(route, "api", v)) + '"'; }) : "";
+    var apiSeg = opts.length > 1 ? seg(opts.map(function (a) { return [a, envs.length ? a : apiName(a)]; }), api, function (v) { return 'data-href="' + esc(withParam(route, "api", v)) + '"'; }) : "";
     var baseSel = select("base", D.harnesses.map(function (h) { return [h.is_ref ? "" : h.slug, shortName(h)]; }), base.is_ref ? "" : base.slug, "Ratio to");
     var head = ["Harness", { h: "Rounds", num: true }, { h: "Median", num: true }, { h: "95% interval of the median", num: true }, { h: term(I, "iqr", "Middle half"), num: true }, { h: "Range", num: true }, { h: "Ratio to " + esc(shortName(base)), num: true }];
     var trs = rows.map(function (r) {
@@ -1307,7 +1482,7 @@
       chart: intervalBars(I, cell, rows, base), table: table(ctx, "metric-" + mt.key, head, trs),
       foot: absent.length ? "No value: " + absent.map(function (h) { var o = otherApi(I, mt.key, h, api); return o ? '<a href="' + esc(withParam(route, "api", o)) + '" data-tip="' + esc(otherTip(h, o)) + '">' + esc(shortName(h) + " (" + apiShort(o) + ")") + "</a>" : '<span data-tip="' + esc(naTip(h, cell.na[h.id])) + '" tabindex="0">' + esc(shortName(h)) + "</span>"; }).join(", ") + "." : "" });
     var formula = '<table class="kv"><tr><th>Unit</th><td>' + esc(unitOf(mt.unit)) + "</td></tr><tr><th>The task</th><td><code>" + esc(mt.scenario) + "</code> · " + esc(w.title || "") + "</td></tr><tr><th>The metric</th><td><code>" + esc(mt.metric) + "</code></td></tr>" +
-      (I.multiApi && api !== "-" ? "<tr><th>Wire API</th><td>" + esc(apiName(api)) + "</td></tr>" : "") + "</table>" +
+      (I.multiApi && api !== "-" && !envs.length ? "<tr><th>Wire API</th><td>" + esc(apiName(api)) + "</td></tr>" : "") + (cell.env ? "<tr><th>Environment</th><td>" + esc(cell.env) + "</td></tr>" : "") + "</table>" +
       (mt.tex ? '<div class="eqrow"><span class="lbl">One sample</span><div class="eq">' + mt.tex + "</div></div>" : "") +
       '<div class="eqrow"><span class="lbl">Each value</span><div class="eq">' + D.tex.median + "</div></div>" +
       '<div class="eqrow"><span class="lbl">Ratio</span><div class="eq">' + D.tex.ratio + "</div></div>" +
@@ -1597,7 +1772,7 @@
     var sentence = esc(shortName(h)) + ": <b>" + esc(val(c.arm_median, cell.unit)) + "</b>. " + esc(refName) + ": <b>" + esc(val(c.ref_median, cell.unit, c.arm_median)) + "</b>. Each value is the median of the " + plural(c.n, "round") + " that both ran.";
     return '<p class="crumbs">' + resultsCrumb(I, cell.key) + ' › <a href="' + link("harness", [h.slug]) + '">' + esc(shortName(h)) + '</a> › <a href="' + link("metric", [cell.key], cell.api_short === "-" ? {} : { api: cell.api_short }) + '">' + esc(w.title || cell.scenario) + "</a> › " + esc(cell.metric_word) + "</p>" +
       '<div class="answer h-' + esc(h.colour) + '"><div class="big">' + ratioStr(c.ratio) + "<small>×</small></div><div><h1>" + esc(w.title || cell.scenario) + ": " + esc(cell.metric_word) + "</h1><p>" + sentence +
-      '</p><p class="meta">' + (cell.api_short !== "-" ? esc(API_NAME[cell.api_short] || cell.api_short) + " · " : "") + 'run <a href="' + link("method", ["runs"]) + '">' + esc(cell.run) + "</a> " + provBadge(cellProv(I, cell)) + "</p></div></div>" + caveat +
+      '</p><p class="meta">' + envChip(cell) + (cell.env ? " " : "") + (cell.api_short !== "-" && !cell.env_variant ? esc(API_NAME[cell.api_short] || cell.api_short) + " · " : "") + 'run <a href="' + link("method", ["runs"]) + '">' + esc(cell.run) + "</a> " + provBadge(cellProv(I, cell)) + "</p></div></div>" + caveat +
       '<div class="grid2">' + card(ctx, { id: "facts", title: "How sure is this number?", body: facts }) +
       card(ctx, { id: "rerun", title: term(I, "rerun", "Measure it again"), body: '<pre class="cmd" id="cmd">' + esc(cell.rerun) + '</pre><button type="button" class="btn" data-copy="#cmd">Copy command</button><p class="files"><a href="' + link("method", ["runs"]) + '">Data files</a></p>' }) + "</div>" +
       card(ctx, { id: "runs-" + h.slug, title: "What runs", body: whatRuns(I, h, cell) }) +
@@ -1710,7 +1885,7 @@
       "<p class=\"muted\">A ratio is within the margin when the whole 90% interval of the ratio is inside 1 ± the margin.</p></section></details>" : "";
     return '<div class="pagehead"><h1>Method</h1><p class="lede">How one number is made, how the harnesses are kept fair, and where the numbers stop.</p>' + methodTabs("") + "</div>" +
       '<ol class="strip">' + steps + "</ol>" +
-      '<h2 class="sech">Fairness</h2>' + runtime + different + equiv +
+      '<h2 class="sech">Fairness</h2>' + runtime + different + equiv + durableMethod(ctx, I) +
       '<h2 class="sech">Limits</h2><section class="card"><p>The scripted model answers at once and has no network. A real session adds network time and model time. One machine gives one set of numbers. The site measures the cost of a harness, not the quality of its answers. ' +
       docLink(I, "LIMITATIONS", "Read the full list.") + "</p></section>" +
       '<section class="card"><header class="card-h"><div><h2>Read more</h2></div></header><ul class="doclist">' + docs + '</ul><p class="muted">Pi is by Mario Zechner and Earendil Inc. (MIT), <a href="https://pi.dev">pi.dev</a>.</p></section>';
@@ -2234,7 +2409,7 @@
       if (s.empty) return;
       secApis(I, s).forEach(function (a) { out.push(link("r", [s.id], { api: a }), link("r", [s.id], { api: a, v: "ratio" })); });
       if (s.kind === "metrics") {
-        ["dots", "rounds"].concat(s.id === "extensions" ? ["line"] : []).forEach(function (v) { out.push(link("r", [s.id], { view: v })); });
+        ["dots", "rounds"].concat(s.id === "extensions" || s.id === "durable" ? ["line"] : []).forEach(function (v) { out.push(link("r", [s.id], { view: v })); });
         ["dots", "bars", "rounds"].forEach(function (v) { out.push(link("r", [s.id], { m: s.keys, view: v })); });   // every metric of the section, drawn in each view
         out.push(link("r", [s.id], { sort: s.keys[0] + ":desc", v: "values" }), link("r", [s.id], { m: ["none"] }));
       }

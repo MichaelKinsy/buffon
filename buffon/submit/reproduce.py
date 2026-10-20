@@ -196,10 +196,12 @@ def cell_plan(original_dir, scenario, api, metric, reference=None):
     """(workloads, apis, arms) that measure one cell again: its workload and API, and the arms that have a measured sample of it (the reference always). CellIdError when the run has no such cell."""
     raw = rawlib.read(original_dir)
     ref = reference or (raw["run"].get("reference") or "pi-node")
-    arms = sorted({s["arm"].removesuffix("-b") for s in raw["samples"] if s["scenario"] == scenario and s.get("api") == api and not s["warmup"] and "failure" not in s and metric in s})
+    mine = [s for s in raw["samples"] if s["scenario"] == scenario and cellmath.variant(s) == api and not s["warmup"] and "failure" not in s and metric in s]
+    arms = sorted({s["arm"].removesuffix("-b") for s in mine})
     if not arms:
         raise cellidlib.CellIdError(f"the run {original_dir} has no measured {metric} of {scenario} ({api or 'no API'}); its cells are listed in its report.md")
-    return [scenario], [api] if api else None, [ref] + [a for a in arms if a != ref]
+    wire = api if any(s.get("api") for s in mine) else None   # an environment (a durable cell of Miniflare) is not a wire API: the run's own params carry it (`run_argv`)
+    return [scenario], [wire] if wire else None, [ref] + [a for a in arms if a != ref]
 
 
 def pins_ok(original_dir, repo):

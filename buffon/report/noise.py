@@ -248,7 +248,7 @@ def per_cell(data):
 def run_view(raw, facts, index):
     """Per-run facts of the noise report from one raw.json: samples and why some are not in the statistics, flags, throttling, the gate, the host."""
     samples = raw["samples"]
-    seq = [s for s in samples if s["scenario"].split("/")[0] not in cellmath.SPECIAL_FAMILIES or "telemetry" in s]
+    seq = [s for s in samples if not cellmath.is_special(s["scenario"]) or "telemetry" in s]
     derived = derive(seq)
     measured = [d for d in derived if not d.sample["warmup"]]
     ok = [d for d in measured if "failure" not in d.sample]
@@ -257,7 +257,7 @@ def run_view(raw, facts, index):
     flagged = [(d.sample, d.flags) for d in ok if d.flags]
     counts = {name: sum(1 for _, f in flagged if name in f) for name in FLAG_ORDER}
     with_t = [d for d in ok if d.flags is not None]
-    throttle_events = [{"arm": d.sample["arm"], "scenario": d.sample["scenario"], "api": d.sample.get("api"), "round": d.sample["round"], "throttled_us": d.throttled_us, "periods": d.throttled_periods}
+    throttle_events = [{"arm": d.sample["arm"], "scenario": d.sample["scenario"], "api": cellmath.variant(d.sample), "round": d.sample["round"], "throttled_us": d.throttled_us, "periods": d.throttled_periods}
                        for d in ok if d.flags and "throttled" in d.flags]
     gate = {"passed": 0, "waited": 0, "gave_up": 0, "disabled": 0, "waited_ms_total": 0, "waited_ms_max": 0, "slow": 0}
     for d in measured:
@@ -277,7 +277,7 @@ def run_view(raw, facts, index):
     parts = [((system(d.sample) or {}).get("collector") or {}) for d in with_t]
     cost = [sum(c.get(k) or 0 for k in ("thread_cpu_ms", "begin_cpu_ms", "end_cpu_ms")) for c in parts if "thread_cpu_ms" in c]
     srcs = sorted({x for d in with_t for x in (system(d.sample) or {}).get("sources", [])})
-    flagged_rounds = sorted({(s["scenario"], s.get("api"), s["round"]) for s, _ in flagged}, key=lambda k: (k[0], str(k[1]), k[2]))
+    flagged_rounds = sorted({(s["scenario"], cellmath.variant(s), s["round"]) for s, _ in flagged}, key=lambda k: (k[0], str(k[1]), k[2]))
     steal = capacity = 0.0
     foreign, mhz, limited, modes = [], [], set(), set()
     for d in with_t:
@@ -301,9 +301,9 @@ def run_view(raw, facts, index):
     med_mhz = stats.median(mhz) if mhz else None
     return {"index": index, "rounds": raw["run"].get("rounds"), "warmup_rounds": raw["run"].get("warmup"), "hardware": raw["hardware"].get("class"),
             "samples": {"measured": len(measured), "ok": len(ok), "failed": len(failed), "warmup": len(warm), "with_telemetry": len(with_t), "infra_failed": kinds["infra"], "arm_failed": kinds["arm"], "stopped": kinds["stop"]},
-            "failed": [{"arm": s["arm"], "scenario": s["scenario"], "api": s.get("api"), "round": s["round"], "reason": s["failure"][:160], "kind": failure_kind(s)} for s in failed],
+            "failed": [{"arm": s["arm"], "scenario": s["scenario"], "api": cellmath.variant(s), "round": s["round"], "reason": s["failure"][:160], "kind": failure_kind(s)} for s in failed],
             "flag_counts": counts, "flagged_samples": len(flagged), "flagged_rounds": [list(k) for k in flagged_rounds],
-            "flagged": [{"arm": s["arm"], "scenario": s["scenario"], "api": s.get("api"), "round": s["round"], "flags": f} for s, f in flagged],
+            "flagged": [{"arm": s["arm"], "scenario": s["scenario"], "api": cellmath.variant(s), "round": s["round"], "flags": f} for s, f in flagged],
             "throttled_samples": len(throttle_events), "throttled_us_total": sum(e["throttled_us"] for e in throttle_events), "throttle_events": throttle_events,
             "facts_throttled_us": (facts or {}).get("throttled_usec"), "gate": gate, "sources": srcs,
             "steal_share": steal / capacity if capacity else math.nan, "foreign_p95": stats.percentile(foreign, 95) if foreign else math.nan,
@@ -340,8 +340,8 @@ def drop_flagged(runs):
         for d in derive(raw["samples"]):
             s, f = d.sample, d.flags
             if f and not s["warmup"] and "failure" not in s:
-                bad.setdefault((s["scenario"], s.get("api"), s["round"]), set()).update(f)
-        kept = [s for s in raw["samples"] if (s["scenario"], s.get("api"), s["round"]) not in bad or s["warmup"]]
+                bad.setdefault((s["scenario"], cellmath.variant(s), s["round"]), set()).update(f)
+        kept = [s for s in raw["samples"] if (s["scenario"], cellmath.variant(s), s["round"]) not in bad or s["warmup"]]
         out.append(dict(raw, samples=kept))
         dropped += [(i + 1, k[0], k[1], k[2], sorted(v)) for k, v in sorted(bad.items(), key=lambda kv: (kv[0][0], str(kv[0][1]), kv[0][2]))]
     return out, dropped

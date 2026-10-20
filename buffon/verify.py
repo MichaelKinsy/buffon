@@ -7,6 +7,7 @@ a result, whatever its numbers say."""
 import json
 import os
 
+from .report import cells as cellmath
 from .runner import raw as rawlib, sysinfo
 
 
@@ -121,14 +122,14 @@ def check_home(run_dir, raw):
     for s in raw.get("samples", []):
         if s["scenario"].split("/")[0] in HOME_EXEMPT or s.get("quiet_gave_up"):
             continue
-        label = f"{s['arm']} {s['scenario']} {s.get('api') or '-'} round {s['round']}"
+        label = f"{s['arm']} {s['scenario']} {cellmath.variant(s) or '-'} round {s['round']}"
         home = s.get("home")
         if not isinstance(home, dict) or any(k not in home for k in HOME_KEYS):
             missing.append(label)
             continue
         if home["fresh"] is not True:
             stale.append(label)
-        before.setdefault((s["arm"], s["scenario"], s.get("api")), {}).setdefault(home["pre_sha256"], []).append(label)
+        before.setdefault((s["arm"], s["scenario"], cellmath.variant(s)), {}).setdefault(home["pre_sha256"], []).append(label)
     if missing:
         problems.append(f"{len(missing)} sample(s) carry no home isolation proof (home.fresh, pre_sha256, post_sha256, ...), first: {missing[0]}")
     if stale:

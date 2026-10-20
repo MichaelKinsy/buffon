@@ -12,6 +12,8 @@ the file); such a run is not Verified. A passed slot calibration adds nothing.
 Noisy outranks Shared, which outranks Dedicated. `reasons` lists every cause, whatever the badge. The strict rules (docs/METHODOLOGY.md section 11) still decide only the
 Verified badge, the headline and the public results index; `--require-class A` keeps the old refusal for people who want it.
 """
+from .report import cells as cellmath
+
 MIN_ROUNDS = 12
 SLOTTED = "slotted: this session ran beside others on one host, and its slot has no passing slot calibration (buffon campaign writes slots-calibration.json)"
 BADGES = ("Verified", "Dedicated", "Shared", "Noisy")
@@ -24,7 +26,7 @@ def realised_rounds(raw):
     rounds = {}
     for s in raw.get("samples", []):
         if not s.get("warmup") and "failure" not in s and s.get("scenario") and not s["scenario"].startswith("scale/"):
-            rounds.setdefault((s["scenario"], s.get("api")), set()).add(s.get("round"))
+            rounds.setdefault((s["scenario"], cellmath.variant(s)), set()).add(s.get("round"))
     return min((len(r) for r in rounds.values()), default=None)
 
 

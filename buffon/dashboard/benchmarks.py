@@ -9,14 +9,14 @@ from fnmatch import fnmatchcase
 
 DOC = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))), "docs", "WHAT-WE-MEASURE.md")
 SECTIONS = {"core": "Core overhead", "ext10": "Extensions (ext10)", "streaming": "Streaming render", "long-session": "Long session: grow and resume",
-            "reliability": "Reliability and faults", "devloop": "Devloop", "large-write": "Large write", "scale": "Scale", "search": "Search"}
+            "reliability": "Reliability and faults", "devloop": "Devloop", "large-write": "Large write", "scale": "Scale", "search": "Search", "durable": "Durable"}
 FIELDS = (("measures", "Measures"), ("why", "Why a user cares"), ("scenario", "Scenario"), ("limits", "Limits"), ("state", "State"))
 NAMES = {"core": "Core", "ext10": "Extensions", "streaming": "Streaming", "long-session": "Long session", "reliability": "Reliability", "devloop": "Dev loop",
-         "large-write": "Large write", "scale": "Scale", "search": "Search", "other": "Other cells"}
+         "large-write": "Large write", "scale": "Scale", "search": "Search", "durable": "Durable", "other": "Other cells"}
 SHORT_NAMES = {"core": "Core", "ext10": "Extensions", "streaming": "Stream", "long-session": "Sessions", "reliability": "Faults", "devloop": "Dev loop"}
 USE = {"core": "Pi in a script, as an editor back end, and in the terminal", "ext10": "Pi with ten extensions", "streaming": "a long answer on the screen", "long-session": "long sessions and sessions that you resume",
        "reliability": "errors from the provider, lost connections and stopped programs", "devloop": "install and first run", "large-write": "a write of one very large file", "scale": "many sessions on one machine",
-       "search": "search in large folders", "other": "measured, but not graded"}
+       "search": "search in large folders", "durable": "conversations stored as commits, reopened after a restart", "other": "measured, but not graded"}
 
 # (scenario glob, title, Pi use case, terminal lines, timeline marks). A mark is (fraction of the line, label, kind): kind start, work, stop, fault.
 WORKLOADS = [
@@ -81,8 +81,45 @@ def family_texts(path=DOC):
     return out
 
 
+def durable_workload(scenario):
+    """The title, the use and the terminal figure of a `durable/<name>` workload (docs/design/DURABLE.md 3.4), or None for a name the table does not know. The size or count in a name is part of the title."""
+    name = scenario.split("/", 1)[1] if scenario.startswith("durable/") else ""
+
+    def n(text):
+        return f"{int(text):,}"
+    marks = [(0, "open", "start"), (0.3, "first turn", "work"), (1, "turn 10", "stop")]
+    rows = (
+        (r"compat-(\d+)", lambda m: (f"Compat lane, {n(m[1])} turns", f"The shape of durable-bench: one conversation, compaction off, eight tool calls a turn, on a store of {n(m[1])} turns.", m[1])),
+        (r"mixed-varied-(\d+)", lambda m: (f"Mixed lane, {n(m[1])} turns, varied words", f"The mixed lane with every word of the history replaced by another of the same length, on {n(m[1])} turns.", m[1])),
+        (r"mixed-(\d+)", lambda m: (f"Mixed lane, {n(m[1])} turns", f"The default: a store of {n(m[1])} turns, compaction on, a 200,000-token window and turns of mixed shapes.", m[1])),
+        (r"window-(\w+)-3500", lambda m: (f"Window {m[1]}, 3,500 turns", f"The mixed lane on 3,500 turns with a {m[1]}-token context window.", "3500")),
+        (r"cold-every-turn-(\d+)", lambda m: (f"Cold every turn, {n(m[1])} turns", f"The store is reopened in a new process before every measured turn, on {n(m[1])} turns.", m[1])),
+        (r"stream-(\d+)", lambda m: (f"Streamed answers, {n(m[1])} turns", "Each response streams in chunks, so partial answers are committed while it runs.", m[1])),
+        (r"large-output-(\d+)", lambda m: (f"Large tool output, {n(m[1])} turns", "Each turn has one tool result of 32 KB.", m[1])),
+        (r"docs-(\d+)", lambda m: (f"{n(m[1])} document edits", f"A warm turn after {n(m[1])} edits of an application document, one commit each.", "1000")),
+        (r"tasks-(\d+)", lambda m: (f"{m[1]} child tasks per call", f"A tool creates {m[1]} child tasks and waits for them.", "1000")),
+        (r"subagent", lambda m: ("A subagent", "A tool owns a child conversation and waits for its answer.", "1000")),
+        (r"many-conv-(\d+)", lambda m: (f"{m[1]} conversation" + ("" if m[1] == "1" else "s"), f"{m[1]} conversation" + (" is" if m[1] == "1" else "s are") + " open in one process, one turn each in turn.", "1000")),
+        (r"grow-(\d+)", lambda m: (f"Build a history of {n(m[1])} turns", "The history is built through the runtime's own loop, and the time of each turn is kept.", m[1])),
+        (r"crash-(\w+)", lambda m: (f"Crash and resume, {m[1]} turns" if m[1].isdigit() else f"Crash and resume, {m[1]}", "The process is killed after a commit, a new one reopens the store and finishes the turn.", None)),
+        (r"compaction-fail", lambda m: ("Failing compaction summaries", "Every summary request fails, on a 32,000-token window.", "3500")),
+        (r"floor-host", lambda m: ("Floor: host and adapter", "The same adapter, protocol, scripted model and SQLite file with no durable runtime.", None)),
+        (r"floor-sql", lambda m: ("Floor: recorded statements", "The statements of one measured turn replayed through the SQLite facade and driver, with no runtime.", None)),
+    )
+    for pattern, make in rows:
+        m = re.fullmatch(pattern, name)
+        if m:
+            title, use, turns = make(m)
+            history = f"  store of {n(turns)} turns" if turns else "  empty store"
+            return {"title": title, "use": use, "lines": ["$ adapter: open the store", history, "→ ten measured turns"], "marks": marks}
+    return None
+
+
 def workload_of(scenario):
     """(title, use, lines, marks) for a scenario, or a plain fallback naming it."""
+    durable = durable_workload(scenario)
+    if durable:
+        return durable
     for pattern, title, use, lines, marks in WORKLOADS:
         if fnmatchcase(scenario, pattern):
             return {"title": title, "use": use, "lines": lines, "marks": marks}
@@ -118,4 +155,38 @@ METRICS = {
     "request_bytes_per_turn": ("The request bytes divided by the turns of the workload.", r"B / n_{\mathrm{turns}}"),
     "side_requests": ("The requests beyond the ones that the workload scripts, such as a title request.", r"\max(0,\ N - N_{\mathrm{scripted}})"),
     "first_request_bytes": ("The size in bytes of the first request body that the harness sends to the scripted model. Runs made before the wire metrics recorded only this.", r"B_1 = \lvert \mathrm{request}_1 \rvert"),
+    # the durable family (docs/design/DURABLE.md 4.2): the runner's own clock around each request to the adapter, and the counts of a wrapper on the public SQLite facade
+    "warm_turn_ms": ("The time of one warm turn: the median of turns 2 to 10 of a sample, from the submit to the conversation being idle, on the runner's clock.", r"w = \operatorname{median}_{k=2}^{10}\ (t_{\mathrm{idle},k} - t_{\mathrm{submit},k})"),
+    "warm_net_ms": ("The warm turn less the warm turn of the floor (an adapter with no durable runtime) of the same arm in the same round. It is the part of a turn that the runtime adds. It is never applied to a cold start.", r"w_{\mathrm{net}} = w - w_{\mathrm{floor}}"),
+    "cold_ms": ("The time from sending the open request to the answer of the first measured turn, in a new process. The time to start the process is not in it, and the store is read once before the clock starts.", r"c = t_{\mathrm{open}} + t_{\mathrm{turn}_1}"),
+    "proc_start_ms": ("The time from starting the adapter to its ready line. It is shown beside the cold start and is not part of it.", r"s = t_{\mathrm{ready}} - t_{\mathrm{exec}}"),
+    "open_ms": ("The time of the open request alone. A runtime that opens lazily moves the read of the history into the first turn.", None),
+    "first_turn_ms": ("The time of the first measured turn after the open.", None),
+    "ready_to_answer_ms": ("The process start and the cold start together: what a command-line user waits from the command to the first answer.", r"s + c"),
+    "ttfr_ms": ("The time from sending a submit to the scripted model receiving its first request, as a median over the warm turns: what the runtime does before it asks the model.", None),
+    "first_delta_ms": ("The time from the scripted model emitting its first streamed piece to a subscriber of the runtime seeing it committed.", None),
+    "model_ms_per_turn": ("The time spent inside the scripted model in one turn. It is shown so that the work of the benchmark itself is visible, and it is not compared.", None),
+    "warm_instructions": ("The CPU instructions of the process tree in one warm turn, from counter readings between turns.", None),
+    "warm_cycles": ("The CPU cycles of the process tree in one warm turn.", None),
+    "warm_cpu_ms": ("The CPU time of the process tree in one warm turn.", None),
+    "sql_stmts_per_turn": ("The SQL statements the runtime ran in one warm turn, counted by a wrapper on the public SQLite facade.", None),
+    "sql_read_stmts_per_turn": ("The read statements (SELECT, WITH) in one warm turn, part of the statements per turn.", None),
+    "sql_write_stmts_per_turn": ("The write statements (INSERT, UPDATE, DELETE) in one warm turn, part of the statements per turn.", None),
+    "sql_ddl_stmts_per_turn": ("The schema statements (CREATE, ALTER, DROP) in one warm turn, part of the statements per turn.", None),
+    "sql_pragma_stmts_per_turn": ("The PRAGMA statements in one warm turn, listed apart because a runtime may read a pragma such as data_version often. They are part of the statements per turn.", None),
+    "sql_commits_per_turn": ("The transactions the runtime committed in one warm turn, counted by the same wrapper.", None),
+    "rows_returned_per_turn": ("The rows the runtime read through the facade in one warm turn.", None),
+    "bytes_returned_per_turn": ("The bytes of the column values the runtime read through the facade in one warm turn.", None),
+    "wchar_bytes_per_turn": ("The bytes the process tree wrote with system calls in one warm turn, from the kernel's counters (Linux only). It includes the log.", None),
+    "rchar_bytes_per_turn": ("The bytes the process tree read with system calls in one warm turn, from the kernel's counters (Linux only). Reads served from the page cache are in it.", None),
+    "rows_read_per_turn": ("The rows the platform counts as read in one warm turn (Cloudflare's own unit, Miniflare and Cloudflare only).", None),
+    "rows_written_per_turn": ("The rows the platform counts as written in one warm turn (Cloudflare's own unit, Miniflare and Cloudflare only).", None),
+    "store_bytes": ("The size of the store after a clean close: the main file, the log and the index file, read by the runner.", None),
+    "store_bytes_per_turn": ("The size of the store divided by the turns in it.", r"B / n_{\mathrm{turns}}"),
+    "end_rss_mib": ("The memory (RSS) of the process tree at the end of the sample.", None),
+    "mem_per_conv_mib": ("The slope of the end memory against the number of conversations, over the four many-conv workloads of one arm in one round.", r"\frac{\Delta M_{\mathrm{end}}}{\Delta N}"),
+    "build_ms": ("The time to build the history through the runtime's own loop, summed over its turns.", None),
+    "early_turn_ms": ("The median time of the first ten turns of a build.", None),
+    "late_turn_ms": ("The median time of the last ten turns of a build.", None),
+    "replay_ms_per_turn": ("The time to replay the recorded statements of one turn through the facade and the driver with no runtime.", None),
 }

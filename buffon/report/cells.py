@@ -3,7 +3,8 @@
 
 Nothing here reads a file or prints. Every function is deterministic for a seed. The rules (METHODOLOGY.md sections 6 and 7):
 
-  * a cell is (scenario, api, metric): the arms' per-round values, warm-up rounds and failed samples excluded;
+  * a cell is (scenario, variant, metric): the arms' per-round values, warm-up rounds and failed samples excluded. The variant is the wire API a sample names, else its environment (`env`)
+    when that is not "native", else None: a sample of another environment never joins a cell of the native one (`variant`);
   * the comparison of an arm with the reference is paired by round (a round is a run directory's round: several runs pool as more rounds): the ratio of medians
     with a 95% bootstrap interval that resamples rounds, a sign-flip p-value, Holm across arms;
   * the A/A noise floor of a pair of copies is the largest deviation from 1 their own ratio-of-medians interval allows, on the log scale (a ratio of 2 and of 0.5 are the same
@@ -24,10 +25,14 @@ from ..stats import margins
 from . import metrics as metricslib
 from ..divergence import reason_for
 
-IDENTITY = {"_run", "arm", "scenario", "api", "round", "warmup", "t_utc", "failure", "series", "twin_of", "wall_s", "meter", "traceback", "terminal", "tty", "renderer"}
+IDENTITY = {"_run", "arm", "scenario", "api", "env", "round", "warmup", "t_utc", "failure", "series", "twin_of", "wall_s", "meter", "traceback", "terminal", "tty", "renderer"}
 # Echoes of the workload's own parameters and counts: identical for every arm by construction, so they are not scored.
 DESCRIPTORS = {"quiet_wait_ms", "host_load1", "host_runnable", "pinned_busy", "pinned_iowait", "pinned_steal", "cpuset_runnable", "throttled", "psi_cpu_some_avg10", "turns", "requests", "compactions", "soak_minutes", "think_ms", "stream_rate_tps", "history_bytes", "history_entries", "history_messages", "series_samples",
                "records_after_kill", "seconds_to_exit",
+               # a durable sample's configuration and the facts of its fixture (docs/RAW-FORMAT.md, "durable"): echoes of the workload, identical for every arm by construction, or a count the runner derives, not a cost
+               "fixture_bytes", "fixture_seed", "fixture_turns", "window_tokens", "measured_turns", "conversations", "stmts_replayed", "commits_replayed", "compaction_failures", "failed_requests", "failed_turns", "k", "commits_total", "kill_event_commit",
+               # time inside the scripted provider: shown, so the benchmark's own work is visible, and not scored (docs/design/DURABLE.md 4.2)
+               "model_ms_per_turn",
                # a swarm sample's context: what the container held before the agents and the cost of the launcher and the scripted model, not the harness's
                "mem_baseline_mib", "mem_ready_mib", "mock_cpu_ms", "launcher_cpu_ms", "runner_cpu_ms"}
 HIGHER_IS_BETTER = ("turns_per_s",)   # every other scored metric is lower is better
@@ -37,21 +42,40 @@ def direction(metric):
     """`higher` for a metric where more is better (the turns a swarm finishes in a second), else `lower`."""
     return "higher" if metric in HIGHER_IS_BETTER else "lower"
 SPECIAL_FAMILIES = ("soak", "reliability")
+SPECIAL_SCENARIOS = ("durable/crash-",)   # one sample for each (order, kill point): a pass or fail grid of its own, not a cell (dashboard/durable.py)
 LEVEL = 0.95
 
 
 def scored(metric):
-    """Cost metrics: times, memory, bytes, CPU (lower is better), what a sample put on the wire (metrics.WIRE_METRICS), and the swarm's turns per second (higher is better: `direction`)."""
+    """Cost metrics: times, memory, bytes, CPU (lower is better), what a sample put on the wire (metrics.WIRE_METRICS), what a durable runtime did per turn (metrics.COUNT_METRICS), and the swarm's turns per
+    second (higher is better: `direction`)."""
     if metric in metricslib.WIRE_METRICS:   # before DESCRIPTORS: `requests` stays listed there because the cross-node gate (cluster/gate.go) mirrors that list and does not judge wire counts
+        return True
+    if metric in metricslib.COUNT_METRICS:
         return True
     if metric in DESCRIPTORS or metric.endswith(("_flat", "_median", "_spread", "_slope_per_h")):
         return False
-    return (metric.endswith(("_ms", "_mib", "_bytes", "_instructions", "_cycles", "_ms_p50", "_ms_p95", "_ms_max")) or "_ms_per_" in metric or "_mib_per_" in metric or "_instructions_per_" in metric
+    return (metric.endswith(("_ms", "_mib", "_bytes", "_instructions", "_cycles", "_ms_p50", "_ms_p95", "_ms_max")) or "_ms_per_" in metric or "_mib_per_" in metric or "_bytes_per_" in metric or metric.startswith("bytes_") or metric == "mem_per_conv_mib" or "_instructions_per_" in metric
             or metric.startswith("cpu_ms") or metric in ("instructions", "cycles") + HIGHER_IS_BETTER)
 
 
 def family(scenario):
     return scenario.split("/", 1)[0]
+
+
+def is_special(scenario):
+    """True for a workload that has a driver and a table of its own and makes no cell: the soak and reliability families, and the durable crash grid."""
+    return family(scenario) in SPECIAL_FAMILIES or scenario.startswith(SPECIAL_SCENARIOS)
+
+
+def variant(sample):
+    """The axis a cell is split by besides the workload: the wire API the sample names, else its environment when it is set and not "native" (a Miniflare or Cloudflare run of a durable
+    workload), else None. A native sample keeps the cell key it always had, so a cell never mixes environments."""
+    api = sample.get("api")
+    if api:
+        return api
+    env = sample.get("env")
+    return env if env and env != "native" else None
 
 
 def per_round(samples, scenario, api, arm, metric):
@@ -61,7 +85,7 @@ def per_round(samples, scenario, api, arm, metric):
     adds pairs instead of averaging unrelated samples into one. Within one run a round has one sample per arm; a repeat (never written by the runner) averages."""
     out = {}
     for s in samples:
-        if s["arm"] == arm and s["scenario"] == scenario and s.get("api") == api and not s["warmup"] and "failure" not in s:
+        if s["arm"] == arm and s["scenario"] == scenario and variant(s) == api and not s["warmup"] and "failure" not in s:
             v = s.get(metric)
             if isinstance(v, (int, float)) and not isinstance(v, bool):
                 out.setdefault((s.get("_run", 0), s["round"]), []).append(float(v))
@@ -99,13 +123,14 @@ class Comparison:
 @dataclass
 class Cell:
     scenario: str
-    api: str
+    api: str                                           # the cell's variant: the wire API, else the environment when it is not native (`variant`), else None
     metric: str
     values: dict = field(default_factory=dict)         # arm -> {round: value}
     comparisons: dict = field(default_factory=dict)    # arm -> Comparison (non-twin arms)
     steps: dict = field(default_factory=dict)          # arm -> Comparison of the arm against the arm its manifest names as `previous`, when both have values
     aa: dict = field(default_factory=dict)             # arm -> (floor, ratio dict) for each arm that has a copy
     mde: float = math.nan
+    env: str = None                                    # the environment the samples of the cell ran in ("native", "miniflare", ...), None for a workload that names none
 
 
 ALPHA = 0.05
@@ -138,17 +163,20 @@ def build(raw_runs, reference=None, seed=0):
     twins = {a: a + "-b" for a in base if a + "-b" in arms}
     previous = previous_of(raw_runs)
     divergences = divergences_of(raw_runs)
-    ref = reference if reference in base else ("pi-node" if "pi-node" in base else (base[0] if base else None))
-    keys = {}
+    named = next((r for r in ((raw.get("run") or {}).get("reference") for raw in raw_runs) if r in base), None)   # the reference a run names (a family whose reference is not pi-node, durable's pi-durable)
+    ref = reference if reference in base else (named or ("pi-node" if "pi-node" in base else (base[0] if base else None)))
+    keys, envs = {}, {}
     for s in samples:
-        if family(s["scenario"]) in SPECIAL_FAMILIES or "failure" in s or s["warmup"]:
+        if is_special(s["scenario"]) or "failure" in s or s["warmup"]:
             continue
+        if s.get("env"):
+            envs.setdefault((s["scenario"], variant(s)), set()).add(s["env"])
         for k, v in s.items():
             if k not in IDENTITY and scored(k) and isinstance(v, (int, float)) and not isinstance(v, bool):
-                keys.setdefault((s["scenario"], s.get("api"), k), None)
+                keys.setdefault((s["scenario"], variant(s), k), None)
     cells = []
     for scenario, api, metric in sorted(keys, key=lambda k: (k[0], k[1] or "", k[2])):
-        cell = Cell(scenario, api, metric)
+        cell = Cell(scenario, api, metric, env=",".join(sorted(envs.get((scenario, api), ()))) or None)
         for a in arms:
             vals = per_round(samples, scenario, api, a, metric)
             if vals:

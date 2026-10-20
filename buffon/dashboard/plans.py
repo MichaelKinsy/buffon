@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: Apache-2.0
 """What each Results section will measure when the loaded runs have nothing for it yet: the workloads the launch campaign names and the harnesses that take part, read from campaigns/launch-rerun.toml,
-the arm manifests and the workload texts (benchmarks.py), plus the Durable family's own plan (docs/design/DURABLE.md, which the site carries). The site shows every section; one without data is muted and says this."""
+the arm manifests and the workload texts (benchmarks.py), plus the Durable family's own plan (docs/design/DURABLE.md, which the site carries) and the command that produces a durable run. The site shows every section; one without data is muted and says this."""
 import os
 import re
 import tomllib
@@ -10,11 +10,14 @@ from . import benchmarks
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 CAMPAIGN = "campaigns/launch-rerun.toml"
 COMMAND = "python3 -m buffon campaign campaigns/launch-rerun.toml --site <your site> --out runs/launch-rerun"
-# The Durable family is designed, not built (docs/design/DURABLE.md, "Owner decisions" and 3.4): its arms and the workloads the plan names.
-DURABLE = {"arms": ["Pi Durable 1.3.0 (the reference)", "PiG Durable, native Go", "PiG Durable, Wasm core", "tardigrade"],
+# The Durable family is built (docs/design/DURABLE.md, docs/DURABLE-ADAPTERS.md): with no durable run in the results the page says so and how to produce one.
+DURABLE = {"arms": ["Pi Durable 1.3.0 (the reference)", "PiG Durable, native Go", "Pi Durable main (informational, never the reference)"],
            "workloads": [("durable/compat-3500", "durable-bench's shape, compaction off, to set beside the published numbers"), ("durable/mixed-3500", "the default: open the fixture, then ten measured turns (the headline: warm_net_ms)"),
                          ("durable/cold-every-turn-3500", "reopen the store before every measured turn"), ("durable/stream-1000", "each response streams in chunks: write amplification"),
-                         ("durable/many-conv-32", "many conversations at once: memory per live conversation"), ("durable/crash-k", "kill the process after a commit, reopen, finish")]}
+                         ("durable/many-conv-32", "many conversations at once: memory per live conversation"), ("durable/crash-50", "kill the process after a commit, reopen, finish")],
+           "command": "python3 -m buffon run durable/mixed-3500 durable/compat-3500 durable/floor-host --reference pi-durable --arms pi-durable pig-durable",
+           "campaign": "campaigns/durable-native.toml",
+           "campaign_command": "python3 -m buffon campaign campaigns/durable-native.toml --site <your site> --out runs/durable-native"}
 
 
 def arm_labels():
@@ -105,4 +108,5 @@ def load(root=ROOT):
             w = benchmarks.workload_of(scenario)
             workloads.append({"scenario": scenario, "title": w["title"], "use": w["use"], "family": family.get("name", ""), "arms": [labels.get(a, a) for a in family.get("arms", [])], "rounds": family.get("rounds")})
     return {"campaign": CAMPAIGN, "command": COMMAND, "workloads": workloads,
-            "durable": {"arms": DURABLE["arms"], "workloads": [{"scenario": s, "note": n} for s, n in DURABLE["workloads"]]}}
+            "durable": {"arms": DURABLE["arms"], "workloads": [{"scenario": s, "note": n} for s, n in DURABLE["workloads"]], "command": DURABLE["command"], "campaign": DURABLE["campaign"],
+                        "campaign_command": DURABLE["campaign_command"]}}

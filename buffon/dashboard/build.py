@@ -24,7 +24,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 DOCS = os.path.join(os.path.dirname(os.path.dirname(HERE)), "docs")
 PROFILES = os.path.join(os.path.dirname(os.path.dirname(HERE)), "profiles")
 MARKER = ".buffon-dashboard"
-RUN_FILES = ("raw.json", "facts.json", "host.json", "MANIFEST.sha256", "promotion.json", "health.json")
+RUN_FILES = ("raw.json", "facts.json", "host.json", "MANIFEST.sha256", "promotion.json", "health.json", "equivalence.json")
 OLD_LOOK = ("report.html", "leaderboard.html", "leaderboard.md", "report-card.html", "report-card.md", "grade.json", "plots")
 REPORT_FILES = ("report.md", "report.json", "summary.csv", "rounds.csv", "telemetry.csv", "noise.csv", "health.json")
 # A metric's name in plain words. A large-write metric starts with kb50_ or kb200_ (the file's size). A streaming metric starts with n_ (an answer of N tokens) or n10_ (an answer ten times longer): ANSWER says which.
@@ -35,11 +35,17 @@ METRIC_WORDS = {"cpu_ms": "CPU time", "wall_ms": "time", "instructions": "CPU in
                 "turn_turn_gap_ms": "gap between turns", "turn_gap_ms": "gap between tool calls", "teardown_ms": "time to stop", "request_bytes": "bytes sent in requests", "requests": "requests sent", "request_bytes_per_turn": "request bytes per turn", "side_requests": "side requests",
                 "first_request_bytes": "size of the first request",
                 "session_growth_bytes": "growth of the session file", "extensions_ready_cpu_ms": "CPU time to load the extensions", "call_to_result_ms": "time from the first byte of the tool call to its result",
-                "after_stream_ms": "time from the end of the tool call to its result"}
+                "after_stream_ms": "time from the end of the tool call to its result",
+                "warm_turn_ms": "warm turn", "warm_net_ms": "warm turn net of the floor", "cold_ms": "cold start", "proc_start_ms": "process start", "open_ms": "open", "first_turn_ms": "first turn",
+                "ready_to_answer_ms": "process start and cold start", "ttfr_ms": "time to the first model request", "first_delta_ms": "time to the first streamed piece", "model_ms": "scripted model time",
+                "warm_instructions": "CPU instructions per warm turn", "warm_cycles": "CPU cycles per warm turn", "warm_cpu_ms": "CPU time per warm turn", "sql_stmts": "statements", "sql_read_stmts": "read statements", "sql_write_stmts": "write statements", "sql_ddl_stmts": "schema statements", "sql_pragma_stmts": "pragma statements", "sql_commits": "commits",
+                "rows_returned": "rows", "rows_read": "rows read", "rows_written": "rows written", "bytes_returned": "bytes read through the facade", "wchar_bytes": "bytes written by the process tree",
+                "rchar_bytes": "bytes read by the process tree", "store_bytes": "store size", "end_rss_mib": "memory at the end", "mem_per_conv_mib": "memory per live conversation",
+                "build_ms": "time to build the history", "early_turn_ms": "early turn", "late_turn_ms": "late turn", "replay_ms": "replay of the recorded statements", "resume_ms": "time to resume", "reopen_ms": "time to reopen"}
 ANSWER = {"n": "short answer", "n10": "answer 10 times longer"}
 
 FIRST = ("overhead/version", "overhead/print", "overhead/print-tools", "overhead/rpc", "overhead/pty")
-LENS_RANK = {"cpu": 0, "wall": 1, "memory": 2, "size": 3, "wire": 4, "other": 5}
+LENS_RANK = {"cpu": 0, "wall": 1, "memory": 2, "size": 3, "count": 4, "wire": 5, "other": 6}
 
 # How one number is made: (title, one sentence, [more], [(formula label, formula)]). Each step opens to its detail; docs/METHODOLOGY.md has the rest.
 METHOD_STEPS = [
@@ -411,6 +417,8 @@ def client_data(site, m, data_dir, docs, profiles=(), external=None):
     used_fams = {c["family"] for c in site["cells"]}
     families = [{"id": f["id"], "title": f["title"], "name": benchmarks.NAMES.get(f["id"], f["id"]), "use": benchmarks.USE.get(f["id"], ""), "texts": texts.get(f["id"], {}),
                  "measured": f["id"] in used_fams} for f in site["families"]]
+    if "durable" in used_fams:   # Buffon's own durable workloads are no family of the grade (workloads/grade.toml names none); their text is the Durable section of docs/WHAT-WE-MEASURE.md
+        families.append({"id": "durable", "title": "Durable", "name": benchmarks.NAMES["durable"], "use": benchmarks.USE["durable"], "texts": texts.get("durable", {}), "measured": True})
     if "other" in used_fams:
         families.append({"id": "other", "title": "Other cells", "name": benchmarks.NAMES["other"], "use": benchmarks.USE["other"], "texts": {}, "measured": True})
     cells, workloads = [], {}
@@ -418,7 +426,7 @@ def client_data(site, m, data_dir, docs, profiles=(), external=None):
     for c in site["cells"]:
         covered.setdefault(c["workload"], set()).update(c["stats"])
     for c in site["cells"]:
-        cell = {k: c[k] for k in ("id", "slug", "key", "scenario", "workload", "api", "api_short", "metric", "kind", "lens", "unit", "memory_kind", "family", "mde", "run", "rerun", "values", "stats", "na")}
+        cell = {k: c[k] for k in ("id", "slug", "key", "scenario", "workload", "api", "api_short", "env", "env_variant", "metric", "kind", "lens", "unit", "memory_kind", "family", "mde", "run", "rerun", "values", "stats", "na")}
         cell["metric_word"] = metric_word(c["metric"])
         run = next((r for r in site["runs"] if r["id"] == c["run"]), {})
         cell["caveats"] = [CAVEATS[k] for k in caveats_of(c["metric"], run)]
@@ -448,7 +456,7 @@ def client_data(site, m, data_dir, docs, profiles=(), external=None):
     data_files = [f for f in REPORT_FILES if os.path.exists(os.path.join(data_dir, f))]
     return {"meta": {"demo": site["demo"], "provisional": site["provisional"], "reasons": site["reasons"], "seed": site["seed"], "reference": site["reference"],
                      "data_files": data_files, "prompt": overhead.PROMPT, "reply": mockserver.REPLY},
-            "harnesses": harnesses, "families": families, "metrics": catalog, "cells": cells, "workloads": workloads, "runs": runs, "profiles": list(profiles), "scale": scale_data(site, m), "faults": site["faults"], "external": external, "plan": plans.load(), "unmeasured": plans.unmeasured(profiles, {h["id"] for h in site["harnesses"]}),
+            "harnesses": harnesses, "families": families, "metrics": catalog, "cells": cells, "workloads": workloads, "runs": runs, "profiles": list(profiles), "scale": scale_data(site, m), "faults": site["faults"], "durable": site["durable"], "external": external, "plan": plans.load(), "unmeasured": plans.unmeasured(profiles, {h["id"] for h in site["harnesses"]}),
             "glossary": gloss, "method": {"steps": steps, "links": list(METHOD_LINKS)}, "docs": docs,
             "tex": {"median": m.tex(fx.MEDIAN), "ratio": m.tex(fx.RATIO), "interval": m.tex(fx.INTERVAL), "floor": m.tex(fx.FLOOR)}}
 

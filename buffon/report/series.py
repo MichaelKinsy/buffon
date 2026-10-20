@@ -10,7 +10,7 @@ A run's cells are medians over rounds; a series shows the rounds themselves, so 
 import html
 import math
 
-from . import noise as noiselib
+from . import cells as cellmath, noise as noiselib
 
 PALETTE = ("#1f77b4", "#d62728", "#2ca02c", "#9467bd", "#ff7f0e", "#8c564b", "#e377c2", "#17becf", "#7f7f7f", "#bcbd22")
 HEADLINE = ("cpu_ms", "wall_ms", "peak_mem_mib", "peak_rss_mib")
@@ -32,8 +32,8 @@ def rows(runs, data):
             t = noiselib.system(s) or {}
             cs, cg, dur = t.get("cpuset", {}), t.get("cgroup", {}), t.get("during", {})
             for metric, v in s.items():
-                if (s["scenario"], s.get("api"), metric) in scored and isinstance(v, (int, float)) and not isinstance(v, bool):
-                    out.append({"run": i, "order": n, "t_utc": s.get("t_utc"), "scenario": s["scenario"], "api": s.get("api"), "metric": metric, "arm": s["arm"], "round": s["round"], "value": v,
+                if (s["scenario"], cellmath.variant(s), metric) in scored and isinstance(v, (int, float)) and not isinstance(v, bool):
+                    out.append({"run": i, "order": n, "t_utc": s.get("t_utc"), "scenario": s["scenario"], "api": cellmath.variant(s), "metric": metric, "arm": s["arm"], "round": s["round"], "value": v,
                                 "quiet_wait_ms": s.get("quiet_wait_ms"), "pinned_busy_before": s.get("pinned_busy"), "host_load1": s.get("host_load1"),
                                 "cpuset_busy_ms": cs.get("cpuset_busy_ms"), "cpuset_steal_ms": cs.get("cpuset_steal_ms"), "cpuset_iowait_ms": cs.get("cpuset_iowait_ms"),
                                 "mhz_mean": dur.get("mhz_mean"), "mhz_min": dur.get("mhz_min"), "mhz_max": dur.get("mhz_max"), "throttled_us": th, "cgroup_cpu_ms": cg.get("cpu_usage_ms"),
@@ -54,7 +54,7 @@ def telemetry_rows(runs):
             t = noiselib.system(s)
             if t is None:
                 continue
-            row = {"run": i, "order": n, "arm": s["arm"], "scenario": s["scenario"], "api": s.get("api"), "round": s["round"], "warmup": s["warmup"], "failure": s.get("failure", ""), "flags": " ".join(f or [])}
+            row = {"run": i, "order": n, "arm": s["arm"], "scenario": s["scenario"], "api": cellmath.variant(s), "round": s["round"], "warmup": s["warmup"], "failure": s.get("failure", ""), "flags": " ".join(f or [])}
             for group in ("before", "after", "during", "cpuset", "cgroup", "gate", "collector"):
                 for k, v in (t.get(group) or {}).items():
                     if isinstance(v, (int, float, str)) or v is None:
