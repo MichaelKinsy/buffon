@@ -1200,6 +1200,161 @@
       },
       "version": "1.3.0"
     },
+    "pi-durable": {
+      "files": {
+        "adapter/src/facade.ts": "8368e0f1b598c402cc6c0530a7f50873e4a576d79d13a5a0a4d373833ed58b1c",
+        "adapter/src/main.ts": "3b0109a2645c27c6c5bd43b90f5b845aed120dba17331921b3e53d8384ce4b93",
+        "adapter/src/model.ts": "f6843c5c4683b5457c4cf2b83799f31fa79d95f8296418ca9b03a8095065ef49",
+        "adapter/src/tools.ts": "8992d654cc37f1e9065c0ace6f5b90dcab60186fcff9fddddbe86c74fa7aa609",
+        "install-package-lock.json": "2eeb516cc4989c1a7b78b3134fa2997a62b3c20ef3065601b47bdc6d62595d9b",
+        "install-package.json": "6f89951bfdca15c4541bbc2033d3077a4f87beaad2484078bdb312654d35c9d3"
+      },
+      "held": null,
+      "licence": "MIT",
+      "manifest_sha256": "d2e2a5f5014b3c54f7620cfc5e192ce0ec8f684694ba62c8aa42e53cb7eea3b7",
+      "spec": {
+        "adapter": {
+          "build": [
+            "esbuild",
+            "src/main.ts",
+            "--bundle",
+            "--platform=node",
+            "--format=esm",
+            "--target=node24",
+            "--legal-comments=none",
+            "--define:ARM=\"pi-durable\"",
+            "--banner:js=#!/usr/bin/env node",
+            "--outfile={out}"
+          ],
+          "envs": [
+            "native"
+          ],
+          "protocol": 1,
+          "source": "adapter",
+          "storage": "sqlite"
+        },
+        "capabilities": {
+          "durable": [
+            "conversations",
+            "documents",
+            "tasks",
+            "compaction",
+            "subagents"
+          ]
+        },
+        "env": {
+          "NODE_COMPILE_CACHE": "{install_dir}/node-compile-cache"
+        },
+        "homepage": "https://github.com/earendil-works/pi/tree/v1.3.0/packages/durable",
+        "label": "Pi Durable 1.3.0 (Node)",
+        "licence": "MIT",
+        "licence_url": "https://github.com/earendil-works/pi/blob/v1.3.0/LICENSE",
+        "modes": {
+          "version": [
+            "--version"
+          ]
+        },
+        "name": "pi-durable",
+        "notes": "The reference arm of the durable family: every ratio in a durable report is relative to it. The arm is the runtime package, @earendil-works/pi-durable 1.3.0 (and the 1.3.0 packages it builds on, pi-ai and chord), plus a small host adapter in adapter/ that speaks the JSON-lines protocol of docs/DURABLE-ADAPTERS.md and drives the runtime through its public API only: Harness.open over SqliteStorage on Pi's own NodeSqliteDatabase (wrapped by the counting facade), the scripted provider, the four tools and the child task. The adapter is bundled with esbuild at install time from the same lock as the runtime. The install pair is Buffon's own (the runtime has no release install pair): exact versions, npm ci --ignore-scripts. NODE_COMPILE_CACHE keeps Node's compile cache in the arm's install directory, so a warm-up round fills it and measured rounds start warm.",
+        "npm": {
+          "bin": "adapter.mjs",
+          "integrity": "sha512-2aD0xead1LH0BBwUBxex28in/PpUJEwyaEiW/nLoTFUcZ/lDYEl6LHX6mGZKJG8tUHzERwJyysDgy0ruidt84w==",
+          "package": "@earendil-works/pi-durable",
+          "package_json": "install-package.json",
+          "package_json_sha256": "6f89951bfdca15c4541bbc2033d3077a4f87beaad2484078bdb312654d35c9d3",
+          "package_lock": "install-package-lock.json",
+          "package_lock_sha256": "2eeb516cc4989c1a7b78b3134fa2997a62b3c20ef3065601b47bdc6d62595d9b",
+          "runtime": "node",
+          "version": "1.3.0"
+        },
+        "relation": "pi-reference",
+        "restrictions": "",
+        "runtime": {
+          "node": "24.19.0"
+        },
+        "version": "1.3.0",
+        "version_check": {
+          "contains": "1.3.0"
+        }
+      },
+      "version": "1.3.0"
+    },
+    "pi-durable-main": {
+      "files": {
+        "adapter/src/facade.ts": "8368e0f1b598c402cc6c0530a7f50873e4a576d79d13a5a0a4d373833ed58b1c",
+        "adapter/src/main.ts": "3b0109a2645c27c6c5bd43b90f5b845aed120dba17331921b3e53d8384ce4b93",
+        "adapter/src/model.ts": "f6843c5c4683b5457c4cf2b83799f31fa79d95f8296418ca9b03a8095065ef49",
+        "adapter/src/tools.ts": "8992d654cc37f1e9065c0ace6f5b90dcab60186fcff9fddddbe86c74fa7aa609"
+      },
+      "held": null,
+      "licence": "MIT",
+      "manifest_sha256": "0a823eb65e8ffb3a849b5f9881dabd6af9909c0d43e2dde59541f6127eed5d0e",
+      "spec": {
+        "adapter": {
+          "envs": [
+            "native"
+          ],
+          "informational": true,
+          "protocol": 1,
+          "schema_reads": [
+            1,
+            2
+          ],
+          "schema_writes": 2,
+          "source": "adapter",
+          "storage": "sqlite"
+        },
+        "capabilities": {
+          "durable": [
+            "conversations",
+            "documents",
+            "tasks",
+            "compaction",
+            "forks",
+            "subagents"
+          ]
+        },
+        "caveat": "Informational: Pi main at one commit, schema version 2 storage, not the reference. Numbers for this arm are not comparable with the 1.3.0 reference as a release; they show where the runtime is heading.",
+        "env": {
+          "NODE_COMPILE_CACHE": "{install_dir}/node-compile-cache"
+        },
+        "homepage": "https://github.com/earendil-works/pi/tree/1402973a9dbe8c627341e04c9744c54953e285ca/packages/durable",
+        "label": "Pi Durable (main 1402973a, informational)",
+        "licence": "MIT",
+        "licence_url": "https://github.com/earendil-works/pi/blob/1402973a9dbe8c627341e04c9744c54953e285ca/LICENSE",
+        "modes": {
+          "version": [
+            "--version"
+          ]
+        },
+        "name": "pi-durable-main",
+        "notes": "INFORMATIONAL: Pi's own durable package built from the unreleased main commit 1402973a (the commit PiG pins as its upstream), never the reference: the reference is pi-durable 1.3.0. At this commit the storage schema is version 2 and tasks have a `sleeping` status, so a store written here is not a 1.3.0 store. The adapter is the same code as pi-durable's: adapter/ is a byte-for-byte copy of arms/pi-durable/adapter/ (a manifest cannot share a source directory, so the two copies are kept identical; a test compares them), told apart only by the arm id the build defines (--define:ARM). The installer checks out the pinned commit, verifies its tree, copies adapter/ to packages/durable/buffon-adapter/, runs npm ci --ignore-scripts from the repository's own lock (so esbuild and TypeScript are the versions that lock pins) for the five workspaces the durable package needs (telemetry, chord, codemode, ai, durable), transpiles them with tsc --noCheck (pi-ai's model data is fetched from the network by Pi's own build and is not needed by a scripted provider; type checking is off for the same reason and the adapter is type checked by pi-durable's own build) and bundles the adapter with esbuild. NODE_COMPILE_CACHE keeps Node's compile cache in the arm's install directory.",
+        "relation": "pi-compatible",
+        "restrictions": "",
+        "runtime": {
+          "node": "24.19.0"
+        },
+        "source": {
+          "build": [
+            "sh",
+            "-ec",
+            "npm ci --ignore-scripts --workspace=packages/telemetry --workspace=packages/chord --workspace=packages/codemode --workspace=packages/ai --workspace=packages/durable --include-workspace-root\nfor p in telemetry chord codemode ai durable; do (cd packages/$p && ../../node_modules/.bin/tsc -p tsconfig.build.json --noCheck); done\ncd {package} && ../../../node_modules/.bin/esbuild src/main.ts --bundle --platform=node --format=esm --target=node24 --legal-comments=none --define:ARM='\"pi-durable-main\"' '--banner:js=#!/usr/bin/env node' --outfile={out}\nchmod 755 {out}\n"
+          ],
+          "commit": "1402973a9dbe8c627341e04c9744c54953e285ca",
+          "package": "packages/durable/buffon-adapter",
+          "repo_env": "BUFFON_SOURCE_REPO_PI_MAIN",
+          "repo_url": "https://github.com/earendil-works/pi",
+          "toolchain": "node",
+          "tree": "496f5cc242c16bccc572ee4ff15de1eba8bf8cee"
+        },
+        "trust": "source",
+        "version": "1.3.0+1402973a",
+        "version_check": {
+          "contains": "1.3.0"
+        }
+      },
+      "version": "1.3.0+1402973a"
+    },
     "pi-node": {
       "files": {
         "install-package-lock.json": "65eacda789c30e1c3859a96eee2fd53cf4a18629d27dcf2aa6d7bdb3da02d719",
@@ -1621,6 +1776,84 @@
         "version": "0.4.1"
       },
       "version": "0.4.1"
+    },
+    "pig-durable": {
+      "files": {
+        "adapter/facade.go": "9795392596fa5ba1da32c20f5652584de035dc17709f2ac38d66e980521004c4",
+        "adapter/main.go": "8a3ca1c9cc7e565b52bacdcd39b3e5ce6eac8a5c5b81446cc8f19149c2f10b91",
+        "adapter/model.go": "856c7ffbf9e3bc63d2f542ce5319c719e4aadd0d31c907aa3f3e0128f38bb424",
+        "adapter/stub.s": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "held": null,
+      "licence": "MIT",
+      "manifest_sha256": "5141ae2909342cecb69468058bdfa75bef601e04069c2390b9eec707e6f54426",
+      "spec": {
+        "adapter": {
+          "envs": [
+            "native"
+          ],
+          "protocol": 1,
+          "schema_reads": [
+            1,
+            2
+          ],
+          "schema_writes": 2,
+          "source": "adapter",
+          "storage": "sqlite"
+        },
+        "capabilities": {
+          "durable": [
+            "conversations",
+            "documents",
+            "tasks",
+            "compaction",
+            "subagents"
+          ]
+        },
+        "caveat": "This is the durable runtime compiled natively in Go inside the benchmark's own process: it is not Cloudflare's Durable Object product, and the numbers say nothing about Workers. Its storage layer adds a working set of decoded entries and reads PRAGMA data_version, work Pi's package does not do, and the facade counts it.",
+        "homepage": "https://github.com/MichaelKinsy/PiG/tree/main/durable",
+        "label": "PiG Durable (native Go)",
+        "licence": "MIT",
+        "licence_url": "https://github.com/MichaelKinsy/PiG/blob/main/LICENSE",
+        "modes": {
+          "version": [
+            "--version"
+          ]
+        },
+        "name": "pig-durable",
+        "notes": "PiG's Go port of @earendil-works/pi-durable: the durable runtime packages (durable, durable/harness, durable/storage/sqlite, chord and ai) at one pinned PiG commit, plus a small host adapter in adapter/ that speaks the JSON-lines protocol of docs/DURABLE-ADAPTERS.md and drives the runtime through its public Go packages only: harness.OpenHarness over durablesqlite.Open on Chord's Go node driver (chord/sqlite/node, wrapped by the counting facade), the scripted model as a durable.Models, the four tools and the child task. The installer checks out the pinned commit, verifies its tree, copies the adapter directory to cmd/buffon-durable-adapter/ inside the PiG module and builds it there with the pinned Go (the version in .go-version, also Buffon's pin in runtimes.toml), CGO off, -trimpath, -buildvcs=false; the build needs the PiG module's dependencies in the module cache. The adapter prints its own --version line; the version it reports is ai.ProductVersion, PiG's release line plus the Pi build this commit tracks (1.3.0 at Pi commit 1402973a, a commit after Pi 1.3.0 that carries SQLite schema version 2, which Pi 1.3.0 does not read), so a store this arm writes cannot be opened by the pi-durable reference, while a store the reference wrote opens here (the Go runtime migrates a copy). The repository location is not part of the manifest: the site profile or the environment names it (BUFFON_SOURCE_REPO_PIG_TIP), as a URL or a local clone.",
+        "relation": "pi-port",
+        "restrictions": "",
+        "source": {
+          "build": [
+            "go",
+            "build",
+            "-buildvcs=false",
+            "-trimpath",
+            "-ldflags",
+            "-X main.arm=pig-durable",
+            "-o",
+            "{out}",
+            "{package}"
+          ],
+          "commit": "e84d2349aed2525a49337142ac2be18405ee8014",
+          "env": {
+            "CGO_ENABLED": "0",
+            "GOFLAGS": "",
+            "GOTOOLCHAIN": "local"
+          },
+          "package": "./cmd/buffon-durable-adapter",
+          "repo_env": "BUFFON_SOURCE_REPO_PIG_TIP",
+          "toolchain": "go",
+          "tree": "85056e6fdd4fba6f42a8edaf32444210cf6e0903"
+        },
+        "trust": "source",
+        "version": "0.5.0+1.3.0",
+        "version_check": {
+          "contains": "1.3.0.1402973a"
+        }
+      },
+      "version": "0.5.0+1.3.0"
     },
     "pig-go-fused": {
       "files": {

@@ -1,0 +1,42 @@
+name = "pi-durable"
+label = "Pi Durable 1.3.0 (Node)"
+homepage = "https://github.com/earendil-works/pi/tree/v1.3.0/packages/durable"
+relation = "pi-reference"
+licence = "MIT"
+licence_url = "https://github.com/earendil-works/pi/blob/v1.3.0/LICENSE"
+restrictions = ""
+version = "1.3.0"
+notes = "The reference arm of the durable family: every ratio in a durable report is relative to it. The arm is the runtime package, @earendil-works/pi-durable 1.3.0 (and the 1.3.0 packages it builds on, pi-ai and chord), plus a small host adapter in adapter/ that speaks the JSON-lines protocol of docs/DURABLE-ADAPTERS.md and drives the runtime through its public API only: Harness.open over SqliteStorage on Pi's own NodeSqliteDatabase (wrapped by the counting facade), the scripted provider, the four tools and the child task. The adapter is bundled with esbuild at install time from the same lock as the runtime. The install pair is Buffon's own (the runtime has no release install pair): exact versions, npm ci --ignore-scripts. NODE_COMPILE_CACHE keeps Node's compile cache in the arm's install directory, so a warm-up round fills it and measured rounds start warm."
+
+[npm]
+package = "@earendil-works/pi-durable"
+version = "1.3.0"
+integrity = "sha512-2aD0xead1LH0BBwUBxex28in/PpUJEwyaEiW/nLoTFUcZ/lDYEl6LHX6mGZKJG8tUHzERwJyysDgy0ruidt84w=="
+package_json = "install-package.json"
+package_json_sha256 = "6f89951bfdca15c4541bbc2033d3077a4f87beaad2484078bdb312654d35c9d3"
+package_lock = "install-package-lock.json"
+package_lock_sha256 = "2eeb516cc4989c1a7b78b3134fa2997a62b3c20ef3065601b47bdc6d62595d9b"
+bin = "adapter.mjs"
+runtime = "node"
+
+[adapter]
+protocol = 1
+envs = ["native"]
+storage = "sqlite"
+source = "adapter"
+build = ["esbuild", "src/main.ts", "--bundle", "--platform=node", "--format=esm", "--target=node24", "--legal-comments=none", "--define:ARM=\"pi-durable\"", "--banner:js=#!/usr/bin/env node", "--outfile={out}"]
+
+[env]
+NODE_COMPILE_CACHE = "{install_dir}/node-compile-cache"
+
+[runtime]
+node = "24.19.0"
+
+[modes]
+version = ["--version"]
+
+[version_check]
+contains = "1.3.0"
+
+[capabilities]
+durable = ["conversations", "documents", "tasks", "compaction", "subagents"]

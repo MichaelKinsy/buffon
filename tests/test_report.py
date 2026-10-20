@@ -397,7 +397,7 @@ class ArmCaveat(unittest.TestCase):
         from buffon.arms import manifest
         arms = manifest.load_all()
         self.assertIn("failure path", arms["omp"].caveat)
-        self.assertEqual({a for a, m in arms.items() if m.caveat}, {"omp", "pig-tip"})
+        self.assertEqual({a for a, m in arms.items() if m.caveat}, {"omp", "pig-tip", "pig-durable", "pi-durable-main"})   # the two durable arms say what their numbers are not (native SQLite, not a Durable Object; the main build is informational)
 
 
 class TokenMethod(unittest.TestCase):

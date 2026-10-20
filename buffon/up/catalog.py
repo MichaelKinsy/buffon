@@ -37,14 +37,18 @@ SMOKE_PROBES = ["F2.hello.completions.*"]   # glob over probe ids
 # Typical seconds for one sample of a workload on an ordinary laptop (one arm, one round, one API). The probe scales it to this machine; history replaces it.
 COST_S = {"overhead/print-write": 30.0, "overhead/print-ext5": 1.4, "overhead/rpc-ext5": 4.6, "overhead/print-ext50": 2.5, "overhead/print-ext100": 4.0, "overhead/rpc-ext50": 7.0, "overhead/rpc-ext100": 10.0, "longsession/resume-4m2": 120.0, "overhead/version": 0.2, "overhead/print": 1.2, "overhead/print-tools": 1.8, "overhead/pty": 4.0, "overhead/rpc": 4.0, "overhead/print-ext10": 1.6, "overhead/rpc-ext10": 5.0,
           "streaming/*": 3.0, "longsession/resume-n": 6.0, "longsession/resume-n-varied": 6.0, "longsession/resume-n10": 25.0, "longsession/resume-n10-varied": 25.0, "longsession/grow-n": 40.0, "longsession/grow-n10": 240.0,
+          "durable/compat-50": 3.0, "durable/compat-250": 4.0, "durable/compat-1000": 6.0, "durable/compat-3500": 10.0, "durable/compat-10000": 15.0, "durable/mixed-1000": 5.0, "durable/mixed-varied-1000": 5.0,
+          "durable/mixed-3500": 7.0, "durable/mixed-varied-3500": 7.0, "durable/window-*": 7.0, "durable/mixed-10000": 10.0, "durable/mixed-varied-10000": 10.0, "durable/cold-every-turn-*": 30.0, "durable/many-conv-*": 20.0,
+          "durable/grow-1000": 40.0, "durable/grow-3500": 150.0, "durable/floor-host": 1.0, "durable/floor-sql": 3.0, "durable/compaction-fail": 8.0, "durable/*": 6.0,
           "devloop/install": 20.0, "devloop/build": 120.0, "devloop/first-run": 3.0}
-SPECIAL_S = {"soak/realistic": 780.0, "soak/stress": 780.0, "reliability/faults": 90.0}   # total seconds for the whole workload, any number of arms (they run together or briefly)
+SPECIAL_S = {"soak/realistic": 780.0, "soak/stress": 780.0, "reliability/faults": 90.0, "durable/crash-50": 240.0, "durable/crash-1000": 300.0, "durable/crash-3500": 120.0, "durable/crash-stream": 200.0}   # total seconds for the whole workload, any number of arms (they run together or briefly)
 
 # A workload's state; anything not listed here that the registry holds is `wired`.
 SWEEP_WHY = "arms that load Pi extension sources by path; the rest show as cannot run"
 SCALE_IDS = ("scale/agents-limit", "scale/print-limit", "scale/agents-ext10", "scale/print-ext10")   # the four search workloads (buffon/workloads/scale.py)
 SCALE_WHY = "how many agents one container holds, found by a search (double N until one fails, then bisect to the exact number) in a container with a memory limit, a cpuset and a pids limit (docs/design/SCALE.md); needs --isolation container; `agents` needs a Pi-dialect RPC mode, `print` a print mode"
 SCALE_EXT_WHY = SCALE_WHY + "; with ten extensions: only arms that load Pi extensions take part, the rest show as cannot run"
+DURABLE_WHY = "only the durable arms (pi-durable, pig-durable) take part: each runs through its adapter (docs/DURABLE-ADAPTERS.md); a workload on a capability an arm lacks shows as cannot run with the adapter's reason"
 PARTLY = {"overhead/print-write": "arms whose tool set has no write tool (the call is built from each arm's own tool schema) show as cannot run", **{w: SCALE_EXT_WHY if w.endswith("-ext10") else SCALE_WHY for w in SCALE_IDS}, "overhead/print-ext5": SWEEP_WHY, "overhead/rpc-ext5": SWEEP_WHY, "overhead/print-ext50": SWEEP_WHY, "overhead/print-ext100": SWEEP_WHY, "overhead/rpc-ext50": SWEEP_WHY, "overhead/rpc-ext100": SWEEP_WHY, "longsession/resume-4m2": "arms that read Pi session files; a stop at this size is a result", "overhead/print-ext10": "needs the extension-realization arms (pig-ts-*, pig-go-*)", "overhead/rpc-ext10": "needs the extension-realization arms (pig-ts-*, pig-go-*)",
           "devloop/build": "only source-built arms have a build step", "overhead/pty": "arms without an interactive mode show as cannot run",
           "streaming/tui-prose": "arms without an interactive mode show as cannot run", "streaming/tui-code": "arms without an interactive mode show as cannot run",
@@ -59,6 +63,8 @@ def family_of(workload_id):
 
 
 def state_of(workload_id):
+    if workload_id.startswith("durable/"):
+        return "partly wired", DURABLE_WHY
     if workload_id in PARTLY:
         return "partly wired", PARTLY[workload_id]
     return "wired", ""

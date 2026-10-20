@@ -79,6 +79,8 @@ class Plan:
     meter: str = "auto"
     source_repos: dict = field(default_factory=dict)
     api: str = "openai-completions"      # the wire API of the sample being taken; the engine sets it per variant
+    env: str = "native"                  # the environment of the durable sample being taken (a durable workload's variant axis, in place of the wire API); the engine sets it per variant
+    envs: list = field(default_factory=lambda: [workloads.NATIVE])   # the environments the durable workloads run in (`--env`); only native is built
     lock_file: str = quietlib.DEFAULT_LOCK  # Buffon's own exclusive host lock: one measurement per host
     lock_files: list = field(default_factory=list)   # locks of other benchmark tools that must be free (or inherited)
     slot: dict = None                    # a session in one slot of a host that runs several at once (buffon/runner/slots.py): {"id", "of", "cpus", "calibration": path or None}
@@ -142,6 +144,9 @@ class Plan:
             raise Refused("the harness CPUs and the mock's CPUs overlap")
         if self.aa not in ("all", "none") and not all(self.aa.split(",")):
             raise Refused("--aa takes all, none or arm ids")
+        later = [e for e in self.envs if e != workloads.NATIVE]
+        if later:
+            raise Refused(f"environment {', '.join(later)} is reserved for a later phase of the durable family (docs/design/DURABLE.md section 5): only native runs today")
 
 
 def with_twins(arms, aa, ws=None):
@@ -268,10 +273,15 @@ def effective_apis(plan, instances):
     return apis
 
 
-def variants(plan_workloads, apis):
-    """[(workload, api)]: a workload runs once per wire API it varies over and the plan selects; a workload whose apis are (None,) does not depend on the API and runs once."""
+def variants(plan_workloads, apis, envs=(workloads.NATIVE,)):
+    """[(workload, variant)]: a workload runs once per wire API it varies over and the plan selects; a workload whose apis are (None,) does not depend on the API and runs once.
+    A durable workload (`envs` set) varies over environments instead: its variant is None for the native environment (the same cell key a workload with no variant has) and the
+    environment's name for another, which then lands in a cell of its own (buffon/report/cells.py `variant`)."""
     out = []
     for w in plan_workloads:
+        if getattr(w, "envs", ()):
+            out += [(w, None if env == workloads.NATIVE else env) for env in envs if env in w.envs]
+            continue
         if w.apis == (None,):
             out.append((w, None))
             continue
@@ -297,6 +307,7 @@ class Runner:
         self.envelope_record = None
         self.preflight = None
         self.sysinfo = None
+        self.durable = None        # the durable family's prepared state (fixtures, gate, floors): buffon/durable/prepare.py
         self.adaptive_stops = {}   # "scenario|api" -> {"rounds", "reason", "verdicts"} for each variant adaptive stopping ended early
         self.adaptive_minimum = {}   # "scenario|api" -> the rounds that variant had to take before it could settle (buffon/runner/adaptive.py min_rounds)
         self.pod_start, self.pod_reasons = None, []   # isolation pod-guaranteed: the pod facts at the start and the envelope guarantees that failed
@@ -454,7 +465,8 @@ class Runner:
                        "quiet_gate": {"enabled": self.gate is not None, "max_busy": p.quiet_max_busy, "timeout_s": p.quiet_timeout_s, "max_runnable": p.quiet_max_runnable, "max_steal": p.quiet_max_steal, "max_psi": p.quiet_max_psi, **self.gate_stats},
                        "lock_file": p.lock_file, "lock_files": p.lock_files, "lock_holder": self.lock_holder, **({"slot": p.slot} if p.slot else {}), "isolation": self.isolation_stamp(),
                        "host_class": self.preflight["class"], "preflight": self.preflight, "perf": getattr(self, "perf", None), "clock_claim": getattr(self, "clock_claim", "") or None, "clock_claim_refused": getattr(self, "clock_claim_refused", None), "work_fs": getattr(self, "work_fs", None),
-                       **({"equivalence": {"passed": equivalence["passed"], "template_sha256": equivalence["template_sha256"], "counts": {n: {"oracle": c["oracle"], "arms": c["arms"]} for n, c in equivalence["counts"].items()}}} if equivalence else {})},
+                       **({"equivalence": {"passed": equivalence["passed"], "template_sha256": equivalence["template_sha256"], "counts": {n: {"oracle": c["oracle"], "arms": c["arms"]} for n, c in equivalence["counts"].items()}}} if equivalence and "template_sha256" in equivalence else {}),
+                       **({"durable": self.durable["summary"], "env": p.envs} if self.durable else {})},
                "site": p.site,
                "hardware": {"class": "quiet-dedicated" if quiet else "provisional", "quiet_dedicated": quiet, "reasons": reasons},
                "lock_sha256": lock.lock_hash() if os.path.exists(lock.LOCK_FILE) else None,
@@ -527,6 +539,11 @@ class Runner:
         if equivalence and not equivalence["passed"]:
             names = "; ".join(f"{arm} with {count} extensions: {d[0]}" for count, c in sorted(equivalence["counts"].items(), key=lambda kv: int(kv[0])) for arm, d in sorted(c["differences"].items()))
             return equivalence, None, f"the arms do not do the same work, so their timings are not comparable ({names}). The records are in equivalence.json"
+        if any(getattr(w, "envs", ()) for w in p.workloads):   # the durable family: its fixtures are built and its equivalence gate passes before anything is timed (buffon/durable/prepare.py)
+            from ..durable import prepare
+            self.durable, refusal = prepare.run(self, ctx, installed, instances)
+            if refusal:
+                return self.durable.get("gate"), None, refusal
         calibration = self.calibrate(ctx, instances) if p.calibrate else None
         if calibration and not calibration["passed"] and not p.allow_noisy and p.strict:
             return equivalence, calibration, (f"the calibration gate failed: the reference arm's CPU time varies by {calibration['max_cv']:.1%} between identical runs (gate {CV_GATE:.0%}). "
@@ -549,7 +566,10 @@ class Runner:
     # -- measurement ---------------------------------------------------------------------------------------------------------------------------
 
     def one_sample(self, ctx, workload, api, arm, rnd):
-        ctx.opts.api = api or arm.apis[0]  # an API-independent workload (--version) runs on the arm's first API
+        if getattr(workload, "envs", ()):
+            ctx.opts.env, ctx.opts.api = api or workloads.NATIVE, None   # a durable sample's variant is its environment (variants()); there is no wire API
+        else:
+            ctx.opts.api = api or arm.apis[0]  # an API-independent workload (--version) runs on the arm's first API
         t0 = time.monotonic()
         ctx.server.context = {"arm": arm.id, "scenario": workload.id, "api": api, "round": rnd, "warmup": rnd < self.plan.warmup}
         host, quiet_ok = self.quiet_wait()
@@ -624,7 +644,7 @@ class Runner:
 
     def measure(self, ctx, instances):
         p = self.plan
-        order = variants([w for w in p.workloads if not w.special], effective_apis(p, instances))
+        order = variants([w for w in p.workloads if not w.special], effective_apis(p, instances), p.envs)
         streak, out = {}, set()
         total = p.warmup + p.rounds
         settled = set()   # (workload id, api) variants adaptive stopping has ended
@@ -659,6 +679,8 @@ class Runner:
             self.log(f"buffon: {workload.id}")
             workload.special(self, ctx, instances)
             self.checkpoint(force=True)
+        for workload in [w for w in p.workloads if getattr(w, "finish", None)]:   # metrics that need several samples (buffon/workloads/durable.py)
+            workload.finish(self)
 
     def settle(self, live, instances, taken, settled, out):
         """Adaptive stopping after a round: end every variant whose answer is known (buffon/runner/adaptive.py), and say so."""

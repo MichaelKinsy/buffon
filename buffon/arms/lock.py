@@ -22,7 +22,22 @@ def generate(arms_dir=manifest.ARMS_DIR, runtimes_file=manifest.RUNTIMES_FILE):
     for name, arm in arms.items():
         entry = {"manifest_sha256": arm.manifest_sha256, "version": arm.version, "licence": arm.licence, "held": arm.held, "spec": arm.spec}
         entry["files"] = {n: manifest.sha256_file(os.path.join(arm.dir, n)) for n in sorted(os.listdir(arm.dir)) if n != "arm.toml" and os.path.isfile(os.path.join(arm.dir, n)) and not n.endswith(".pyc")}
+        if arm.adapter:   # the adapter is part of the arm: every file of its source directory, by path, so a change to it changes provenance
+            entry["files"].update(adapter_files(arm))
         out["arms"][name] = entry
+    return out
+
+
+def adapter_files(arm):
+    """{path relative to the arm directory: sha256} of every file under the adapter's source directory (node_modules, build output and caches are not source)."""
+    root = os.path.join(arm.dir, arm.adapter["source"])
+    out = {}
+    for base, dirs, files in os.walk(root):
+        dirs[:] = sorted(d for d in dirs if d not in ("node_modules", "dist", "__pycache__", ".cache"))
+        for name in sorted(files):
+            if not name.endswith(".pyc"):
+                full = os.path.join(base, name)
+                out[os.path.relpath(full, arm.dir).replace(os.sep, "/")] = manifest.sha256_file(full)
     return out
 
 

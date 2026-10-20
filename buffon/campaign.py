@@ -33,9 +33,10 @@ from .runner import slots as slotlib
 
 EXIT_USAGE, EXIT_REFUSED = 2, 3
 MIN_ROUNDS = 12
+SHORT_ROUNDS = 3      # a family that says allow_short (a provisional first run, or a build-up that is not compared round by round, the grow workloads): the fewest rounds it may name; the run is labelled not a measured run
 _NAME = re.compile(r"^[a-z0-9]([a-z0-9-]{0,30}[a-z0-9])?$")
 _TABLES = {"campaign": {"name", "reference", "description"}, "calibrate": {"workloads", "rounds", "apis", "params"},
-           "family": {"name", "workloads", "arms", "rounds", "apis", "params", "warmup", "timeout", "adaptive"}}
+           "family": {"name", "workloads", "arms", "rounds", "apis", "params", "warmup", "timeout", "adaptive", "allow_short"}}
 STATE = "campaign.json"
 
 
@@ -106,8 +107,12 @@ def check_plan(doc):
         except KeyError as error:
             raise PlanError(f"{where}: {error.args[0]}") from None
         rounds = body.get("rounds", MIN_ROUNDS)
-        if not isinstance(rounds, int) or isinstance(rounds, bool) or rounds < MIN_ROUNDS:
-            raise PlanError(f"{where}: rounds must be an integer of at least {MIN_ROUNDS}; a campaign is a measured run")
+        short = body.get("allow_short", False)
+        if not isinstance(short, bool) or (short and table != "family"):
+            raise PlanError(f"{where}: allow_short is true or false, on a family only")
+        floor = SHORT_ROUNDS if short else MIN_ROUNDS
+        if not isinstance(rounds, int) or isinstance(rounds, bool) or rounds < floor:
+            raise PlanError(f"{where}: rounds must be an integer of at least {floor}; " + ("an allow_short family is a provisional run" if short else "a campaign is a measured run"))
         if "apis" in body and (not isinstance(body["apis"], list) or not all(isinstance(a, str) for a in body["apis"])):
             raise PlanError(f"{where}: apis must be a list of wire API names")
         if "params" in body and not isinstance(body["params"], dict):
@@ -127,6 +132,8 @@ def family_argv(cmd, body, site_ref, out, reference, bundle_dir, calibration=Non
             argv += ["--warmup", str(body["warmup"])]
         if "timeout" in body:
             argv += ["--timeout", str(body["timeout"])]
+        if body.get("allow_short"):
+            argv += ["--allow-short"]   # the run is labelled not a measured run
         if body.get("adaptive"):
             argv += ["--adaptive"]   # rounds is then the most a cell takes; a cell stops once its answer is clear (docs/METHODOLOGY.md section 18)
     if body.get("apis"):

@@ -508,6 +508,8 @@ class Defaults(unittest.TestCase):
         for wid, w in workloads.load_all().items():
             if wid.startswith("scale/"):
                 self.assertEqual((w.rounds, w.aa), (5, False), wid)
+            elif wid.startswith("durable/"):   # the durable family declares its own rounds and A/A defaults in buffon/durable/specs.py
+                continue
             else:
                 self.assertEqual((w.rounds, w.aa), (0, True), wid)
 

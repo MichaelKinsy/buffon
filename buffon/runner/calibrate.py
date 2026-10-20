@@ -17,18 +17,24 @@ def run(session, ctx, instances, rounds=None):
     from ..workloads import overhead
     plan = session.plan
     rounds = rounds or plan.calibration_rounds
-    eligible = [a for a in instances if not a.twin_of and a.supports_mode("print") and a.supports_api(plan.api)]
+    durable = bool(getattr(plan, "workloads", None)) and all(getattr(w, "envs", ()) for w in plan.workloads)   # a durable run has no print mode: its calibration is the floor-host sample (docs/design/DURABLE.md 4.5)
+    eligible = [a for a in instances if not a.twin_of and (a.adapter if durable else a.supports_mode("print") and a.supports_api(plan.api))]
     # The reference arm when it is selected; otherwise the first eligible arm, named in the result.
     ref = next((a for a in eligible if a.id == getattr(plan, "reference", None)), eligible[0] if eligible else None)
     if ref is None:
-        return {"passed": False, "reason": "no arm can print on this wire API, so there is nothing to calibrate on", "max_cv": float("nan"), "gate": session_gate(), "runs": 0}
+        return {"passed": False, "reason": ("no durable arm is selected, so there is nothing to calibrate on" if durable else "no arm can print on this wire API, so there is nothing to calibrate on"), "max_cv": float("nan"), "gate": session_gate(), "runs": 0}
     copies = [ref, next((a for a in instances if a.twin_of == ref.id), None) or _twin(ref)]
-    ctx.opts.api = plan.api if plan.api in ref.apis else ref.apis[0]
+    if not durable:
+        ctx.opts.api = plan.api if plan.api in ref.apis else ref.apis[0]
     values = {c.id: [] for c in copies}
     raw = []
     for rnd in range(plan.warmup + rounds):
         for c in (copies if rnd % 2 == 0 else copies[::-1]):
-            sample = overhead.RUNNERS["print"](ctx, c)
+            if durable:
+                from ..workloads import durable as durable_workloads
+                sample = durable_workloads.floor_sample(ctx, c)
+            else:
+                sample = overhead.RUNNERS["print"](ctx, c)
             ctx.release()
             ok = "failure" not in sample and sample.get(METRIC) is not None
             if rnd >= plan.warmup:
@@ -39,7 +45,7 @@ def run(session, ctx, instances, rounds=None):
     good = all(len(v) >= max(2, rounds - 1) for v in values.values())
     max_cv = max(cvs.values()) if cvs else float("nan")
     gate = session_gate()
-    out = {"metric": METRIC, "scenario": SCENARIO, "api": ctx.opts.api, "arm": ref.id, "runs": rounds, "cv": cvs, "max_cv": max_cv, "gate": gate,
+    out = {"metric": METRIC, "scenario": "durable/floor-host" if durable else SCENARIO, "api": None if durable else ctx.opts.api, "arm": ref.id, "runs": rounds, "cv": cvs, "max_cv": max_cv, "gate": gate,
            "passed": bool(good and cvs and max_cv <= gate), "samples": raw}
     if not good:
         out["reason"] = "too many failed calibration runs"

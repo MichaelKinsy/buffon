@@ -16,6 +16,7 @@ LEDE = ("Buffon measures coding-agent harnesses against the same scripted model,
 # What each memory metric is, by name. A memory metric that is not here is shown as "memory (kind not named)" so it cannot pass for a kind it is not.
 MEMORY_KINDS = {"peak_rss_mib": "peak RSS", "rss_mib": "RSS", "ready_rss_mib": "RSS at ready", "pss_mib": "PSS", "ready_pss_mib": "PSS at ready",
                 "peak_mem_mib": "cgroup peak memory", "max_proc_rss_mib": "largest process RSS",
+                "end_rss_mib": "RSS at the end", "mem_per_conv_mib": "RSS per live conversation (the slope of the end RSS against the conversations)",   # a durable sample
                 # a swarm container (scale/*): the container's own counters, not one process's
                 "mem_peak_mib": "container peak memory (memory.peak)", "mem_per_agent_mib": "container memory per agent", "mem_baseline_mib": "container memory before the agents",
                 "mem_ready_mib": "container memory at ready", "pss_mib_per_agent": "PSS per agent"}
