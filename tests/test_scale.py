@@ -377,9 +377,9 @@ class Swarm(Env):
     def test_a_container_the_kernel_killed_with_its_cgroup_is_an_oom_from_the_last_reading(self):
         seen, read = threading.Event(), swarmlib.read_cgroup
 
-        def watch(path):   # the monitor's read: the container dies only after a reading at its limit, as a real kill follows the counters reaching it
+        def watch(path):   # the monitor's read: the container dies only after a reading whose peak is at its limit, as a real kill follows the counters reaching it
             got = read(path)
-            if got and got.get("memory.current", 0) >= 1024 * MIB:
+            if got and (got.get("memory.peak") or 0) >= 1024 * MIB:   # the peak, not memory.current: the fake writes the two files one after the other
                 seen.set()
             return got
         patcher = mock.patch.object(swarmlib, "read_cgroup", watch)
