@@ -117,7 +117,7 @@ A plan file has three parts; every key not listed is refused:
 |---|---|
 | `[campaign]` | `name` (lower-case letters, digits and dashes), `reference` (default `pi-node`), `description` |
 | `[calibrate]` | `workloads`, `rounds` (12 or more), `apis`, `params` |
-| `[[family]]` | `name` (as above; not `bundle` or `calibrate`), `workloads`, `arms`, `rounds` (12 or more), `apis`, `params`, `warmup`, `timeout`, `adaptive` (`true`: a cell stops once its answer is clear, and `rounds` is the most it takes; docs/METHODOLOGY.md section 18) |
+| `[[family]]` | `name` (as above; not `bundle` or `calibrate`), `workloads`, `arms`, `rounds` (12 or more, or 3 or more with `allow_short`), `apis`, `params`, `warmup`, `timeout`, `adaptive` (`true`: a cell stops once its answer is clear, and `rounds` is the most it takes; docs/METHODOLOGY.md section 18), `allow_short` (`true`: 3 or more rounds are accepted and the run is labelled not a measured run; the minimal first run of the durable family and its build-up workloads use it) |
 
 Workloads are ids, families or `all`; arms must exist and must not be held; `params` are passed as `--param KEY=VALUE`.
 
@@ -166,6 +166,26 @@ The plan has four families, each its own `buffon run` with an A/A copy of every 
 A harness with no mode for a workload (Codex has no RPC) shows "cannot run" in that cell. The estimate counts every harness in every workload of its family at its most rounds, so it is an upper bound, and it uses the speed probe of the machine it runs on: on a busy machine the probe is slow and the estimate is long. Time per sample comes from earlier runs on the same machine when there are any. From the benchmark host timings of 2026-10-16 (core 18 minutes for nine harnesses, the 200 KB write about an hour at 12 rounds) the plan takes about 2 to 2.5 hours on a quiet benchmark host, and about 3.5 to 4 hours if every focus cell needed all 12 rounds. `buffon up --plan` cannot print it, because `buffon up` runs one harness list for all its workloads and this plan gives the focus workloads to five harnesses only.
 
 With print-mode streaming unpaced (WHAT-WE-MEASURE, "Streaming render"), the plan takes about 1.5 hours on a quiet benchmark host. On a host with two sockets, a site with `[local] slots = 2` puts one slot on each socket, and the campaign runs two families at once after the slot calibration (the reference against its A/A copy alone, then in both slots at once). That brings it to about 1 to 1.25 hours, and with no passing slot it runs the families one after the other. Both sockets must be free and set up for measuring (governor, fixed clock, idle states, counters) for the run.
+
+### The durable family
+
+The `durable` workloads measure durable agent runtimes: Pi Durable 1.3.0 (the reference, `pi-durable`) and PiG Durable (native Go, `pig-durable`) on their native SQLite. Each arm is a runtime package plus a small adapter that speaks the protocol of [DURABLE-ADAPTERS.md](DURABLE-ADAPTERS.md); the design and what is built are in [design/DURABLE.md](design/DURABLE.md) (section 11). A durable run selects the adapter arms and `pi-durable` as the reference by itself:
+
+```sh
+export BUFFON_SOURCE_REPO_PIG_TIP=/path/to/PiG-clone        # the repository that holds the pinned PiG commit (or a URL)
+python3 -m buffon run durable/compat-1000 durable/compat-3500 durable/mixed-1000 durable/mixed-3500 durable/floor-host durable/floor-sql durable/crash-50 \
+    --rounds 6 --allow-short --out runs/durable-minimal          # the minimal first run (docs/design/DURABLE.md section 10): provisional
+python3 -m buffon run durable --out runs/durable-full           # every durable workload, 12 rounds, A/A copies
+python3 -m buffon report runs/durable-full                      # or: python3 -m buffon dashboard runs/durable-full --out site
+```
+
+`campaigns/durable-native.toml` holds the same plan as a campaign: the first family is the minimal run, the others are the full session. A local site runs one family per `buffon run`; a Kubernetes bundle does not carry the Go adapter yet.
+
+What happens before the first sample: the runtimes are installed (Node and the esbuild bundle of the Pi adapter from the committed lock; the PiG checkout at its pinned commit and tree with the adapter built into it); each fixture the plan needs is built once by the reference through its real loop and kept under the site's cache directory (`durable/`, keyed by the script's sha256, the settings and the writer); every arm runs the equivalence scenarios on a copy of each fixture, and the runner compares the stores it reads itself. A difference in conversation state, model requests or cross-open refuses the run (exit 3) and `equivalence.json` in the run directory says which fields differ. A fixture the reference cannot build, or one where the reference disagrees with its own A/A copy, is not timed: its workloads are skipped with that reason. A capability an arm lacks is that adapter's own sentence in the cell's `cannot run` reason.
+
+Parameters (`--param KEY=VALUE`): `crash_points` (default 20: kill points per crash workload, spaced from the first commit of the turn to the last, or `all`). `--envs native` is the only environment today; `miniflare` and `cloudflare` are refused. The crash workloads run once, not in rounds. The cold-start method is a warm page cache: every sample's store is a fresh copy that the runner reads once before timing.
+
+Time: a fixture of 3,500 turns takes the reference minutes to build the first time (a 10,000-turn compat fixture about twenty minutes) and is reused afterwards; a measured sample takes seconds. The minimal first run is about one hour on a quiet host. On a shared machine every durable run is labelled PROVISIONAL like any other.
 
 ## Site profile reference
 

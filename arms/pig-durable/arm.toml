@@ -1,0 +1,37 @@
+name = "pig-durable"
+label = "PiG Durable (native Go)"
+homepage = "https://github.com/MichaelKinsy/PiG/tree/main/durable"
+relation = "pi-port"
+licence = "MIT"
+licence_url = "https://github.com/MichaelKinsy/PiG/blob/main/LICENSE"
+restrictions = ""
+version = "0.5.0+1.3.0"
+notes = "PiG's Go port of @earendil-works/pi-durable: the durable runtime packages (durable, durable/harness, durable/storage/sqlite, chord and ai) at one pinned PiG commit, plus a small host adapter in adapter/ that speaks the JSON-lines protocol of docs/DURABLE-ADAPTERS.md and drives the runtime through its public Go packages only: harness.OpenHarness over durablesqlite.Open on Chord's Go node driver (chord/sqlite/node, wrapped by the counting facade), the scripted model as a durable.Models, the four tools and the child task. The installer checks out the pinned commit, verifies its tree, copies the adapter directory to cmd/buffon-durable-adapter/ inside the PiG module and builds it there with the pinned Go (the version in .go-version, also Buffon's pin in runtimes.toml), CGO off, -trimpath, -buildvcs=false; the build needs the PiG module's dependencies in the module cache. The adapter prints its own --version line; the version it reports is ai.ProductVersion, PiG's release line plus the Pi build this commit tracks (1.3.0 at Pi commit 1402973a, a commit after Pi 1.3.0 that carries SQLite schema version 2, which Pi 1.3.0 does not read), so a store this arm writes cannot be opened by the pi-durable reference, while a store the reference wrote opens here (the Go runtime migrates a copy). The repository location is not part of the manifest: the site profile or the environment names it (BUFFON_SOURCE_REPO_PIG_TIP), as a URL or a local clone."
+trust = "source"
+caveat = "This is the durable runtime compiled natively in Go inside the benchmark's own process: it is not Cloudflare's Durable Object product, and the numbers say nothing about Workers. Its storage layer adds a working set of decoded entries and reads PRAGMA data_version, work Pi's package does not do, and the facade counts it."
+
+[source]
+repo_env = "BUFFON_SOURCE_REPO_PIG_TIP"
+commit = "e84d2349aed2525a49337142ac2be18405ee8014"
+tree = "85056e6fdd4fba6f42a8edaf32444210cf6e0903"
+toolchain = "go"
+package = "./cmd/buffon-durable-adapter"
+build = ["go", "build", "-buildvcs=false", "-trimpath", "-ldflags", "-X main.arm=pig-durable", "-o", "{out}", "{package}"]
+env = { CGO_ENABLED = "0", GOFLAGS = "", GOTOOLCHAIN = "local" }
+
+[adapter]
+protocol = 1
+envs = ["native"]
+storage = "sqlite"
+source = "adapter"
+schema_reads = [1, 2]
+schema_writes = 2
+
+[modes]
+version = ["--version"]
+
+[version_check]
+contains = "1.3.0.1402973a"
+
+[capabilities]
+durable = ["conversations", "documents", "tasks", "compaction", "subagents"]

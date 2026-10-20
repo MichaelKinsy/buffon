@@ -186,6 +186,9 @@ def build(out_dir, arch, arm_ids=None, repo=ROOT, host_cache="", allow_dirty=Fal
             runtimes.add(arm.spec["npm"]["runtime"])
             npm_arms.append(arm)
         elif kind == "source":
+            if getattr(arm, "adapter", None):
+                skipped[arm_id] = "a durable adapter arm is built inside its runtime's checkout at install; a bundle does not carry that build yet (the durable family runs on a local site today)"
+                continue
             why = cross_buildable(arm)
             where = source_repo(arm, source_repos)
             if why or not where:

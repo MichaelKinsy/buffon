@@ -43,6 +43,7 @@ def add_run_flags(p):
     p.add_argument("--arms", nargs="*", help="arm ids (default: every runnable arm; held arms are never run)")
     p.add_argument("--accept-terms", default="", metavar="IDS", help="arms whose vendor terms you accept (comma separated, or BUFFON_ACCEPT_TERMS); an arm with operator terms runs only when named and accepted")
     p.add_argument("--apis", nargs="*", default=None, help="wire APIs, each a separate variant in the report (default: openai-completions and anthropic-messages, plus openai-responses when an arm speaks only that)")
+    p.add_argument("--envs", nargs="*", default=None, help="environments the durable workloads run in (default: native; miniflare and cloudflare are reserved for a later phase and refused)")
     p.add_argument("--rounds", type=int, default=None, help="measured rounds (default 12; 5 for the scale family, whose spread across rounds is its noise). With --adaptive: the most a cell takes. Fewer than 12 are recorded and labelled; they cannot be Verified")
     p.add_argument("--adaptive", action="store_true", help="per cell, stop adding rounds once the interval clears the noise floor or is tight enough to call no measurable difference (at least 6 rounds)")
     p.add_argument("--calibration-rounds", type=int, default=12, help="rounds of the reference-against-its-own-copy calibration (the Noisy label's measurement)")
@@ -651,7 +652,14 @@ def session_plan(args):
     from .runner import facts as factlib
 
     arms = manifest.load_all()
+    resolved = workloads.resolve(args.workloads)
+    durable_only = bool(resolved) and all(w.envs for w in resolved)   # the durable family: its arms are the adapter arms, and its reference is the Pi Durable arm
     wanted = session_arms(resolve_arm_names(args.arms, arms) if args.arms else None, arms)
+    if durable_only and not args.arms:
+        wanted = [n for n, a in arms.items() if a.adapter and not a.held and not a.adapter.get("informational")]
+    reference = args.reference
+    if durable_only and reference == "pi-node" and "pi-node" not in wanted and wanted:
+        reference = "pi-durable" if "pi-durable" in wanted else wanted[0]
     held = [n for n in wanted if arms[n].held]
     if held:
         print(f"buffon: held arms are listed but never run: {', '.join(held)}", file=sys.stderr)
@@ -672,8 +680,8 @@ def session_plan(args):
         slot_id, slot_of = (int(n) for n in args.slot.split("/"))
         slot = {"id": slot_id, "of": slot_of, "cpus": sitelib.format_cpus(cpus), "calibration": os.path.abspath(args.slot_calibration) if args.slot_calibration and slotlib.passed(args.slot_calibration, slot_id) else None}
         lock = args.lock_file or slotlib.lock_path(engine.quietlib.DEFAULT_LOCK, slot_id)
-    return engine.Plan(workloads=workloads.resolve(args.workloads), arms=[arms[n] for n in wanted if not arms[n].held], apis=args.apis or list(engine.APIS), apis_explicit=args.apis is not None, rounds=args.rounds or engine.MIN_ROUNDS, rounds_set=args.rounds is not None, warmup=args.warmup,
-                       aa=args.aa or "all", aa_set=args.aa is not None, reference=args.reference, cpus=cpus, mock_cpus=mock, pinning=args.pinning, seed=args.seed, timeout=args.timeout, rpc_turns=args.rpc_turns, long_turns=args.long_turns,
+    return engine.Plan(workloads=resolved, arms=[arms[n] for n in wanted if not arms[n].held], apis=args.apis or list(engine.APIS), envs=list(args.envs or [workloads.NATIVE]), apis_explicit=args.apis is not None, rounds=args.rounds or engine.MIN_ROUNDS, rounds_set=args.rounds is not None, warmup=args.warmup,
+                       aa=args.aa or "all", aa_set=args.aa is not None, reference=reference, cpus=cpus, mock_cpus=mock, pinning=args.pinning, seed=args.seed, timeout=args.timeout, rpc_turns=args.rpc_turns, long_turns=args.long_turns,
                        calibrate=not args.no_calibrate, memory_mib=args.memory_tier * 1024, calibration_rounds=args.calibration_rounds, adaptive=args.adaptive, strict=args.require_class == "A", allow_noisy=args.allow_noisy, allow_short=args.allow_short, allow_frequency_scaling=args.allow_frequency_scaling,
                        hardware_claim=args.hardware_claim, site=site, out=args.out or default_out(), command=["buffon"] + sys.argv[1:], params=parse_params(args.param),
                        lock_file=lock, lock_files=list(args.foreign_lock), slot=slot, slot_others=parse_cpus(args.slot_others), quiet_max_busy=args.quiet_max_busy, quiet_timeout_s=args.quiet_timeout,
@@ -716,7 +724,7 @@ def cmd_session(args):
 
 
 # `buffon run` builds the session's argv itself; these flags it forwards above, every other run flag the operator gave goes through explicit_run_flags.
-RUN_FORWARDED = {"workloads", "arms", "accept_terms", "apis", "rounds", "warmup", "aa", "reference", "seed", "timeout", "rpc_turns", "long_turns", "param", "out", "no_calibrate", "allow_noisy",
+RUN_FORWARDED = {"workloads", "arms", "accept_terms", "apis", "envs", "rounds", "warmup", "aa", "reference", "seed", "timeout", "rpc_turns", "long_turns", "param", "out", "no_calibrate", "allow_noisy",
                  "allow_short", "allow_frequency_scaling"}
 
 
@@ -839,7 +847,7 @@ def cmd_calibrate(args):
 def submit(args, s, b, out, nodes):
     """Run one session through the backend: build its argv from the run flags and the site, build the bundle a bundle site needs, and report how it ended."""
     from . import backend
-    argv = [sys.executable, "-m", "buffon", "session", *args.workloads, *(["--apis", *args.apis] if args.apis else []), *(["--rounds", str(args.rounds)] if args.rounds is not None else []), "--warmup", str(args.warmup), *(["--aa", args.aa] if args.aa is not None else []),
+    argv = [sys.executable, "-m", "buffon", "session", *args.workloads, *(["--apis", *args.apis] if args.apis else []), *(["--envs", *args.envs] if args.envs else []), *(["--rounds", str(args.rounds)] if args.rounds is not None else []), "--warmup", str(args.warmup), *(["--aa", args.aa] if args.aa is not None else []),
             "--reference", args.reference, "--seed", str(args.seed), "--timeout", str(args.timeout), "--rpc-turns", str(args.rpc_turns), "--long-turns", str(args.long_turns), "--out", out,
             "--pinning", s.local.pinning if s.backend == "local" else "required", "--hardware-claim", s.hardware, "--meter", s.local.meter]
     bundle_dir, prebuilt = None, getattr(args, "bundle", None)

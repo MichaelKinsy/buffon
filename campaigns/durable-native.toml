@@ -1,0 +1,69 @@
+# The durable family on its native environment (docs/design/DURABLE.md sections 5.1 and 10; docs/RUNNING.md, "The durable family"). The reference is Pi Durable 1.3.0.
+# The first family is the minimal first run of section 10 (steps 1 to 6): one warm-up and six measured rounds, A/A copies on, a provisional label. The others are the full session.
+# The Wasm core, Miniflare and Cloudflare environments are later phases and have no family here. The adapters build inside their runtime's checkout, so this plan runs on a local site
+# today (`buffon run`, one family at a time); a Kubernetes bundle does not carry the Go adapter yet.
+
+[campaign]
+name = "durable-native"
+reference = "pi-durable"
+description = "the durable family on native SQLite: Pi Durable 1.3.0 against PiG Durable (native Go), compat and mixed lanes, floors, crash matrix"
+
+[calibrate]
+workloads = ["durable/floor-host"]
+rounds = 12
+
+[[family]]
+name = "minimal"
+workloads = ["durable/compat-1000", "durable/compat-3500", "durable/mixed-1000", "durable/mixed-3500", "durable/floor-host", "durable/floor-sql", "durable/crash-50"]
+arms = ["pi-durable", "pig-durable"]
+rounds = 6
+allow_short = true
+
+[[family]]
+name = "compat"
+workloads = ["durable/compat-50", "durable/compat-250", "durable/compat-1000", "durable/compat-3500", "durable/compat-10000"]
+arms = ["pi-durable", "pig-durable"]
+rounds = 12
+
+[[family]]
+name = "mixed"
+workloads = ["durable/mixed-1000", "durable/mixed-3500", "durable/mixed-10000", "durable/mixed-varied-1000", "durable/mixed-varied-3500", "durable/mixed-varied-10000", "durable/floor-host", "durable/floor-sql"]
+arms = ["pi-durable", "pig-durable"]
+rounds = 12
+
+[[family]]
+name = "window"
+workloads = ["durable/window-32k-3500", "durable/window-200k-3500", "durable/window-1m-3500", "durable/compaction-fail", "durable/floor-host"]
+arms = ["pi-durable", "pig-durable"]
+rounds = 12
+
+[[family]]
+name = "cold"
+workloads = ["durable/cold-every-turn-1000", "durable/cold-every-turn-3500", "durable/floor-host"]
+arms = ["pi-durable", "pig-durable"]
+rounds = 12
+
+[[family]]
+name = "shapes"
+workloads = ["durable/stream-50", "durable/stream-1000", "durable/large-output-50", "durable/large-output-1000", "durable/docs-100", "durable/docs-1000", "durable/tasks-8", "durable/tasks-64", "durable/subagent", "durable/floor-host"]
+arms = ["pi-durable", "pig-durable"]
+rounds = 12
+
+[[family]]
+name = "many-conv"
+workloads = ["durable/many-conv-1", "durable/many-conv-8", "durable/many-conv-32", "durable/many-conv-128", "durable/floor-host"]
+arms = ["pi-durable", "pig-durable"]
+rounds = 12
+
+[[family]]
+name = "grow"
+workloads = ["durable/grow-1000", "durable/grow-3500"]
+arms = ["pi-durable", "pig-durable"]
+rounds = 3
+allow_short = true
+
+[[family]]
+name = "crash"
+workloads = ["durable/crash-50", "durable/crash-1000", "durable/crash-3500", "durable/crash-stream"]
+arms = ["pi-durable", "pig-durable"]
+rounds = 12

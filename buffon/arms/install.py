@@ -298,6 +298,7 @@ class Workspace:
             arm.skip = f"no pinned executable for {self.platform}"
             return
         run(["npm", "ci", "--ignore-scripts"], cwd=dest, env=env, timeout=1200)
+        adapter = self._bundle_adapter(arm, dest, env) if arm.adapter else {}
         arm.binary = os.path.join(dest, native.get(self.platform, n["bin"]))
         if native and not os.path.isfile(arm.binary):
             raise InstallError(f"{arm.id}: {os.path.relpath(arm.binary, dest)} is not installed (npm skipped the optional dependency for {self.platform})")
@@ -307,7 +308,25 @@ class Workspace:
         if want and manifest.sha256_file(real) != want:
             raise InstallError(f"{arm.id}: executable sha256 differs from the manifest's")
         arm.record = {"install_method": "npm ci --ignore-scripts", "package": n["package"], "package_lock_sha256": n["package_lock_sha256"], "integrity": n["integrity"],
-                      "platform": self.platform, "node": self.runtimes[n["runtime"]]["version"]}
+                      "platform": self.platform, "node": self.runtimes[n["runtime"]]["version"], **adapter}
+
+    def _bundle_adapter(self, arm, dest, env):
+        """A Node adapter (docs/DURABLE-ADAPTERS.md): its source directory is copied beside the installed packages and bundled by the esbuild the lock pins, into the file [npm] `bin` names.
+        The bundle is built here, never committed; the record keeps the digest of the source it came from, the argv and the digest of the bundle, so the run shows what ran."""
+        a = arm.adapter
+        work = os.path.join(dest, "adapter")
+        shutil.copytree(os.path.join(arm.dir, a["source"]), work)
+        out = os.path.join(dest, arm.spec["npm"]["bin"])
+        esbuild = os.path.join(dest, "node_modules", ".bin", "esbuild")
+        if not os.path.exists(esbuild):
+            raise InstallError(f"{arm.id}: esbuild is not in the installed packages: pin it in {arm.spec['npm']['package_json']}")
+        argv = [esbuild, *[x.replace("{out}", out) for x in a["build"][1:]]]
+        run(argv, cwd=work, env=env, timeout=600)
+        if not os.path.isfile(out):
+            raise InstallError(f"{arm.id}: the adapter build wrote no {os.path.basename(out)}")
+        os.chmod(out, 0o755)
+        return {"adapter_source_sha256": tree_sha256(work), "adapter_build": " ".join(a["build"]), "adapter_bundle_sha256": manifest.sha256_file(out), "adapter_bundle_bytes": os.path.getsize(out),
+                "esbuild": run([esbuild, "--version"], env=env).strip()}
 
     def _source(self, arm, dest, repos):
         s = arm.spec["source"]
@@ -331,13 +350,24 @@ class Workspace:
             raise InstallError(f"{arm.id}: checked out {head}/{tree}, the manifest pins {s['commit']}/{s.get('tree')}")
         env = self.base_env([s["toolchain"]])
         env.update(s.get("env", {}))
+        adapter = self._place_adapter(arm, src) if arm.adapter else {}
         out = os.path.join(dest, "bin", os.path.basename(s["package"].rstrip("/")) or "arm")
         os.makedirs(os.path.dirname(out), exist_ok=True)
         argv = [a.replace("{out}", out).replace("{package}", s["package"]) for a in s["build"]]
         run(argv, cwd=src, env=env, timeout=3600)
         arm.binary = out
+        if arm.adapter and os.path.isfile(out):
+            adapter.update(adapter_bundle_sha256=manifest.sha256_file(out), adapter_bundle_bytes=os.path.getsize(out))
         arm.record = {"install_method": "source build", "commit": head, "tree": tree, "build": " ".join(argv), "toolchain": f"{s['toolchain']} {self.runtimes_spec[s['toolchain']]['version']}",
-                      "platform": self.platform}
+                      "platform": self.platform, **adapter}
+
+    def _place_adapter(self, arm, src):
+        """A Go adapter (docs/DURABLE-ADAPTERS.md): the pinned commit and tree were verified above, and the adapter's source directory is copied into the checkout at [source] `package`, so it builds inside the
+        runtime's own module and links its public packages. The runtime's files are not changed; the digest of the adapter's source goes in the record."""
+        package = os.path.join(src, arm.spec["source"]["package"])
+        shutil.rmtree(package, ignore_errors=True)
+        shutil.copytree(os.path.join(arm.dir, arm.adapter["source"]), package)
+        return {"adapter_source_sha256": tree_sha256(package)}
 
     def _prebuilt(self, arm, dest):
         """An offline install of a source arm: the binary a bundle cross-built from the pinned commit with the pinned toolchain (buffon/backend/bundle.py), checked

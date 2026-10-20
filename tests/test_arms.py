@@ -10,6 +10,7 @@ from buffon.arms import install, lock, manifest
 ROOT = manifest.ROOT
 V0_ARMS = {"pi-node", "octet", "pi-bun", "pig-0.4.1", "pig-tip", "pibolt", "pi-bolt-0.8.5", "omp", "rpi", "codex", "opencode", "opencode-v2", "nowa-gi", "guanshan-pi-go", "sky-valley-pi", "pulseaiclub-phi", "rcarmo-gi"}
 MATRIX_ARMS = {"pig-ts-node", "pig-ts-bun", "pig-ts-aot", "pig-go-packed", "pig-go-isolated", "pig-go-fused", "pig-ts-node-isolated-diag", "pig-standard", "pig-strip-min", "piglet-bench-lean", "piglet-bench-ext10", "piglet-bench-ext10-split", "piglet-bench-ext10-aot", "piglet-combined"}   # extension-matrix arms (tests/test_matrix.py) and Piglet arms (tests/test_piglet_arms.py): run only when named
+DURABLE_ARMS = {"pi-durable", "pig-durable", "pi-durable-main"}   # adapter arms (tests/test_durable_adapters.py): the durable workloads select them, no CLI modes
 HELD = {"pi-agent-rust"}
 OPERATOR_TERMS = {"copilot", "claude-code"}   # installed from the vendor at run time; run only when named and accepted (tests/test_up.py)
 
@@ -17,7 +18,7 @@ OPERATOR_TERMS = {"copilot", "claude-code"}   # installed from the vendor at run
 class Manifests(unittest.TestCase):
     def test_every_v0_arm_is_present_and_the_held_arms_are_held(self):
         arms = manifest.load_all()
-        self.assertEqual(V0_ARMS | HELD | OPERATOR_TERMS | MATRIX_ARMS, set(arms))
+        self.assertEqual(V0_ARMS | HELD | OPERATOR_TERMS | MATRIX_ARMS | DURABLE_ARMS, set(arms))
         self.assertTrue(all(arms[n].held for n in HELD))
         self.assertFalse(any(arms[n].held for n in V0_ARMS | OPERATOR_TERMS))
         self.assertTrue(all(arms[n].operator_terms and not arms[n].runs_by_default for n in OPERATOR_TERMS))
@@ -28,6 +29,9 @@ class Manifests(unittest.TestCase):
             if arm.held:
                 continue
             self.assertIn("version", arm.modes, name)
+            if arm.adapter:   # an adapter arm speaks its own protocol: no wire API, no config writer
+                self.assertFalse(arm.runs_by_default, name)
+                continue
             self.assertTrue(os.path.exists(arm.writer_path()), name)
             self.assertTrue(arm.apis, name)
 
@@ -87,7 +91,7 @@ class Lock(unittest.TestCase):
         a, b = lock.dumps(lock.generate()), lock.dumps(lock.generate())
         self.assertEqual(a, b)
         data = lock.generate()
-        self.assertEqual(set(data["arms"]), V0_ARMS | HELD | OPERATOR_TERMS | MATRIX_ARMS)
+        self.assertEqual(set(data["arms"]), V0_ARMS | HELD | OPERATOR_TERMS | MATRIX_ARMS | DURABLE_ARMS)
         self.assertIn("node", data["runtimes"])
 
     def test_a_changed_manifest_changes_the_lock(self):

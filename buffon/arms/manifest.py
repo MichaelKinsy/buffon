@@ -17,11 +17,14 @@ RUNTIMES_FILE = os.path.join(ROOT, "runtimes.toml")
 PLATFORMS = ("linux-x64", "linux-arm64", "darwin-x64", "darwin-arm64")
 RELATIONS = ("pi-reference", "pi-fork", "pi-port", "pi-compatible", "reference")
 APIS = ("openai-completions", "openai-responses", "anthropic-messages")
+ENVS = ("native", "miniflare", "cloudflare")   # the environments the durable family runs in (docs/design/DURABLE.md section 5); only native is built
+ADAPTER_KEYS = {"protocol", "envs", "storage", "source", "build", "schema_reads", "schema_writes", "informational"}
+ADAPTER_PROTOCOL = 1
 CLAIMS = ("pi-extensions", "pi-sessions", "pi-rpc")   # what a manifest's `claims` may list (workloads/grade.toml [claims] holds the same list; a test keeps them equal)
 EXTENSIONS = ("native", "sidecar", "partial", "none")
 MODES = ("version", "print", "print_write", "print_session", "rpc", "rpc_session", "rpc_resume", "pty")
 TOP_KEYS = {"claims", "caveat", "previous", "name", "label", "homepage", "relation", "licence", "licence_url", "restrictions", "version", "held", "operator_terms", "artifact", "npm", "source", "runtime", "endpoint",
-            "env", "state", "modes", "capabilities", "renderer", "rpc", "cannot_run", "version_check", "notes", "trust", "derive", "extensions", "prepare", "seed", "piglet", "divergence"}
+            "env", "state", "modes", "capabilities", "renderer", "rpc", "cannot_run", "version_check", "notes", "trust", "derive", "extensions", "prepare", "seed", "piglet", "divergence", "adapter"}
 # A derived arm names a base arm (`[derive] base`): it runs from a copy of the base's install tree and inherits the base's scalar fields and these tables, key by key.
 INHERITED_SCALARS = ("homepage", "relation", "licence", "licence_url", "restrictions", "version")
 INHERITED_TABLES = ("endpoint", "env", "state", "modes", "capabilities", "renderer", "rpc", "cannot_run", "version_check", "runtime")
@@ -89,6 +92,7 @@ class Arm:
         self.cannot_run = spec.get("cannot_run", {})
         self.install_kind = "artifact" if "artifact" in spec else "npm" if "npm" in spec else "source" if "source" in spec else "derive" if "derive" in spec else None
         self.base = spec.get("derive", {}).get("base")
+        self.adapter = dict(spec["adapter"]) if "adapter" in spec else None   # a durable arm: a runtime package plus a host adapter that speaks the JSON-lines protocol (docs/DURABLE-ADAPTERS.md)
         self.extension_spec = spec.get("extensions", {})
         self.writer_dir = directory
         self.vars = {}   # install-time paths an `[env]` value may name as {name}: filled by the installer (a derived arm gets source_dir, the checkout of its base)
@@ -138,8 +142,8 @@ class Arm:
     @property
     def runs_by_default(self):
         """False for an extension-matrix arm (`[extensions] default = false`): it runs only when a run names it, because it repeats the base arm with another extension realization.
-        Always False for an arm with `operator_terms`: it runs only when named and its terms are accepted."""
-        return self.extension_spec.get("default", True) and not self.operator_terms
+        Always False for an arm with `operator_terms`: it runs only when named and its terms are accepted, and for an adapter arm (a durable arm has no CLI modes: the durable workloads select it)."""
+        return self.extension_spec.get("default", True) and not self.operator_terms and self.adapter is None
 
     def writer_path(self):
         w = self.spec.get("endpoint", {}).get("writer")
@@ -274,7 +278,9 @@ def validate(name, spec, directory):
             if rversion != runtimes[rname]["version"]:
                 raise ManifestError(f"{where} [runtime] {rname} = {rversion!r}, but runtimes.toml pins {runtimes[rname]['version']!r}")
     ep = spec.get("endpoint", {})
-    if held is None:
+    if "adapter" in spec:
+        _validate_adapter(spec["adapter"], spec, directory, where)
+    if held is None and "adapter" not in spec:   # an adapter arm talks to the harness through its own protocol, not to the mock endpoint
         _need(ep, ("apis", "writer"), f"{where} [endpoint]")
     for api in ep.get("apis", []):
         if api not in APIS:
@@ -293,6 +299,44 @@ def validate(name, spec, directory):
     if held is None and "version" not in spec.get("modes", {}):
         raise ManifestError(f"{where}: a runnable arm declares the `version` mode (the post-install version check)")
     return spec
+
+
+def _validate_adapter(a, spec, directory, where):
+    """[adapter]: a durable arm (docs/DURABLE-ADAPTERS.md). It sits beside exactly one of [npm] or [source], which installs the runtime package; `source` is the directory of the adapter's code
+    next to the manifest (arms.lock hashes it, every file); a Node arm's `build` is the argv that bundles it with esbuild (`{out}` is the file [npm] `bin` names)."""
+    at = f"{where} [adapter]"
+    if not isinstance(a, dict):
+        raise ManifestError(f"{at}: want a table")
+    unknown = set(a) - ADAPTER_KEYS
+    if unknown:
+        raise ManifestError(f"{at}: unknown key(s) {', '.join(sorted(unknown))}")
+    _need(a, ("protocol", "envs", "storage", "source"), at)
+    if a["protocol"] != ADAPTER_PROTOCOL:
+        raise ManifestError(f"{at}: protocol = {a['protocol']!r}; this runner speaks protocol {ADAPTER_PROTOCOL}")
+    envs = a["envs"]
+    if not (isinstance(envs, list) and envs and len(set(envs)) == len(envs) and all(e in ENVS for e in envs)):
+        raise ManifestError(f"{at}: envs is a list without repeats of {', '.join(ENVS)}")
+    if a["storage"] != "sqlite":
+        raise ManifestError(f"{at}: storage = {a['storage']!r}; the durable family measures sqlite")
+    reads, writes = a.get("schema_reads", [1]), a.get("schema_writes", 1)
+    if not (isinstance(reads, list) and reads and all(isinstance(v, int) and v > 0 for v in reads) and isinstance(writes, int) and writes in reads):
+        raise ManifestError(f"{at}: schema_reads is the list of storage schema versions the runtime opens and schema_writes the one it writes (one of them); the defaults are [1] and 1")
+    if not isinstance(a.get("informational", False), bool):
+        raise ManifestError(f"{at}: informational is true or false (an informational arm runs only when a run names it, and is never the reference)")
+    src = a["source"]
+    if not isinstance(src, str) or os.path.isabs(src) or ".." in src.split("/") or not os.path.isdir(os.path.join(directory, src)):
+        raise ManifestError(f"{at}: source must name a directory next to the manifest")
+    forms = [k for k in ("npm", "source") if k in spec]
+    if len(forms) != 1 or "derive" in spec or "artifact" in spec:
+        raise ManifestError(f"{at}: an adapter arm installs its runtime with exactly one of [npm] or [source]")
+    build = a.get("build")
+    if forms[0] == "npm":
+        if not (isinstance(build, list) and build and all(isinstance(x, str) for x in build) and any("{out}" in x for x in build) and build[0] == "esbuild"):
+            raise ManifestError(f"{at}: a Node adapter's build is an esbuild argv that writes {{out}}")
+        if spec["npm"].get("runtime") != "node":
+            raise ManifestError(f"{at}: a bundled adapter runs on node")
+    elif build is not None:
+        raise ManifestError(f"{at}: build belongs to a Node adapter; a Go adapter is built by [source] build")
 
 
 def _validate_divergences(rows, where):

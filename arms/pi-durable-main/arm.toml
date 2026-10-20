@@ -1,0 +1,49 @@
+name = "pi-durable-main"
+label = "Pi Durable (main 1402973a, informational)"
+homepage = "https://github.com/earendil-works/pi/tree/1402973a9dbe8c627341e04c9744c54953e285ca/packages/durable"
+relation = "pi-compatible"
+licence = "MIT"
+licence_url = "https://github.com/earendil-works/pi/blob/1402973a9dbe8c627341e04c9744c54953e285ca/LICENSE"
+restrictions = ""
+version = "1.3.0+1402973a"
+notes = "INFORMATIONAL: Pi's own durable package built from the unreleased main commit 1402973a (the commit PiG pins as its upstream), never the reference: the reference is pi-durable 1.3.0. At this commit the storage schema is version 2 and tasks have a `sleeping` status, so a store written here is not a 1.3.0 store. The adapter is the same code as pi-durable's: adapter/ is a byte-for-byte copy of arms/pi-durable/adapter/ (a manifest cannot share a source directory, so the two copies are kept identical; a test compares them), told apart only by the arm id the build defines (--define:ARM). The installer checks out the pinned commit, verifies its tree, copies adapter/ to packages/durable/buffon-adapter/, runs npm ci --ignore-scripts from the repository's own lock (so esbuild and TypeScript are the versions that lock pins) for the five workspaces the durable package needs (telemetry, chord, codemode, ai, durable), transpiles them with tsc --noCheck (pi-ai's model data is fetched from the network by Pi's own build and is not needed by a scripted provider; type checking is off for the same reason and the adapter is type checked by pi-durable's own build) and bundles the adapter with esbuild. NODE_COMPILE_CACHE keeps Node's compile cache in the arm's install directory."
+trust = "source"
+caveat = "Informational: Pi main at one commit, schema version 2 storage, not the reference. Numbers for this arm are not comparable with the 1.3.0 reference as a release; they show where the runtime is heading."
+
+[source]
+repo_env = "BUFFON_SOURCE_REPO_PI_MAIN"
+repo_url = "https://github.com/earendil-works/pi"
+commit = "1402973a9dbe8c627341e04c9744c54953e285ca"
+tree = "496f5cc242c16bccc572ee4ff15de1eba8bf8cee"
+toolchain = "node"
+package = "packages/durable/buffon-adapter"
+build = ["sh", "-ec", '''
+npm ci --ignore-scripts --workspace=packages/telemetry --workspace=packages/chord --workspace=packages/codemode --workspace=packages/ai --workspace=packages/durable --include-workspace-root
+for p in telemetry chord codemode ai durable; do (cd packages/$p && ../../node_modules/.bin/tsc -p tsconfig.build.json --noCheck); done
+cd {package} && ../../../node_modules/.bin/esbuild src/main.ts --bundle --platform=node --format=esm --target=node24 --legal-comments=none --define:ARM='"pi-durable-main"' '--banner:js=#!/usr/bin/env node' --outfile={out}
+chmod 755 {out}
+''']
+
+[adapter]
+protocol = 1
+envs = ["native"]
+storage = "sqlite"
+source = "adapter"
+schema_reads = [1, 2]
+schema_writes = 2
+informational = true
+
+[env]
+NODE_COMPILE_CACHE = "{install_dir}/node-compile-cache"
+
+[runtime]
+node = "24.19.0"
+
+[modes]
+version = ["--version"]
+
+[version_check]
+contains = "1.3.0"
+
+[capabilities]
+durable = ["conversations", "documents", "tasks", "compaction", "forks", "subagents"]

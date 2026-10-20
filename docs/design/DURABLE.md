@@ -1,6 +1,6 @@
 # Design: the `durable` family (durable agent runtimes)
 
-Status: design only. Nothing in this document is built, and no benchmark was run to write it. Every number quoted below is somebody else's measurement or a derivation from one, and the source is in brackets. A claim with no source is marked `[INFERENCE]`. Source keys are listed in "Sources" at the end.
+Status: Phase 1, the native environment, is built (section 11 says what and where it differs from this design). Miniflare and workerd, real Cloudflare, the Wasm core arm and tardigrade are designed here and not built. The sections below are the design as written on 2026-10-18; every number quoted in them is somebody else's measurement or a derivation from one, and the source is in brackets. A claim with no source is marked `[INFERENCE]`. Source keys are listed in "Sources" at the end.
 
 Date of the research: 2026-10-18.
 
@@ -366,7 +366,7 @@ May:
 - open storage through the project's own adapter (`openNodeSqliteStorage`, `openDurableObjectSqliteStorage`, the Go node adapter) wrapped by the counting facade;
 - call the public API: open, root, createConversation, submit, wait, waitForIdle, resume, commit, close;
 - write the side-effect ledger and answer barriers;
-- be at most about 300 lines per arm, public, and reviewed by the project it adapts.
+- be small enough to read: about 300 lines for the TypeScript adapter was the aim, and the cap the test enforces is 400 code lines for it and 1,000 for the Go adapter (section 11). The cap is for reviewability; the equivalence gate (6.2) is the fairness control. The adapter is public and meant for review by the project it adapts.
 
 May not:
 - keep any cache, index or state that the runtime does not keep (for example hold the transcript, skip a read, batch commits, reuse a context range across processes);
@@ -522,6 +522,19 @@ Real Cloudflare: wall time of a few hours; money is the plan's minimum, from sec
 7. durable-bench unchanged for Pi at 50, 250, 1,000 and 3,500 turns, 3 samples, for the host factor: about 10 minutes.
 
 Output: cold and warm net against history for both arms and both lanes, rows and bytes per turn, store bytes, memory, the crash pass grid, and the host factor. It answers the first question: does PiG's lead survive compaction on and a realistic mix.
+
+## 11. What is built (Phase 1, native)
+
+The protocol, the script format, the counting facade and the rules for adapters are written in [DURABLE-ADAPTERS.md](../DURABLE-ADAPTERS.md); how to run the family is in [RUNNING.md](../RUNNING.md), "The durable family". Where the build differs from the design above:
+
+- **Arms.** `pi-durable` (Pi Durable 1.3.0 on Node, the reference; adapter bundled with esbuild from a committed npm lock) and `pig-durable` (PiG's `durable/` packages at a pinned commit and tree, built with CGO off inside the checkout with the adapter copied in). `pi-durable-main` (Pi built from main at the commit PiG pins, storage schema 2) is informational, runs only when named and is never the reference. `null-host` is not an arm: it is the adapter's floor mode (`durable/floor-host`, section 8 of the adapter document), run by each arm.
+- **Adapter size.** The TypeScript adapter is about 350 code lines, the Go adapter about 1,000. Section 7.2 asked for about 300 per arm; the Go port needs more glue for the same protocol, and the cap in the test (400 and 1,000) is for reviewability while the gate is the fairness control. The Method page lists the size of each part.
+- **Storage schema.** Pi 1.3.0 writes storage schema version 1. PiG pins a Pi main whose migration 2 adds the `sleeping` task status, so PiG writes version 2, reads 1 and 2, and migrates a version-1 fixture on open. Pi 1.3.0 cannot open a version-2 store, so the cross-open check runs Pi to PiG and records PiG to Pi as not possible, with that reason; the crash matrix lists the orders that need it the same way. Row identity (`row_identical`) is read on the tables both versions share.
+- **Order of parallel tool results.** When one round has several tool calls, each result commits as its tool finishes: Pi in the order of the calls (microtask order), Go in the scheduler's order. The gate compares a round's results in a canonical order (and every reference to them), so two runs that made the same calls and stored the same results are the same work; the stored order is a run note.
+- **Counters.** Statements are counted by kind (read, write, DDL, pragma); the facade does not count the statements a `barrier` issues. PiG's working set issues `PRAGMA data_version`, which Pi does not, so the pragma count is listed apart in the report.
+- **Gate.** A fixture is gated by the scenarios `base` (three turns), `compaction` (an 8,000-token window), and once `documents`, `tasks` and `subagent`; the blocking variant (`background_tokens` 0) runs only where compaction boundaries differ. A capability an arm lacks becomes the workload's `cannot run` reason; boundaries that differ and agree when blocking become a divergence for that arm at that fixture (the manifest mechanism), computed at run time.
+- **Fixtures.** Built by the reference through its real loop, cached under the site's cache directory by the sha256 of the script, the fixture's settings and the writer (arm, version, adapter digest), copied per sample and read once. `fixture_sha256` is the script's digest and `fixture_store_sha256` the store's.
+- **Not yet built.** `durable/many-obj-{1,8,32}` (needs the Miniflare environment), the Miniflare and Cloudflare environments, `pig-durable-do`, tardigrade, the billing metrics (`bill_usd_per_1k_turns`, `do_gb_s_per_turn`), `rows_read`/`rows_written` in Cloudflare units, a `drop_caches` variant. The environment is a variant axis (`env`: native today; `miniflare` and `cloudflare` are refused with that reason).
 
 ## Sources
 

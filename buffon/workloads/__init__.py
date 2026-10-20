@@ -8,6 +8,8 @@ Soak and reliability are different in shape (arms in parallel for minutes; pass/
 from dataclasses import dataclass, field
 
 REGISTRY = {}
+NATIVE = "native"
+ENVS = (NATIVE, "miniflare", "cloudflare")   # the environments a durable workload can run in; only NATIVE is built (docs/design/DURABLE.md section 5)
 
 
 @dataclass
@@ -21,6 +23,8 @@ class Workload:
     params: dict = field(default_factory=dict)
     rounds: int = 0               # the measured rounds this workload takes by default (0: the run's); an explicit --rounds wins
     aa: bool = True               # whether it runs on the A/A copies by default; an explicit --aa wins
+    envs: tuple = ()              # environments the workload varies over (the durable family): its variant axis is the environment, not the wire API. Empty: a wire-API workload.
+    finish: object = None         # fn(runner) called once after the last round: derived metrics that need several samples (warm_net_ms, mem_per_conv_mib)
 
 
 def register(workload):
@@ -32,7 +36,7 @@ def register(workload):
 
 def load_all():
     """Import every workload module (each registers itself) and return the registry."""
-    from . import overhead, streaming, longsession, soak, reliability, devloop, scale  # noqa: F401
+    from . import overhead, streaming, longsession, soak, reliability, devloop, scale, durable  # noqa: F401
     return REGISTRY
 
 

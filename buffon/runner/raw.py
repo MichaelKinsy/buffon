@@ -10,6 +10,7 @@ import os
 IDENTITY = ("arm", "scenario", "api", "round", "warmup", "t_utc", "failure", "series", "twin_of")
 KINDS = ("buffon-run", "arena-run")   # "arena-run" is what runs published before the project was renamed carry
 TOP = ("kind", "run", "site", "hardware", "lock_sha256", "runner", "arms", "calibration", "egress", "isolation", "samples", "skipped", "ok")
+DURABLE_NESTED = ("runtime_settings", "runtime_versions", "store_tables", "compaction_ids")   # dicts and a list on a durable sample (docs/RAW-FORMAT.md)
 
 
 class RawError(ValueError):
@@ -140,8 +141,11 @@ def check_sample(s, where="sample"):
         _check_swarm(s["swarm"], f"{where}: swarm")
     if "probes" in s:
         _check_probes(s["probes"], f"{where}: probes")
+    for key in DURABLE_NESTED:   # a durable sample's declared settings, versions, table row counts and compaction ids: JSON, shown by the Method page, never a metric
+        if key in s:
+            _check_json(s[key], f"{where}: {key}")
     for key, value in s.items():
-        if key in IDENTITY or key in ("telemetry", "sched", "pod", "home", "text_fs", "swarm", "probes"):   # pod: the node, cpuset and QoS a pod-guaranteed sample ran with   # telemetry: observers' data (docs/HOOKS.md); sched: schedstat counters. Nested, never a metric the report compares
+        if key in IDENTITY or key in DURABLE_NESTED or key in ("telemetry", "sched", "pod", "home", "text_fs", "swarm", "probes"):   # pod: the node, cpuset and QoS a pod-guaranteed sample ran with   # telemetry: observers' data (docs/HOOKS.md); sched: schedstat counters. Nested, never a metric the report compares
             continue
         if isinstance(value, bool) or value is None or isinstance(value, str):
             continue
