@@ -13,7 +13,7 @@ import sys
 from .. import stats
 from ..runner import raw as rawlib
 from . import cellid as cellidlib, cells as cellmath, metrics as metricslib
-from . import extras, grade as gradelib, grade_inputs, grade_render, health as healthlib, noise as noiselib, races as raceslib
+from . import durable as durablelib, extras, grade as gradelib, grade_inputs, grade_render, health as healthlib, noise as noiselib, races as raceslib
 
 PROVISIONAL = "PROVISIONAL"
 VERDICT_ORDER = ["loss", "inconclusive", "no measurable difference", "win", "too few rounds"]
@@ -69,7 +69,7 @@ def cell_ids(data, run_ids):
     """{(scenario, api, metric): cell id} for every cell of the report: the first run directory that holds a measured sample of the cell names it."""
     first = {}
     for s in data["samples"]:
-        first.setdefault((s["scenario"], s.get("api")), s["_run"])
+        first.setdefault((s["scenario"], cellmath.variant(s)), s["_run"])
     return {(c.scenario, c.api, c.metric): cellidlib.make(run_ids[first.get((c.scenario, c.api), 0)], c.scenario, c.api, c.metric) for c in data["cells"]}
 
 
@@ -239,7 +239,7 @@ def arm_section(data, arm, prov):
                 "|---|---|---|---|---|---:|---:|---:|---|---:|---:|---:|---:|---:|---|---|---|---|" + ("---|" if pig else "")]
         for c, comp in sel:
             cv, iqr, out_n = noiselib.cell_columns(c, data["reference"], arm)
-            out.append(f"| {c.scenario} | {short_api(c.api)} | {c.metric} | {metricslib.describe(c.metric)[0]} | {metricslib.describe(c.metric)[1]} | {comp.n} | {fmt(comp.ref_median)} | {fmt(comp.arm_median)} | {ratio_text(comp)} | {floor_pct(comp.floor)} | {pct(c.mde)} | {cv} | {iqr} | {out_n} | {fmt(comp.p_holm)} | {equivalence_text(comp)} | {comp.note} | `{(data.get('cell_ids') or {}).get((c.scenario, c.api, c.metric), '')}` |"
+            out.append(f"| {c.scenario} | {variant_text(c)} | {c.metric} | {metricslib.describe(c.metric)[0]} | {metricslib.describe(c.metric)[1]} | {comp.n} | {fmt(comp.ref_median)} | {fmt(comp.arm_median)} | {ratio_text(comp)} | {floor_pct(comp.floor)} | {pct(c.mde)} | {cv} | {iqr} | {out_n} | {fmt(comp.p_holm)} | {equivalence_text(comp)} | {comp.note} | `{(data.get('cell_ids') or {}).get((c.scenario, c.api, c.metric), '')}` |"
                        + (f" {step_cell(c, arm)} |" if pig else ""))
         out.append("")
     return out
@@ -252,7 +252,7 @@ def rerun_section(data, prov):
            "(its arms, rounds, seed and parameters) for that workload and API only, on your host, and compares your result with the original. The raw samples of every cell are in the run directory's raw.json; "
            "this report is generated from them and from nothing else, and `buffon verify` regenerates it to check that no number was edited.", "", "| workload | api | metric | cell id |", "|---|---|---|---|"]
     for c in data["cells"]:
-        out.append(f"| {c.scenario} | {short_api(c.api)} | {c.metric} | `{data['cell_ids'][(c.scenario, c.api, c.metric)]}` |")
+        out.append(f"| {c.scenario} | {variant_text(c)} | {c.metric} | `{data['cell_ids'][(c.scenario, c.api, c.metric)]}` |")
     return out + [""]
 
 
@@ -274,6 +274,11 @@ def short_api(api):
     return {"openai-completions": "chat", "anthropic-messages": "anthropic", "openai-responses": "responses", None: "-"}.get(api, str(api))
 
 
+def variant_text(c):
+    """The `api` column of a cell: the wire API, else the environment the cell ran in (`native` for a durable workload), else `-`."""
+    return short_api(c.api) if c.api else (c.env or "-")
+
+
 def version_section(data, prov):
     """For every arm whose manifest names a `previous` arm: the same cells, the arm compared with its previous, losses (the newer slower) first. The relation is data in the manifests; the
     buffon names no harness."""
@@ -291,7 +296,7 @@ def version_section(data, prov):
                 f"| workload | api | metric | {old} median | {arm} median | ratio [95% CI] | A/A floor | verdict |", "|---|---|---|---:|---:|---|---:|---|"]
         for c in rows:
             s = c.steps[arm]
-            out.append(f"| {c.scenario} | {short_api(c.api)} | {c.metric} | {fmt(s.ref_median)} | {fmt(s.arm_median)} | {ratio_text(s)} | {floor_pct(s.floor)} | **{s.verdict}** |")
+            out.append(f"| {c.scenario} | {variant_text(c)} | {c.metric} | {fmt(s.ref_median)} | {fmt(s.arm_median)} | {ratio_text(s)} | {floor_pct(s.floor)} | **{s.verdict}** |")
         out.append("")
     return out
 
@@ -306,7 +311,7 @@ def floor_section(data, prov):
         for arm, (floor, _) in c.aa.items():
             if floor is not None:
                 agg.setdefault((arm, c.scenario, c.api), []).append((floor, c.metric))
-    for (arm, scenario, api), vals in sorted(agg.items()):
+    for (arm, scenario, api), vals in sorted(agg.items(), key=lambda kv: (kv[0][0], kv[0][1], str(kv[0][2]))):
         fl = sorted(v[0] for v in vals)
         worst = max(vals)
         out.append(f"| {arm} | {scenario} | {short_api(api)} | {len(vals)} | {floor_pct(fl[len(fl) // 2])} | {floor_pct(worst[0])} | {worst[1]} |")
@@ -325,20 +330,20 @@ def failure_section(runs, prov):
     attempts = {}
     for r in runs:
         for s in r["samples"]:
-            key = (s["arm"], s["scenario"], s.get("api"))
+            key = (s["arm"], s["scenario"], cellmath.variant(s))
             if s["warmup"]:
                 continue
             attempts[key] = attempts.get(key, 0) + 1
             if "failure" in s:
                 fails.setdefault(key, []).append(s["failure"])
         for k in r["skipped"]:
-            skips[(k["arm"], k["scenario"], k.get("api"))] = k["reason"]
+            skips[(k["arm"], k["scenario"], cellmath.variant(k))] = k["reason"]
         egress += r["egress"].get("violations", [])
     out = [f"## Failures, cannot-run and egress{tag}", ""]
     out += ["### Failed samples (every attempt is in the raw data; none is dropped)", ""]
     if fails:
         out += ["| arm | workload | api | failed / attempts | first failure |", "|---|---|---|---:|---|"]
-        for (arm, scenario, api), msgs in sorted(fails.items()):
+        for (arm, scenario, api), msgs in sorted(fails.items(), key=lambda kv: (kv[0][0], kv[0][1], str(kv[0][2]))):
             out.append(f"| {arm} | {scenario} | {short_api(api)} | {len(msgs)}/{attempts[(arm, scenario, api)]} | {msgs[0][:160].replace('|', '/')} |")
     else:
         out.append("None.")
@@ -380,7 +385,7 @@ def reliability_verdicts(data):
     ref = data["reference"]
     groups = {}
     for s in rel:
-        groups.setdefault((s["scenario"], s.get("api")), {}).setdefault(s["arm"], []).append(s)
+        groups.setdefault((s["scenario"], cellmath.variant(s)), {}).setdefault(s["arm"], []).append(s)
     out = {}
     for key, by_arm in groups.items():
         def stable(runs):
@@ -537,7 +542,8 @@ def runtime_settings_section(runs):
 
 
 def csv_rows(data, runs):
-    yield ["scenario", "api", "metric", "kind", "unit", "arm", "n", "median", "p90", "min", "max", "ratio_to_reference", "ci_low", "ci_high", "floor", "verdict", "cell_id", "rerun", "label"]
+    with_env = any(c.env for c in data["cells"])   # a run with no environment on any cell (every run before the durable family) writes the columns and keys it always wrote
+    yield ["scenario", "api", "metric", "kind", "unit", "arm", "n", "median", "p90", "min", "max", "ratio_to_reference", "ci_low", "ci_high", "floor", "verdict", "cell_id", "rerun", *(["env"] if with_env else []), "label"]
     label = PROVISIONAL if provisional(runs)[0] else "quiet-dedicated"
     for c in data["cells"]:
         for arm, vals in c.values.items():
@@ -546,7 +552,7 @@ def csv_rows(data, runs):
             comp = c.comparisons.get(arm)
             yield [c.scenario, c.api, c.metric, *metricslib.describe(c.metric), arm, s["n"], s["median"], s["p90"], s["min"], s["max"], comp.ratio if comp and not comp.not_compared else "", comp.ci[0] if comp and not comp.not_compared else "", comp.ci[1] if comp and not comp.not_compared else "",
                    comp.floor if comp and not comp.not_compared else "", comp.verdict if comp else "", (data.get("cell_ids") or {}).get((c.scenario, c.api, c.metric), ""),
-                   cellidlib.rerun_command((data.get("cell_ids") or {}).get((c.scenario, c.api, c.metric), "")) if (data.get("cell_ids") or {}).get((c.scenario, c.api, c.metric)) else "", label]
+                   cellidlib.rerun_command((data.get("cell_ids") or {}).get((c.scenario, c.api, c.metric), "")) if (data.get("cell_ids") or {}).get((c.scenario, c.api, c.metric)) else "", *([c.env or ""] if with_env else []), label]
 
 
 def faithfulness_docs(paths):
@@ -580,7 +586,7 @@ def html_view(data, graded, prov, reasons, health, runs, title, footer):
             cell_id = (data.get("cell_ids") or {}).get((c.scenario, c.api, c.metric), "")
             arms.add(arm)
             families[spec[0] if spec else "other"]["rows"].append({
-                "arm": arm, "workload": c.scenario, "api": short_api(c.api), "metric": c.metric, "kind": kind, "unit": unit, "n": comp.n, "ref_median": fmt(comp.ref_median),
+                "arm": arm, "workload": c.scenario, "api": variant_text(c), "metric": c.metric, "kind": kind, "unit": unit, "n": comp.n, "ref_median": fmt(comp.ref_median),
                 "arm_median": fmt(comp.arm_median), "ratio": ratio_text(comp), "floor": floor_pct(comp.floor), "mde": pct(c.mde), "cv": cv, "iqr": iqr, "outliers": outliers,
                 "verdict": comp.verdict, "cell_id": cell_id, "rerun": cellidlib.rerun_command(cell_id) if cell_id else ""})
     grade = []
@@ -627,7 +633,7 @@ def render(dirs, out_dir=None, reference=None, seed=20261011, drop_flagged=False
                 lines += arm_section(data, a, prov)
         lines += version_section(data, prov) + floor_section(data, prov) + rerun_section(data, prov)
     lines += noiselib.lines(noise, tag)
-    lines += soak_section(data, prov) + reliability_section(data, prov) + failure_section(runs, prov) + excluded_section(prov) + provenance_section(runs, prov) + environment_section(runs, facts, prov) + piglet_section(runs, prov)
+    lines += soak_section(data, prov) + reliability_section(data, prov) + durablelib.lines(data, prov, durablelib.impossible(runs)) + durablelib.notes(data, prov) + failure_section(runs, prov) + excluded_section(prov) + provenance_section(runs, prov) + environment_section(runs, facts, prov) + piglet_section(runs, prov)
     if external_results or external_suites:   # their own sections, after everything Buffon measured; nothing above reads them
         from ..external import results as extresults, runner as extrunner
         lines += extresults.section(list(external_results)) + extrunner.section(list(external_suites))
@@ -639,15 +645,19 @@ def render(dirs, out_dir=None, reference=None, seed=20261011, drop_flagged=False
         f.write("\n".join(lines) + "\n")
     with open(os.path.join(out_dir, "summary.csv"), "w", newline="") as f:
         csv.writer(f).writerows(csv_rows(data, runs))
+    with_env = any(c.env for c in data["cells"])
     summary = {"trust": trust, "provisional": prov, "reasons": reasons, "reference": data["reference"], "arms": data["base"], "health": health,
                "noise": {"by_metric": noise["by_metric"], "runs": noise["views"], "discarded": noise["discarded"], "dropped": noise["dropped"], "sensitivity": noise["sensitivity"]},
                "cells": [{"id": data["cell_ids"][(c.scenario, c.api, c.metric)], "rerun": cellidlib.rerun_command(data["cell_ids"][(c.scenario, c.api, c.metric)]), "scenario": c.scenario, "api": c.api, "metric": c.metric,
-                          "kind": metricslib.describe(c.metric)[0], "unit": metricslib.describe(c.metric)[1], "mde": None if c.mde != c.mde else c.mde, "aa": {a: (None if f is None else f) for a, (f, _) in c.aa.items()},
+                          **({"env": c.env} if with_env else {}), "kind": metricslib.describe(c.metric)[0], "unit": metricslib.describe(c.metric)[1], "mde": None if c.mde != c.mde else c.mde, "aa": {a: (None if f is None else f) for a, (f, _) in c.aa.items()},
                           "comparisons": {a: {"ratio": None if x.not_compared else x.ratio, "ci": None if x.not_compared else list(x.ci), "floor": None if x.floor != x.floor else x.floor, "p": None if x.p != x.p else x.p,
                                               "p_holm": None if x.p_holm != x.p_holm else x.p_holm, "verdict": x.verdict, "n": x.n, "arm_median": x.arm_median, "not_compared": x.not_compared or None,
                                               "equivalence": None if x.not_compared else x.equivalence}
                                           for a, x in c.comparisons.items()}} for c in data["cells"]]}
     summary["grade_inputs"] = grade_in
+    crash = durablelib.verdicts(data["samples"], data["reference"], durablelib.impossible(runs))
+    if crash:
+        summary["crash"] = crash
     summary["races"] = races
     if graded:
         grade_render.write_all(graded, out_dir)

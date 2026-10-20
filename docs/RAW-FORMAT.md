@@ -6,6 +6,7 @@ Every session leaves a run directory. Two files are the raw record; a report is 
 |---|---|
 | `raw.json` | the run: what was asked, what ran, every sample, what was skipped. Validated when written and when read (`buffon/runner/raw.py`). |
 | `facts.json` | the facts of the machine or pod the session ran on: CPU model and flags, kernel, cpuset, pinning, governors and clocks, SMT, cgroup limits and throttling, load and idle before and after, runner commit and tree. |
+| `equivalence.json` | a run with `durable/*` workloads only: the records of the equivalence gate (fixtures built, the requests and state digests of each arm for each gate scenario, cross-open results, differences), see "`durable/*` samples". The dashboard copies it with the run's other files. |
 | `raw.partial.json` | the same shape as `raw.json`, rewritten while the session runs; removed when the session finishes. |
 
 The shape is the one current shape. There is no version field and no reader for any other shape: the runner and the report change together.
@@ -75,9 +76,37 @@ A sample is one fresh process of one arm. The record is flat: identity keys, the
 | `swarm` | object, `scale/*` only | the envelope of a swarm sample: `memory_mib` (memory = memory-swap), `cpus` (the cpuset's CPU numbers) and `pids_max` (the pids limit), exactly these keys. Recorded, never a metric |
 | `requests`, `request_bytes`, `request_bytes_per_turn`, `side_requests` | numbers, optional | the wire metrics, kind `wire` (docs/WHAT-WE-MEASURE.md, wire efficiency): the model requests the mock received during the sample, the sum of their body bytes, those bytes per turn of the workload, and the requests beyond the scripted ones. The last two are present only where the workload knows its turns and scripted requests. Runs made before the wire metrics wrote `request_bytes` as the size of the first request only and no `requests`; the reader takes such a value as `first_request_bytes` |
 | `session_variant`, `session_seed`, `session_sha256` | string, integer, string; `longsession/resume-*` only | which generated session the sample resumed: `repeating` or `varied` (the twin, docs/WHAT-WE-MEASURE.md), the seed of the generator and the sha256 of the file before its working directory was set. Recorded, never a metric |
+| `env` | string, optional | the environment the sample ran in: `native` (SQLite in the process, Node or Go), `miniflare` or `cloudflare`. The report's cell variant is the sample's `api` when it has one, else its `env` when that is not `native`, else none, so a sample of another environment is its own cell and never joins a native one; a native cell keeps the key it always had. A cell id carries the variant after `@` (`<run>::durable/mixed-3500@miniflare#warm_turn_ms`; `-` for native) |
+| `runtime_settings`, `runtime_versions`, `store_tables`, `compaction_ids` | object, object, object, list; `durable/*` only | what the arm declared (`window_tokens`, `compaction_enabled`, `background_tokens`, `partial_interval_ms`), the versions it ran, the rows of each table of the store and the ids of the compaction heads. JSON, shown on the Method page and never a metric |
 | every other key | number, boolean, string or null | a metric. Names end in their unit (`_ms`, `_mib`, `_bytes`); a number must be finite |
 
 Every sample also carries the host readings taken just before it started (`pinned_busy`, `pinned_iowait`, `pinned_steal`, `cpuset_runnable`, `throttled`, `psi_cpu_some_avg10`, `host_load1`, `host_runnable`, `quiet_wait_ms`): see METHODOLOGY section 5, "Serial execution on the host".
+
+### `durable/*` samples
+
+One sample is one fresh adapter process of one arm in one environment (docs/design/DURABLE.md, docs/DURABLE-ADAPTERS.md). `api` is null and `env` is `native`. A metric the environment cannot produce is absent, never zero: the kernel's byte counters exist on Linux only, and the platform's own rows exist on Miniflare and Cloudflare only.
+
+| key | meaning |
+|---|---|
+| `fixture_sha256`, `fixture_store_sha256`, `measured_script_sha256`, `fixture_seed`, `fixture_writer`, `fixture_variant`, `fixture_turns`, `fixture_bytes` | the fixture the sample opened: the digest of its script and of the store built from it, the digest of the script of the measured turns, the seed, the arm that built the store, `repeating` or `varied` words, the turns and the bytes in the store. Descriptors, never scored |
+| `lane`, `shape`, `turns`, `window_tokens`, `compaction`, `measured_turns`, `conversations`, `cold_start` | the configuration: `compat`, `mixed` or `floor`, the turn shape, the history length, the context window, `on` or `off`, the measured turns (10), the conversations of a `many-conv` workload and the cold-start method. Descriptors |
+| `proc_start_ms`, `open_ms`, `first_turn_ms`, `cold_ms`, `ready_to_answer_ms`, `warm_turn_ms`, `warm_net_ms`, `ttfr_ms`, `first_delta_ms` | times on the runner's clock: exec to the ready line, the open request, the first measured turn, `open_ms` plus the first turn, `proc_start_ms` plus `cold_ms`, the median of turns 2 to 10, the warm turn less the median `durable/floor-host` warm turn of the same arm, round and environment (derived at the end of the run and absent without a floor sample; never applied to a cold start), the submit to the scripted model's first request and, for streaming workloads, the first delta to its commit. `cold-every-turn-*` takes `cold_ms` as the median over the measured turns |
+| `model_ms_per_turn` | time inside the scripted model. Shown, never scored |
+| `warm_instructions`, `warm_cycles`, `warm_cpu_ms`, `instructions`, `cycles`, `cpu_ms` | CPU of the process tree: per warm turn (readings between turns) and over the whole sample |
+| `sql_stmts_per_turn`, `sql_read_stmts_per_turn`, `sql_write_stmts_per_turn`, `sql_ddl_stmts_per_turn`, `sql_pragma_stmts_per_turn`, `sql_commits_per_turn`, `rows_returned_per_turn`, `bytes_returned_per_turn` | counts per warm turn from the wrapper on the public SQLite facade. `sql_stmts_per_turn` is the total; the kinds are listed apart (a runtime may read `PRAGMA data_version` often, and the pragma statements are in the total). Kind `count`, lower is better |
+| `wchar_bytes_per_turn`, `rchar_bytes_per_turn` | the kernel's byte counters of the process tree per warm turn (Linux only) |
+| `rows_read_per_turn`, `rows_written_per_turn` | the platform's own rows, Cloudflare's unit (Miniflare and Cloudflare only) |
+| `store_bytes`, `store_bytes_per_turn` | the main file, the log and the index file after a clean close, read by the runner with its own SQLite, and that size over the turns in the store |
+| `peak_rss_mib`, `ready_rss_mib`, `end_rss_mib`, `pss_mib`, `peak_mem_mib`, `mem_per_conv_mib` | memory; `mem_per_conv_mib` is the slope of `end_rss_mib` against the conversations over the four `many-conv-*` workloads of one arm and round |
+| `build_ms`, `early_turn_ms`, `late_turn_ms` | `grow-*`: the time to build the history and the median of its first and last ten turns |
+| `replay_ms_per_turn`, `cpu_ms_replay`, `stmts_replayed`, `commits_replayed` | `durable/floor-sql`: the recorded statements of one turn replayed through the facade and the driver with no runtime |
+| `compaction_failures`, `failed_turns`, `failed_requests` | `durable/compaction-fail` |
+| `series` | `turn_ms` (the runner's clock for each measured turn), `adapter_turn_ms`, and for `cold-every-turn-*` `cold_ms`. Never read by the statistics |
+| `equivalence`, `row_identical` | `ok` when the gate passed; whether the two stores' rows are identical (true, false or absent). Descriptors |
+
+A `durable/crash-*` workload is not a cell. It has one sample for each (order, kill point): `arm` is the resuming arm, `order` is `<writer>><resumer>`, `crash_writer` the killed one, `k` the commit after which it was killed, `commits_total` the commits of the uncrashed control, `kill_event_commit`, `resume_ok`, `invariant_failures` (text, `; ` joined), `signature` (JSON text of the outcome, compared with the reference order's at the same `k`), `duplicated_submission`, `reopen_ms`, `resume_ms` and `ledger` (JSON text). A copy of the resumer carries `twin_of`. The report builds a pass or fail grid from them (`buffon/report/durable.py`): a point passes when the run resumed, no invariant failed, the submission was not duplicated and the outcome equals the reference order's; each order has its passed share with a Wilson 95% interval. An order whose resumer cannot open the writer's store is not run: `run.durable.cross_open` lists it (`{"<fixture>": {"<writer>><reader>": {"ok": false, "why": "..."}}}`) and the grid shows it as `not possible`, never as a failure.
+
+`run.durable` holds the gate's summary (`env`, `oracle`, `passed`, `failures`, the built `fixtures` by label with their digests, `flaky`, `different_work`, `capabilities`, `row_identical`, `cross_open`, `seed`, `generator`, `cold_start`) and `equivalence.json` in the run directory holds the full records (the requests and state digests of each arm for each gate scenario). The site shows both on the Method page.
 
 ### `scale/*` samples
 

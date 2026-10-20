@@ -209,7 +209,7 @@ def run(runner, ctx, instances, spec):
         for r in arms:
             writes, reads = w.adapter.get("schema_writes", 1), r.adapter.get("schema_reads", [1])
             if writes not in reads:   # a store the reader's runtime cannot open: the order cannot be run, and the grid says so rather than count it a failure
-                why = f"not possible: {r.id}'s runtime opens storage schema version(s) {reads}, and {w.id} writes version {writes}"
+                why = f"not possible: {r.id} {r.version} opens {gatelib.schema_words(reads)}; {w.id} writes version {writes}"
                 runner.skipped.append({"arm": r.id, "scenario": spec.id, "api": None, "order": f"{w.id}>{r.id}", "reason": why})
                 continue
             orders.append((w, r, None))

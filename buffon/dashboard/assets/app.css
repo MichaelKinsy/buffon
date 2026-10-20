@@ -607,3 +607,18 @@ table.grid td.num a { overflow: hidden; }
 @media (max-width: 860px) { table.grid, .tablewrap table.data.grid { min-width: calc(124px + var(--n, 6) * 100px); } table.grid .hcol, table.grid .hn1 { width: 124px; } }
 .mh .arrow { display: none; } th[aria-sort="ascending"] .mh .arrow, th[aria-sort="descending"] .mh .arrow { display: inline; }
 details.mxmore { margin: -6px 0 14px; } details.mxmore > summary { padding: 4px 4px 8px; font-weight: 500; color: var(--muted); font-size: 13.5px; } details.mxmore .mxcard { margin: 0; }
+/* the Durable section: the environment of a cell, the attribution, the compat lane's dashed lines and the crash grid */
+.envchip { display: inline-block; font: 600 10.5px/1.4 var(--sans); letter-spacing: .04em; color: var(--muted); border: 1px solid var(--line-strong); border-radius: 999px; padding: 0 7px; margin: 0 6px; white-space: nowrap; cursor: help; vertical-align: middle; }
+.tile h2 .envchip, .card-h h2 .envchip { margin-left: 8px; }
+.attrib { margin: 6px 0 0; font-size: 13.5px; color: var(--ink-2); }
+svg .series.alt polyline { stroke-dasharray: 6 4; } svg .series.alt circle { fill: var(--panel); stroke: var(--h); stroke-width: 2; }
+.crashgrid { display: flex; flex-direction: column; gap: 10px; margin: 4px 0 8px; }
+.crow { display: grid; grid-template-columns: minmax(9em, 14em) minmax(0, 1fr) minmax(8em, 11em); gap: 12px; align-items: center; }
+.crow .cname { font-weight: 560; } .crow .cname small, .cscore small { display: block; color: var(--muted); font-weight: 400; font-size: 12px; }
+.ccells { display: flex; flex-wrap: nowrap; gap: 2px; min-width: 0; } .caxis .ccells small { color: var(--muted); font-size: 12px; }
+.cc { display: inline-block; flex: 1 1 0; min-width: 2px; max-width: 12px; height: 18px; border-radius: 2px; background: var(--win); opacity: .8; vertical-align: middle; cursor: help; }
+.cc.bad { background: repeating-linear-gradient(135deg, var(--loss) 0 2px, var(--panel) 2px 4px); outline: 1.5px solid var(--loss); opacity: 1; }
+.cscore b { font-weight: 650; }
+@media (max-width: 700px) { .crow { grid-template-columns: minmax(0, 1fr); gap: 4px; } }
+.ccells.nopos { color: var(--muted); font-size: 13px; font-style: italic; flex-wrap: wrap; }
+p .cc, .muted .cc { flex: none; width: 9px; }

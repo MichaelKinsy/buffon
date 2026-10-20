@@ -58,13 +58,19 @@ class GateMetrics(unittest.TestCase):
                         names |= set(re.findall(r'"([a-z][a-z0-9_]*_(?:ms|mib|bytes|flat|median|spread|h|tokens|turn|tps|n10|n))"', f.read()))
         self.assertGreater(len(names), 20)
 
+        from buffon.report import metrics as metricslib
+        counts = set(re.findall(r'"([a-z0-9_]+)": true', go_block(src, "var countMetrics = map[string]bool{")))
+        self.assertEqual(counts, set(metricslib.COUNT_METRICS))
+
         def go_scored(metric):
+            if metric in counts:
+                return True
             if metric in cells.DESCRIPTORS or metric.endswith(tuple(unscored)):
                 return False
-            return (metric.endswith(tuple(scored)) or "_ms_per_" in metric or "_mib_per_" in metric or "_instructions_per_" in metric or metric.startswith("cpu_ms")
-                    or metric in ("instructions", "cycles", "turns_per_s"))
+            return (metric.endswith(tuple(scored)) or "_ms_per_" in metric or "_mib_per_" in metric or "_bytes_per_" in metric or metric.startswith("bytes_") or metric == "mem_per_conv_mib"
+                    or "_instructions_per_" in metric or metric.startswith("cpu_ms") or metric in ("instructions", "cycles", "turns_per_s"))
 
-        for metric in sorted(names):
+        for metric in sorted(names | {"bytes_returned_per_turn", "wchar_bytes_per_turn", "mem_per_conv_mib"} | counts):
             self.assertEqual(go_scored(metric), cells.scored(metric), metric)
 
 

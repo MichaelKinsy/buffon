@@ -1,7 +1,8 @@
 # SPDX-License-Identifier: Apache-2.0
 """Cell ids: the stable name of one cell of a report and the exact command that measures it again (`buffon rerun <cell id>`).
 
-A cell id is `<run id>::<workload>@<api>#<metric>`: the run directory's name, the workload id, the wire API (`-` when the workload does not depend on one) and the metric. It is made from the
+A cell id is `<run id>::<workload>@<api>#<metric>`: the run directory's name, the workload id, the wire API (`-` when the workload does not depend on one) and the metric. For a workload that
+runs in an environment other than the native one (a durable workload on Miniflare) the part after `@` is the environment (`cells.variant`): a native cell keeps `-`. It is made from the
 data only, so the same run directory always gives the same ids; the report generator is the only writer of them."""
 
 SEP = "::"
@@ -12,7 +13,7 @@ class CellIdError(ValueError):
     pass
 
 
-def make(run_id, scenario, api, metric):
+def make(run_id, scenario, api, metric):   # `api` is the cell's variant
     return f"{run_id}{SEP}{scenario}@{api or '-'}#{metric}"
 
 

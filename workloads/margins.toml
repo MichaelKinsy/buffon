@@ -6,6 +6,12 @@
 # Equivalence holds when the 90% interval of the paired ratio (arm over reference, rounds paired, resampled by round) lies inside 1/(1+margin) .. 1+margin: the TOST at alpha 0.05.
 
 [[margin]]
+# A durable runtime's commits per turn, the rows a platform counts as written and the bytes of its store (docs/design/DURABLE.md 7.4): the same work leaves the same number, so the margin is exact.
+# The entry sits before the generic ones so that store_bytes, which no other entry names, has it too.
+metrics = ["sql_commits_per_turn", "rows_written_per_turn", "store_bytes", "store_bytes_per_turn"]
+relative = 0.0
+
+[[margin]]
 # Bytes and tokens sent per turn are the same for harnesses that send the same request, so the margin is exact.
 metrics = ["*_bytes_per_turn", "*_tokens_per_turn"]
 relative = 0.0

@@ -67,14 +67,14 @@ def build(data, runs, health, prov, reasons, reliability=None, faithfulness=None
                       "values": {a: {f"{k[0]}:{k[1]}": v for k, v in c.values[a].items()} for a in data["base"] if a in c.values}})
     failures, skips = {}, {}
     # review: the reference is never gated, so a sample it fails too (a workload that does not run on this host) must not gate another entry (m4-smoke grow-n failed for both)
-    ref_failed = {(s["scenario"], s.get("api")) for s in data["samples"] if "failure" in s and not s["warmup"] and ref in (s["arm"], s.get("twin_of"))}
+    ref_failed = {(s["scenario"], cellmath.variant(s)) for s in data["samples"] if "failure" in s and not s["warmup"] and ref in (s["arm"], s.get("twin_of"))}
     for s in data["samples"]:
         fam = scenario_family(s["scenario"], method)
         if fam is None or s["warmup"] or s["arm"] not in data["base"]:
             continue
         row = failures.setdefault(s["arm"], {}).setdefault(fam, [0, 0])
         row[1] += 1
-        row[0] += "failure" in s and (s["arm"] == ref or (s["scenario"], s.get("api")) not in ref_failed)
+        row[0] += "failure" in s and (s["arm"] == ref or (s["scenario"], cellmath.variant(s)) not in ref_failed)
     for r in runs:
         for k in r["skipped"]:
             fam = scenario_family(k["scenario"], method)

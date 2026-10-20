@@ -13,15 +13,15 @@ import re
 from .. import stats
 from ..arms import manifest as manifestlib
 from ..report import cellid as cellidlib, cells as cellmath, grade as gradelib, metrics as metricslib, render
-from . import scale as scalelib
+from . import durable as durablelib, scale as scalelib
 
 SEED = 20261011
 HIST_BINS = 32
 API_SHORT = {"openai-completions": "chat", "anthropic-messages": "anthropic", "openai-responses": "responses"}
-KIND_LENS = {metricslib.CPU: "cpu", metricslib.WALL: "wall", metricslib.MEMORY: "memory", metricslib.SIZE: "size", "wire": "wire"}   # "wire": what the mock received (requests, request_bytes)
+KIND_LENS = {metricslib.CPU: "cpu", metricslib.WALL: "wall", metricslib.MEMORY: "memory", metricslib.SIZE: "size", metricslib.COUNT: "count", "wire": "wire"}   # "wire": what the mock received (requests, request_bytes)
 NOT_COMPARED = "different work: not compared"
 WORD = {"loss": "more than Pi", "win": "less than Pi", "no measurable difference": "same as Pi, within noise", "inconclusive": "too close to call", "too few rounds": "too few rounds"}
-MEMORY_KINDS = {"peak_rss_mib": "peak RSS", "rss_mib": "RSS", "ready_rss_mib": "RSS at ready", "pss_mib": "PSS", "ready_pss_mib": "PSS at ready", "peak_mem_mib": "cgroup peak memory"}
+MEMORY_KINDS = {"peak_rss_mib": "peak RSS", "rss_mib": "RSS", "ready_rss_mib": "RSS at ready", "pss_mib": "PSS", "ready_pss_mib": "PSS at ready", "peak_mem_mib": "cgroup peak memory", "end_rss_mib": "RSS at the end", "mem_per_conv_mib": "RSS per live conversation"}
 COLOURS = 8   # site.css defines --h1 to --h8; a ninth harness reuses a colour, and its name is always printed beside its marks
 
 
@@ -30,7 +30,7 @@ class ModelError(ValueError):
 
 
 def slugify(text):
-    return re.sub(r"[^a-z0-9]+", "-", str(text).lower()).strip("-") or "x"
+    return durablelib.slug(text)
 
 
 def finite(x):
@@ -158,7 +158,7 @@ def command_of(arm_id):
 
 def run_view(path, raw, facts, notes):
     run_id = render.run_id_of(path)
-    files = [name for name in ("raw.json", "facts.json", "host.json", "MANIFEST.sha256", "promotion.json", "health.json") if os.path.exists(os.path.join(path, name))]
+    files = [name for name in ("raw.json", "facts.json", "host.json", "MANIFEST.sha256", "promotion.json", "health.json", "equivalence.json") if os.path.exists(os.path.join(path, name))]
     logs = os.path.isdir(os.path.join(path, "logs"))
     log_files = sorted(os.listdir(os.path.join(path, "logs"))) if logs else []
     return {"id": run_id, "path": path, "run": raw.get("run", {}), "site": raw.get("site", {}), "hardware": raw.get("hardware", {}), "runner": raw.get("runner", {}),
@@ -211,13 +211,13 @@ def faults_of(raws, run_ids, ref, shown, skipped):
         for s in raw["samples"]:
             if s["scenario"].startswith("reliability/"):
                 samples.append(s)
-                run_of.setdefault((s["scenario"], s.get("api")), run_ids[i])
+                run_of.setdefault((s["scenario"], cellmath.variant(s)), run_ids[i])
     if not samples:
         return []
     verdicts = render.reliability_verdicts({"samples": samples, "reference": ref})
     out = []
     for (scenario, api), by_arm in sorted(verdicts.items(), key=lambda kv: (kv[0][0], str(kv[0][1]))):
-        group = [s for s in samples if s["scenario"] == scenario and s.get("api") == api]
+        group = [s for s in samples if s["scenario"] == scenario and cellmath.variant(s) == api]
 
         def facts(arm):
             mine = [s for s in group if s["arm"] == arm]
@@ -260,8 +260,8 @@ def build(dirs, data_dir, reference=None, faithfulness=(), seed=SEED):
         cid = ids[(c.scenario, c.api, c.metric)]
         run_id = cellidlib.parse(cid)[0] if cid else run_ids[0]
         cell = {"id": cid, "slug": cell_slug(c), "key": metric_key(c.scenario, c.metric), "scenario": c.scenario, "workload": slugify(c.scenario),
-                "api": c.api, "api_short": API_SHORT.get(c.api, c.api or "-"), "metric": c.metric, "kind": kind, "lens": KIND_LENS.get(kind, "other"), "unit": unit,
-                "memory_kind": MEMORY_KINDS.get(c.metric) if kind == metricslib.MEMORY else None, "family": spec[0] if spec else "other",
+                "api": c.api, "api_short": API_SHORT.get(c.api, c.api or "-"), "env": c.env, "env_variant": bool(c.api) and c.api == c.env, "metric": c.metric, "kind": kind, "lens": KIND_LENS.get(kind, "other"), "unit": unit,
+                "memory_kind": MEMORY_KINDS.get(c.metric) if kind == metricslib.MEMORY else None, "family": spec[0] if spec else "durable" if c.scenario.startswith("durable/") else "other",
                 "mde": c.mde if finite(c.mde) else None, "run": run_id, "rerun": cellidlib.rerun_command(cid) if cid else "",
                 "values": {a: [v[k] for k in ordered_rounds(v)] for a, v in c.values.items()},
                 "stats": {a: value_stats([v[k] for k in ordered_rounds(v)], seed) for a, v in c.values.items() if a in shown and v},
@@ -276,7 +276,8 @@ def build(dirs, data_dir, reference=None, faithfulness=(), seed=SEED):
     synthetic = [r["synthetic"] for r in runs if r["synthetic"]]
     scale = scalelib.build([(r["id"], raws[i]) for i, r in enumerate(runs)], skipped, shown)
     faults = faults_of(raws, run_ids, ref, shown, skipped)
-    return {"reference": ref, "harnesses": harnesses, "cells": cells, "scale": scale, "faults": faults, "families": families, "runs": runs,
+    durable = durablelib.build(raws, dirs, run_ids, ref, shown, skipped, na_reason)
+    return {"reference": ref, "harnesses": harnesses, "cells": cells, "scale": scale, "faults": faults, "durable": durable, "families": families, "runs": runs,
             "provisional": report.get("provisional"), "reasons": report.get("reasons") or [],
             "demo": synthetic[0] if synthetic else None, "seed": seed, "report": report}
 
