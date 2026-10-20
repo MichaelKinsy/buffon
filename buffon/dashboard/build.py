@@ -41,7 +41,7 @@ METRIC_WORDS = {"cpu_ms": "CPU time", "wall_ms": "time", "instructions": "CPU in
                 "warm_instructions": "CPU instructions per warm turn", "warm_cycles": "CPU cycles per warm turn", "warm_cpu_ms": "CPU time per warm turn", "sql_stmts": "statements", "sql_read_stmts": "read statements", "sql_write_stmts": "write statements", "sql_ddl_stmts": "schema statements", "sql_pragma_stmts": "pragma statements", "sql_commits": "commits",
                 "rows_returned": "rows", "rows_read": "rows read", "rows_written": "rows written", "bytes_returned": "bytes read through the facade", "wchar_bytes": "bytes written by the process tree",
                 "rchar_bytes": "bytes read by the process tree", "store_bytes": "store size", "end_rss_mib": "memory at the end", "mem_per_conv_mib": "memory per live conversation",
-                "build_ms": "time to build the history", "early_turn_ms": "early turn", "late_turn_ms": "late turn", "replay_ms": "replay of the recorded statements", "resume_ms": "time to resume", "reopen_ms": "time to reopen"}
+                "build_ms": "time to build the history", "cpu_ms_replay": "CPU time of the replay", "early_turn_ms": "early turn", "late_turn_ms": "late turn", "replay_ms": "replay of the recorded statements", "resume_ms": "time to resume", "reopen_ms": "time to reopen"}
 ANSWER = {"n": "short answer", "n10": "answer 10 times longer"}
 
 FIRST = ("overhead/version", "overhead/print", "overhead/print-tools", "overhead/rpc", "overhead/pty")

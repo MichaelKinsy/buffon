@@ -621,3 +621,4 @@ svg .series.alt polyline { stroke-dasharray: 6 4; } svg .series.alt circle { fil
 .cscore b { font-weight: 650; }
 @media (max-width: 700px) { .crow { grid-template-columns: minmax(0, 1fr); gap: 4px; } }
 .ccells.nopos { color: var(--muted); font-size: 13px; font-style: italic; flex-wrap: wrap; }
+p .cc, .muted .cc { flex: none; width: 9px; }

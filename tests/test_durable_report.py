@@ -379,5 +379,18 @@ class Empty(unittest.TestCase):
         self.assertNotIn("durable-bench (github.com/clavia-labs/durable-bench)", self.page)
 
 
+class DriverShapes(unittest.TestCase):
+    """The records the real driver writes for an order that cannot run: a `cross_open` entry `{"ok": null, "possible": false, "why": ...}` and a `skipped[]` entry that names the order."""
+
+    def test_both_records_make_the_order_not_possible_with_its_reason(self):
+        why = "pi-durable's runtime opens storage schema version(s) [1]; the store pig-durable wrote is version 2"
+        by_gate = {"run": {"durable": {"cross_open": {"mixed-1000": {"pig-durable>pi-durable": {"ok": None, "possible": False, "why": why}, "pi-durable>pig-durable": {"ok": True, "messages": 219}}}}}}
+        self.assertEqual(crash.impossible([by_gate]), {"pig-durable>pi-durable": why})
+        by_skip = {"run": {}, "skipped": [{"arm": "pi-durable", "scenario": "durable/crash-50", "api": None, "order": "pig-durable>pi-durable", "reason": "not possible: " + why},
+                                         {"arm": "pig-durable", "scenario": "durable/subagent", "api": None, "reason": "it has no subagent"}]}
+        self.assertEqual(crash.impossible([by_skip]), {"pig-durable>pi-durable": why})
+
+
+
 if __name__ == "__main__":
     unittest.main()

@@ -88,9 +88,8 @@ def gate_of(path, raw, run_id):
     scenarios = []
     for label, by_name in sorted((fx.get("scenarios") or {}).items()):
         for name, by_arm in sorted(by_name.items()):
-            digests = {(r.get("requests_sha256"), r.get("state_sha256")) for r in by_arm.values()}
-            scenarios.append({"label": label, "name": name, "arms": {a: {"requests": r.get("requests"), "messages": r.get("transcript_messages")} for a, r in sorted(by_arm.items())}, "same": len(digests) == 1 if len(by_arm) > 1 else None})
-    cross = [{"label": label, "order": order, "ok": v.get("ok"), "why": v.get("why"), "messages": v.get("messages")} for label, orders in sorted((doc.get("cross_open") or {}).items()) for order, v in sorted((orders or {}).items()) if isinstance(v, dict)]
+            scenarios.append({"label": label, "name": name, "arms": {a: {"requests": r.get("requests"), "messages": r.get("transcript_messages")} for a, r in sorted(by_arm.items())}})   # the gate compares them by field, not by digest: the page lists what each arm did and the gate's own verdict
+    cross = [{"label": label, "order": order, "ok": v.get("ok"), "why": v.get("why"), "impossible": crash.reason_of(v), "messages": v.get("messages")} for label, orders in sorted((doc.get("cross_open") or {}).items()) for order, v in sorted((orders or {}).items()) if isinstance(v, dict)]
     return {"run": run_id, "source": source, "passed": doc.get("passed"), "oracle": doc.get("oracle"), "failures": [str(f) for f in doc.get("failures") or []],
             "fixtures": [{"label": k, "script_sha256": v.get("script_sha256"), "store_sha256": v.get("store_sha256"), "writer": v.get("writer"), "turns": v.get("turns"), "store_bytes": v.get("store_bytes"), "cached": v.get("cached")}
                          for k, v in sorted(built.items()) if isinstance(v, dict)],
@@ -102,13 +101,16 @@ def gate_of(path, raw, run_id):
 
 def method_of(raws, dirs, run_ids):
     """{settings: [{arm, versions, settings}], fixtures: [{scenario, sha256, writer, variant, seed, turns}], gates: [...]} from the durable samples and run files."""
-    settings, fixtures, gates = {}, {}, []
+    settings, fixtures, gates = {}, {}, []   # settings: arm -> {key: value, or the words "varies by workload"}
     for i, raw in enumerate(raws):
         for s in raw["samples"]:
             if not s["scenario"].startswith("durable/") or s["arm"].endswith("-b"):
                 continue
             if isinstance(s.get("runtime_settings"), dict) or isinstance(s.get("runtime_versions"), dict):
-                settings.setdefault(s["arm"], {"arm": s["arm"], "versions": s.get("runtime_versions") or {}, "settings": s.get("runtime_settings") or {}, "envs": []})
+                a = settings.setdefault(s["arm"], {"arm": s["arm"], "versions": s.get("runtime_versions") or {}, "settings": dict(s.get("runtime_settings") or {}), "envs": []})
+                for k, v in (s.get("runtime_settings") or {}).items():   # a setting that differs between workloads (the window) is said to vary, not shown as the first workload's
+                    if k in a["settings"] and a["settings"][k] != v:
+                        a["settings"][k] = "varies by workload"
                 if s.get("env") and s["env"] not in settings[s["arm"]]["envs"]:
                     settings[s["arm"]]["envs"].append(s["env"])
             if s.get("fixture_sha256") and not s["scenario"].startswith("durable/crash-"):
@@ -134,8 +136,8 @@ def build(raws, dirs, run_ids, ref, shown, skipped, na_reason):
     for i in present:
         for g in [gate_of(dirs[i], raws[i], run_ids[i])]:   # the full record of the gate also lists the orders it found impossible
             for c in (g or {}).get("cross_open", []):
-                if c["ok"] is False and c["why"]:
-                    not_possible.setdefault(c["order"], str(c["why"]))
+                if c["impossible"]:
+                    not_possible.setdefault(c["order"], c["impossible"])
         for s in raws[i]["samples"]:
             if crash.is_crash(s["scenario"]):
                 samples.append(s)

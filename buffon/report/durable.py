@@ -54,14 +54,25 @@ def _point(runs, want, control, ref_order):
     return not reasons, sorted(set(reasons))
 
 
+def reason_of(entry):
+    """The reason of a cross-open record that says the resumer cannot open the writer's store, else None. The driver writes `{"ok": null, "possible": false, "why": ...}` (`ok` false with a `why` is read the same way)."""
+    if isinstance(entry, dict) and entry.get("why") and (entry.get("possible") is False or entry.get("ok") is False):
+        return str(entry["why"])
+    return None
+
+
 def impossible(raws):
-    """{order: reason} of the orders the gate found impossible, from the `run.durable.cross_open` of the runs: an entry that is not ok and says why (the resumer could not open the writer's store)."""
+    """{order: reason} of the orders that cannot run, from the runs: the `cross_open` records of the gate (`run.durable.cross_open`) and the crash workload's `skipped[]` entries, which name the order and
+    say `not possible: <reason>`."""
     out = {}
     for raw in raws:
         for orders in (((raw.get("run") or {}).get("durable") or {}).get("cross_open") or {}).values():
             for order, v in (orders or {}).items():
-                if isinstance(v, dict) and v.get("ok") is False and v.get("why"):
-                    out.setdefault(order, str(v["why"]))
+                if reason_of(v):
+                    out.setdefault(order, reason_of(v))
+        for k in raw.get("skipped") or []:
+            if is_crash(k.get("scenario", "")) and k.get("order") and str(k.get("reason", "")).startswith("not possible"):
+                out.setdefault(k["order"], str(k["reason"]).split(":", 1)[1].strip())
     return out
 
 
