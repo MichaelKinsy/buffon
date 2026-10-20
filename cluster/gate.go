@@ -88,6 +88,12 @@ var descriptors = map[string]bool{
 	"soak_minutes": true, "think_ms": true, "stream_rate_tps": true, "history_bytes": true, "history_entries": true,
 	"history_messages": true, "series_samples": true, "records_after_kill": true, "seconds_to_exit": true,
 	"mem_baseline_mib": true, "mem_ready_mib": true, "mock_cpu_ms": true, "launcher_cpu_ms": true, "runner_cpu_ms": true,
+	"commits_replayed": true, "commits_total": true, "compaction_failures": true, "conversations": true, "failed_requests": true, "failed_turns": true, "fixture_bytes": true, "fixture_seed": true, "fixture_turns": true, "k": true, "kill_event_commit": true, "measured_turns": true, "model_ms_per_turn": true, "stmts_replayed": true, "window_tokens": true,
+}
+
+// countMetrics are what a durable runtime did per turn (buffon/report/metrics.py COUNT_METRICS): scored.
+var countMetrics = map[string]bool{
+	"rows_read_per_turn": true, "rows_returned_per_turn": true, "rows_written_per_turn": true, "sql_commits_per_turn": true, "sql_ddl_stmts_per_turn": true, "sql_pragma_stmts_per_turn": true, "sql_read_stmts_per_turn": true, "sql_stmts_per_turn": true, "sql_write_stmts_per_turn": true,
 }
 
 // Name endings of derived summaries (not scored) and of cost metrics (scored), as buffon/report/cells.py scored.
@@ -100,11 +106,14 @@ var (
 // memory, byte or CPU metric. Only those are judged for noise: a host reading such as pinned_steal is zero on a quiet
 // node, and a zero series would refuse the node as unmeasured.
 func scored(metric string) bool {
+	if countMetrics[metric] {
+		return true
+	}
 	if descriptors[metric] || slices.ContainsFunc(unscoredSuffixes, func(x string) bool { return strings.HasSuffix(metric, x) }) {
 		return false
 	}
 	return slices.ContainsFunc(scoredSuffixes, func(x string) bool { return strings.HasSuffix(metric, x) }) ||
-		strings.Contains(metric, "_ms_per_") || strings.Contains(metric, "_mib_per_") || strings.Contains(metric, "_instructions_per_") || strings.HasPrefix(metric, "cpu_ms") ||
+		strings.Contains(metric, "_ms_per_") || strings.Contains(metric, "_mib_per_") || strings.Contains(metric, "_bytes_per_") || strings.HasPrefix(metric, "bytes_") || metric == "mem_per_conv_mib" || strings.Contains(metric, "_instructions_per_") || strings.HasPrefix(metric, "cpu_ms") ||
 		metric == "instructions" || metric == "cycles" || metric == "turns_per_s"
 }
 

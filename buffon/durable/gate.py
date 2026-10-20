@@ -36,6 +36,12 @@ SHARED_TABLES = tuple(t for t in store.DURABLE_TABLES if t != "durable_schema") 
 CAPABILITIES = {"documents": "documents", "tasks": "tasks", "subagents": "subagent"}   # capability name -> scenario
 
 
+def schema_words(reads):
+    """The storage schema versions a runtime opens, as a sentence part: `storage schema version 1 only`, `storage schema versions 1 and 2`."""
+    reads = sorted(reads)
+    return f"storage schema version {reads[0]} only" if len(reads) == 1 else "storage schema versions " + ", ".join(str(v) for v in reads[:-1]) + f" and {reads[-1]}"
+
+
 def gate_script(root, fx, seed):
     """(path, facts) of the gate's script for fixture `fx`: turns h .. h+4 (three of the fixture's measured shape, a fanout of three tasks, a subagent) and three document strings."""
     h = fx.history
@@ -306,7 +312,7 @@ class Gate:
                 key = f"{writer.id}>{reader.id}"
                 reads = reader.adapter.get("schema_reads", [1])
                 if version not in reads:   # not a failure: the reader's runtime does not open that schema (a store written by a newer runtime), and says so
-                    self.cross_open.setdefault(label, {})[key] = {"ok": None, "possible": False, "why": f"{reader.id}'s runtime opens storage schema version(s) {reads}; the store {writer.id} wrote is version {version}"}
+                    self.cross_open.setdefault(label, {})[key] = {"ok": None, "possible": False, "why": f"{reader.id} {reader.version} opens {schema_words(reads)}; {writer.id} writes version {version}"}
                     continue
                 r = run_scenario(self.state, reader, built, spath, {"name": "cross", "steps": []}, source=w["store"], tag=f"-{writer.id}")
                 if "state" not in r:
