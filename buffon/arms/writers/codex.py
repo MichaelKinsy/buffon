@@ -6,6 +6,7 @@ the features that do that are switched off; with them on, the egress audit fails
 import json
 import os
 
+from .. import manifest
 from . import DUMMY_KEY, ensure
 
 NO_EGRESS = """[features]
@@ -35,16 +36,20 @@ show_tooltips = false
 
 def catalog(slug):
     """A model catalog with one entry for the mock's model, as Codex's `model_catalog_json` documents. An unknown model gets Codex's fallback entry, which has no `apply_patch` tool and so no
-    way to write a file; Codex's own models carry `apply_patch_tool_type = "freeform"`, and this entry differs from the fallback in nothing else. The large-write workload names the file
-    in its `print_write` mode (arm.toml) and no other workload loads it."""
+    way to write a file; Codex's own models carry `apply_patch_tool_type = "freeform"`, and this entry differs from the fallback in nothing else: its instructions are the fallback's own
+    text (BASE_INSTRUCTIONS_FILE), so the large-write workload's requests carry what every other Codex request carries. The large-write workload names the file in its `print_write`
+    mode (arm.toml) and no other workload loads it."""
+    with open(BASE_INSTRUCTIONS_FILE, encoding="utf-8", newline="") as f:
+        instructions = f.read()
     return {"models": [{
         "slug": slug, "display_name": slug, "description": None, "supported_reasoning_levels": [], "shell_type": "unified_exec", "visibility": "none", "supported_in_api": True,
         "priority": 99, "availability_nux": None, "upgrade": None, "support_verbosity": False, "default_verbosity": None, "apply_patch_tool_type": "freeform",
-        "truncation_policy": {"mode": "bytes", "limit": 10000}, "experimental_supported_tools": [], "base_instructions": BASE_INSTRUCTIONS}]}
+        "truncation_policy": {"mode": "bytes", "limit": 10000}, "experimental_supported_tools": [], "base_instructions": instructions}]}
 
 
-# The fallback entry's instructions are a 20 KB prompt; the catalog entry carries a one-line one, so the large-write sample's requests differ from the other workloads' in that.
-BASE_INSTRUCTIONS = "You are a coding agent running in the Codex CLI, a terminal-based coding assistant."
+# Codex 0.162.1's fallback instructions, as it sends them to the mock's model (the first developer message of every other Codex request; Apache-2.0, see NOTICE). The file is in the
+# arm directory, so arms.lock hashes it. Until it was added, the entry carried a one-line text instead, and the large-write requests were about 17 KB smaller than Codex's own.
+BASE_INSTRUCTIONS_FILE = os.path.join(manifest.ARMS_DIR, "codex", "base-instructions.md")
 
 
 def write(spec):

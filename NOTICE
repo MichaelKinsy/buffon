@@ -26,6 +26,9 @@ Provenance and headers. Each vendored file keeps the header its source had when 
 KaTeX 0.19.0 (MIT, Copyright (c) 2013-2020 Khan Academy and other contributors) is vendored unchanged in buffon/dashboard/vendor/katex/ (katex.min.js, katex.min.css, the woff2 fonts
 and its LICENSE): `buffon dashboard` runs it under Node to set formulas at build time, and the published site ships its CSS, fonts and LICENSE.
 
+arms/codex/base-instructions.md is the instructions text Codex CLI 0.162.1 (github.com/openai/codex, Apache-2.0, Copyright 2025 OpenAI) sends for a model it has no entry for, copied
+unchanged from the requests it sent to Buffon's mock. Codex's licence is the Apache-2.0 text in LICENSE.
+
 Pi-Bolt's own benchmark suite (MIT) is not vendored: `buffon external run` runs it from a checkout. Pi-Bolt's published Linux results (bench/results/2026-10-11-linux-x64-0.8.0, MIT, Copyright (c) 2025 Mario Zechner) are copied unchanged into `external/results/` with their provenance (docs/EXTERNAL.md). durable-bench (github.com/clavia-labs/durable-bench and its fork github.com/badlogic/durable-bench) has no licence: `buffon external run` runs it from a clone, unchanged, and that run copies nothing of it into this repository.
 
 The compat lane is adapted from durable-bench (github.com/clavia-labs/durable-bench), used with permission.

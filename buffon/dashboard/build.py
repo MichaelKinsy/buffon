@@ -16,7 +16,9 @@ import tomllib
 from fnmatch import fnmatchcase
 from urllib.parse import urlsplit
 
+from ..arms import manifest
 from ..mock import server as mockserver
+from ..submit import check as submitcheck
 from ..workloads import overhead
 from . import benchmarks, external_site, formulas as fx, glossary, markdown, mathtex, model, plans, profiles_check, scale as scalelib
 
@@ -88,7 +90,22 @@ CAVEATS = {
                             "of a process that stops, so the count is low, more so for short processes. Use the CPU time of this task instead.",
     "rusage-live": "This CPU value was read while the harness ran, with the rusage meter (macOS, or Linux without a cgroup). It counts only the processes that run at that "
                    "moment. The CPU time of child processes that already stopped is missing, so the value can be low.",
+    "codex-short-instructions": "Codex was measured here with a one-line instructions text in place of its own 17 KB text, so each Codex request in this test was about 17 KB "
+                                "smaller than in normal use. The other Codex tests send the full text. Later runs send it here too (arms/codex/base-instructions.md).",
 }
+
+
+def codex_short_instructions(lock_sha256, repo=manifest.ROOT):
+    """True when a run's arms.lock pins a Codex arm without base-instructions.md: its large-write catalog then carried a one-line instructions text. A lock that is neither the
+    repository's nor in the lock archive is not known, and gets no caveat."""
+    current = os.path.join(repo, "arms.lock")
+    if os.path.exists(current) and manifest.sha256_file(current) == lock_sha256:
+        with open(current) as f:
+            pinned = json.load(f)
+    else:
+        pinned, _ = submitcheck.archived_lock(repo, lock_sha256)
+    codex = ((pinned or {}).get("arms") or {}).get("codex")
+    return codex is not None and "base-instructions.md" not in codex.get("files", {})
 
 
 def caveats_of(metric, run):
@@ -425,11 +442,14 @@ def client_data(site, m, data_dir, docs, profiles=(), external=None):
     covered = {}
     for c in site["cells"]:
         covered.setdefault(c["workload"], set()).update(c["stats"])
+    short_codex = {r["id"]: codex_short_instructions(r.get("lock_sha256")) for r in site["runs"]}
     for c in site["cells"]:
         cell = {k: c[k] for k in ("id", "slug", "key", "scenario", "workload", "api", "api_short", "env", "env_variant", "metric", "kind", "lens", "unit", "memory_kind", "family", "mde", "run", "rerun", "values", "stats", "na")}
         cell["metric_word"] = metric_word(c["metric"])
         run = next((r for r in site["runs"] if r["id"] == c["run"]), {})
         cell["caveats"] = [CAVEATS[k] for k in caveats_of(c["metric"], run)]
+        if c["scenario"] == "overhead/print-write" and "codex" in c["values"] and short_codex.get(c["run"]):
+            cell["caveats"].append(CAVEATS["codex-short-instructions"])
         cell["comparisons"] = {}
         for arm, comp in c["comparisons"].items():
             out = dict(comp)
