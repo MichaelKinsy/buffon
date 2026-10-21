@@ -1,0 +1,200 @@
+{
+ "generated_utc": "2026-10-17T09:12:31Z",
+ "kernel": "6.8.0-137-generic",
+ "machine": "x86_64",
+ "cpu_model": "Intel(R) Xeon(R) Platinum 8462Y+",
+ "microcode": "0x2b000661",
+ "mitigations": {
+  "gather_data_sampling": "Not affected",
+  "indirect_target_selection": "Not affected",
+  "itlb_multihit": "Not affected",
+  "l1tf": "Not affected",
+  "mds": "Not affected",
+  "meltdown": "Not affected",
+  "mmio_stale_data": "Not affected",
+  "reg_file_data_sampling": "Not affected",
+  "retbleed": "Not affected",
+  "spec_rstack_overflow": "Not affected",
+  "spec_store_bypass": "Mitigation: Speculative Store Bypass disabled via prctl",
+  "spectre_v1": "Mitigation: usercopy/swapgs barriers and __user pointer sanitization",
+  "spectre_v2": "Mitigation: Enhanced / Automatic IBRS; IBPB: conditional; PBRSB-eIBRS: SW sequence; BHI: BHI_DIS_S",
+  "srbds": "Not affected",
+  "tsa": "Not affected",
+  "tsx_async_abort": "Not affected",
+  "vmscape": "Mitigation: IBPB before exit to userspace"
+ },
+ "cpu_mhz_max": 4100,
+ "turbo": {
+  "intel_no_turbo": "1",
+  "cpufreq_boost": null
+ },
+ "smt": {
+  "active": "1",
+  "siblings": {
+   "8": [
+    8,
+    72
+   ],
+   "9": [
+    9,
+    73
+   ],
+   "10": [
+    10,
+    74
+   ],
+   "11": [
+    11,
+    75
+   ],
+   "72": [
+    8,
+    72
+   ],
+   "73": [
+    9,
+    73
+   ],
+   "74": [
+    10,
+    74
+   ],
+   "75": [
+    11,
+    75
+   ]
+  }
+ },
+ "cstates": [
+  {
+   "name": "POLL",
+   "disabled": "0"
+  },
+  {
+   "name": "C1",
+   "disabled": "0"
+  },
+  {
+   "name": "C1E",
+   "disabled": "1"
+  },
+  {
+   "name": "C6",
+   "disabled": "1"
+  }
+ ],
+ "thp": "always [madvise] never",
+ "aslr": "2",
+ "numa": {
+  "node_of_cpu": {
+   "8": 0,
+   "9": 0,
+   "10": 0,
+   "11": 0,
+   "72": 0,
+   "73": 0,
+   "74": 0,
+   "75": 0,
+   "16": 0,
+   "17": 0,
+   "18": 0,
+   "19": 0,
+   "20": 0,
+   "21": 0,
+   "22": 0,
+   "23": 0,
+   "80": 0,
+   "81": 0,
+   "82": 0,
+   "83": 0,
+   "84": 0,
+   "85": 0,
+   "86": 0,
+   "87": 0
+  },
+  "nodes": [
+   0,
+   1
+  ]
+ },
+ "irq": {
+  "default_smp_affinity": "ffffffff,ffffffff,ffffffff,ffffffff",
+  "irqbalance": false
+ },
+ "clocksource": "tsc",
+ "cgroup": {
+  "chain": [
+   {
+    "path": "/user.slice/user-160150820.slice/user@160150820.service/app.slice/run-rf0827aa6ef0644b29de29629a12ec068.scope",
+    "cpu.max": null,
+    "cpuset.cpus.partition": null
+   },
+   {
+    "path": "/user.slice/user-160150820.slice/user@160150820.service/app.slice",
+    "cpu.max": "max 100000",
+    "cpuset.cpus.partition": null
+   },
+   {
+    "path": "/user.slice/user-160150820.slice/user@160150820.service",
+    "cpu.max": "max 100000",
+    "cpuset.cpus.partition": null
+   },
+   {
+    "path": "/user.slice/user-160150820.slice",
+    "cpu.max": "max 100000",
+    "cpuset.cpus.partition": null
+   },
+   {
+    "path": "/user.slice",
+    "cpu.max": "max 100000",
+    "cpuset.cpus.partition": "member"
+   },
+   {
+    "path": "/",
+    "cpu.max": null,
+    "cpuset.cpus.partition": null
+   }
+  ],
+  "mode": "v2"
+ },
+ "container_runtime": {
+  "runtime": "docker",
+  "version": "29.7.2",
+  "cgroup_driver": "systemd",
+  "storage_driver": "overlay2",
+  "default_runtime": "runc",
+  "security_options": "[\"name=apparmor\",\"name=seccomp,profile=builtin\",\"name=cgroupns\"]"
+ },
+ "boot_id": "136f0136a559c650",
+ "bench_cpus": [
+  8,
+  9,
+  10,
+  11,
+  72,
+  73,
+  74,
+  75
+ ],
+ "mock_cpus": [
+  16,
+  17,
+  18,
+  19,
+  20,
+  21,
+  22,
+  23,
+  80,
+  81,
+  82,
+  83,
+  84,
+  85,
+  86,
+  87
+ ],
+ "memory_gib": 2015.5,
+ "unavailable": {},
+ "host_class": "A"
+}

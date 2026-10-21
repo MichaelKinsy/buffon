@@ -1,0 +1,99 @@
+{
+ "generated_utc": "2026-10-19T13:00:11Z",
+ "os": "Linux 6.8.0-137-generic",
+ "kernel": "6.8.0-137-generic",
+ "machine": "x86_64",
+ "cpu_model": "Intel(R) Xeon(R) Platinum 8462Y+",
+ "cpu_flags": "fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc art arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc cpuid aperfmperf tsc_known_freq pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 sdbg fma cx16 xtpr pdcm pcid dca sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand lahf_lm abm 3dnowprefetch cpuid_fault epb cat_l3 cat_l2 cdp_l3 intel_ppin cdp_l2 ssbd mba ibrs ibpb stibp ibrs_enhanced tpr_shadow flexpriority ept vpid ept_ad fsgsbase tsc_adjust bmi1 avx2 smep bmi2 erms invpcid cqm rdt_a avx512f avx512dq rdseed adx smap avx512ifma clflushopt clwb intel_pt avx512cd sha_ni avx512bw avx512vl xsaveopt xsavec xgetbv1 xsaves cqm_llc cqm_occup_llc cqm_mbm_total cqm_mbm_local split_lock_detect user_shstk avx_vnni avx512_bf16 wbnoinvd dtherm ida arat pln pts hfi vnmi avx512vbmi umip pku ospke waitpkg avx512_vbmi2 gfni vaes vpclmulqdq avx512_vnni avx512_bitalg tme avx512_vpopcntdq la57 rdpid bus_lock_detect cldemote movdiri movdir64b enqcmd fsrm md_clear serialize tsxldtrk pconfig arch_lbr ibt amx_bf16 avx512_fp16 amx_tile amx_int8 flush_l1d arch_capabilities ibpb_exit_to_user",
+ "logical_cpus": 128,
+ "cpus_allowed": "32-63,96-127",
+ "pinned_cpus": "48-51,112-115",
+ "mock_cpus": "52,116",
+ "memory_gib": 2015.5,
+ "smt_active": true,
+ "governors": {
+  "48": "performance",
+  "49": "performance",
+  "50": "performance",
+  "51": "performance",
+  "112": "performance",
+  "113": "performance",
+  "114": "performance",
+  "115": "performance"
+ },
+ "fixed_clock": true,
+ "mhz": {
+  "48": 2800.0,
+  "49": 2800.0,
+  "50": 2800.0,
+  "51": 2800.0,
+  "112": 2800.0,
+  "113": 2800.0,
+  "114": 2800.0,
+  "115": 2800.0
+ },
+ "turbo_disabled": "1",
+ "boost": null,
+ "cgroup": {
+  "memory.max": "max",
+  "cpuset.cpus.effective": "0-127",
+  "cpu.stat": {
+   "usage_usec": 1310614544,
+   "user_usec": 434276920,
+   "system_usec": 876337623,
+   "core_sched.force_idle_usec": 0
+  }
+ },
+ "container": null,
+ "node": null,
+ "pod": null,
+ "load_average": [
+  1.43310546875,
+  1.74267578125,
+  1.7763671875
+ ],
+ "python": "3.12.3",
+ "go": null,
+ "node_js": null,
+ "runner_commit": "5b3729fca2f0d9b4d2d38eaf32a4ce50498fe618",
+ "runner_tree": "3943ebd8df9933a9980eaabf67be6e164c168e1e",
+ "runner_dirty": false,
+ "runner_diff_sha256": null,
+ "load_before": [
+  1.43310546875,
+  1.74267578125,
+  1.7763671875
+ ],
+ "idle_before": {
+  "48": 0.0,
+  "49": 0.0,
+  "50": 0.0,
+  "51": 0.0,
+  "112": 0.0,
+  "113": 0.0,
+  "114": 0.0,
+  "115": 0.0
+ },
+ "load_after": [
+  1.08984375,
+  1.19384765625,
+  1.23583984375
+ ],
+ "idle_after": {
+  "48": 0.0,
+  "49": 0.0,
+  "50": 0.0,
+  "51": 0.0,
+  "112": 0.0,
+  "113": 0.0,
+  "114": 0.0,
+  "115": 0.0
+ },
+ "throttled_usec": 0,
+ "cpumon": {
+  "samples": 4992,
+  "pinned_busy_mean": 0.022014418578323126,
+  "pinned_busy_max": 0.1664141414141414,
+  "host_busy_mean": 0.009147627403471434
+ }
+}

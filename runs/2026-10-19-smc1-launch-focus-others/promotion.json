@@ -1,0 +1,39 @@
+{
+ "checks": [
+  "seal",
+  "raw",
+  "facts",
+  "rules-home",
+  "rules-isolation",
+  "rules-raw",
+  "rules-host-disclosure",
+  "rules-host-class",
+  "rules-provenance",
+  "run",
+  "egress",
+  "rounds",
+  "flags",
+  "quiet_gate",
+  "lock",
+  "arms",
+  "hardware",
+  "telemetry",
+  "health",
+  "health.json",
+  "report.json",
+  "generated",
+  "submission"
+ ],
+ "ci": {
+  "ref": "refs/heads/main",
+  "repository": "MichaelKinsy/buffon",
+  "run_attempt": "1",
+  "run_id": "39324378685",
+  "sha": "c81babb419fa14e0b1c8f4028b94e629b4155757",
+  "workflow": "results-merge"
+ },
+ "id": "2026-10-19-smc1-launch-focus-others",
+ "manifest_sha256": "7a13bc3e0cbc025083777ed207e3f7660c8cdea7b7aaa21aed9e8727b1bbc3d5",
+ "notes": 4,
+ "thresholds_sha256": "bb1caaa044ec28a8b258fb9a98912a3cc5948a3e74bc9d2caec584214f080737"
+}
