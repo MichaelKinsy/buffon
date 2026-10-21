@@ -85,6 +85,7 @@
     },
     "codex": {
       "files": {
+        "base-instructions.md": "3b08633fa672906666659d764864dfda1d7af5b5111ea5817c8f46e5de4e1a8d",
         "package-lock.json": "a17117b06362c74b63de80e9c4cb525cf8556b5ead9d0d0e250473061365902d",
         "writer.py": "d32b673a9ae99140320aa08913edeff87add2d901d0539d65804e5e08ace422b"
       },

@@ -1,4 +1,5 @@
 # SPDX-License-Identifier: Apache-2.0
+import gzip
 import hashlib
 import os
 import shutil
@@ -171,7 +172,11 @@ class CodexWriteCatalog(unittest.TestCase):
             self.assertNotIn("model_catalog_json", open(os.path.join(home, ".codex", "config.toml")).read())
             (entry,) = json.load(open(os.path.join(home, ".codex", "write-catalog.json")))["models"]
             self.assertEqual((entry["slug"], entry["apply_patch_tool_type"]), ("bench-1", "freeform"))
-            self.assertTrue(entry["base_instructions"])
+            # The entry's instructions are the ones Codex 0.162.1 sends on every other workload: the first developer message of a published print request.
+            sample = os.path.join(manifest.ROOT, "results", "2026-10-19-smc1-launch-core", "mock-requests", "00067-codex-overhead_print-openai-responses-r0.jsonl.gz")
+            with gzip.open(sample, "rt", encoding="utf-8") as f:
+                sent = json.loads(f.readline())["body"]["input"][0]["content"][0]["text"]
+            self.assertEqual(entry["base_instructions"], sent)
 
 
 if __name__ == "__main__":
