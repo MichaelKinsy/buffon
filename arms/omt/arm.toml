@@ -1,0 +1,46 @@
+name = "omt"
+label = "omt (oh my tau, Rust port of oh-my-pi)"
+homepage = "https://github.com/kanashimi1/oh-my-tau"
+relation = "pi-port"
+licence = "MIT"
+licence_url = "https://github.com/kanashimi1/oh-my-tau/blob/main/LICENSE"
+restrictions = ""
+version = "0.10.0"
+notes = "Rust port of omp (oh-my-pi), itself a fork of Pi. A single executable, no separate runtime. It reads omp's models.yml and config.yml (PI_CODING_AGENT_DIR / OMP_AGENT_DIR), so it shares the omp writer. It does not claim Pi's session format (pi_session_format = false), so the Pi session-format workloads are skipped. Session, RPC and PTY modes pass --no-title: like omp, omt otherwise asks the model for a session title in a side request, which Pi never sends and the scripted mock would answer with the next scripted step. The release asset is a raw executable built from the tagged source with debug info stripped (objcopy --strip-debug); the checksum is in the release's SHA256SUMS.txt."
+
+[artifact.linux-x64]
+url = "https://github.com/kanashimi1/oh-my-tau/releases/download/v0.10.0/omt-linux-x64"
+sha256 = "8655fbb8c98703b82bed0e9562a86382d03615818546dcd79f2de2cf02790939"
+checksums = "https://github.com/kanashimi1/oh-my-tau/releases/download/v0.10.0/SHA256SUMS.txt"
+exe = "omt"
+
+[endpoint]
+apis = ["openai-completions", "anthropic-messages"]
+writer = "writer.py"
+
+[env]
+OMP_AGENT_DIR = "{agent_dir}"
+PI_CODING_AGENT_DIR = "{agent_dir}"
+# Defensive, as for omp: every outbound request that is not a model request goes to a closed local port (the mock is on NO_PROXY, which the harness sets for every arm). The egress audit still checks that nothing leaves.
+HTTPS_PROXY = "http://127.0.0.1:9"
+HTTP_PROXY = "http://127.0.0.1:9"
+ALL_PROXY = "http://127.0.0.1:9"
+
+[state]
+dirs = ["$HOME/.agent", "$XDG_CONFIG_HOME", "$XDG_DATA_HOME", "$XDG_CACHE_HOME", "$XDG_STATE_HOME"]
+
+[modes]
+version = ["--version"]
+print = ["--provider", "bench", "--model", "{model}", "--no-session", "-p", "{prompt}"]
+print_session = ["--no-title", "--provider", "bench", "--model", "{model}", "--session", "{session}", "-p", "{prompt}"]
+rpc = ["--no-title", "--mode", "rpc", "--provider", "bench", "--model", "{model}", "--no-session"]
+rpc_session = ["--no-title", "--mode", "rpc", "--provider", "bench", "--model", "{model}", "--session-dir", "{session_dir}"]
+rpc_resume = ["--no-title", "--mode", "rpc", "--provider", "bench", "--model", "{model}", "--session", "{session}"]
+pty = ["--no-title", "--provider", "bench", "--model", "{model}", "--no-session"]
+
+[cannot_run]
+
+[capabilities]
+exact_requests = true   # with --no-title (session and RPC modes): omt, like omp, otherwise names a saved session with a side request; Pi does not
+pi_extensions = "partial"
+pi_session_format = false

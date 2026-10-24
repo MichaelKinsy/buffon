@@ -9,7 +9,7 @@ import unittest
 from buffon.arms import install, lock, manifest
 
 ROOT = manifest.ROOT
-V0_ARMS = {"pi-node", "octet", "pi-bun", "pig-0.4.1", "pig-tip", "pibolt", "pi-bolt-0.8.5", "omp", "rpi", "codex", "opencode", "opencode-v2", "nowa-gi", "guanshan-pi-go", "sky-valley-pi", "pulseaiclub-phi", "rcarmo-gi"}
+V0_ARMS = {"pi-node", "octet", "pi-bun", "pig-0.4.1", "pig-tip", "pibolt", "pi-bolt-0.8.5", "omp", "omt", "rpi", "codex", "opencode", "opencode-v2", "nowa-gi", "guanshan-pi-go", "sky-valley-pi", "pulseaiclub-phi", "rcarmo-gi"}
 MATRIX_ARMS = {"pig-ts-node", "pig-ts-bun", "pig-ts-aot", "pig-go-packed", "pig-go-isolated", "pig-go-fused", "pig-ts-node-isolated-diag", "pig-standard", "pig-strip-min", "piglet-bench-lean", "piglet-bench-ext10", "piglet-bench-ext10-split", "piglet-bench-ext10-aot", "piglet-combined"}   # extension-matrix arms (tests/test_matrix.py) and Piglet arms (tests/test_piglet_arms.py): run only when named
 DURABLE_ARMS = {"pi-durable", "pig-durable", "pi-durable-main"}   # adapter arms (tests/test_durable_adapters.py): the durable workloads select them, no CLI modes
 HELD = {"pi-agent-rust"}
